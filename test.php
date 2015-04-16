@@ -5,9 +5,9 @@
  * Date: 15-4-2015
  * Time: 13:15
  */
-echo 'Thom Peele';
+echo 'Thom';
 echo '<br> ';
-echo 'ABDC';
+echo 'Kayan';
 echo '<br> ';
 echo 'Koen';
 echo '<br>';
