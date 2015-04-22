@@ -23,7 +23,7 @@ GO
 /* Table: Animal                                                */
 /*==============================================================*/
 CREATE TABLE Animal (
-  AnimalID             INTEGER              NOT NULL		IDENTITY,
+  AnimalID             INTEGER              NOT NULL		IDENTITY (1, 1),
   AnimalName           VARCHAR(50)          NOT NULL,
   Gender               CHAR(1)              NOT NULL,
   BirthDate            DATETIME             NOT NULL,
@@ -52,7 +52,7 @@ GO
 /* Table: Enclosure                                             */
 /*==============================================================*/
 CREATE TABLE Enclosure (
-  EnclosureID          INTEGER               NOT NULL		IDENTITY,
+  EnclosureID          INTEGER               NOT NULL,
   AreaName             VARCHAR(50)           NOT NULL,
   CONSTRAINT PK_ENCLOSURE PRIMARY KEY (AreaName, EnclosureID)
 )
@@ -86,7 +86,7 @@ GO
 /* Table: Staff                                                 */
 /*==============================================================*/
 CREATE TABLE Staff (
-  StaffID              INTEGER               NOT NULL		IDENTITY,
+  StaffID              INTEGER               NOT NULL		IDENTITY (1, 1),
   StaffName            VARCHAR(50)           NOT NULL,
   Password             VARCHAR(200)          NOT NULL,
   CONSTRAINT PK_STAFF PRIMARY KEY (StaffID)
