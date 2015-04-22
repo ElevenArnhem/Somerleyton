@@ -4,8 +4,8 @@ GO
 DELETE FROM Animal
 DELETE FROM Species
 DELETE FROM Enclosure
-DELETE FROM Area
 DELETE FROM Keeper
+DELETE FROM Area
 DELETE FROM Staff
 GO
 
@@ -28,17 +28,16 @@ GO
 SET IDENTITY_INSERT Staff OFF
 GO
 
-/* TODO: AREANAME MAG NIET NULL ZIJN. */
-INSERT INTO Keeper (StaffID, AreaName) VALUES
-    (1, NULL),
-    (2, NULL),
-    (3, NULL),
-    (4, NULL),
-    (5, NULL)
-GO
-
 INSERT INTO Area (AreaName, HeadkeeperID) VALUES
     ('Monkey House', 1)
+GO
+
+INSERT INTO Keeper (StaffID, AreaName) VALUES
+    (1, 'Monkey House'),
+    (2, 'Monkey House'),
+    (3, 'Monkey House'),
+    (4, 'Monkey House'),
+    (5, 'Monkey House')
 GO
 
 INSERT INTO Enclosure(EnclosureID, AreaName) VALUES

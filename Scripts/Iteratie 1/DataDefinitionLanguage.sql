@@ -63,7 +63,7 @@ GO
 /*==============================================================*/
 CREATE TABLE Keeper (
   StaffID              INTEGER               NOT NULL,
-  AreaName             VARCHAR(50)           NULL,
+  AreaName             VARCHAR(50)           NOT NULL,
   CONSTRAINT PK_KEEPER PRIMARY KEY (StaffID)
 )
 GO
@@ -105,7 +105,7 @@ GO
 
 ALTER TABLE Area
 ADD CONSTRAINT FK_AREA_HEADKEEPE_KEEPER FOREIGN KEY (HeadkeeperID)
-  REFERENCES Keeper (StaffID)
+  REFERENCES Staff (StaffID)
 GO
 
 ALTER TABLE Enclosure
