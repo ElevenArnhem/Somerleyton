@@ -6,14 +6,14 @@
  * Time: 12:19
  */
 echo '    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="navbar-fixed-top.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Dont actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="js/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -56,7 +56,7 @@ echo '    <!-- Bootstrap core CSS -->
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li><a href="../    navbar-static-top/">Static top</a></li>
             <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
           </ul>
         </div><!--/.nav-collapse -->
