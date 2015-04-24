@@ -26,12 +26,12 @@ CREATE TABLE Animal (
   AnimalID             INTEGER              NOT NULL		IDENTITY (1, 1),
   AnimalName           VARCHAR(50)          NOT NULL,
   Gender               CHAR(1)              NOT NULL,
-  BirthDate            DATETIME             NOT NULL,
+  BirthDate            DATE                 NOT NULL,
   BirthPlace           VARCHAR(50)          NOT NULL,
   AreaName             VARCHAR(50)          NOT NULL,
   EnclosureID          INTEGER              NOT NULL,
   SpeciesName          VARCHAR(50)          NOT NULL,
-  DeceasedDate         DATETIME             NULL,
+  DeceasedDate         DATE                 NULL,
   Image                VARCHAR(50)          NULL,
   CONSTRAINT PK_ANIMAL PRIMARY KEY (AnimalID),
   CONSTRAINT CK_GENDER CHECK (Gender IN ('M','F'))
@@ -89,6 +89,7 @@ CREATE TABLE Staff (
   StaffID              INTEGER               NOT NULL		IDENTITY (1, 1),
   StaffName            VARCHAR(50)           NOT NULL,
   Password             VARCHAR(200)          NOT NULL,
+  IsActive             BIT                   NOT NULL,
   CONSTRAINT PK_STAFF PRIMARY KEY (StaffID)
 )
 GO

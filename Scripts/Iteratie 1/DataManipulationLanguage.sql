@@ -17,12 +17,12 @@ GO
 SET IDENTITY_INSERT Staff ON
 GO
 
-INSERT INTO Staff (StaffID, StaffName, [Password]) VALUES
-    (1, 'Koen van Keulen', '1234567890'),
-    (2, 'Dirk Lenders', '1234567890'),
-    (3, 'Tony Nijenhuis', '1234567890'),
-    (4, 'Thom Peele', '1234567890'),
-    (5, 'Kayan Meijer', '1234567890')
+INSERT INTO Staff (StaffID, StaffName, [Password], IsActive) VALUES
+    (1, 'Koen van Keulen', '1234567890', 1),
+    (2, 'Dirk Lenders', '1234567890', 1),
+    (3, 'Tony Nijenhuis', '1234567890', 1),
+    (4, 'Thom Peele', '1234567890', 1),
+    (5, 'Kayan Meijer', '1234567890', 1)
 GO
 
 SET IDENTITY_INSERT Staff OFF
