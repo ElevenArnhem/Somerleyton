@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2012                    */
-/* Created on:     22-4-2015 13:56:00                           */
+/* Created on:     24-4-2015 13:27:01                           */
 /*==============================================================*/
 
 
@@ -20,9 +20,9 @@ go
 
 IF EXISTS (SELECT 1
    FROM SYS.SYSREFERENCES R JOIN SYS.SYSOBJECTS O ON (O.ID = R.CONSTID AND O.TYPE = 'F')
-   WHERE R.FKEYID = OBJECT_ID('AREA') AND O.NAME = 'FK_AREA_HEADKEEPE_KEEPER')
+   WHERE R.FKEYID = OBJECT_ID('AREA') AND O.NAME = 'FK_AREA_HEADKEEPE_STAFF')
 ALTER TABLE AREA
-   DROP CONSTRAINT FK_AREA_HEADKEEPE_KEEPER
+   DROP CONSTRAINT FK_AREA_HEADKEEPE_STAFF
 go
 
 IF EXISTS (SELECT 1
@@ -141,6 +141,10 @@ IF EXISTS(SELECT 1 FROM SYSTYPES WHERE NAME='COMMENT')
    DROP TYPE COMMENT
 go
 
+IF EXISTS(SELECT 1 FROM SYSTYPES WHERE NAME='DATE')
+   DROP TYPE DATE
+go
+
 IF EXISTS(SELECT 1 FROM SYSTYPES WHERE NAME='DATETIME')
    DROP TYPE DATETIME
 go
@@ -249,6 +253,13 @@ go
 /*==============================================================*/
 CREATE TYPE COMMENT
    FROM VARCHAR(100)
+go
+
+/*==============================================================*/
+/* Domain: DATE                                                 */
+/*==============================================================*/
+CREATE TYPE DATE
+   FROM DATE
 go
 
 /*==============================================================*/
@@ -372,12 +383,12 @@ CREATE TABLE ANIMAL (
    ANIMALID             NUMBER               NOT NULL,
    ANIMALNAME           NAME                 NOT NULL,
    GENDER               GENDER               NOT NULL,
-   BIRTHDATE            DATETIME             NOT NULL,
+   BIRTHDATE            DATE                 NOT NULL,
    BIRTHPLACE           LOCATION             NOT NULL,
    AREANAME             NAME                 NOT NULL,
    ENCLOSUREID          NUMBER               NOT NULL,
    SPECIESNAME          NAME                 NOT NULL,
-   DECEASEDDATE         DATETIME             NULL,
+   DECEASEDDATE         DATE                 NULL,
    IMAGE                IMAGE                NULL,
    CONSTRAINT PK_ANIMAL PRIMARY KEY NONCLUSTERED (ANIMALID)
 )
@@ -474,6 +485,7 @@ CREATE TABLE STAFF (
    STAFFID              NUMBER               NOT NULL,
    STAFFNAME            NAME                 NOT NULL,
    PASSWORD             PASSWORD             NOT NULL,
+   ISACTIVE             YESNO                NOT NULL,
    CONSTRAINT PK_STAFF PRIMARY KEY NONCLUSTERED (STAFFID)
 )
 go
@@ -489,8 +501,8 @@ ALTER TABLE ANIMAL
 go
 
 ALTER TABLE AREA
-   ADD CONSTRAINT FK_AREA_HEADKEEPE_KEEPER FOREIGN KEY (HEADKEEPERID)
-      REFERENCES KEEPER (STAFFID)
+   ADD CONSTRAINT FK_AREA_HEADKEEPE_STAFF FOREIGN KEY (HEADKEEPERID)
+      REFERENCES STAFF (STAFFID)
 go
 
 ALTER TABLE ENCLOSURE
