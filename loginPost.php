@@ -13,13 +13,13 @@ session_start();
 
 //	if($type == "login") {
 
-        $staffName = $_POST["STAFFNAME"];
+        $staffID = $_POST["STAFFID"];
         $password = $_POST["PASSWORD"];
 
 
         // the hash stored for the user
-        $stmtGetUser = $dbh->prepare("SELECT * FROM Staff where StaffName = ?");
-        if($stmtGetUser->execute(array($staffName))){
+        $stmtGetUser = $dbh->prepare("SELECT * FROM Staff where StaffID = ?");
+        if($stmtGetUser->execute(array($staffID))){
             while($userRow = $stmtGetUser->fetch()) {
 
 
@@ -45,7 +45,7 @@ session_start();
                 // }
                 $given_hash = $userRow['Password'];
                 if($given_hash === $password) {
-                    $_SESSION['STAFFNAME'] = $staffName;
+                    $_SESSION['STAFFNAME'] = $userRow['StaffName'];
                     $_SESSION['FUNCTION'] = 'admin';
                     echo $_SESSION['FUNCTION'];
 
@@ -53,5 +53,5 @@ session_start();
             }
 
         }
-//        header('Location:/');
+        header('Location:/');
 //    }

@@ -24,7 +24,7 @@ echo '<!-- Bootstrap core CSS -->
       <form class="form-signin" action="loginPost.php" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="STAFFNAME" type="text" id="inputEmail" class="form-control" placeholder="Staff naam" required autofocus>
+        <input name="STAFFID" type="number" id="inputEmail" class="form-control" placeholder="Staff id" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
         <div class="checkbox">

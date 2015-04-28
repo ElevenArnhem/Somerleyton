@@ -58,7 +58,7 @@ echo '    <!-- Bootstrap core CSS -->
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">Default</a></li>
             <li><a href="../    navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+            <li class="active"><form action="logOut.php" method="post"><button type="submit" class="btn btn-default">Log uit </button></form> </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
