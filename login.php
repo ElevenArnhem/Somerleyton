@@ -22,17 +22,13 @@ echo '<!-- Bootstrap core CSS -->
     <div class="container">
 
       <form class="form-signin" action="loginPost.php" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Log in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input name="STAFFID" type="number" id="inputEmail" class="form-control" placeholder="Staff id" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
       </form>
 
 
