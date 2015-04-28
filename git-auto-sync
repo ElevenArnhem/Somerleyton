@@ -18,7 +18,7 @@ _local_merge () {
     local ml=$D/merge.log
     local conflicted=0
     for rmtbranch in $(git branch | cut -c3- | grep -v $lclbranch); do
-        echo `Crkpyv11!`: git merge $rmtbranch
+        echo `pwd`: git merge $rmtbranch
         git merge $rmtbranch > $ml 2>&1 || true
         cat $ml
         echo ===
