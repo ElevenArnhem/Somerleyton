@@ -19,3 +19,6 @@ while ($row = $stmt->fetch()) {
 unset($dbh); unset($stmt);
 
 include 'footer.php';
+phpinfo();
+
+echo "test";
