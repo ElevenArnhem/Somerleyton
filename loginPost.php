@@ -30,12 +30,12 @@ session_start();
                  // extract the hashing method, number of rounds, and salt from the stored hash
                  // and hash the password string accordingly
                  $parts = explode('$', $given_hash);
-                    echo $parts[1];
+//                    echo $parts[1];
                  $test_hash = crypt($password, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
 
 
                  // compare
-                 echo $given_hash . "\n" . $test_hash . "\n" . var_export($given_hash === $test_hash, true);
+//                 echo $given_hash . "\n" . $test_hash . "\n" . var_export($given_hash === $test_hash, true);
 
                 // if($given_hash === $test_hash) {
                 //
@@ -55,7 +55,7 @@ session_start();
                     $_SESSION['STAFFID'] = $userRow['StaffID'];
                     $_SESSION['STAFFNAME'] = $userRow['StaffName'];
                     $_SESSION['FUNCTION'] = 'admin';
-                    echo $_SESSION['FUNCTION'];
+//                    echo $_SESSION['FUNCTION'];
 
                 }
             }

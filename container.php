@@ -35,7 +35,7 @@ echo '    <!-- Bootstrap core CSS -->
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Somerleyton Animal Park</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -63,17 +63,54 @@ echo '    <!-- Bootstrap core CSS -->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    <br><br><br>
+    <div class="container">';
 
-    <div class="container">
+    $animalstmt = $dbh->prepare("Select * from Animal");
+    $animalstmt->execute();
+    $animals = $animalstmt->fetchAll();
+    echo '<table class="table table-hover"><tr>
+            <th>AnimalID</th>
+            <th>AnimalName</th>
+            <th>BirthDate</th>
+            <th>BirthPlace</th>
+            <th>SpeciesName</th>
+            <th>AreaName</th>
+            <th>EnclosureID</th>
+</tr>';
+    foreach($animals as $animal) {
+        echo '<tr><td>'.$animal["AnimalID"].'</td>
+        <td>'.$animal["AnimalName"].'</td>
+        <td>'.$animal["BirthDate"].'</td>
+        <td>'.$animal["BirthPlace"].'</td>
+        <td>'.$animal["SpeciesName"].'</td>
+        <td>'.$animal["AreaName"].'</td>
+        <td>'.$animal["EnclosureID"].'</td></tr>';
+    };
+echo '
+</table>';
+echo '
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+ <!-- Example row of columns -->
+
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Safari bug warning!</h2>
+          <p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-lg-4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        </div>
       </div>
 
     </div> <!-- /container -->';
