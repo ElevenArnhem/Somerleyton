@@ -2,8 +2,8 @@
 try {
     $hostname = "localhost";
     $dbname = "SomerleytonAnimalPark";
-    $username = "SomerleytonUser";
-    $pw = "2kByMjp5vNN6";
+    $username = "Eleven";
+    $pw = "asdfasdf";
 
     $dbh = new PDO ("sqlsrv:Server=$hostname;Database=$dbname","$username","$pw");
 } catch (PDOException $e) {
