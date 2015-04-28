@@ -1,11 +1,12 @@
 <?php
 try {
-    $hostname = "localhost";
+    $hostname = "95.96.69.114";
     $dbname = "SomerleytonAnimalPark";
-    $username = "SomerleytonUser";
-    $pw = "2kByMjp5vNN6";
+    $port = "1433";
+    $username = "Eleven";
+    $pw = "asdfasdf";
 
-    $dbh = new PDO ("sqlsrv:Server=$hostname;Database=$dbname","$username","$pw");
+    $dbh = new PDO ("sqlsrv:Server=$hostname,$port;Database=$dbname","$username","$pw");
 } catch (PDOException $e) {
     echo "Failed to get DB handle: " . $e->getMessage() . "\n";
     exit;
