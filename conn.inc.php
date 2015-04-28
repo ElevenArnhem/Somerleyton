@@ -1,6 +1,6 @@
 <?php
 try {
-    $hostname = "localhost";
+    $hostname = "95.96.69.114";
     $dbname = "SomerleytonAnimalPark";
     $username = "Eleven";
     $pw = "asdfasdf";
