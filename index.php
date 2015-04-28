@@ -6,9 +6,15 @@
  * Time: 12:18*/
  include 'conn.inc.php';
 include 'pageHead.php';
-
-echo '';
-include 'login.php';
+session_start();
+if(empty($_SESSION['STAFFNAME'])) {
+    $_SESSION['STAFFNAME'] = null;
+}
+if( $_SESSION['STAFFNAME'] != null) {
+    include 'container.php';
+} else {
+    include 'login.php';
+}
 //include 'container.php';
 //$stmt = $dbh->prepare("select * from Animal");
 //$stmt->execute();

@@ -14,18 +14,19 @@ echo '<!-- Bootstrap core CSS -->
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <title>Somerleyton login</title>
   </head>
 
   <body>
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="loginPost.php" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input name="STAFFNAME" type="text" id="inputEmail" class="form-control" placeholder="Staff naam" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input name="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
