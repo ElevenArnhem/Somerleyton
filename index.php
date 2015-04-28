@@ -7,7 +7,7 @@
  include 'conn.inc.php';
 include 'pageHead.php';*/
 
-echo '<title>Somerleyton Animal Park</title>';/*
+echo '<title>Somerleyton Animal Park</title>';
 
 include 'container.php';
 $stmt = $dbh->prepare("select * from Animal");
@@ -17,4 +17,4 @@ while ($row = $stmt->fetch()) {
 }
 unset($dbh); unset($stmt);
 
-include 'footer.php';*/echo "working";
+include 'footer.php';
