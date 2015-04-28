@@ -23,28 +23,36 @@ session_start();
             while($userRow = $stmtGetUser->fetch()) {
 
 
-                // $given_hash = $userRow['PASSWORD'];
+                 $given_hash = $userRow['Password'];
 
-                // echo $userRow['PASSWORD']. " ---db password". "\n". phpversion();
+                 echo $userRow['StaffName']. " ---db password". "\n". phpversion();
 
-                // // extract the hashing method, number of rounds, and salt from the stored hash
-                // // and hash the password string accordingly
-                // $parts = explode('$', $given_hash);
+                 // extract the hashing method, number of rounds, and salt from the stored hash
+                 // and hash the password string accordingly
+                 $parts = explode('$', $given_hash);
+                    echo $parts[1];
+                 $test_hash = crypt($password, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
 
-                // $test_hash = crypt($password, sprintf('$%s$%s$%s$', $parts[1], $parts[2], $parts[3]));
 
-
-                // // compare
-                // echo $given_hash . "\n" . $test_hash . "\n" . var_export($given_hash === $test_hash, true);
+                 // compare
+                 echo $given_hash . "\n" . $test_hash . "\n" . var_export($given_hash === $test_hash, true);
 
                 // if($given_hash === $test_hash) {
-                // 	 $_SESSION['EMAIL'] = $email;
+                //
                 // 	 $_SESSION['USERTYPE'] = 'admin';
                 // 	 echo $_SESSION['USERTYPE'];
 
                 // }
-                $given_hash = $userRow['Password'];
-                if($given_hash === $password) {
+
+//                $hashedPass = crypt($password, sprintf('$6$rounds=%d$%s$', $rounds, $salt));
+
+
+
+
+//                echo $hashedPass;
+//                $given_hash =$userRow['StaffName'];
+                if($given_hash === $test_hash) {
+                    $_SESSION['STAFFID'] = $userRow['StaffID'];
                     $_SESSION['STAFFNAME'] = $userRow['StaffName'];
                     $_SESSION['FUNCTION'] = 'admin';
                     echo $_SESSION['FUNCTION'];
