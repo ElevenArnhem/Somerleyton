@@ -6,21 +6,26 @@
  * Time: 12:18*/
  include 'conn.inc.php';
 include 'pageHead.php';
+
+if(!isset($_GET ['page'])) {
+    $page = 1;
+} else {
+    $page = $_GET['page'];
+}
 session_start();
 if(empty($_SESSION['STAFFNAME'])) {
     $_SESSION['STAFFNAME'] = null;
 }
 if( $_SESSION['STAFFNAME'] != null) {
-    include 'container.php';
+    if($page != 'addAnimal') {
+        include 'container.php';
+    } else {
+        include 'navbar.php';
+        include $page . '.php';
+    }
 } else {
     include 'login.php';
 }
-//include 'container.php';
-//$stmt = $dbh->prepare("select * from Animal");
-//$stmt->execute();
-//while ($row = $stmt->fetch()) {
-//    print_r($row);
-//}
-//unset($dbh); unset($stmt);
+
 
 include 'footer.php';

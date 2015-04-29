@@ -23,8 +23,8 @@ echo '<!-- Bootstrap core CSS -->
 
       <form class="form-signin" action="loginPost.php" method="post">
         <h2 class="form-signin-heading">Log in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="STAFFID" type="number" id="inputEmail" class="form-control" placeholder="Staff id" required autofocus>
+        <label for="staffID" class="sr-only">Staff id</label>
+        <input name="STAFFID" type="" id="staffID" class="form-control" placeholder="Staff id" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
 
