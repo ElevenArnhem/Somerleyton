@@ -14,15 +14,5 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="PHARS">
-        <CLASSES>
-          <root url="phar://$USER_HOME$/Desktop/Backup 28-3-2015/Desktop/School/php interpreter/pharcommand.phar" />
-        </CLASSES>
-        <SOURCES>
-          <root url="phar://$USER_HOME$/Desktop/Backup 28-3-2015/Desktop/School/php interpreter/pharcommand.phar" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
