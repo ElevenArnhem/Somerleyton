@@ -22,4 +22,4 @@ setcookie(session_name(),
 
 // Destroy session
 session_destroy();
-header('Location:/');
+header('Location:index.php');

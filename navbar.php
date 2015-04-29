@@ -10,6 +10,7 @@ echo '    <!-- Bootstrap core CSS -->
 
     <!-- Custom styles for this template -->
     <link href="navbar-fixed-top.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Dont actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->

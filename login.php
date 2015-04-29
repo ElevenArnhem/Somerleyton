@@ -4,6 +4,7 @@ echo '<!-- Bootstrap core CSS -->
 
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Dont actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -21,6 +22,8 @@ echo '<!-- Bootstrap core CSS -->
 
     <div class="container">
 
+
+    <div id="element-box" class="login well">
       <form class="form-signin" action="loginPost.php" method="post">
         <h2 class="form-signin-heading">Log in</h2>
         <label for="staffID" class="sr-only">Staff id</label>
@@ -28,9 +31,9 @@ echo '<!-- Bootstrap core CSS -->
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="PASSWORD" type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Inloggen</button>
       </form>
-
+    </div>
 
     </div>
    ';

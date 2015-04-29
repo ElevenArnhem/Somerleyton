@@ -48,4 +48,4 @@ session_start();
             }
 
         }
-        header('Location:/');
+        header('Location:index.php');
