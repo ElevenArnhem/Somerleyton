@@ -35,7 +35,7 @@ CREATE TABLE Area (
   EnvironmentName		VARCHAR(50)			NOT NULL,
   AreaName				VARCHAR(50)         NOT NULL,
   HeadkeeperID			INTEGER             NOT NULL,
-  CONSTRAINT PK_AREA PRIMARY KEY (AreaName)
+  CONSTRAINT PK_AREA PRIMARY KEY (AreaName, EnvironmentName)
 )
 GO
 
@@ -46,7 +46,7 @@ CREATE TABLE Enclosure (
   EnvironmentName		VARCHAR(50)			NOT NULL,
   EnclosureID			INTEGER             NOT NULL,
   AreaName				VARCHAR(50)         NOT NULL,
-  CONSTRAINT PK_ENCLOSURE PRIMARY KEY (AreaName, EnclosureID)
+  CONSTRAINT PK_ENCLOSURE PRIMARY KEY (EnvironmentName, AreaName, EnclosureID)
 )
 GO
 
@@ -64,7 +64,7 @@ CREATE TABLE Animal (
   EnclosureID          INTEGER              NOT NULL,
   LatinName			   VARCHAR(50)          NOT NULL,
   SubSpeciesName	   VARCHAR(50)			NOT NULL,
-  Image                VARCHAR(50)          NULL,
+  [Image]              VARCHAR(50)          NULL,
   CONSTRAINT PK_ANIMAL PRIMARY KEY (AnimalID),
   CONSTRAINT CK_GENDER CHECK (Gender IN ('M','F'))
 )
@@ -105,8 +105,8 @@ GO
 CREATE TABLE SubSpecies (
   LatinName		       VARCHAR(50)           NOT NULL,
   SubSpeciesName       VARCHAR(50)           NOT NULL,
-  Description          VARCHAR(1500)         NOT NULL,
-  Image                VARCHAR(50)           NULL,
+  [Description]        VARCHAR(1500)         NOT NULL,
+  [Image]              VARCHAR(50)           NULL,
   CONSTRAINT PK_SUBSPECIES PRIMARY KEY (LatinName, SubSpeciesName)
 )
 GO
@@ -117,10 +117,10 @@ GO
 CREATE TABLE Staff (
   StaffID				INTEGER             NOT NULL		IDENTITY (1, 1),
   StaffName				VARCHAR(50)         NOT NULL,
-  Password				VARCHAR(200)        NOT NULL,
+  [Password]			VARCHAR(200)        NOT NULL,
   IsActive				BIT                 NOT NULL,
   PhoneNumber			VARCHAR(20)			NOT NULL,
-  Address				VARCHAR(50)			NOT NULL,
+  [Address]				VARCHAR(50)			NOT NULL,
   ZipCode				VARCHAR(50)			NOT NULL,
   City					VARCHAR(200)		NOT NULL,
   Email					VARCHAR(200)		NULL,
@@ -165,7 +165,7 @@ GO
 
 
 ALTER TABLE Animal
-ADD CONSTRAINT FK_ANIMAL_ANIMALTO_ENCLOSUR FOREIGN KEY (EnvironmentName, AreaName, EnclosureID)
+ADD CONSTRAINT FK_ANIMAL_ANIMALTO_ENCLOSURE FOREIGN KEY (EnvironmentName, AreaName, EnclosureID)
 REFERENCES Enclosure (EnvironmentName, AreaName, EnclosureID)
 GO
 
@@ -186,7 +186,7 @@ GO
 
 ALTER TABLE Enclosure
 ADD CONSTRAINT FK_ENCLOSURE_AREA FOREIGN KEY (EnvironmentName, AreaName)
-REFERENCES Area (EnvironmentName, AreaName)
+REFERENCES Area (AreaName, EnvironmentName)
 GO
 
 ALTER TABLE KeeperToArea
@@ -225,6 +225,6 @@ REFERENCES Subspecies (LatinName, SubSpeciesName)
 GO
 
 ALTER TABLE SubSpecies
-ADD CONSTRAINT FK_SUBSPECIES_HEADSPECIES FOREIGN KEY (LatinName, SubSpeciesName)
-REFERENCES HeadSpecies (LatinName, SubSpeciesName)
+ADD CONSTRAINT FK_SUBSPECIES_HEADSPECIES FOREIGN KEY (LatinName)
+REFERENCES HeadSpecies (LatinName)
 GO
