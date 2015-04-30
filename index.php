@@ -31,5 +31,6 @@ if( $_SESSION['STAFFNAME'] != null) {
     include 'login.php';
 }
 
+include 'addSubSpecie.php';
 
 include 'footer.php';
