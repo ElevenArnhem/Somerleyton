@@ -6,10 +6,8 @@
  * Time: 12:19
  */
 
-include 'navbar.php';
-echo '
-    <br><br><br>
-    <div class="container">';
+
+
 //    include 'findAnimal.php';
 
 

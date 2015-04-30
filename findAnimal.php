@@ -21,7 +21,7 @@ if(!isset($_POST["SEARCHSTRING"])) {
 
 
 echo '
-</div>
+
 <hr>
 <form action="index.php" method="post">
   <div class="col-lg-6">
@@ -61,14 +61,23 @@ echo '
             <th>EnclosureID</th>
 </tr>';
 foreach($animals as $animal) {
+//    if($_SESSION['FUNCTION'])
     echo '<tr><td>'.$animal["AnimalID"].'</td>
-        <td>'.$animal["AnimalName"].'</td>
+        <td><a href="?page=animalCard?animalID='.$animal["AnimalID"].'">'.$animal["AnimalName"].'</a></td>
         <td>'.$animal["BirthDate"].'</td>
         <td>'.$animal["BirthPlace"].'</td>
         <td>'.$animal["LatinName"].'</td>
         <td>'.$animal["SubSpeciesName"].'</td>
         <td>'.$animal["AreaName"].'</td>
-        <td>'.$animal["EnclosureID"].'</td></tr>';
+        <td>'.$animal["EnclosureID"].'</td>';
+    if($_SESSION['FUNCTION'] == 'HeadKeeper') {
+
+
+    echo '   <td>
+       <a href="?page=changeAnimal"> <button type="button" class="btn btn-default" >Aanpassen</button></a>
+    </td>';
+    }
+    echo'</tr>';
 };
 echo '
 </table>';

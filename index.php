@@ -17,7 +17,11 @@ if(empty($_SESSION['STAFFNAME'])) {
     $_SESSION['STAFFNAME'] = null;
 }
 if( $_SESSION['STAFFNAME'] != null) {
-    if($page != 'addAnimal') {
+    include "navbar.php";
+    echo '
+    <br><br><br>
+    <div class="container">';
+    if($page != 'addAnimal' && $page != 'findAnimal') {
         include 'container.php';
     } else {
         include 'navbar.php';

@@ -42,7 +42,7 @@ echo '    <!-- Bootstrap core CSS -->
           <ul class="nav navbar-nav">
             <li><a href="/index.php">Home</a></li>
             <li><a href="#">Medewerkers</a></li>
-            <li><a href="#">Dieren</a></li>
+            <li><a href="?page=findAnimal">Dieren</a></li>
             <li><a href="#">Verblijven</a></li>
             </ul>
           <ul class="nav navbar-nav navbar-right">
