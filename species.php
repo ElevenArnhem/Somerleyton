@@ -21,5 +21,5 @@ echo '
 ?>
 
 <div class="btn-group" role="group">
-    <a href="?page=addSubSpecies"> <button type="button" class="btn btn-default" >Toevoegen</button></a>
+    <a href="?page=addSubSpecies"> <button type="button" class="btn btn-default" >Subsoort toevoegen</button></a>
 </div>

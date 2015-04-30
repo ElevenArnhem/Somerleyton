@@ -7,11 +7,13 @@ $headSpeciesProc->execute();
 $headSpecies = $headSpeciesProc->fetchAll();
 ?>
 
+<h1>Subsoort toevoegen</h1>
+
 <form action="?page=addSubSpeciesPost" method="post">
     <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
     <div class="form-group">
-        <label>Naam</label>
-        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam soort">
+        <label>Subsoort naam</label>
+        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam subsoort">
     </div>
     <div class="form-group">
 
