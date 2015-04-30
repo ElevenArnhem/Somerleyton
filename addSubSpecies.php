@@ -1,33 +1,16 @@
-<?php
-
-$speciesName = $dbh->prepare("SELECT SubSpeciesName FROM SubSpecies ORDER BY SubSpeciesName");
-$speciesName->execute();
-$species = $speciesName->fetchAll();
-?>
-
-
 <form action="addSubSpeciesPost.php" method="post">
+    <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
     <div class="form-group">
         <label>Naam</label>
-        <input name="ANIMALNAME" type="text" class="form-control" placeholder="Naam dier">
+        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam soort">
     </div>
     <div class="form-group">
         <label>Latijnse naam</label>
         <input name="LATINNAME" type="text" class="form-control" placeholder="Latijnse naam">
     </div>
     <div class="form-group">
-        <label>Hoofdsoort</label>
-        <select name="SPECIESNAME" class="form-control">
-            <?php
-            foreach($species as $specie) {
-                echo    '<option value="'.$specie["SubSpeciesName"].'">'.$specie["SubSpeciesName"].'</option>';
-            }
-            ?>
-        </select>
-    </div>
-    <div class="form-group">
         <label>Beschrijving</label>
         <textarea name="DESCRIPTION" class="form-control" rows="3"></textarea>
     </div>
-    <input type="submit" value="submit" name="submit">
+    <input class="btn btn-default" type="submit" name="submit" value="Toevoegen">
 </form>

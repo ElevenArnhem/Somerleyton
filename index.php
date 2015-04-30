@@ -23,6 +23,7 @@ if( $_SESSION['STAFFNAME'] != null) {
     <div class="container">';
     if($page != 'addAnimal' && $page != 'findAnimal') {
         include 'home.php';
+        include 'subSpecies.php';
     } else {
         include 'navbar.php';
         include $page . '.php';
@@ -30,7 +31,5 @@ if( $_SESSION['STAFFNAME'] != null) {
 } else {
     include 'login.php';
 }
-
-include 'addSubSpecies.php';
 
 include 'footer.php';
