@@ -1,9 +1,5 @@
 <?php
 
-$allSubSpecies = $dbh->prepare("EXEC proc_getSubSpecies");
-$allSubSpecies->execute();
-$subSpecies = $allSubSpecies->fetchAll();
-
 $allHeadSpecies = $dbh->prepare("EXEC proc_getHeadSpecies");
 $allHeadSpecies->execute();
 $headSpecies = $allHeadSpecies->fetchAll();
@@ -11,11 +7,11 @@ $headSpecies = $allHeadSpecies->fetchAll();
 echo '
 <table class="table table-hover">
     <tr>
-        <th>Subsoort</th>
+        <th>Hoofdsoort</th>
     </tr>';
-    foreach($subSpecies as $fetchSubSpecies) {
+    foreach($headSpecies as $fetchHeadSpecies) {
     echo '<tr>
-            <td>'.$fetchSubSpecies["SubSpeciesName"].'</td>
+            <td>'.$fetchHeadSpecies["LatinName"].'</td>
             </tr>';
     }
     echo ' </table>';

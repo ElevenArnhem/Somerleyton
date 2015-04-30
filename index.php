@@ -21,9 +21,8 @@ if( $_SESSION['STAFFNAME'] != null) {
     echo '
     <br><br><br>
     <div class="container">';
-    if($page != 'addAnimal' && $page != 'findAnimal') {
+    if($page != 'addAnimal' && $page != 'findAnimal' && $page != 'species' && $page !='addSubSpecies' && $page !='addSubSpeciesPost') {
         include 'home.php';
-        include 'subSpecies.php';
     } else {
         include 'navbar.php';
         include $page . '.php';
