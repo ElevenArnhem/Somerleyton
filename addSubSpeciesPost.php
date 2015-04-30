@@ -2,7 +2,7 @@
 
 $animalName = $_POST["ANIMALNAME"];
 $latinName = $_POST["LATINNAME"];
-$specieName = $_POST["SPECIENAME"];
+$specieName = $_POST["SPECIESNAME"];
 $descriptionName = $_POST["DESCRIPTION"];
 
 echo '<br/>';

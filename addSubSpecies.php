@@ -6,7 +6,7 @@ $species = $speciesName->fetchAll();
 ?>
 
 
-<form action="addSubSpeciePost.php" method="post">
+<form action="addSubSpeciesPost.php" method="post">
     <div class="form-group">
         <label>Naam</label>
         <input name="ANIMALNAME" type="text" class="form-control" placeholder="Naam dier">
@@ -17,7 +17,7 @@ $species = $speciesName->fetchAll();
     </div>
     <div class="form-group">
         <label>Hoofdsoort</label>
-        <select name="SPECIENAME" class="form-control">
+        <select name="SPECIESNAME" class="form-control">
             <?php
             foreach($species as $specie) {
                 echo    '<option value="'.$specie["SubSpeciesName"].'">'.$specie["SubSpeciesName"].'</option>';
