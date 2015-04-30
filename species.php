@@ -4,6 +4,9 @@ $allHeadSpecies = $dbh->prepare("EXEC proc_getHeadSpecies");
 $allHeadSpecies->execute();
 $headSpecies = $allHeadSpecies->fetchAll();
 
+
+echo '<h1>Diersoorten beheren</h1>';
+
 echo '
 <table class="table table-hover">
     <tr>
