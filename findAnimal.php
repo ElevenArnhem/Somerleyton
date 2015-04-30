@@ -21,7 +21,7 @@ if(isset($_POST["SEARCHSTRING"])) {
 echo '
 
 <hr>
-<form action="index.php" method="post">
+<form action="index.php?page=findAnimal" method="post">
   <div class="col-lg-6">
 
     <div class="input-group">
@@ -62,7 +62,7 @@ echo '
 foreach($animals as $animal) {
 //    if($_SESSION['FUNCTION'])
     echo '<tr><td>'.$animal["AnimalID"].'</td>
-        <td><a href="?page=animalCard?animalID='.$animal["AnimalID"].'">'.$animal["AnimalName"].'</a></td>
+        <td><a href="?page=animalCard&animalID='.$animal["AnimalID"].'">'.$animal["AnimalName"].'</a></td>
         <td>'.$animal["BirthDate"].'</td>
         <td>'.$animal["BirthPlace"].'</td>
         <td>'.$animal["LatinName"].'</td>
@@ -73,7 +73,7 @@ foreach($animals as $animal) {
 
 
     echo '   <td>
-       <a href="?page=changeAnimal"> <button type="button" class="btn btn-default" >Aanpassen</button></a>
+       <a href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> <button type="button" class="btn btn-default" >Aanpassen</button></a>
     </td>';
     }
     echo'</tr>';

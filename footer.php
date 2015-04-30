@@ -5,6 +5,7 @@
  * Date: 24-4-2015
  * Time: 12:19
  */
+echo'  </div> <!-- /container -->';
 
 echo '
 <!-- Bootstrap core JavaScript
