@@ -10,7 +10,7 @@ include 'pageHead.php';
 
 echo '<title>Somerleyton Animal Park</title>';
 
-include 'container.php';
+include 'home.php';
 $stmt = $dbh->prepare("select * from Animal");
 $stmt->execute();
 while ($row = $stmt->fetch()) {

@@ -22,7 +22,7 @@ if( $_SESSION['STAFFNAME'] != null) {
     <br><br><br>
     <div class="container">';
     if($page != 'addAnimal' && $page != 'findAnimal') {
-        include 'container.php';
+        include 'home.php';
     } else {
         include 'navbar.php';
         include $page . '.php';

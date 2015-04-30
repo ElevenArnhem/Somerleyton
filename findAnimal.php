@@ -1,10 +1,6 @@
 <?php
 
-if(!isset($_POST["SEARCHSTRING"])) {
-    $animalstmt = $dbh->prepare("Select * from Animal ");
-    $animalstmt->execute();
-    $animals = $animalstmt->fetchAll();
-} else {
+if(isset($_POST["SEARCHSTRING"])) {
     $searchString = $_POST["SEARCHSTRING"];
     $aliveAnimal = $_POST["ALIVEANIMAL"];
     $animalstmt = $dbh->prepare("EXEC proc_searchAnimal ?,?");
@@ -12,10 +8,12 @@ if(!isset($_POST["SEARCHSTRING"])) {
     $animalstmt->bindParam(2,$aliveAnimal);
     $animalstmt->execute();
     $animals = $animalstmt->fetchAll(PDO::FETCH_ASSOC);
-//    while($row = $animalstmt->fetch()) {
-//
-//       echo $row[0];
-//}
+
+
+} if(!isset($_POST["SEARCHSTRING"])) {
+    $animalstmt = $dbh->prepare("Select * from Animal where Animal.AnimalID NOT IN (select di.AnimalID from DeceasedInfo di)");
+    $animalstmt->execute();
+    $animals = $animalstmt->fetchAll();
 
 }
 
@@ -44,12 +42,13 @@ echo '
 </div>
 <div class="radio">
   <label>
-    <input type="radio" name="ALIVEANIMAL" id="0" value="option2">
+    <input type="radio" name="ALIVEANIMAL" id="0" value="0">
    Overleden dieren
 </label>
 </div>
   <br><br>
-</form>
+</form>';
+echo '
 <table class="table table-hover"><tr>
             <th>AnimalID</th>
             <th>AnimalName</th>
