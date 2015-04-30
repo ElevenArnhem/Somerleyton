@@ -31,5 +31,4 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
 //        </div>
 //      </div>';
 
-  echo'  </div> <!-- /container -->';
 
