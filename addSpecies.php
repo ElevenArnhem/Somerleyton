@@ -25,31 +25,31 @@ if(isset($_POST["submit"])) {
 }
 ?>
 
-<h1>Subsoort toevoegen</h1>
+<h1>Diersoort toevoegen</h1>
 
-<form action="?page=addSubSpecies" method="post">
+<form action="?page=addSpecies" method="post">
     <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
+    <div class="form-group">
+
+        <label>Hoofdsoort</label>
+        <select name="LATINNAME" id="selectbox" class="form-control" type="text" placeholder="Hoofdsoort" required>
+            <?php
+            foreach ($headSpecies as $fetchHeadSpecies) {
+                echo '<option value="'.$fetchHeadSpecies["LatinName"].'">'.$fetchHeadSpecies["LatinName"].'</option>';
+            }
+            ?>
+        </select>
+        <span>Andere hoofdsoort:</span>
+        <input id="enable" name="enable" type="checkbox" />
+        <input id="first_name" class="form-control textbox" name="LATINNAME" type="text" disabled required />
+    </div>
     <div class="form-group">
         <label>Subsoort naam</label>
         <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam subsoort">
     </div>
     <div class="form-group">
-
-        <label>Hoofdsoort</label>
-        <select name="LATINNAME" id="selectbox" class="form-control" type="text" placeholder="Hoofdsoort">
-            <?php
-            foreach ($headSpecies as $fetchHeadSpecies) {
-            echo '<option value="'.$fetchHeadSpecies["LatinName"].'">'.$fetchHeadSpecies["LatinName"].'</option>';
-            }
-            ?>
-            </select>
-        <span>Andere hoofdsoort:</span>
-        <input id="enable" name="enable" type="checkbox" />
-        <input id="first_name" class="form-control textbox" name="LATINNAME" type="text" disabled />
-    </div>
-    <div class="form-group">
         <label>Beschrijving</label>
-        <textarea name="DESCRIPTION" class="form-control" rows="3"></textarea>
+        <textarea name="DESCRIPTION" class="form-control" rows="3" required></textarea>
     </div>
     <input class="btn btn-default" type="submit" name="submit" value="Toevoegen">
 </form>
