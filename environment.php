@@ -17,10 +17,10 @@ echo '
     <tr>
         <th>Environment</th>
     </tr>';
-foreach($environments as $fetchEnvironments) {
+foreach($environments as $environment) {
     echo '<tr>
-            <td><a href="?page=area&environmentName='.$environments["EnvironmentName"].'">'.$fetchEnvironments["EnvironmentName"].'</a></td>
-            </tr>';
+            <td><a href="?page=area&environmentName='.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</a></td>
+          </tr>';
 }
 echo ' </table>';
 ?>
