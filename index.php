@@ -22,12 +22,16 @@ if( $_SESSION['STAFFNAME'] != null) {
     echo '
     <br><br><br>
     <div class="container">';
-    if($page != 'addAnimal' && $page != 'findAnimal' && $page != 'species' && $page !='addSubSpecies' && $page !='addSubSpeciesPost' && $page != 'medewerkers' && $page != 'alterStaff' && $page != 'animalCard'
-        && $page != 'changeAnimal') {
+    $dir = '../Somerleyton';
+    $allPages = scandir($dir);
+
+    $page = $page.'.php';
+
+    if(!in_array($page , $allPages)) {
         include 'home.php';
     } else {
         include 'navbar.php';
-        include $page . '.php';
+        include $page;
     }
 } else {
     include 'login.php';
