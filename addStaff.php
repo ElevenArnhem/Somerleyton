@@ -17,8 +17,12 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         else
             $newStaffIsActive= 0;
 
-        if(isset($_POST['STAFFPASSWORD']))
-            $staffPassword = $_POST['STAFFPASSWORD'];
+        if(isset($_POST['STAFFPASSWORD'])) {
+
+            $salt = substr(str_replace('+','.',base64_encode(md5(mt_rand(), true))),0,16);
+            $rounds = 1000;
+            $staffPassword = crypt($_POST['STAFFPASSWORD'], sprintf('$6$rounds=%d$%s$', $rounds, $salt));;
+        }
         else
             $staffPassword = '';
 
@@ -122,7 +126,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Wachtwoord:
                 </dt>
                 <dd>
-                    <input name="STAFFPASSWORD" type="text" class="form-control">
+                    <input name="STAFFPASSWORD" type="password" class="form-control">
                 </dd>
                 <br>
 
