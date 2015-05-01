@@ -41,11 +41,11 @@ if(isset($_POST["submit"])) {
         </select>
         <span>Andere hoofdsoort:</span>
         <input id="enable" name="enable" type="checkbox" />
-        <input id="first_name" class="form-control textbox" name="LATINNAME" type="text" disabled required />
+        <input class="form-control textbox" name="LATINNAME" required type="text" disabled />
     </div>
     <div class="form-group">
         <label>Subsoort naam</label>
-        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam subsoort">
+        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam subsoort" required>
     </div>
     <div class="form-group">
         <label>Beschrijving</label>

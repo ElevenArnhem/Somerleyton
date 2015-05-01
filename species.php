@@ -1,25 +1,42 @@
 <?php
 
-$allSubSpecies = $dbh->prepare("EXEC proc_getSubSpecies");
-$allSubSpecies->execute();
-$subSpecies = $allSubSpecies->fetchAll();
-$count = count($subSpecies);
 if(!isset($_GET ['number'])) {
     $page = 1;
 } else {
     $page = $_GET['number'];
 }
 
-$pp = 2;
+$rowsAtPage = 8;
+$rownumber = ($page - 1) * ($rowsAtPage + 1)  + 1;
 
-$paging_info = get_paging_info($count,$pp,$page);
+$allSubSpeciesByNumber = $dbh->prepare("EXEC proc_getSubSpeciesByNumber ?, ?");
+$allSubSpeciesByNumber->bindParam(1, $rownumber);
+$allSubSpeciesByNumber->bindParam(2, $rowsAtPage);
+$allSubSpeciesByNumber->execute();
+$subSpeciesByNumber = $allSubSpeciesByNumber->fetchAll();
 
-function get_paging_info($tot_rows,$pp,$curr_page)
+$allSubSpecies = $dbh->prepare("EXEC proc_getSubSpecies");
+$allSubSpecies->execute();
+$subSpecies = $allSubSpecies->fetchAll();
+$count = count($subSpecies);
+
+//if(isset($_POST["SEARCHSTRING"])) {
+//    $searchString = $_POST["SEARCHSTRING"];
+//    $searchSpecies = $dbh->prepare("EXEC proc_getSubSpecies ?");
+//    $searchSpecies->bindParam(1, $searchString);
+//    $searchSpecies->execute();
+//    $animals = $searchSpecies->fetchAll(PDO::FETCH_ASSOC);
+//}
+
+
+$paging_info = get_paging_info($count,$rowsAtPage,$page);
+
+function get_paging_info($tot_rows,$rowsAtPage,$curr_page)
 {
-    $pages = ceil($tot_rows / $pp); // calc pages
+    $pages = ceil($tot_rows / ($rowsAtPage + 1)); // calc pages
 
     $data = array(); // start out array
-    $data['si']        = ($curr_page * $pp) - $pp; // what row to start at
+    $data['si']        = ($curr_page * ($rowsAtPage + 1) ) - ($rowsAtPage + 1); // what row to start at
     $data['pages']     = $pages;                   // add the pages
     $data['curr_page'] = $curr_page;               // Whats the current page
 
@@ -30,16 +47,16 @@ function get_paging_info($tot_rows,$pp,$curr_page)
 
 echo '<h1>Diersoorten beheren</h1>';
 
+
 echo '
 <table class="table table-hover">
     <tr>
         <th>Hoofdsoort</th>
         <th>Subsoort</th>
     </tr>';
-    foreach($subSpecies as $fetchSubSpecies) {
-            echo '<tr>';
-            $bla = $fetchSubSpecies["LatinName"];
-            echo '<td>' . $fetchSubSpecies["LatinName"] . '</td>
+    foreach($subSpeciesByNumber as $fetchSubSpecies) {
+            echo '<tr>
+            <td>' . $fetchSubSpecies["LatinName"] . '</td>
             <td>' . $fetchSubSpecies["SubSpeciesName"] . '</td>
             </tr>';
     }
@@ -71,7 +88,7 @@ echo '
     <!-- If the current page >= $max then show link to 1st page -->
     <?php if($paging_info['curr_page'] >= $max) : ?>
 
-        <a href='' title='Pagina 1'>1</a>
+        <a href='index.php?page=species&number=1' title='Pagina 1'>1</a>
         ..
 
     <?php endif; ?>
@@ -90,7 +107,7 @@ echo '
 
         <?php else : ?>
 
-            <a href='' title='Page <?php echo $i; ?>'><?php echo $i; ?></a>
+            <a href='index.php?page=species&number=<?php echo $i; ?>' title='Page <?php echo $i; ?>'><?php echo $i; ?></a>
 
         <?php endif; ?>
 
@@ -101,7 +118,7 @@ echo '
     <?php if($paging_info['curr_page'] < ($paging_info['pages'] - floor($max / 2))) : ?>
 
         ..
-        <a href='' title='Page <?php echo $paging_info['pages']; ?>'><?php echo $paging_info['pages']; ?></a>
+        <a href='index.php?page=species&number=<?php echo $paging_info['pages']; ?>' title='Page <?php echo $paging_info['pages']; ?>'><?php echo $paging_info['pages']; ?></a>
 
     <?php endif; ?>
 
