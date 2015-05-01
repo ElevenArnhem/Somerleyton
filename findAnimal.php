@@ -11,7 +11,7 @@ if(isset($_POST["SEARCHSTRING"])) {
 
 
 } if(!isset($_POST["SEARCHSTRING"])) {
-    $animalstmt = $dbh->prepare("Select * from Animal where Animal.AnimalID NOT IN (select di.AnimalID from DeceasedInfo di)");
+    $animalstmt = $dbh->prepare("EXEC proc_searchAnimal '','1'");
     $animalstmt->execute();
     $animals = $animalstmt->fetchAll();
 
