@@ -21,30 +21,38 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
         $subSpeciesName = $_POST['SUBSPECIESNAME'];
         $image = 'test';
 
-        echo $staffID, $animalID, $environmentName, $areaName, $enclosureID, $latinName, $subSpeciesName,$animalName, $gender, $birthDate, $birthPlace,  $image;
+//        echo $staffID, $animalID, $environmentName, $areaName, $enclosureID, $latinName, $subSpeciesName,$animalName, $gender, $birthDate, $birthPlace,  $image;
+        $changeAnimalstmt = $dbh->prepare("proc_AlterAnimal");
 
-//
-        $changeAnimalstmt = $dbh->prepare("proc_AlterAnimal ?,?,?,?,?,?,?,?,?,?,?,?");
-        $changeAnimalstmt->bindParam(1, $staffID);
-        $changeAnimalstmt->bindParam(2, $animalID);
-        $changeAnimalstmt->bindParam(3, $environmentName);
-        $changeAnimalstmt->bindParam(4, $areaName);
-        $changeAnimalstmt->bindParam(5, $enclosureID);
-        $changeAnimalstmt->bindParam(6, $latinName);
-        $changeAnimalstmt->bindParam(7, $subSpeciesName);
-        $changeAnimalstmt->bindParam(8, $animalName);
-        $changeAnimalstmt->bindParam(9, $gender);
-        $changeAnimalstmt->bindParam(10, $birthDate);
-        $changeAnimalstmt->bindParam(11, $birthPlace);
-        $changeAnimalstmt->bindParam(12, $image);
+//            $changeAnimalstmt = $dbh->prepare("proc_AlterAnimal ?,?,?,?,?,?,?,?,?,?,?,?");
+//            $changeAnimalstmt->bindParam(1, $staffID);
+//            $changeAnimalstmt->bindParam(2, $animalID);
+//            $changeAnimalstmt->bindParam(3, $environmentName);
+//            $changeAnimalstmt->bindParam(4, $areaName);
+//            $changeAnimalstmt->bindParam(5, $enclosureID);
+//            $changeAnimalstmt->bindParam(6, $latinName);
+//            $changeAnimalstmt->bindParam(7, $subSpeciesName);
+//            $changeAnimalstmt->bindParam(8, $animalName);
+//            $changeAnimalstmt->bindParam(9, $gender);
+//            $changeAnimalstmt->bindParam(10, $birthDate);
+//            $changeAnimalstmt->bindParam(11, $birthPlace);
+//            $changeAnimalstmt->bindParam(12, $image);
 //        $changeAnimalstmt = $dbh->prepare("update Animal set Gender = 'F' where AnimalID = 3");
-
-        $changeAnimalstmt->execute();
+//        $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            $changeAnimalstmt->execute();
+        //if(!$changeAnimalstmt) {
+        $changeAnimalstmt->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        echo $changeAnimalstmt->errorInfo()[0];
+        echo $changeAnimalstmt->errorInfo()[1];
+        echo $changeAnimalstmt->errorInfo()[2];
+       // }
 //        $msg = $changeAnimalstmt->fetch();
 //        echo $msg['animalID'];
 //        echo sqlsrv_errors();
 //        echo "changed something";
-            //StaffID, AnimalID, AnimalName, Gender, BirthDate, BirthPlace, EnvironmentName, AreaName, EnclosureID, LatinName, SubSpeciesName, Image
+
+
+        //StaffID, AnimalID, AnimalName, Gender, BirthDate, BirthPlace, EnvironmentName, AreaName, EnclosureID, LatinName, SubSpeciesName, Image
     }
 
     $animalID = $_GET['animalID'];
