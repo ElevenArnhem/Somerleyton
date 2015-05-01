@@ -22,7 +22,7 @@ if( $_SESSION['STAFFNAME'] != null) {
     echo '
     <br><br><br>
     <div class="container">';
-    $dir = '../Somerleyton';
+    $dir = '/';
     $allPages = scandir($dir);
 
     $page = $page.'.php';

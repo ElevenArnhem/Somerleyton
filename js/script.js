@@ -7,6 +7,7 @@ $(document).ready(function($) {
             $('input.textbox:text').attr("disabled", false);
             $('input.textbox:text').removeAttr('disabled');
             $('input.textbox:text').attr("name", "LATINNAME");
+            $('input.textbox:text').attr("required", true);
         }
         else if ($(this).not(':checked')) {
                 var remove = '';
@@ -15,6 +16,7 @@ $(document).ready(function($) {
 
                 $('input.textbox:text').attr ('value', remove);
                 $('input.textbox:text').removeAttr("name", false);
+                $('input.textbox:text').removeAttr("required", false);
                 $('input.textbox:text').attr("disabled", true);
             }
     }); });

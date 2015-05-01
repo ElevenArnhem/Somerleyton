@@ -13,6 +13,7 @@ $animalstmt->execute();
 $animal = $animalstmt->fetch();
 echo '<h1>'.$animal['AnimalName'].'</h1>
         <br>
+        <div class="row">
         <div class="col-lg-6">
           <h2>Dier Info</h2>
           <dl class="dl-horizontal">
@@ -27,4 +28,11 @@ echo '<h1>'.$animal['AnimalName'].'</h1>
         if($_SESSION['FUNCTION'] == 'HeadKeeper') {
         echo '<a href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> <button type="button" class="btn btn-default" >Aanpassen</button></a>';
         }
-       echo'</div>';
+       echo'</div>
+   <div class="col-lg-6">
+   <br><br>';
+if(isset($animal['Image']) && !empty($animal['Image'])) {
+    echo '
+<img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
+}
+echo '</div></div>';
