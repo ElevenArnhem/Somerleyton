@@ -9,11 +9,25 @@ include 'conn.inc.php';
 $headSpeciesProc = $dbh->prepare('EXEC proc_getHeadSpecies');
 $headSpeciesProc->execute();
 $headSpecies = $headSpeciesProc->fetchAll();
+
+if(isset($_POST["submit"])) {
+    $image = 'sdfsdf';
+
+    $speciesStatement = $dbh->prepare("proc_addSubSpecies ?, ?, ?, ?, ?");
+    $speciesStatement->bindParam(1, $_POST["STAFFID"]);
+    $speciesStatement->bindParam(2, $_POST["LATINNAME"]);
+    $speciesStatement->bindParam(3, $_POST["SUBSPECIESNAME"]);
+    $speciesStatement->bindParam(4, $_POST["DESCRIPTION"]);
+    $speciesStatement->bindParam(5, $image);
+    $speciesStatement->execute();
+    echo '<div class="alert alert-success" role="alert">Diersoort is toegevoegd.</div>';
+
+}
 ?>
 
 <h1>Subsoort toevoegen</h1>
 
-<form action="?page=addSubSpeciesPost" method="post">
+<form action="?page=addSubSpecies" method="post">
     <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
     <div class="form-group">
         <label>Subsoort naam</label>
@@ -22,15 +36,16 @@ $headSpecies = $headSpeciesProc->fetchAll();
     <div class="form-group">
 
         <label>Hoofdsoort</label>
-        <select name="LATINNAME" id="textbox" type="text" placeholder="Hoofdsoort">
+        <select name="LATINNAME" id="selectbox" class="form-control" type="text" placeholder="Hoofdsoort">
             <?php
             foreach ($headSpecies as $fetchHeadSpecies) {
             echo '<option value="'.$fetchHeadSpecies["LatinName"].'">'.$fetchHeadSpecies["LatinName"].'</option>';
             }
             ?>
             </select>
+        <span>Andere hoofdsoort:</span>
         <input id="enable" name="enable" type="checkbox" />
-        <input id="first_name" class="textbox" name="LATINNAME" type="text" disabled />
+        <input id="first_name" class="form-control textbox" name="LATINNAME" type="text" disabled />
     </div>
     <div class="form-group">
         <label>Beschrijving</label>

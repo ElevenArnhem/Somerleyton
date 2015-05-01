@@ -75,6 +75,6 @@ echo '
 
 if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
     echo '<div class="btn-group" role="group">
-            <a href="#"><button type="button" class="btn btn-default">Toevoegen</button></a>
+            <a href="index.php?page=addStaff"><button type="button" class="btn btn-default">Toevoegen</button></a>
           </div>';
 }

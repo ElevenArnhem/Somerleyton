@@ -1,40 +1,77 @@
 <?php
-$currentStaffID = $_SESSION["STAFFID"];
-$staffID = $_GET['staffID'];
+if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
 
-$medewerkerStatement = $dbh -> prepare("proc_GetMedewerker ?, ?");
-$medewerkerStatement -> bindParam(1, $currentStaffID);
-$medewerkerStatement -> bindParam(2, $staffID);
-$medewerkerStatement -> execute();
-$medewerker = $medewerkerStatement -> fetch();
+    $currentStaffID = $_SESSION["STAFFID"];
+    $staffID = $_GET['staffID'];
 
-$functionStatement = $dbh -> prepare("proc_getAllFunctions");
-$functionStatement -> execute();
-$functions = $functionStatement -> fetchAll();
+    if (isset($_POST['STAFFID'])) {
+        $currentStaffID = $_SESSION["STAFFID"];
+        $staffID = $_POST['STAFFID'];
+        $newStaffName = $_POST['STAFFNAME'];
+        $newStaffPhoneNumber = $_POST['STAFFPHONENUMBER'];
+        $newStaffAddress = $_POST['STAFFADDRESS'];
+        $newStaffZipCode = $_POST['STAFFZIPCODE'];
+        $newStaffCity = $_POST['STAFFCITY'];
+        $newStaffEmail = $_POST['STAFFEMAIL'];
+        $newStaffBirthDate = $_POST['STAFFBIRTHDATE'];
+        $newStaffFunction = $_POST['STAFFFUNCTION'];
 
-$areasForUserIDStatement = $dbh -> prepare("proc_getAreasFromStaffID ?");
-$areasForUserIDStatement -> bindParam(1, $staffID);
-$areasForUserIDStatement -> execute();
-$areasForUserID = $areasForUserIDStatement -> fetchAll();
+        if(isset($_POST['STAFFISACTIVE']))
+            $newStaffIsActive = 1;
+        else
+            $newStaffIsActive= 0;
 
-echo '
+        $alterMedewerkerStatement = $dbh->prepare("proc_alterStaff ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+        $alterMedewerkerStatement->bindParam(1, $currentStaffID);
+        $alterMedewerkerStatement->bindParam(2, $staffID);
+        $alterMedewerkerStatement->bindParam(3, $newStaffName);
+        $alterMedewerkerStatement->bindParam(4, $newStaffPhoneNumber);
+        $alterMedewerkerStatement->bindParam(5, $newStaffAddress);
+        $alterMedewerkerStatement->bindParam(6, $newStaffZipCode);
+        $alterMedewerkerStatement->bindParam(7, $newStaffCity);
+        $alterMedewerkerStatement->bindParam(8, $newStaffEmail);
+        $alterMedewerkerStatement->bindParam(9, $newStaffBirthDate);
+        $alterMedewerkerStatement->bindParam(10, $newStaffFunction);
+        $alterMedewerkerStatement->bindParam(11, $newStaffIsActive);
+        $alterMedewerkerStatement->execute();
+
+        spErrorCaching($alterMedewerkerStatement);
+    }
+
+    $medewerkerStatement = $dbh->prepare("proc_GetMedewerker ?, ?");
+    $medewerkerStatement->bindParam(1, $currentStaffID);
+    $medewerkerStatement->bindParam(2, $staffID);
+    $medewerkerStatement->execute();
+    $medewerker = $medewerkerStatement->fetch();
+
+    $functionStatement = $dbh->prepare("proc_getAllFunctions");
+    $functionStatement->execute();
+    $functions = $functionStatement->fetchAll();
+
+    $areasForUserIDStatement = $dbh->prepare("proc_getAreasFromStaffID ?");
+    $areasForUserIDStatement->bindParam(1, $staffID);
+    $areasForUserIDStatement->execute();
+    $areasForUserID = $areasForUserIDStatement->fetchAll();
+
+    echo '
         <br>
             <div class="col-lg-6">
               <h2>Medewerker gegevens</h2>
-              <form action="index.php?page=alterStaff&animalID='.$staffID.'" method="post">
+              <form action="index.php?page=alterStaff&staffID=' . $staffID . '" method="post">
               <dl class="dl-horizontal">
                 <dt>
                     Nummer:
                 </dt>
                 <dd>
-                    <label>'.$staffID.'</label>
+                    <label>' . $staffID . '</label>
+                    <input type="hidden" name="STAFFID" value="' . $staffID . '">
                 </dd>
                 <br>
                 <dt>
                     Naam:
                 </dt>
                 <dd>
-                    <input name="STAFFNAME" type="text" class="form-control" value="'.$medewerker['StaffName'].'">
+                    <input name="STAFFNAME" type="text" class="form-control" value="' . $medewerker['StaffName'] . '">
                 </dd>
                 <br>
 
@@ -42,7 +79,7 @@ echo '
                     Telefoon nummer:
                 </dt>
                 <dd>
-                    <input name="STAFFPHONENUMBER" type="text" class="form-control" value="'.$medewerker['PhoneNumber'].'">
+                    <input name="STAFFPHONENUMBER" type="text" class="form-control" value="' . $medewerker['PhoneNumber'] . '">
                 </dd>
                 <br>
 
@@ -50,7 +87,7 @@ echo '
                     Adres:
                 </dt>
                 <dd>
-                    <input name="STAFFADDRESS" type="text" class="form-control" value="'.$medewerker['Address'].'">
+                    <input name="STAFFADDRESS" type="text" class="form-control" value="' . $medewerker['Address'] . '">
                 </dd>
                 <br>
 
@@ -58,7 +95,7 @@ echo '
                     Postcode:
                 </dt>
                 <dd>
-                    <input name="STAFFZIPCODE" type="text" class="form-control" value="'.$medewerker['ZipCode'].'">
+                    <input name="STAFFZIPCODE" type="text" class="form-control" value="' . $medewerker['ZipCode'] . '">
                 </dd>
                 <br>
 
@@ -66,7 +103,7 @@ echo '
                     Stad:
                 </dt>
                 <dd>
-                    <input name="STAFFCITY" type="text" class="form-control" value="'.$medewerker['City'].'">
+                    <input name="STAFFCITY" type="text" class="form-control" value="' . $medewerker['City'] . '">
                 </dd>
                 <br>
 
@@ -74,52 +111,55 @@ echo '
                     E-mail:
                 </dt>
                 <dd>
-                    <input name="STAFFEMAIL" type="text" class="form-control" value="'.$medewerker['Email'].'">
+                    <input name="STAFFEMAIL" type="text" class="form-control" value="' . $medewerker['Email'] . '">
                 </dd>
                 <br>
                 <dt>
                     Geboorte datum:
                 </dt>
                 <dd>
-                    <input name="STAFFBIRTHDATE" type="date" class="form-control" value="'.$medewerker['Birthdate'].'">
+                    <input name="STAFFBIRTHDATE" type="date" class="form-control" value="' . $medewerker['Birthdate'] . '">
                 </dd>
                 <br>
                 <dt>
                     Functie:
                 </dt>
                 <dd>
-                <select name="STAFFFUNCTION" type="text" class="form-control" value="'.$medewerker['Functie'].'">';
-                    foreach($functions as $function){
-                        echo '<option value="'.$function["name"].'">'.$function["name"].'</option>';
-                     }
-                    echo '</select>
-                </dd>
-                <br>
-                <dt>
-                    Verzorger van:
-                </dt>
-                <dd>
-                     <table class="table table-hover">
-                        <tr>
-                            <th>Gebied</th>
-                        </tr>';
-                    foreach($areasForUserID as $areaForUserID){
-                        echo    '<tr>
-                                    <td>'.$areaForUserID["AreaName"].'</td>
-                                 </tr>';
-                    }
-                    echo '</select>
-                </table>
-                </dd>
-                <br>
-                <dt></dt>
-                <dd>';
+                <select name="STAFFFUNCTION" type="text" class="form-control" value="' . $medewerker['Functie'] . '">
+                <option value="' . $medewerker['Functie'] . '" selected>' . $medewerker['Functie'] . '</option>';
+                foreach ($functions as $function) {
+                    echo '<option value="' . $function["name"] . '">' . $function["name"] . '</option>';
+                }
+                echo '</select>
+                            </dd>
+                            <br>
+                            <dt>
+                                Verzorger van:
+                            </dt>
+                            <dd>
+                                 <table class="table table-hover">
+                                    <tr>
+                                        <th>Gebied</th>
+                                    </tr>';
+                foreach ($areasForUserID as $areaForUserID) {
+                    echo '<tr>
+                                                <td>' . $areaForUserID["AreaName"] . '</td>
+                                             </tr>';
+                }
+                echo '</select>
+                            </table>
+                            </dd>
+                            <br>
+                            <dt></dt>
+                            <dd>';
 
-                if($medewerker['IsActive'] == 0)
-                    echo '<input type="checkbox" name="STAFFISACTIVE" value="IsSelected">Actief?<br>';
+                if ($medewerker['IsActive'] == 0)
+                    echo '<input type="checkbox" name="STAFFISACTIVE" value="0">Actief?<br>';
                 else
-                    echo '<input type="checkbox" name="STAFFISACTIVE" value="IsSelected" checked>Actief?<br>
-                </dd>
-';
-echo '</div>';
-?>
+                    echo '<input type="checkbox" name="STAFFISACTIVE" value="1" checked>Actief?<br>
+                            </dd>
+            ';
+    echo'            <button class="btn btn-lg btn-primary" type="submit">Opslaan</button>
+        </form>
+</div>';
+}
