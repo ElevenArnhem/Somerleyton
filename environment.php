@@ -1,36 +1,54 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: dirk
+ * User: koen
  * Date: 1-5-2015
  * Time: 10:20
  */
 
-$allEnclosures = $dbh->prepare("EXEC proc_getEnclosure");
+echo $_SESSION["STAFFID"];
+
+$allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
+$allEnvironments->execute();
+$environments = $allEnvironments->fetchAll();
+
+$allAreas = $dbh->prepare("EXEC proc_GetAreaName");
+$allAreas->execute();
+$areas = $allAreas->fetchAll();
+
+$allEnclosures = $dbh->prepare("EXEC proc_GetEnclosure");
 $allEnclosures->execute();
 $enclosures = $allEnclosures->fetchAll();
 
-echo '
-
-<hr>
-<table class="table table-hover">
+echo ' <div class="row"><div class="col-lg-4"><table class="table table-hover">
     <tr>
-        <th>Environment</th>
-        <th>Area</th>
-        <th>Environment</th>
+        <th>Omgeving</th>
     </tr>';
+foreach($environments as $environment) {
+    echo '<tr>
+            <td>'.$environment["EnvironmentName"].'</td>
+          </tr>';
+}
+
+echo "</table><button type='button' class='btn btn-default' >Omgeving toevoegen</button></div><div class='col-lg-4'><table class='table table-hover'>
+    <tr>
+        <th>Gebied</th>
+    </tr>";
+foreach($areas as $area) {
+    echo '<tr>
+            <td>'.$area["AreaName"].'</td>
+          </tr>';
+}
+
+echo "</table><button type='button' class='btn btn-default' >Gebied toevoegen</button></div><div class='col-lg-4'><table class='table table-hover'>
+    <tr>
+        <th>Verblijf</th>
+    </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-            <td>'.$enclosure["EnvironmentName"].'</td>
-            <td>'.$enclosure["AreaName"].'</td>
             <td>'.$enclosure["EnclosureID"].'</td>
           </tr>';
 }
-echo ' </table>';
-?>
 
-<div class="btn-group" role="group">
-    <a href="?page=addEnvironment"> <button type="button" class="btn btn-default" >Environment toevoegen</button></a>
-    <a href="?page=addArea"> <button type="button" class="btn btn-default" >Area toevoegen</button></a>
-    <button type="button" class="btn btn-default" >Enclosure toevoegen</button>
-</div>
+echo ' </table><button type="button" class="btn btn-default" >Verblijf toevoegen</button></div></div>';
+?>
