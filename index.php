@@ -5,6 +5,7 @@
  * Date: 24-4-2015
  * Time: 12:18*/
  include 'conn.inc.php';
+include 'functions.php';
 include 'pageHead.php';
 
 if(!isset($_GET ['page'])) {
