@@ -6,9 +6,9 @@
  * Time: 10:20
  */
 
-$allEnvironments = $dbh->prepare("EXEC proc_getEnvironment");
-$allEnvironments->execute();
-$environments = $allEnvironments->fetchAll();
+$allEnclosures = $dbh->prepare("EXEC proc_getEnclosure");
+$allEnclosures->execute();
+$enclosures = $allEnclosures->fetchAll();
 
 echo '
 
@@ -16,10 +16,14 @@ echo '
 <table class="table table-hover">
     <tr>
         <th>Environment</th>
+        <th>Area</th>
+        <th>Environment</th>
     </tr>';
-foreach($environments as $environment) {
+foreach($enclosures as $enclosure) {
     echo '<tr>
-            <td><a href="?page=area&environmentName='.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</a></td>
+            <td>'.$enclosure["EnvironmentName"].'</td>
+            <td>'.$enclosure["AreaName"].'</td>
+            <td>'.$enclosure["EnclosureID"].'</td>
           </tr>';
 }
 echo ' </table>';
