@@ -2,7 +2,7 @@
 
 include 'conn.inc.php';
 
-$headSpeciesProc = $dbh->prepare("EXEC proc_getHeadSpecies");
+$headSpeciesProc = $dbh->prepare('EXEC proc_getHeadSpecies');
 $headSpeciesProc->execute();
 $headSpecies = $headSpeciesProc->fetchAll();
 ?>
@@ -25,6 +25,7 @@ $headSpecies = $headSpeciesProc->fetchAll();
             }
             ?>
             </select>
+        <a href="addHeadSpecies.php"> <button type="button" class="btn btn-default">Nieuwe toevoegen</button></a>
     </div>
     <div class="form-group">
         <label>Beschrijving</label>
