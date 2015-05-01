@@ -1,6 +1,10 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+<script src="js/script.js"></script>
+
 <?php
 
 include 'conn.inc.php';
+
 
 $headSpeciesProc = $dbh->prepare('EXEC proc_getHeadSpecies');
 $headSpeciesProc->execute();
@@ -18,14 +22,15 @@ $headSpecies = $headSpeciesProc->fetchAll();
     <div class="form-group">
 
         <label>Hoofdsoort</label>
-        <select name="LATINNAME" type="text" class="form-control" placeholder="Hoofdsoort">
+        <select name="LATINNAME" id="textbox" type="text" placeholder="Hoofdsoort">
             <?php
             foreach ($headSpecies as $fetchHeadSpecies) {
             echo '<option value="'.$fetchHeadSpecies["LatinName"].'">'.$fetchHeadSpecies["LatinName"].'</option>';
             }
             ?>
             </select>
-        <a href="addHeadSpecies.php"> <button type="button" class="btn btn-default">Nieuwe toevoegen</button></a>
+        <input id="enable" name="enable" type="checkbox" />
+        <input id="first_name" class="textbox" name="LATINNAME" type="text" disabled />
     </div>
     <div class="form-group">
         <label>Beschrijving</label>
