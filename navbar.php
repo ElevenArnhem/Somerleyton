@@ -41,7 +41,7 @@ echo '    <!-- Bootstrap core CSS -->
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
-            <li><a href="#">Medewerkers</a></li>
+            <li><a href="?page=medewerkers">Medewerkers</a></li>
             <li><a href="?page=findAnimal">Dieren</a></li>
             <li><a href="?page=species">Diersoorten</a></li>
             <li><a href="#">Verblijven</a></li>
