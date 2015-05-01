@@ -6,7 +6,60 @@
  * Time: 13:07
  */
 if($_SESSION['FUNCTION'] == 'HeadKeeper') {
+    $picaName = null;
+    if(isset($_POST['fileName'])) {
+        $picaName = $_POST['fileName'];
+    }
 
+    if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
+        $target_dir = "pictures/";
+
+        $targetFileName = $_POST['ANIMALID'];
+        $tmpTargetFileName = $targetFileName.'.'.explode('.', $_FILES['fileToUpload']['name'])[1];
+        $targetFileName = $tmpTargetFileName;
+        $target_file = $target_dir . basename($targetFileName);
+        $uploadOk = 1;
+        $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+// Check if image file is a actual image or fake image
+        if (isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["fileToUpload"].$targetFileName);
+            if ($check !== false) {
+
+                $uploadOk = 1;
+            } else {
+
+                $uploadOk = 0;
+            }
+        }
+// Check if file already exists
+        if (file_exists($target_file)) {
+            unlink('pictures/'.$targetFileName);
+//            $uploadOk = 0;
+        }
+// Check file size
+        if ($_FILES["fileToUpload"]["size"] > 5000000) {
+            echo '<div class="alert alert-danger" role="alert">Sorry, het bestand is te groot.</div>';
+            $uploadOk = 0;
+        }
+// Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif"
+        ) {
+            echo '<div class="alert alert-danger" role="alert">Sorry, alleen JPG, JPEG, PNG & GIF bestanden zijn toegestaan.</div>';
+            $uploadOk = 0;
+        }
+// Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo '<div class="alert alert-danger" role="alert">Sorry, er iets mis gegaan tijden het uploaden.</div>';
+// if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
+                $picaName =$targetFileName;
+            } else {
+                echo '<div class="alert alert-danger" role="alert">Sorry, er iets mis gegaan tijden het uploaden.</div>';
+        }
+        }
+    }
     if(isset($_POST['ANIMALNAME'])) {
         $staffID = $_SESSION['STAFFID'];
         $animalID = $_POST['ANIMALID'];
@@ -19,7 +72,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
         $enclosureID = $_POST['ENCLOSUREID'];
         $latinName = $_POST['LATINNAME'];
         $subSpeciesName = $_POST['SUBSPECIESNAME'];
-        $image = 'test';
+//        $image = $_POST['fileToUpload'];
 
 
             $changeAnimalstmt = $dbh->prepare("proc_AlterAnimal ?,?,?,?,?,?,?,?,?,?,?,?");
@@ -34,7 +87,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
             $changeAnimalstmt->bindParam(9, $gender);
             $changeAnimalstmt->bindParam(10, $birthDate);
             $changeAnimalstmt->bindParam(11, $birthPlace);
-            $changeAnimalstmt->bindParam(12, $image);
+            $changeAnimalstmt->bindParam(12, $picaName);
 
             $changeAnimalstmt->execute();
         spErrorCaching($changeAnimalstmt);
@@ -65,9 +118,10 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     $environmentNames = $environmontstmt->fetchAll();
 
     echo '        <br>
+        <div class="row">
             <div class="col-lg-6">
               <h2>Dier Info</h2>
-              <form action="index.php?page=changeAnimal&animalID='.$animal['AnimalID'].'" method="post">
+              <form action="index.php?page=changeAnimal&animalID='.$animal['AnimalID'].'" method="post" enctype="multipart/form-data">
               <dl class="dl-horizontal">
               <input type="hidden" name="ANIMALID" value="'.$animal['AnimalID']. '">
                <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" value="'.$animal['AnimalName'].'"></dd><br>
@@ -103,7 +157,20 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
                 <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="text" class="form-control" value="'.$animal['EnclosureID'].'"></dd><br><br>
                <dt>Beschrijving </dt></dl> <br> <textarea name="DESCRIPTION" class="form-control" rows="5">'.$animal['Description'].'</textarea><br><br>';
 
-        echo '   <button class="btn btn-lg btn-primary " type="submit">Aanpassen</button></form>';
+        echo '  </div>
+   <div class="col-lg-6">
+   <br><br>';
+    if(isset($animal['Image'])) {
+        echo '
+<img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
+    }
+    echo'
+    Selecteer een foto:<br><br>
+    <input type="hidden" name="fileName" value="'.$animal['Image'].'">
+    <input class="btn btn-default"  type="file" name="fileToUpload" >
+   <br>
+     <button class="btn btn-primary" type="submit">Aanpassen</button>
+</form></div>';
 
     echo'</div>';
 }
