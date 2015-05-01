@@ -1,8 +1,6 @@
 <?php
 
-//include 'conn.inc.php';
-
-//$animalstmt = $dbh->prepare('EXEC proc_addSubSpecies(?,?,?,?,?)');
+include 'conn.inc.php';
 
 $staffID = $_POST["STAFFID"];
 $latinName = $_POST["LATINNAME"];
@@ -14,12 +12,13 @@ $image = 'sdfsdf';
 
 echo $latinName;
 
-//$animalstmt->bindParam(1, $staffID, PDO::PARAM_INT);
-//$animalstmt->bindParam(2, $latinName, PDO::PARAM_STR,50);
-//$animalstmt->bindParam(3, $subSpeciesName, PDO::PARAM_STR,50);
-//$animalstmt->bindParam(4, $description, PDO::PARAM_STR,8000);
-//$animalstmt->bindParam(5, $image, PDO::PARAM_STR,50);
-//$animalstmt->execute();
+$animalstmt = $dbh->prepare("EXEC proc_addSubSpecies ?,?,?,?,?");
+$animalstmt->bindParam(1,$staffID);
+$animalstmt->bindParam(2,$latinName);
+$animalstmt->bindParam(3,$subSpeciesName);
+$animalstmt->bindParam(4,$description);
+$animalstmt->bindParam(5,$image);
+$animalstmt->execute();
 
 
 ?>
