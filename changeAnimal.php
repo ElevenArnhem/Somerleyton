@@ -21,8 +21,6 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
         $subSpeciesName = $_POST['SUBSPECIESNAME'];
         $image = 'test';
 
-//        echo $staffID, $animalID, $environmentName, $areaName, $enclosureID, $latinName, $subSpeciesName,$animalName, $gender, $birthDate, $birthPlace,  $image;
-//        $changeAnimalstmt = $dbh->prepare("proc_AlterAnimal");
 
             $changeAnimalstmt = $dbh->prepare("proc_AlterAnimal ?,?,?,?,?,?,?,?,?,?,?,?");
             $changeAnimalstmt->bindParam(1, $staffID);
