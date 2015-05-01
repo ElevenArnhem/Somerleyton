@@ -30,5 +30,7 @@ echo ' </table>';
 ?>
 
 <div class="btn-group" role="group">
-    <a href="?page=addSubSpecies"> <button type="button" class="btn btn-default" >Subsoort toevoegen</button></a>
+    <a href="?page=addEnvironment"> <button type="button" class="btn btn-default" >Environment toevoegen</button></a>
+    <a href="?page=addArea"> <button type="button" class="btn btn-default" >Area toevoegen</button></a>
+    <button type="button" class="btn btn-default" >Enclosure toevoegen</button>
 </div>
