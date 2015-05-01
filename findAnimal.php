@@ -58,6 +58,7 @@ echo '
             <th>SubSpeciesName</th>
             <th>AreaName</th>
             <th>EnclosureID</th>
+            <th></th>
 </tr>';
 foreach($animals as $animal) {
 //    if($_SESSION['FUNCTION'])

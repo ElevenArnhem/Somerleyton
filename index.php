@@ -21,18 +21,14 @@ if( $_SESSION['STAFFNAME'] != null) {
     echo '
     <br><br><br>
     <div class="container">';
-    $pageParts = explode('&',$page);
-
-    if($pageParts[0] != 'addAnimal' && $pageParts[0] != 'findAnimal' && $pageParts[0] != 'animalCard' && $pageParts[0] != 'changeAnimal') {
+    if($page != 'addAnimal' && $page != 'findAnimal' && $page != 'species' && $page !='addSubSpecies' && $page !='addSubSpeciesPost') {
         include 'home.php';
     } else {
         include 'navbar.php';
-        include $pageParts[0] . '.php';
+        include $page . '.php';
     }
 } else {
     include 'login.php';
 }
-
-//include 'addSubSpecie.php';
 
 include 'footer.php';

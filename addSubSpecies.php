@@ -1,12 +1,30 @@
-<form action="addSubSpeciesPost.php" method="post">
+<?php
+
+include 'conn.inc.php';
+
+$headSpeciesProc = $dbh->prepare("EXEC proc_getHeadSpecies");
+$headSpeciesProc->execute();
+$headSpecies = $headSpeciesProc->fetchAll();
+?>
+
+<h1>Subsoort toevoegen</h1>
+
+<form action="?page=addSubSpeciesPost" method="post">
     <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
     <div class="form-group">
-        <label>Naam</label>
-        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam soort">
+        <label>Subsoort naam</label>
+        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam subsoort">
     </div>
     <div class="form-group">
-        <label>Latijnse naam</label>
-        <input name="LATINNAME" type="text" class="form-control" placeholder="Latijnse naam">
+
+        <label>Hoofdsoort</label>
+        <select name="LATINNAME" type="text" class="form-control" placeholder="Hoofdsoort">
+            <?php
+            foreach ($headSpecies as $fetchHeadSpecies) {
+            echo '<option value="'.$fetchHeadSpecies["LatinName"].'">'.$fetchHeadSpecies["LatinName"].'</option>';
+            }
+            ?>
+            </select>
     </div>
     <div class="form-group">
         <label>Beschrijving</label>

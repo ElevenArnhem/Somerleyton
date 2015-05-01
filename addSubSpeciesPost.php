@@ -17,7 +17,6 @@ echo $description;
 
 $image = 'ssdfsfd.jpg';
 
-
 $animalstmt = $dbh->prepare("EXEC proc_addSubSpecies ?,?,?,?,?");
 $animalstmt->bindParam(1,$staffID);
 $animalstmt->bindParam(2,$latinName);
