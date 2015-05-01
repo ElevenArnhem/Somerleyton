@@ -1,8 +1,8 @@
 <?php
 
-$allHeadSpecies = $dbh->prepare("EXEC proc_getHeadSpecies");
-$allHeadSpecies->execute();
-$headSpecies = $allHeadSpecies->fetchAll();
+$allSubSpecies = $dbh->prepare("EXEC proc_getSubSpecies");
+$allSubSpecies->execute();
+$subSpecies = $allSubSpecies->fetchAll();
 
 
 echo '<h1>Diersoorten beheren</h1>';
@@ -11,10 +11,12 @@ echo '
 <table class="table table-hover">
     <tr>
         <th>Hoofdsoort</th>
+        <th>Subsoort</th>
     </tr>';
-    foreach($headSpecies as $fetchHeadSpecies) {
+    foreach($subSpecies as $fetchSubSpecies) {
     echo '<tr>
-            <td>'.$fetchHeadSpecies["LatinName"].'</td>
+            <td>'.$fetchSubSpecies["LatinName"].'</td>
+            <td>'.$fetchSubSpecies["SubSpeciesName"].'</td>
             </tr>';
     }
     echo ' </table>';
