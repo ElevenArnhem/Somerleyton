@@ -63,5 +63,5 @@ foreach($enclosures as $enclosure) {
 }
 
 echo ' </table><button type="button" class="btn btn-default" >Verblijf toevoegen</button></div></div>';
-echo "hohoohoo";
+//echo "hohoohoo";
 ?>
