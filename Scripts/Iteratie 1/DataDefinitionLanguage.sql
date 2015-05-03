@@ -134,7 +134,11 @@ GO
 /*==============================================================*/
 CREATE TABLE Radio (
   RadioNumber            INTEGER			NOT NULL,
+<<<<<<< HEAD
   StaffID				 INTEGER            NULL,
+=======
+  StaffID				 INTEGER            NOT NULL,
+>>>>>>> ee5bb542702ed20020bee8d85edcc5f3fa804caa
   CONSTRAINT PK_RADIO PRIMARY KEY (RadioNumber)
 )
 GO
@@ -227,5 +231,9 @@ GO
 ALTER TABLE SubSpecies
 ADD CONSTRAINT FK_SUBSPECIES_HEADSPECIES FOREIGN KEY (LatinName)
 REFERENCES HeadSpecies (LatinName)
+<<<<<<< HEAD
 GO
 
+=======
+GO
+>>>>>>> ee5bb542702ed20020bee8d85edcc5f3fa804caa
