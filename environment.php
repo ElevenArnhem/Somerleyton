@@ -52,7 +52,7 @@ foreach($areas as $area) {
           </tr>';
 }
 
-echo "</table><button type='button' class='btn btn-default' >Gebied toevoegen</button></div><div class='col-lg-4'><table class='table table-hover'>
+echo "</table><a href='addEnvironment.php'></a> <button type='button' class='btn btn-default'>Gebied toevoegen</button></div><div class='col-lg-4'><table class='table table-hover'>
     <tr>
         <th>Verblijf: ".$selectedArea."</th>
     </tr>";
