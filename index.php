@@ -27,7 +27,6 @@ if( $_SESSION['STAFFNAME'] != null) {
 
     $page = $page.'.php';
 
-<<<<<<< HEAD
     if(!in_array($page , $allPages)) {
         include 'home.php';
     } else {
@@ -36,17 +35,7 @@ if( $_SESSION['STAFFNAME'] != null) {
     }
 } else {
     include 'login.php';
-=======
-include 'container.php';
-include 'inlog.php';
-$stmt = $dbh->prepare("select * from Animal");
-$stmt->execute();
-while ($row = $stmt->fetch()) {
-    print_r($row);
->>>>>>> ee5bb542702ed20020bee8d85edcc5f3fa804caa
+
 }
 
 include 'footer.php';
-phpinfo();
-
-echo "test";
