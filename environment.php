@@ -52,7 +52,7 @@ foreach($areas as $area) {
           </tr>';
 }
 
-echo "</table><a href='addEnvironment.php'> <button type='button' class='btn btn-default'>Gebied toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
+echo "</table><a href='index.php?page=addArea'> <button type='button' class='btn btn-default'>Gebied toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
     <tr>
         <th>Verblijf: ".$selectedArea."</th>
     </tr>";
@@ -62,6 +62,6 @@ foreach($enclosures as $enclosure) {
           </tr>';
 }
 
-echo ' </table><button type="button" class="btn btn-default" >Verblijf toevoegen</button></div></div>';
+echo ' </table><a href="index.php?page=addEnclosure"><button type="button" class="btn btn-default" >Verblijf toevoegen</button></a></div></div>';
 //echo "hohoohoo";
 ?>
