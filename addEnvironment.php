@@ -9,4 +9,7 @@
 echo '<div class="col-lg-4">
 
 <h1>Omgeving toevoegen</h1>
+<form action="index.php?page=addEnvironment" method="post">
+<input>
+</form>
 </div>';
