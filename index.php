@@ -36,6 +36,7 @@ if( $_SESSION['STAFFNAME'] != null) {
 } else {
     include 'login.php';
 
+
 }
 
 include 'footer.php';
