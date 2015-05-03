@@ -42,7 +42,7 @@ foreach($environments as $environment) {
           </tr>';
 }
 
-echo "</table><button type='button' class='btn btn-default' >Omgeving toevoegen</button></div><div class='col-lg-4'><table class='table table-hover'>
+echo "</table><a href='?page=addEnvironment".$animal['AnimalID']."'> <button type='button' class='btn btn-default' >Omgeving toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
     <tr>
         <th>Gebied: ".$selectedEnivornment."</th>
     </tr>";
