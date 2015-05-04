@@ -9,7 +9,7 @@ if(isset($_POST['ENVIRONMENTNAME'])) {
     $staffID = $_SESSION['STAFFID'];
     $environmentName = $_POST['ENVIRONMENTNAME'];
     $areaName = $_POST['AREANAME'];
-    $addEnvironment = $dbh->prepare("proc_addArea ?,?,?");
+    $addEnvironment = $dbh->prepare("proc_addArea ?,?,?,?");
     $addEnvironment->bindParam(1, $staffID);
     $addEnvironment->bindParam(2, $environmentName);
     $addEnvironment->bindParam(3, $areaName);
@@ -21,6 +21,12 @@ $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
 $allEnvironments->execute();
 $environments = $allEnvironments->fetchAll();
 
+$activeSaff = 1;
+$allStaffstmt = $dbh->prepare("EXEC proc_getStaffMembers ?");
+$allStaffstmt->bindParam(1, $activeSaff);
+$allStaffstmt->execute();
+$allStaff = $allStaffstmt->fetchAll();
+
 echo '<div class="col-lg-4">
 
 <h1>Gebied toevoegen</h1>
@@ -31,7 +37,13 @@ echo '<div class="col-lg-4">
 foreach($environments as $environment) {
     echo '<option value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</option>';
 }
+
 echo'</select></dd><br>
+<dt>Hoofddierverzorger</dt><dd><select name="HEADKEEPER" type="text" class="form-control" >';
+foreach($allStaff as $staff) {
+    echo '<option value="'.$staff["Name"].'">'.$staff["Name"].'</option>';
+}
+echo'
 </dl>
 <button class="btn btn-primary" type="submit">Toevoegen</button>
 </form>
