@@ -33,7 +33,7 @@ foreach($keepers as $keeper) {
 echo'</select></td>
     <td><input name="STARTTIME" type="time" class="form-control" ></td>
     <td><input name="ENDTIME" type="time" class="form-control" ></td>
-    <td><td><select name="AREANAME" type="text" class="form-control">';
+    <td><select name="AREANAME" type="text" class="form-control">';
 foreach($areas as $area) {
     echo '<option value="'.$area["AreaName"].'">'.$area["AreaName"].'</option>';
 }
