@@ -13,6 +13,11 @@ $keepersstmt = $dbh->prepare("EXEC proc_getKeepers");
 $keepersstmt->execute();
 $keepers = $keepersstmt->fetchAll();
 
+$allAreas = $dbh->prepare("EXEC proc_GetAreaNameByEnvironment ?");
+$allAreas->bindParam(1,$selectedEnivornment);
+$allAreas->execute();
+$areas = $allAreas->fetchAll();
+
 echo '
 <table class="table table-hover"><tr>
             <th>Keeper</th>
@@ -26,9 +31,13 @@ foreach($keepers as $keeper) {
     echo '<option value="'.$keeper["StaffID"].'">'.$keeper["StaffName"].'</option>';
 }
 echo'</select></td>
-    <td><input name="STARTTIME" type="datetime" class="form-control" ></td>
+    <td><input name="STARTTIME" type="time" class="form-control" ></td>
     <td><input name="ENDTIME" type="time" class="form-control" ></td>
-    <td>SeaLife zee vissen</td>
+    <td><td><select name="AREANAME" type="text" class="form-control">';
+foreach($areas as $area) {
+    echo '<option value="'.$area["AreaName"].'">'.$area["AreaName"].'</option>';
+}
+echo'</select></td>
     </tr>
     </table>
 ';
