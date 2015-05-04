@@ -26,8 +26,8 @@ foreach($keepers as $keeper) {
     echo '<option value="'.$keeper["StaffID"].'">'.$keeper["StaffName"].'</option>';
 }
 echo'</select></td>
-    <td>09:00</td>
-    <td>12:00</td>
+    <td><input name="STARTTIME" type="time" class="form-control" ></td>
+    <td><input name="ENDTIME" type="time" class="form-control" ></td>
     <td>SeaLife zee vissen</td>
     </tr>
     </table>
