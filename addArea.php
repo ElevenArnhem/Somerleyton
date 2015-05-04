@@ -10,14 +10,13 @@ if(isset($_POST['ENVIRONMENTNAME'])) {
     $environmentName = $_POST['ENVIRONMENTNAME'];
     $areaName = $_POST['AREANAME'];
     $headKeeperID = $_POST['HEADKEEPER'];
-    echo $environmentName;
-    $addEnvironment = $dbh->prepare("proc_addArea ?,?,?,?");
-    $addEnvironment->bindParam(1, $staffID);
-    $addEnvironment->bindParam(2, $areaName);
-    $addEnvironment->bindParam(3, $environmentName);
-    $addEnvironment->bindParam(4, $headKeeperID);
-    $addEnvironment->execute();
-    spErrorCaching($addEnvironment);
+    $addAreastmt = $dbh->prepare("proc_addArea ?,?,?,?");
+    $addAreastmt->bindParam(1, $staffID);
+    $addAreastmt->bindParam(2, $areaName);
+    $addAreastmt->bindParam(3, $environmentName);
+    $addAreastmt->bindParam(4, $headKeeperID);
+    $addAreastmt->execute();
+    spErrorCaching($addAreastmt);
 }
 
 $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");

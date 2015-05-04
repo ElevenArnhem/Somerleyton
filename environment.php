@@ -8,6 +8,16 @@
 
 $staffID = $_SESSION["STAFFID"];
 
+if(isset($_POST['ADDENCLOSURE'])) {
+    $environmentName = $_POST['ENVIRONMENT'];
+    $areaName = $_POST['AREA'];
+    $addEnclosurestmt = $dbh->prepare("proc_addEnclosure ?,?,?");
+    $addEnclosurestmt->bindParam(1, $staffID);
+    $addEnclosurestmt->bindParam(2, $areaName);
+    $addEnclosurestmt->bindParam(3, $environmentName);
+    $addEnclosurestmt->execute();
+    spErrorCaching($addEnclosurestmt);
+}
 
 $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
 $allEnvironments->execute();
@@ -62,6 +72,8 @@ foreach($enclosures as $enclosure) {
           </tr>';
 }
 
-echo ' </table><a href="index.php?page=addEnclosure"><button type="button" class="btn btn-default" >Verblijf toevoegen</button></a></div></div>';
+echo ' </table>
+ <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$selectedArea.'"><input type="hidden" name="ADDENCLOSURE" value="true"> <td><button class="btn btn-link" type="submit" >Verblijf toevoegen</button></td></form>
+</div></div>';
 //echo "hohoohoo";
 ?>
