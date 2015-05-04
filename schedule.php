@@ -25,7 +25,7 @@ echo '
             <th>EindTijd</th>
             <th>Waar</th>
 </tr>
-<tr>
+<tr><form action="index.php?page=schedule" method="post">
     <td><select name="KEEPER" type="text" class="form-control">';
 foreach($keepers as $keeper) {
     echo '<option value="'.$keeper["StaffID"].'">'.$keeper["StaffName"].'</option>';
@@ -38,6 +38,8 @@ foreach($areas as $area) {
     echo '<option value="'.$area["AreaName"].'">'.$area["AreaName"].'</option>';
 }
 echo'</select></td>
+<td><button class="btn btn-primary" type="submit">Aanpassen</button>
+</form></td>
     </tr>
     </table>
 ';
