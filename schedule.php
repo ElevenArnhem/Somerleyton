@@ -13,8 +13,8 @@ $keepersstmt = $dbh->prepare("EXEC proc_getKeepers");
 $keepersstmt->execute();
 $keepers = $keepersstmt->fetchAll();
 
-$allAreas = $dbh->prepare("EXEC proc_GetAreaNameByEnvironment ?");
-$allAreas->bindParam(1,$selectedEnivornment);
+$allAreas = $dbh->prepare("EXEC proc_GetAreaName");
+//$allAreas->bindParam(1,$selectedEnivornment);
 $allAreas->execute();
 $areas = $allAreas->fetchAll();
 
