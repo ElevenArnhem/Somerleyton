@@ -12,8 +12,8 @@ if(isset($_POST['ENVIRONMENTNAME'])) {
     $headKeeperID = $_POST['HEADKEEPER'];
     $addEnvironment = $dbh->prepare("proc_addArea ?,?,?,?");
     $addEnvironment->bindParam(1, $staffID);
-    $addEnvironment->bindParam(2, $environmentName);
-    $addEnvironment->bindParam(3, $areaName);
+    $addEnvironment->bindParam(2, $areaName);
+    $addEnvironment->bindParam(3, $environmentName);
     $addEnvironment->bindParam(4, $headKeeperID);
     $addEnvironment->execute();
     spErrorCaching($addEnvironment);
