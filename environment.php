@@ -73,7 +73,7 @@ foreach($enclosures as $enclosure) {
 }
 
 echo ' </table>
- <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$selectedArea.'"><input type="hidden" name="ADDENCLOSURE" value="true"> <td><button class="btn btn-link" type="submit" >Verblijf toevoegen</button></td></form>
+ <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$selectedArea.'"><input type="hidden" name="ADDENCLOSURE" value="true"> <td><button class="btn btn-default" type="submit" >Verblijf toevoegen</button></td></form>
 </div></div>';
 //echo "hohoohoo";
 ?>
