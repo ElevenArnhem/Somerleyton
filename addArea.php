@@ -41,7 +41,7 @@ foreach($environments as $environment) {
 echo'</select></dd><br>
 <dt>Hoofddierverzorger</dt><dd><select name="HEADKEEPER" type="text" class="form-control" >';
 foreach($allStaff as $staff) {
-    echo '<option value="'.$staff["Name"].'">'.$staff["Name"].'</option>';
+    echo '<option value="'.$staff["StaffName"].'">'.$staff["StaffName"].'</option>';
 }
 echo'
 </dl>
