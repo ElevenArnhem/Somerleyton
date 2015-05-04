@@ -22,7 +22,7 @@ echo '
 <table class="table table-hover"><tr>
             <th>Keeper</th>
             <th>Begintijd</th>
-            <th>EindTijd</th>
+            <th>Eindtijd</th>
             <th>Waar</th>
 </tr>
 <tr><form action="index.php?page=schedule" method="post">
@@ -38,7 +38,7 @@ foreach($areas as $area) {
     echo '<option value="'.$area["AreaName"].'">'.$area["AreaName"].'</option>';
 }
 echo'</select></td>
-<td><button class="btn btn-primary" type="submit">Aanpassen</button>
+<td><button class="btn btn-primary" type="submit">Voeg toe</button>
 </form></td>
     </tr>
     </table>
