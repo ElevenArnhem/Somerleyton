@@ -10,6 +10,7 @@ if(isset($_POST['ENVIRONMENTNAME'])) {
     $environmentName = $_POST['ENVIRONMENTNAME'];
     $areaName = $_POST['AREANAME'];
     $headKeeperID = $_POST['HEADKEEPER'];
+    echo $environmentName;
     $addEnvironment = $dbh->prepare("proc_addArea ?,?,?,?");
     $addEnvironment->bindParam(1, $staffID);
     $addEnvironment->bindParam(2, $areaName);
