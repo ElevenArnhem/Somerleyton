@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1413618304">
+    <data-source source="LOCAL" name="SQL Server - SomerleytonAnimalPark@95.96.69.114" uuid="f3ae1b7a-569e-41f5-a24c-a3ac6565a927">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://95.96.69.114:1433;databaseName=SomerleytonAnimalPark</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
