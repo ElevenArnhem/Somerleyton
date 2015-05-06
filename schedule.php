@@ -37,7 +37,7 @@ echo '
 </tr>';
 foreach($schedule as $scheduleRow) {
     echo '<tr>
-            <td>'.$scheduleRow["StaffID"].'</td>
+            <td>'.$scheduleRow["StaffName"].'</td>
             <td>'.$scheduleRow["StartTime"].'</td>
             <td>'.$scheduleRow["EndTime"].'</td>
             <td>'.$scheduleRow["EnvironmentName"].'</td>
