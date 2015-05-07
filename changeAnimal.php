@@ -12,7 +12,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     }
 
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-        $target_dir = "../pictures/";
+        $target_dir = "/pictures/";
 
         $targetFileName = $_POST['ANIMALID'];
         $tmpTargetFileName = $targetFileName.'.'.explode('.', $_FILES['fileToUpload']['name'])[1];
