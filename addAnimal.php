@@ -9,6 +9,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
     $picaName = null;
     if(isset($_POST['fileName'])) {
         $picaName = $_POST['fileName'];
+        echo $picaName;
     }
 
 
