@@ -60,7 +60,7 @@ function addPicture($animalID) {
 // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
-           echo 'foto toegevoegd';
+           //echo 'foto toegevoegd';
         } else {
             echo '<div class="alert alert-danger" role="alert">Sorry, er iets mis gegaan tijden het uploaden.</div>';
         }
