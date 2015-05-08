@@ -9,7 +9,10 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
     $picaName = null;
     if(isset($_POST['fileName'])) {
         $picaName = $_POST['fileName'];
-        echo $picaName;
+        $targetFileName = $animalID;
+        $tmpTargetFileName = $targetFileName.'.'.explode('.', $_FILES['fileToUpload']['name'])[1];
+        $picaName = $tmpTargetFileName;
+
     }
 
 
@@ -52,7 +55,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         if(!empty($newAnimal[0])) {
             echo $newAnimal[0];
             if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-                addPicture($newAnimal[0]);
+                //addPicture($newAnimal[0]);
             }
 
             echo '<div class="alert alert-success" role="alert"><a href="index.php?page=changeAnimal&animalID=' . $newAnimal[0] . '"> Dier toegevoegd </a></div>';
