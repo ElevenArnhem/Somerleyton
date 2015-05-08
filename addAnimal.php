@@ -49,6 +49,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
 //        echo $newAnimal;
 
         if(!empty($newAnimal[0])) {
+            echo $newAnimal[0];
             if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
                 addPicture($newAnimal[0]);
             }
