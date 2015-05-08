@@ -8,8 +8,8 @@
 if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
     $picaName = null;
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-        $picaName = $_POST['fileName'];
-        $targetFileName = $animalID;
+        //$picaName = $_POST['fileName'];
+        //$targetFileName = $animalID;
         $tmpTargetFileName = '.'.explode('.', $_FILES['fileToUpload']['name'])[1];
         $picaName = $tmpTargetFileName;
 
