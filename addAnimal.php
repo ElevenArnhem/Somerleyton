@@ -29,7 +29,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         $latinName = $_POST['LATINNAME'];
         $subSpeciesName = $_POST['SUBSPECIESNAME'];
 //        $image = $_POST['fileToUpload'];
-        echo $picaName. ' ';
+        //echo $picaName. ' ';
 
 
 
@@ -55,7 +55,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         if(!empty($newAnimal[0])) {
             echo $newAnimal[0];
             if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-                //addPicture($newAnimal[0]);
+                addPicture($newAnimal[0]);
             }
 
             echo '<div class="alert alert-success" role="alert"><a href="index.php?page=changeAnimal&animalID=' . $newAnimal[0] . '"> Dier toegevoegd </a></div>';
