@@ -28,6 +28,10 @@ $allAreas->execute();
 $areas = $allAreas->fetchAll();
 
 echo '
+<form method="post" action="index.php?page=schedule">
+ <dt>Datum</dt><dd><input name="DATE" type="date" class="form-control"></dd><br>
+ <button class="btn btn-primary" type="submit">Check rooster</button>
+ </form><br>
 <table class="table table-hover"><tr>
             <th>Keeper</th>
             <th>Begintijd</th>
