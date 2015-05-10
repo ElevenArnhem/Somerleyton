@@ -30,6 +30,11 @@ $areas = $allAreas->fetchAll();
 echo '
 <form method="post" action="index.php?page=schedule">
  <dt>Datum</dt><dd><input name="DATE" type="date" class="form-control"></dd><br>
+  <dt>Lengte</dt><dd><select name="LENGTH" type="text" class="form-control">
+  <option value="1">1 Dag</option>
+  <option value="7">1 Week</option>
+  <option value="30">1 Maand</option>
+  </select></dd><br>
  <button class="btn btn-primary" type="submit">Check rooster</button>
  </form><br>
 <table class="table table-hover"><tr>
