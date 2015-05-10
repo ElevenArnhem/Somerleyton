@@ -9,9 +9,19 @@ if(isset($_GET['day'])) {
 
 }
 $staffID = $_SESSION['STAFFID'];
+$date = date("Y-m-d H:i:s");
+if(isset($_POST['DATE'])) {
+    $date = $_POST['DATE'];
+}
+$length = 1;
+if(isset($_POST['LENGTH'])) {
+    $length = $_POST['LENGTH'];
+}
+$schedulestmt = $dbh->prepare("EXEC proc_getSchedule ?,?,?");
+$schedulestmt->bindParam(1, $date);
+$schedulestmt->bindParam(2, $length);
+$schedulestmt->bindParam(3, $staffID);
 
-$schedulestmt = $dbh->prepare("EXEC proc_getSchedule ?");
-$schedulestmt->bindParam(1, $staffID);
 $schedulestmt->execute();
 $schedule = $schedulestmt->fetchAll();
 
@@ -29,7 +39,7 @@ $areas = $allAreas->fetchAll();
 
 echo '
 <form method="post" action="index.php?page=schedule">
- <dt>Datum</dt><dd><input name="DATE" type="date" class="form-control"></dd><br>
+ <dt>Datum</dt><dd><input name="DATE" type="date" class="form-control" value="01-01-2015"></dd><br>
   <dt>Lengte</dt><dd><select name="LENGTH" type="text" class="form-control">
   <option value="1">1 Dag</option>
   <option value="7">1 Week</option>
