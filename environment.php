@@ -54,7 +54,7 @@ foreach($environments as $environment) {
 
 echo "</table><a href='?page=addEnvironment'> <button type='button' class='btn btn-default' >Omgeving toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
     <tr>
-        <th>Gebied: ".$selectedEnivornment."</th>
+        <th>Gebied: ".$selectedEnivornment."<button class='btn btn-default' type='submit' >Omgeving aanpassen</button></th>
     </tr>";
 foreach($areas as $area) {
     echo '<tr>
@@ -64,11 +64,11 @@ foreach($areas as $area) {
 
 echo "</table><a href='index.php?page=addArea'> <button type='button' class='btn btn-default'>Gebied toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
     <tr>
-        <th>Verblijf: ".$selectedArea."</th>
+        <th>Verblijf: ".$selectedArea."<button class='btn btn-default' type='submit' >Gebied aanpassen</button></th>
     </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-            <td>'.$enclosure["EnclosureID"].'</td>
+            <td>'.$enclosure["EnclosureID"].'<button class="btn btn-default" type="submit" >Verwijderen</button></td>
           </tr>';
 }
 
