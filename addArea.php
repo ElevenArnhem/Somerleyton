@@ -94,6 +94,6 @@ foreach($allStaff as $staff) {
 echo'</select></dd><br>
 </dl>
 <input type="hidden" name="OLDAREANAME" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'">
-<button class="btn btn-primary" type="submit">Opslaan</button>
+<button class="btn btn-primary" name="TYPE" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'changeArea';} else {echo 'addArea';} echo'" type="submit">Opslaan</button>
 </form>
 </div>';
