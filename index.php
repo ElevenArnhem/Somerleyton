@@ -22,7 +22,9 @@ if( $_SESSION['STAFFNAME'] != null) {
     echo '
     <br><br><br>
     <div class="container">';
+
     $dir = '/';
+    // LOKAAL FIX: ../Somerleyton
     $allPages = scandir($dir);
 
     $page = $page.'.php';
