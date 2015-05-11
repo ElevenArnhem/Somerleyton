@@ -104,11 +104,6 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         echo '<option value="'.$subSpeciesName["SubSpeciesName"].'">'.$subSpeciesName["SubSpeciesName"].'</option>';
     }
     echo'</select></dd><br>
-               <dt>Latijnse naam</dt><dd><select name="LATINNAME" type="text" class="form-control" required>';
-    foreach($latinNames as $latinName){
-        echo '<option value="'.$latinName["LatinName"].'">'.$latinName["LatinName"].'</option>';
-    }
-    echo'</select></dd><br>
                <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" placeholder="Geboorte plaats"></dd><br>
                <dt>Geboorte datum</dt><dd><input name="BIRTHDATE" type="date" class="form-control"></dd><br>
                <dt>Omgeving </dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" required>';
