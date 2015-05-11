@@ -41,7 +41,7 @@ echo '<div class="col-lg-4">
 <form action="index.php?page=addArea" method="post">
  <dl class="dl-horizontal">
 <dt>Naam</dt><dd><input name="AREANAME" type="text" class="form-control" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'" placeholder="gebied naam" required></dd><br>
-<dt>Omgeving</dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" >';
+<dt>Omgeving</dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" '; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'disabled';} echo'>';
 foreach($environments as $environment) {
     echo '<option value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</option>';
 }
