@@ -60,7 +60,7 @@ echo "</table><a href='?page=addEnvironment'> <button type='button' class='btn b
 foreach($areas as $area) {
     echo '<tr>
            <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$area["AreaName"].'"> <td><button class="btn btn-link" type="submit" value="'.$area["AreaName"].'">'.$area["AreaName"].'</button></td></form>
-           <td><form action="index.php?page=addArea" method="post"><input type="hidden" name="HEADKEEPER" value="'.$area['HeadkeeperID'].'"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Gebied aanpassen</button></form></td>
+           ';if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'<td><form action="index.php?page=addArea" method="post"><input type="hidden" name="HEADKEEPER" value="'.$area['HeadkeeperID'].'"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Gebied aanpassen</button></form></td>'; } echo '
           </tr>';
 }
 
@@ -70,7 +70,7 @@ echo "</table><a href='index.php?page=addArea'> <button type='button' class='btn
     </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-            <td>'.$enclosure["EnclosureID"].'</td><td><button class="btn btn-default" type="submit" >Verwijderen</button></td>
+           ';if($_SESSION['FUNCTION'] == 'Headkeeper') {echo' <td>'.$enclosure["EnclosureID"].'</td><td><button class="btn btn-default" type="submit" >Verwijderen</button></td>'; }echo '
           </tr>';
 }
 
