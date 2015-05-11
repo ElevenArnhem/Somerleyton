@@ -47,7 +47,7 @@ if(isset($_POST['TYPE'])) {
         $changeAreastmt->execute();
         spErrorCaching($changeAreastmt);
         $area = $areaName;
-        $environment = $environmentName;
+        $environment = $oldEnvironmentName;
         $OldHeadkeeperID = $headKeeperID;
     }
 //    @staffID			INT,
