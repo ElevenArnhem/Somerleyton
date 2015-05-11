@@ -48,7 +48,7 @@ echo ' <div class="row"><div class="col-lg-4"><table class="table table-hover">
     </tr>';
 foreach($environments as $environment) {
     echo '<tr>
-            <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'">  <td><button class="btn btn-link" type="submit" value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</button><button class="btn btn-default" type="submit" >Gebied aanpassen</button></td></form>
+            <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'">  <td><button class="btn btn-link" type="submit" value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</button></td></form><td><button class="btn btn-default" type="submit" >Gebied aanpassen</button></td>
           </tr>';
 }
 
@@ -58,7 +58,7 @@ echo "</table><a href='?page=addEnvironment'> <button type='button' class='btn b
     </tr>";
 foreach($areas as $area) {
     echo '<tr>
-           <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$area["AreaName"].'"> <td><button class="btn btn-link" type="submit" value="'.$area["AreaName"].'">'.$area["AreaName"].'</button><button class="btn btn-default" type="submit" >Omgeving aanpassen</button></td></form>
+           <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$area["AreaName"].'"> <td><button class="btn btn-link" type="submit" value="'.$area["AreaName"].'">'.$area["AreaName"].'</button></td></form><td><button class="btn btn-default" type="submit" >Omgeving aanpassen</button></td>
           </tr>';
 }
 
@@ -68,7 +68,7 @@ echo "</table><a href='index.php?page=addArea'> <button type='button' class='btn
     </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-            <td>'.$enclosure["EnclosureID"].'     <button class="btn btn-default" type="submit" >Verwijderen</button></td>
+            <td>'.$enclosure["EnclosureID"].'</td><td><button class="btn btn-default" type="submit" >Verwijderen</button></td>
           </tr>';
 }
 
