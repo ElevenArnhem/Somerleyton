@@ -55,7 +55,7 @@ if(isset($_POST['TYPE'])) {
         $oldAreaName = $_POST['OLDAREANAME'];
         $deleteAreastmt = $dbh->prepare("proc_deleteArea ?,?,?");
         $deleteAreastmt->bindParam(1, $staffID);
-        $deleteAreastmt->bindParam(2, $areaName);
+        $deleteAreastmt->bindParam(2, $oldAreaName);
         $deleteAreastmt->bindParam(3, $oldEnvironmentName);
 
         $deleteAreastmt->execute();
