@@ -48,6 +48,21 @@ if(isset($_POST['TYPE'])) {
         $area = $areaName;
         $environment = $oldEnvironmentName;
         $OldHeadkeeperID = $headKeeperID;
+    } else if($_POST['TYPE'] == 'deleteArea' || isset($_POST['ENVIRONMENTNAME'])) {
+        $staffID = $_SESSION['STAFFID'];
+        //$environmentName = $_POST['ENVIRONMENTNAME'];
+        $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
+        $oldAreaName = $_POST['OLDAREANAME'];
+        $changeAreastmt = $dbh->prepare("proc_deleteArea ?,?,?");
+        $changeAreastmt->bindParam(1, $staffID);
+        $changeAreastmt->bindParam(2, $areaName);
+        $changeAreastmt->bindParam(3, $oldEnvironmentName);
+
+        $changeAreastmt->execute();
+        spErrorCaching($changeAreastmt);
+        $area = $areaName;
+        $environment = $oldEnvironmentName;
+        $OldHeadkeeperID = $headKeeperID;
     }
 //    @staffID			INT,
 //	 @newAreaName		VARCHAR(50),
@@ -94,5 +109,7 @@ echo'</select></dd><br>
 </dl>
 <input type="hidden" name="OLDAREANAME" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'">
 <button class="btn btn-primary" name="TYPE" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'changeArea';} else {echo 'addArea';} echo'" type="submit">Opslaan</button>
+
+<button class="btn btn-primary" name="TYPE" value="deleteArea" type="submit">Verwijder omgeving</button>
 </form>
 </div>';
