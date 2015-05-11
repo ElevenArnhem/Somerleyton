@@ -15,6 +15,7 @@ if(isset($_POST['TYPE'])) {
     if($_POST['TYPE'] == 'addArea' || isset($_POST['ENVIRONMENTNAME'])) {
         $staffID = $_SESSION['STAFFID'];
         $environmentName = $_POST['ENVIRONMENTNAME'];
+
         $areaName = $_POST['AREANAME'];
         $headKeeperID = $_POST['HEADKEEPER'];
         $addAreastmt = $dbh->prepare("proc_addArea ?,?,?,?");
@@ -28,14 +29,16 @@ if(isset($_POST['TYPE'])) {
         $area = $areaName;
     }else if($_POST['TYPE'] == 'changeArea' || isset($_POST['ENVIRONMENTNAME'])) {
         $staffID = $_SESSION['STAFFID'];
-        $environmentName = $_POST['ENVIRONMENTNAME'];
+        //$environmentName = $_POST['ENVIRONMENTNAME'];
+        $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
         $areaName = $_POST['AREANAME'];
         $headKeeperID = $_POST['HEADKEEPER'];
+        $oldAreaName = $_POST['OLDAREANAME'];
         $changeAreastmt = $dbh->prepare("proc_alterArea ?,?,?,?,?");
         $changeAreastmt->bindParam(1, $staffID);
         $changeAreastmt->bindParam(2, $areaName);
         $changeAreastmt->bindParam(3, $headKeeperID);
-        $changeAreastmt->bindParam(4, $environmentName);
+        $changeAreastmt->bindParam(4, $oldEnvironmentName);
         $changeAreastmt->bindParam(5, $oldAreaName);
         $changeAreastmt->execute();
         spErrorCaching($changeAreastmt);
@@ -65,7 +68,7 @@ echo '<div class="col-lg-4">
 <h1>Gebied toevoegen</h1>
 <form action="index.php?page=addArea" method="post">
  <dl class="dl-horizontal">
- <input type="hidden" name="OLDENVIRONMENT" value="'.$environment.'">
+ <input type="hidden" name="OLDENVIRONMENTNAME" value="'.$environment.'">
 <dt>Naam</dt><dd><input name="AREANAME" type="text" class="form-control" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'" placeholder="gebied naam" required></dd><br>
 <dt>Omgeving</dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" '; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'disabled';} echo'>';
 if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) { echo'<option value="'.$environment.'">'.$environment.'</option>';}
