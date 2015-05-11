@@ -32,8 +32,8 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         //echo $picaName. ' ';
 
 
-
-        $addAnimalstmt = $dbh->prepare("proc_InsertAnimal ?,?,?,?,?,?,?,?,?,?,?");
+        $addNewAnimalID = -1;
+        $addAnimalstmt = $dbh->prepare("proc_InsertAnimal ?,?,?,?,?,?,?,?,?,?,?,?");
         $addAnimalstmt->bindParam(1, $staffID);
         $addAnimalstmt->bindParam(2, $animalName);
         $addAnimalstmt->bindParam(3, $gender);
@@ -45,6 +45,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         $addAnimalstmt->bindParam(9, $latinName);
         $addAnimalstmt->bindParam(10, $subSpeciesName);
         $addAnimalstmt->bindParam(11, $picaName);
+        $addAnimalstmt->bindParam(12, $addNewAnimalID);
 
         $addAnimalstmt->execute();
         $addAnimalstmt->nextRowset();
