@@ -64,7 +64,7 @@ echo '<div class="col-lg-4">
  <dl class="dl-horizontal">
 <dt>Naam</dt><dd><input name="ENVIRONMENTNAME" type="text" class="form-control" value="'; if(isset($_POST['ENVIRONMENT']) || isset($_POST['ENVIRONMENTNAME'])) {echo $environment;} echo'" placeholder="omgeving naam" required></dd><br>
 </dl>
-<input name="OLDENVIRONMENTNAME" type="hidden"  value="'; if(isset($_POST['ENVIRONMENT'])) {echo $_POST['ENVIRONMENT'];} echo'" >
+<input name="OLDENVIRONMENTNAME" type="hidden"  value="'; if(isset($_POST['ENVIRONMENT']) || isset($_POST['ENVIRONMENTNAME'])) {echo $environment;} echo'" >
 <button class="btn btn-primary" name="TYPE" value="'; if(isset($_POST['ENVIRONMENT'])) {echo 'changeEnvironment';} else{echo 'addEnvironment';} echo'" type="submit">Opslaan</button>
 <button class="btn btn-primary" name="TYPE" value="deleteEnvironment" type="submit">Verwijder omgeving</button>
 </form>
