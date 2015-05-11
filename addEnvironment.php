@@ -44,7 +44,7 @@ if(isset($_POST['TYPE'])) {
             $changeEnvironment->bindParam(2, $oldEnvironmentName);
             $changeEnvironment->execute();
             spErrorCaching($changeEnvironment);
-            header('index.php?page=environment');
+            http_redirect('index.php?page=environment');
         }
     }
 }
