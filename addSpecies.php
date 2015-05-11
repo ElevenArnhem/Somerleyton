@@ -46,7 +46,7 @@ if(isset($_POST["submit"])) {
     <div class="form-group">
         <label>Subsoort naam</label>
         <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="
-        <?php if(isset($_POST['subSpecies'])) {echo $_POST['subSpecies'];} else{ echo 'Naam subsoort"';} echo' required>
+        <?php if(isset($_POST['subSpecies'])) {echo $_POST['subSpecies'];} else{ echo 'Naam subsoort"';} echo'" required>
     </div>
     <div class="form-group">
         <label>Beschrijving</label>
