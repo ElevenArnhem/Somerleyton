@@ -33,7 +33,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
 
 
         $addNewAnimalID = -1;
-        $addAnimalstmt = $dbh->prepare("proc_InsertAnimal ?,?,?,?,?,?,?,?,?,?,?,?");
+        $addAnimalstmt = $dbh->prepare("proc_InsertAnimal ?,?,?,?,?,?,?,?,?,?,?,? OUTPUT");
         $addAnimalstmt->bindParam(1, $staffID);
         $addAnimalstmt->bindParam(2, $animalName);
         $addAnimalstmt->bindParam(3, $gender);
@@ -51,7 +51,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         $addAnimalstmt->nextRowset();
         $newAnimal = $addAnimalstmt->fetch();
         spErrorCaching($addAnimalstmt);
-//        echo $newAnimal;
+        echo  $addNewAnimalID;
 
         if(!empty($newAnimal[0])) {
             if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
