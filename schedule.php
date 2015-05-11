@@ -8,7 +8,7 @@
 if(isset($_GET['day'])) {
 
 }
-date_default_timezone_set('UTC+1');
+date_default_timezone_set('Europe/Amsterdam');
 $staffID = $_SESSION['STAFFID'];
 $date = date("Y-m-d H:i:s");
 if(isset($_POST['DATE'])) {
