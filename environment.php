@@ -23,7 +23,7 @@ if(isset($_POST['DELETEENCLOSURE'])) {
     $environmentName = $_POST['ENVIRONMENT'];
     $enclosureID = $_POST['ENCLOSURE'];
     $areaName = $_POST['AREA'];
-    $addEnclosurestmt = $dbh->prepare("proc_addEnclosure ?,?,?,?");
+    $addEnclosurestmt = $dbh->prepare("proc_deleteEnclosure ?,?,?,?");
     $addEnclosurestmt->bindParam(1, $staffID);
     $addEnclosurestmt->bindParam(2, $enclosureID);
     $addEnclosurestmt->bindParam(3, $areaName);
