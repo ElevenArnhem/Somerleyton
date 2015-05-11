@@ -62,7 +62,7 @@ echo '<div class="col-lg-4">
 <h1>Omgeving toevoegen</h1>
 <form action="index.php?page=addEnvironment" method="post">
  <dl class="dl-horizontal">
-<dt>Naam</dt><dd><input name="ENVIRONMENTNAME" type="text" class="form-control" value="'; if(isset($_POST['ENVIRONMENT'])) {echo $environment;} echo'" placeholder="omgeving naam" required></dd><br>
+<dt>Naam</dt><dd><input name="ENVIRONMENTNAME" type="text" class="form-control" value="'; if(isset($_POST['ENVIRONMENT']) || isset($_POST['ENVIRONMENTNAME'])) {echo $environment;} echo'" placeholder="omgeving naam" required></dd><br>
 </dl>
 <input name="OLDENVIRONMENTNAME" type="hidden"  value="'; if(isset($_POST['ENVIRONMENT'])) {echo $_POST['ENVIRONMENT'];} echo'" >
 <button class="btn btn-primary" name="TYPE" value="'; if(isset($_POST['ENVIRONMENT'])) {echo 'changeEnvironment';} else{echo 'addEnvironment';} echo'" type="submit">Opslaan</button>
