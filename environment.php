@@ -70,7 +70,7 @@ echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='i
     </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-           ';if($_SESSION['FUNCTION'] == 'Headkeeper') {echo' <td>'.$enclosure["EnclosureID"].'</td><td><button class="btn btn-default" type="submit" >Verwijderen</button></td>'; }echo '
+           <td>'.$enclosure["EnclosureID"].'</td> ';if($_SESSION['FUNCTION'] == 'HeadKeeper') {echo'<td><button class="btn btn-default" type="submit" >Verwijderen</button></td>'; }echo '
           </tr>';
 }
 
