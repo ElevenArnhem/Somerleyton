@@ -6,8 +6,10 @@
  * Time: 00:16
  */
 $environment = null;
+$area = null;
 if(isset($_POST['AREA'])) {
     $area = $_POST['AREA'];
+    $environment = $_POST['ENVIRONMENT'];
 }
 if(isset($_POST['TYPE'])) {
     if($_POST['TYPE'] == 'addArea' || isset($_POST['ENVIRONMENTNAME'])) {
@@ -22,6 +24,8 @@ if(isset($_POST['TYPE'])) {
         $addAreastmt->bindParam(4, $headKeeperID);
         $addAreastmt->execute();
         spErrorCaching($addAreastmt);
+        $environment = $environmentName;
+        $area = $areaName;
     }else if($_POST['TYPE'] == 'changeArea' || isset($_POST['ENVIRONMENTNAME'])) {
         $staffID = $_SESSION['STAFFID'];
         $environmentName = $_POST['ENVIRONMENTNAME'];
@@ -36,6 +40,7 @@ if(isset($_POST['TYPE'])) {
         $changeAreastmt->execute();
         spErrorCaching($changeAreastmt);
         $area = $areaName;
+        $environment = $environmentName;
     }
 //    @staffID			INT,
 //	 @newAreaName		VARCHAR(50),
@@ -60,8 +65,10 @@ echo '<div class="col-lg-4">
 <h1>Gebied toevoegen</h1>
 <form action="index.php?page=addArea" method="post">
  <dl class="dl-horizontal">
+ <input type="hidden" name="OLDENVIRONMENT" value="'.$environment.'">
 <dt>Naam</dt><dd><input name="AREANAME" type="text" class="form-control" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'" placeholder="gebied naam" required></dd><br>
 <dt>Omgeving</dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" '; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'disabled';} echo'>';
+if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) { echo'<option value="'.$environment.'">'.$environment.'</option>';}
 foreach($environments as $environment) {
     echo '<option value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</option>';
 }
