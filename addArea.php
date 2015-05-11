@@ -8,10 +8,11 @@
 $environment = null;
 $area = null;
 $staffID = null;
+$OldHeadkeeperID = null;
 if(isset($_POST['AREA'])) {
     $area = $_POST['AREA'];
     $environment = $_POST['ENVIRONMENT'];
-    $OldeadKeeperID = $_POST['HEADKEEPER'];
+    $OldHeadkeeperID = $_POST['HEADKEEPER'];
 }
 if(isset($_POST['TYPE'])) {
     if($_POST['TYPE'] == 'addArea' || isset($_POST['ENVIRONMENTNAME'])) {
@@ -29,7 +30,7 @@ if(isset($_POST['TYPE'])) {
         spErrorCaching($addAreastmt);
         $environment = $environmentName;
         $area = $areaName;
-        $OldeadKeeperID = $headKeeperID;
+        $OldHeadkeeperID = $headKeeperID;
     }else if($_POST['TYPE'] == 'changeArea' || isset($_POST['ENVIRONMENTNAME'])) {
         $staffID = $_SESSION['STAFFID'];
         //$environmentName = $_POST['ENVIRONMENTNAME'];
@@ -47,7 +48,7 @@ if(isset($_POST['TYPE'])) {
         spErrorCaching($changeAreastmt);
         $area = $areaName;
         $environment = $environmentName;
-        $OldeadKeeperID = $headKeeperID;
+        $OldHeadkeeperID = $headKeeperID;
     }
 //    @staffID			INT,
 //	 @newAreaName		VARCHAR(50),
@@ -83,7 +84,7 @@ foreach($environments as $environment) {
 echo'</select></dd><br>
 <dt>Hoofddierverzorger</dt><dd><select name="HEADKEEPER" type="text" class="form-control" >';
 foreach($allStaff as $staff) {
-    if($OldeadKeeperID == $staff["StaffID"]) {
+    if($OldHeadkeeperID == $staff["StaffID"]) {
         echo '<option value="' . $staff["StaffID"] . '">' . $staff["StaffName"] . '</option>';
     }
 }
