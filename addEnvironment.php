@@ -58,7 +58,7 @@ if(isset($_POST['DELETEENVIRONMENTNAME'])) {}
 
 echo '<div class="col-lg-4">
 
-<h1>Omgeving toevoegen</h1>
+<h1>Omgeving aanpassen</h1>
 <form action="index.php?page=addEnvironment" method="post">
  <dl class="dl-horizontal">
 <dt>Naam</dt><dd><input name="ENVIRONMENTNAME" type="text" class="form-control" value="'; if(isset($_POST['ENVIRONMENT']) || isset($_POST['ENVIRONMENTNAME'])) {echo $environment;} echo'" placeholder="omgeving naam" required></dd><br>

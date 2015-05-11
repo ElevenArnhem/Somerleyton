@@ -60,7 +60,7 @@ echo "</table><a href='?page=addEnvironment'> <button type='button' class='btn b
 foreach($areas as $area) {
     echo '<tr>
            <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$area["AreaName"].'"> <td><button class="btn btn-link" type="submit" value="'.$area["AreaName"].'">'.$area["AreaName"].'</button></td></form>
-           <td><form action="index.php?page=addArea" method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Gebied aanpassen</button></form></td>
+           <td><form action="index.php?page=addArea" method="post"><input type="hidden" name="HEADKEEPER" value="'.$area['HeadKeeper'].'"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Gebied aanpassen</button></form></td>
           </tr>';
 }
 
