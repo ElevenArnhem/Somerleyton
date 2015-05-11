@@ -137,11 +137,6 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
                  echo '<option value="'.$subSpeciesName["SubSpeciesName"].'">'.$subSpeciesName["SubSpeciesName"].'</option>';
                 }
                 echo'</select></dd><br>
-               <dt>Latijnse naam</dt><dd><select name="LATINNAME" type="text" class="form-control" value="'.$animal['LatinName'].'"><option value="'.$animal['LatinName'].'">'.$animal['LatinName'].'</option>';
-        foreach($latinNames as $latinName){
-            echo '<option value="'.$latinName["LatinName"].'">'.$latinName["LatinName"].'</option>';
-        }
-        echo'</select></dd><br>
                <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" value="'.$animal['BirthPlace'].'"></dd><br>
                <dt>Geboorte datum</dt><dd><input name="BIRTHDATE" type="date" class="form-control" value="'.$animal['BirthDate'].'"></dd><br>
                <dt>Omgeving </dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" value="'.$animal['EnvironmentName'].'"><option value="'.$animal['EnvironmentName'].'">'.$animal['EnvironmentName'].'</option>';
