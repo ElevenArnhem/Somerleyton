@@ -19,6 +19,22 @@ if(isset($_POST['ADDENCLOSURE'])) {
     spErrorCaching($addEnclosurestmt);
 }
 
+if(isset($_POST['DELETEENCLOSURE'])) {
+    $environmentName = $_POST['ENVIRONMENT'];
+    $enclosureID = $_POST['ENCLOSURE'];
+    $areaName = $_POST['AREA'];
+    $addEnclosurestmt = $dbh->prepare("proc_addEnclosure ?,?,?,?");
+    $addEnclosurestmt->bindParam(1, $staffID);
+    $addEnclosurestmt->bindParam(2, $enclosureID);
+    $addEnclosurestmt->bindParam(3, $areaName);
+    $addEnclosurestmt->bindParam(4, $environmentName);
+    $addEnclosurestmt->execute();
+    spErrorCaching($addEnclosurestmt);
+}
+//@staffID INT,
+//	@enclosureID INT,
+//	@areaName VARCHAR(50),
+//	@environmentName VARCHAR(50)
 $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
 $allEnvironments->execute();
 $environments = $allEnvironments->fetchAll();
@@ -70,7 +86,13 @@ echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='i
     </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-           <td>'.$enclosure["EnclosureID"].'</td> ';if($_SESSION['FUNCTION'] == 'HeadKeeper') {echo'<td><button class="btn btn-default" type="submit" >Verwijderen</button></td>'; }echo '
+           <td>'.$enclosure["EnclosureID"].'</td> ';if($_SESSION['FUNCTION'] == 'HeadKeeper') {echo'<td>
+<form action="index.php?page=environment" method="post">
+<input type="hidden" name="ENCLOSURE" value="'.$enclosure["EnclosureID"].'">
+<input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'">
+<input type="hidden" name="AREA" value="'.$selectedArea.'">
+<input type="hidden" name="DELETEENCLOSURE" value="true">
+<button class="btn btn-default" type="submit" >Verwijderen</button></form></td>'; }echo '
           </tr>';
 }
 
