@@ -7,7 +7,6 @@
  */
 $environment = null;
 $area = null;
-$staffID = null;
 $OldHeadkeeperID = null;
 if(isset($_POST['AREA'])) {
     $area = $_POST['AREA'];
