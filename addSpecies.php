@@ -45,11 +45,13 @@ if(isset($_POST["submit"])) {
     </div>
     <div class="form-group">
         <label>Subsoort naam</label>
-        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="Naam subsoort" required>
+        <input name="SUBSPECIESNAME" type="text" class="form-control" placeholder="
+        <?php if(isset($_POST['subSpecies'])) {echo $_POST['subSpecies'];} else{ echo 'Naam subsoort"';} echo' required>
     </div>
     <div class="form-group">
         <label>Beschrijving</label>
         <textarea name="DESCRIPTION" class="form-control" rows="3" required></textarea>
     </div>
     <input class="btn btn-default" type="submit" name="submit" value="Toevoegen">
-</form>
+</form>';
+    ?>
