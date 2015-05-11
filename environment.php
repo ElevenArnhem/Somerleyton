@@ -53,7 +53,7 @@ foreach($environments as $environment) {
           </tr>';
 }
 
-echo "</table><a href='?page=addEnvironment'> <button type='button' class='btn btn-default' >Omgeving toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
+echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='?page=addEnvironment'> <button type='button' class='btn btn-default' >Omgeving toevoegen</button></a></div>";} echo "<div class='col-lg-4'><table class='table table-hover'>
     <tr>
         <th>Gebied: ".$selectedEnivornment."</th>
     </tr>";
@@ -64,7 +64,7 @@ foreach($areas as $area) {
           </tr>';
 }
 
-echo "</table><a href='index.php?page=addArea'> <button type='button' class='btn btn-default'>Gebied toevoegen</button></a></div><div class='col-lg-4'><table class='table table-hover'>
+echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='index.php?page=addArea'> <button type='button' class='btn btn-default'>Gebied toevoegen</button></a></div>"; }echo "<div class='col-lg-4'><table class='table table-hover'>
     <tr>
         <th>Verblijf: ".$selectedArea."</th>
     </tr>";
