@@ -10,7 +10,7 @@ if(isset($_POST['AREA'])) {
     $area = $_POST['AREA'];
 }
 if(isset($_POST['TYPE'])) {
-    if(isset($_POST['ENVIRONMENTNAME'])) {
+    if($_POST['TYPE'] == 'addArea' || isset($_POST['ENVIRONMENTNAME'])) {
         $staffID = $_SESSION['STAFFID'];
         $environmentName = $_POST['ENVIRONMENTNAME'];
         $areaName = $_POST['AREANAME'];
@@ -22,7 +22,27 @@ if(isset($_POST['TYPE'])) {
         $addAreastmt->bindParam(4, $headKeeperID);
         $addAreastmt->execute();
         spErrorCaching($addAreastmt);
+    }else if($_POST['TYPE'] == 'changeArea' || isset($_POST['ENVIRONMENTNAME'])) {
+        $staffID = $_SESSION['STAFFID'];
+        $environmentName = $_POST['ENVIRONMENTNAME'];
+        $areaName = $_POST['AREANAME'];
+        $headKeeperID = $_POST['HEADKEEPER'];
+        $changeAreastmt = $dbh->prepare("proc_alterArea ?,?,?,?,?");
+        $changeAreastmt->bindParam(1, $staffID);
+        $changeAreastmt->bindParam(2, $areaName);
+        $changeAreastmt->bindParam(3, $headKeeperID);
+        $changeAreastmt->bindParam(4, $environmentName);
+        $changeAreastmt->bindParam(5, $oldAreaName);
+        $changeAreastmt->execute();
+        spErrorCaching($changeAreastmt);
+        $area = $areaName;
     }
+//    @staffID			INT,
+//	 @newAreaName		VARCHAR(50),
+//	 @newHeadkeeperID	INTEGER,
+//	 @environmentName	VARCHAR(50),
+//	 @areaName			VARCHAR(50),
+//	 @HeadkeeperID		INTEGER
 }
 
 $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
@@ -53,6 +73,7 @@ foreach($allStaff as $staff) {
 }
 echo'</select></dd><br>
 </dl>
-<button class="btn btn-primary" type="submit">Toevoegen</button>
+<input type="hidden" name="OLDAREANAME" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'">
+<button class="btn btn-primary" type="submit">Opslaan</button>
 </form>
 </div>';
