@@ -53,15 +53,15 @@ if(isset($_POST['TYPE'])) {
         //$environmentName = $_POST['ENVIRONMENTNAME'];
         $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
         $oldAreaName = $_POST['OLDAREANAME'];
-        $changeAreastmt = $dbh->prepare("proc_deleteArea ?,?,?");
-        $changeAreastmt->bindParam(1, $staffID);
-        $changeAreastmt->bindParam(2, $areaName);
-        $changeAreastmt->bindParam(3, $oldEnvironmentName);
+        $deleteAreastmt = $dbh->prepare("proc_deleteArea ?,?,?");
+        $deleteAreastmt->bindParam(1, $staffID);
+        $deleteAreastmt->bindParam(2, $areaName);
+        $deleteAreastmt->bindParam(3, $oldEnvironmentName);
 
-        $changeAreastmt->execute();
-        spErrorCaching($changeAreastmt);
+        $deleteAreastmt->execute();
+        spErrorCaching($deleteAreastmt);
 
-
+    echo $staffID,$oldEnvironmentName,$oldAreaName;
     }
 //    @staffID			INT,
 //	 @newAreaName		VARCHAR(50),
