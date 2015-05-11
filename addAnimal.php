@@ -45,7 +45,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         $addAnimalstmt->bindParam(9, $latinName);
         $addAnimalstmt->bindParam(10, $subSpeciesName);
         $addAnimalstmt->bindParam(11, $picaName);
-        $addAnimalstmt->bindParam(12, $addNewAnimalID, PDO::PARAM_INPUT_OUTPUT);
+        $addAnimalstmt->bindParam(12, $addNewAnimalID, PDO::PARAM_INPUT_OUTPUT, 4000);
 
         $addAnimalstmt->execute();
         $addAnimalstmt->nextRowset();
