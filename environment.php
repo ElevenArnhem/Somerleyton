@@ -49,7 +49,7 @@ echo ' <div class="row"><div class="col-lg-4"><table class="table table-hover">
 foreach($environments as $environment) {
     echo '<tr>
             <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'">  <td><button class="btn btn-link" type="submit" value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</button></td></form>
-            <td><form action="index.php?page=addEnvironment" method="post"><button class="btn btn-default" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'" type="submit" >Omgeving aanpassen</button></form></td>
+            ';if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'<td><form action="index.php?page=addEnvironment" method="post"><button class="btn btn-default" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'" type="submit" >Omgeving aanpassen</button></form></td>'; } echo '
           </tr>';
 }
 
