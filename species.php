@@ -1,5 +1,7 @@
 <?php
 
+include 'conn.inc.php';
+
 if(!isset($_GET ['number'])) {
     $page = 1;
 } else {
@@ -19,15 +21,6 @@ $allSubSpecies = $dbh->prepare("EXEC proc_getSubSpecies");
 $allSubSpecies->execute();
 $subSpecies = $allSubSpecies->fetchAll();
 $count = count($subSpecies);
-
-//if(isset($_POST["SEARCHSTRING"])) {
-//    $searchString = $_POST["SEARCHSTRING"];
-//    $searchSpecies = $dbh->prepare("EXEC proc_getSubSpecies ?");
-//    $searchSpecies->bindParam(1, $searchString);
-//    $searchSpecies->execute();
-//    $animals = $searchSpecies->fetchAll(PDO::FETCH_ASSOC);
-//}
-
 
 $paging_info = get_paging_info($count,$rowsAtPage,$page);
 
@@ -53,11 +46,13 @@ echo '
     <tr>
         <th>Hoofdsoort</th>
         <th>Subsoort</th>
+        <th></th>
     </tr>';
     foreach($subSpeciesByNumber as $fetchSubSpecies) {
             echo '<tr>
             <td>' . $fetchSubSpecies["LatinName"] . '</td>
             <td>' . $fetchSubSpecies["SubSpeciesName"] . '</td>
+            <td><form action="index.php?page=addSpecies" method="post"><button class="btn btn-default" name="subSpecies" value="'.$fetchSubSpecies["SubSpeciesName"].'" type="submit" >Diersoort aanpassen</button></form></td>
             </tr>';
     }
     echo ' </table>';
