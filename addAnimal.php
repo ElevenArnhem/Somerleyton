@@ -49,9 +49,11 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         //$addAnimalstmt->bindParam(12, $addNewAnimalID, PDO::PARAM_INPUT_OUTPUT, 4000);
 
         $addAnimalstmt->execute();
+
+        spErrorCaching($addAnimalstmt);
         $addAnimalstmt->nextRowset();
         $newAnimal = $addAnimalstmt->fetch();
-        spErrorCaching($addAnimalstmt);
+//        spErrorCaching($addAnimalstmt);
        // echo  $addNewAnimalID;
         $newAnimalid = $newAnimal[0];
         if(!empty($newAnimalid)) {
