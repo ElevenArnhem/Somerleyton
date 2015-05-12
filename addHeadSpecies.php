@@ -6,7 +6,7 @@ $headSpecies = $headSpeciesProc->fetchAll();
 if(isset($_POST["submit"])) {
     echo $_POST["STAFFID"];
     echo $_POST["LATINNAME"];
-    $speciesStatement = $dbh->prepare("proc_alterHeadSpecies ?, ?");
+    $speciesStatement = $dbh->prepare("proc_addHeadSpecies ?, ?");
     $speciesStatement->bindParam(1, $_POST["STAFFID"]);
     $speciesStatement->bindParam(2, $_POST["LATINNAME"]);
     $speciesStatement->execute();
@@ -14,7 +14,7 @@ if(isset($_POST["submit"])) {
 }
 ?>
 
-<h1>Hoofdsoort aanpassen</h1>
+<h1>Hoofdsoort toevoegen</h1>
 
 <form action="?page=addHeadSpecies" method="post">
     <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
