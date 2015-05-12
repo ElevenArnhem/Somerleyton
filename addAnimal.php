@@ -52,13 +52,15 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         $newAnimal = $addAnimalstmt->fetch();
         spErrorCaching($addAnimalstmt);
        // echo  $addNewAnimalID;
-
-        if(!empty($newAnimal[0])) {
+        $newAnimalid = $newAnimal[0];
+        if(!empty($newAnimalid)) {
+            echo 'test';
             if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-                addPicture($newAnimal[0]);
+                echo $newAnimalid;
+                addPicture($newAnimalid);
             }
 
-            echo '<div class="alert alert-success" role="alert"><a href="index.php?page=changeAnimal&animalID=' . $newAnimal[0] . '"> Dier toegevoegd </a></div>';
+            echo '<div class="alert alert-success" role="alert"><a href="index.php?page=changeAnimal&animalID=' . $newAnimalid . '"> Dier toegevoegd </a></div>';
         }
 
     }
