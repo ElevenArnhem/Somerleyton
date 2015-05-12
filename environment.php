@@ -97,7 +97,7 @@ foreach($enclosures as $enclosure) {
 }
 
 echo ' </table>
- ';if($_SESSION['FUNCTION'] == 'HeadKeeper') {echo' <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$selectedArea.'"><input type="hidden" name="ADDENCLOSURE" value="true"> <td><button class="btn btn-default" type="submit" >Verblijf toevoegen</button></td></form>';} echo '
+ ';if($_SESSION['FUNCTION'] == 'HeadKeeper' || $_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo' <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$selectedArea.'"><input type="hidden" name="ADDENCLOSURE" value="true"> <td><button class="btn btn-default" type="submit" >Verblijf toevoegen</button></td></form>';} echo '
 </div></div>';
 //echo "hohoohoo";
 ?>
