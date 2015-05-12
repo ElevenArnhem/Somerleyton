@@ -5,6 +5,7 @@
  * Date: 29-4-2015
  * Time: 11:44
  */
+date_default_timezone_set('Europe/Amsterdam');
 if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
     $picaName = null;
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
