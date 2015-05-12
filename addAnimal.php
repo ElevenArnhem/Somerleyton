@@ -48,15 +48,15 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         //$addAnimalstmt->bindParam(12, $addNewAnimalID, PDO::PARAM_INPUT_OUTPUT, 4000);
 
         $addAnimalstmt->execute();
-        $addAnimalstmt->nextRowset();
+       // $addAnimalstmt->nextRowset();
         $newAnimal = $addAnimalstmt->fetch();
         spErrorCaching($addAnimalstmt);
        // echo  $addNewAnimalID;
 
         if(!empty($newAnimal[0])) {
-            if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-               // addPicture($newAnimal[0]);
-            }
+//            if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
+//               // addPicture($newAnimal[0]);
+//            }
 
             echo '<div class="alert alert-success" role="alert"><a href="index.php?page=changeAnimal&animalID=' . $newAnimal[0] . '"> Dier toegevoegd </a></div>';
         }
