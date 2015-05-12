@@ -52,7 +52,9 @@ echo '
             echo '<tr>
             <td>' . $fetchSubSpecies["LatinName"] . '</td>
             <td>' . $fetchSubSpecies["SubSpeciesName"] . '</td>
-            <td><form action="index.php?page=addSpecies" method="post"><button class="btn btn-default" name="subSpecies" value="'.$fetchSubSpecies["SubSpeciesName"].'" type="submit" >Diersoort aanpassen</button></form></td>
+            <td>';
+                //<form action="index.php?page=addSpecies" method="post"><button class="btn btn-default" name="subSpecies" value="'.$fetchSubSpecies["SubSpeciesName"].'" type="submit" >Diersoort aanpassen</button></form>
+            echo '</td>
             </tr>';
     }
     echo ' </table>';
