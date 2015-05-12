@@ -106,7 +106,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
     }
     echo'</select></dd><br>
                <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" placeholder="Geboorte plaats"></dd><br>
-               <dt>Geboorte datum</dt><dd><input name="BIRTHDATE" type="date" class="form-control"></dd><br>
+               <dt>Geboorte datum</dt><dd><input name="BIRTHDATE" type="date" class="form-control" max="'. date('Y-m-d') .'"></dd><br>
                <dt>Omgeving </dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" required>';
     foreach($environmentNames as $environmentName) {
         echo '<option value="'.$environmentName['EnvironmentName'].'">'.$environmentName['EnvironmentName'].'</option>';
