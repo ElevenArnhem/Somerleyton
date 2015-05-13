@@ -12,6 +12,9 @@ $headSpeciesName = $_GET['headspecies'];
 $subSpeciesName = $_GET['subspecies'];
 
 if(isset($_POST['ADDGENERICFEEDINGSCHEMEROW'])) {
+    $dayGeneral = $_POST['DayGeneral'];
+    $timeGeneral = $_POST['TimeGeneral'];
+    $feedingRecipeID = $_POST['FeedingRecipeID'];
     $addGenericFeedingSchemestmt = $dbh->prepare("EXEC proc_AddGeneriekVoerschema ?,?,?,?,?");
     $addGenericFeedingSchemestmt->bindParam(1,$headSpeciesName);
     $addGenericFeedingSchemestmt->bindParam(2,$subSpeciesName);
@@ -30,6 +33,15 @@ $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
 $recipestmt->execute();
 $recipe = $recipestmt->fetchAll();
 
+//@HeadSpeciesName			VARCHAR(50),
+//	@SubSpeciesName				VARCHAR(50),
+//	@Voerschema					BIT
+$animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,0");
+$animalsstmt->bindParam(1,$headSpeciesName);
+$animalsstmt->bindParam(2,$subSpeciesName);
+$animalsstmt->execute();
+$animals = $animalsstmt->fetchAll();
+
 
 echo '<h2>Voedingsschema</h1>
     <h3>Hoofdsoort: '.$_GET['headspecies'].'</h2>
@@ -47,14 +59,14 @@ foreach($genericFeedingScheme as $genericFeedingSchemeRow) {
 //    if($_SESSION['FUNCTION'])
     echo '<tr>
 <td>'.$genericFeedingSchemeRow['DayGeneral'].'</td>
-<td>'.$genericFeedingSchemeRow['TimeGeneral'].'</td>
+<td>'; echo explode('.', $genericFeedingSchemeRow['TimeGeneral'])[0]; echo '</td>
 <td>'.$genericFeedingSchemeRow['FeedingRecipeID'].'</td>
         ';
 
     echo'</tr>';
 };
 echo '
-<tr><form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['headspecies'].'" method="post">
+<tr><form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
 <td><select name="DayGeneral" type="text" class="form-control" required>
     <option>maandag</option>
     <option>dinsdag</option>
@@ -74,8 +86,29 @@ echo '
     </select></td>
     </tr>
     <tr><td></td>
-    <td><button name="ADDGENERICFEEDINGSCHEMEROW" type="button" class="btn btn-default">Voeg toe</button></td>
+    <td><button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button></td>
 </tr></form>
 </table>
 
-    </div></div>';
+    </div>
+    <div class="col-lg-4">
+<form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
+    <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Alleen dieren met een specifiek voerschema</button><br><br>
+    </form>
+    <table class="table table-hover"><tr>
+            <th>ID</th>
+            <th>Naam</th>
+            </tr>';
+foreach($animals as $animal) {
+    echo'
+    <tr>
+    <td>'.$animal['AnimalID'].'</td>
+    <td>'.$animal['AnimalName'].'</td>
+    </tr>';
+}
+echo '
+            </table>
+    </div>
+
+
+    </div>';
