@@ -12,6 +12,9 @@ $headSpeciesName = $_GET['headspecies'];
 $subSpeciesName = $_GET['subspecies'];
 
 if(isset($_POST['ADDGENERICFEEDINGSCHEMEROW'])) {
+    $dayGeneral = $_POST['DayGeneral'];
+    $timeGeneral = $_POST['TimeGeneral'];
+    $feedingRecipeID = $_POST['FeedingRecipeID'];
     $addGenericFeedingSchemestmt = $dbh->prepare("EXEC proc_AddGeneriekVoerschema ?,?,?,?,?");
     $addGenericFeedingSchemestmt->bindParam(1,$headSpeciesName);
     $addGenericFeedingSchemestmt->bindParam(2,$subSpeciesName);
@@ -54,7 +57,7 @@ foreach($genericFeedingScheme as $genericFeedingSchemeRow) {
     echo'</tr>';
 };
 echo '
-<tr><form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['headspecies'].'" method="post">
+<tr><form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
 <td><select name="DayGeneral" type="text" class="form-control" required>
     <option>maandag</option>
     <option>dinsdag</option>
@@ -74,7 +77,7 @@ echo '
     </select></td>
     </tr>
     <tr><td></td>
-    <td><button name="ADDGENERICFEEDINGSCHEMEROW" type="button" class="btn btn-default">Voeg toe</button></td>
+    <td><button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button></td>
 </tr></form>
 </table>
 
