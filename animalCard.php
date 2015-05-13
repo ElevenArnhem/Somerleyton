@@ -23,7 +23,12 @@ echo '<h1>'.$animal['AnimalName'].'</h1>
            <dt>Latijnse naam</dt><dd>'.$animal['LatinName'].'</dd><br>
            <dt>Geboorte plaats</dt><dd>'.$animal['BirthPlace'].'</dd><br>
            <dt>Geboorte datum</dt><dd>'.$animal['BirthDate'].'</dd><br>
-           <dt>Gebied </dt><dd>'.$animal['AreaName'].'</dd><br> <br>
+           <dt>Omgeving </dt><dd>'.$animal['EnvironmentName'].'</dd><br>
+           <dt>Gebied </dt><dd>'.$animal['AreaName'].'</dd><br>';
+            if($_SESSION['FUNCTION'] == 'HeadKeeper' || $_SESSION['FUNCTION'] == 'Keeper' ||$_SESSION['FUNCTION'] == 'Vet' ) {
+           echo'<dt>Verblijf </dt><dd>'.$animal['EnclosureID'].'</dd><br>
+           <dt>Voedingsschema </dt><dd>nnb</dd><br>
+           <dt>Medische gegevens </dt><dd>nnb</dd><br>'; } echo'<br>
            <dt>Beschrijving </dt></dl> <br> '.$animal['Description'].'<br><br>';
         if($_SESSION['FUNCTION'] == 'HeadKeeper') {
         echo '<a href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> <button type="button" class="btn btn-default" >Aanpassen</button></a>';
