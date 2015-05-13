@@ -61,7 +61,6 @@ if(isset($_POST['TYPE'])) {
         $deleteAreastmt->execute();
         spErrorCaching($deleteAreastmt);
 
-    echo $staffID,$oldEnvironmentName,$oldAreaName;
     }
 //    @staffID			INT,
 //	 @newAreaName		VARCHAR(50),

@@ -8,6 +8,7 @@
 include 'functions.php';
 include 'pageHead.php';
 
+
 if(!isset($_GET ['page'])) {
     $page = 1;
 } else {
@@ -23,8 +24,8 @@ if( $_SESSION['STAFFNAME'] != null) {
     <br><br><br>
     <div class="container">';
 
-    $dir = '/';
-    // LOKAAL FIX: ../Somerleyton
+    $dir = isLocal().'/';
+
     $allPages = scandir($dir);
 
     $page = $page.'.php';

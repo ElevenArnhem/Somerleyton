@@ -63,7 +63,7 @@ echo ' <div class="row"><div class="col-lg-4"><table class="table table-hover">
         <th>Omgeving</th>
     </tr>';
 foreach($environments as $environment) {
-    echo '<tr>
+    echo '<tr '; if($selectedEnivornment == $environment['EnvironmentName']) { echo 'class="active" ';} echo'>
             <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'">  <td><button class="btn btn-link" type="submit" value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</button></td></form>
             ';if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'<td><form action="index.php?page=addEnvironment" method="post"><button class="btn btn-default" name="ENVIRONMENT" value="'.$environment["EnvironmentName"].'" type="submit" >Omgeving aanpassen</button></form></td>'; } echo '
           </tr>';
@@ -74,7 +74,7 @@ echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='?
         <th>Gebied: ".$selectedEnivornment."</th>
     </tr>";
 foreach($areas as $area) {
-    echo '<tr>
+    echo '<tr '; if($selectedArea == $area['AreaName']) { echo 'class="active" ';} echo'>
            <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$area["AreaName"].'"> <td><button class="btn btn-link" type="submit" value="'.$area["AreaName"].'">'.$area["AreaName"].'</button></td></form>
            ';if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'<td><form action="index.php?page=addArea" method="post"><input type="hidden" name="HEADKEEPER" value="'.$area['HeadkeeperID'].'"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Gebied aanpassen</button></form></td>'; } echo '
           </tr>';
