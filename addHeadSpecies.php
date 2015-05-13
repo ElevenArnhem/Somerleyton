@@ -1,8 +1,6 @@
 <?php
 
 if(isset($_POST["submit"])) {
-    echo $_POST["STAFFID"];
-    echo $_POST["LATINNAME"];
     $speciesStatement = $dbh->prepare("proc_addHeadSpecies ?, ?");
     $speciesStatement->bindParam(1, $_POST["STAFFID"]);
     $speciesStatement->bindParam(2, $_POST["LATINNAME"]);
