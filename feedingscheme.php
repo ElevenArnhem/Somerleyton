@@ -33,6 +33,15 @@ $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
 $recipestmt->execute();
 $recipe = $recipestmt->fetchAll();
 
+//@HeadSpeciesName			VARCHAR(50),
+//	@SubSpeciesName				VARCHAR(50),
+//	@Voerschema					BIT
+$animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,0");
+$animalsstmt->bindParam(1,$headSpeciesName);
+$animalsstmt->bindParam(2,$subSpeciesName);
+$animalsstmt->execute();
+$animals = $animalsstmt->fetchAll();
+
 
 echo '<h2>Voedingsschema</h1>
     <h3>Hoofdsoort: '.$_GET['headspecies'].'</h2>
@@ -81,4 +90,25 @@ echo '
 </tr></form>
 </table>
 
-    </div></div>';
+    </div>
+    <div class="col-lg-4">
+<form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
+    <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Alleen dieren met een specifiek voerschema</button><br><br>
+    </form>
+    <table class="table table-hover"><tr>
+            <th>ID</th>
+            <th>Naam</th>
+            </tr>';
+foreach($animals as $animal) {
+    echo'
+    <tr>
+    <td>'.$animal['AnimalID'].'</td>
+    <td>'.$animal['AnimalName'].'</td>
+    </tr>';
+}
+echo '
+            </table>
+    </div>
+
+
+    </div>';
