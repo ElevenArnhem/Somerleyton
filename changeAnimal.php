@@ -126,7 +126,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
               <input type="hidden" name="ANIMALID" value="'.$animal['AnimalID']. '">
                <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" value="'.$animal['AnimalName'].'"></dd><br>
               <dt>Geslacht</dt><dd><select name="GENDER" type="text" class="form-control" value="'.$animal['Gender'].'">
-                                        <option value="F">Vrouwtje</option><option value="M"';if($animal['Gender'] == "M"){ echo'selected'; } echo'>Mannetje </option></select></dd><br>
+                                        <option value="F">Vrouwtje</option><option value="M"';if($animal['Gender'] == "M"){ echo'selected'; } echo'>Mannetje </option><option value="U" ';if($animal['Gender'] == "U"){ echo'selected'; } echo'>Nog niet bekend</option></select></dd><br>
                <dt>Soort</dt><dd><select name="LATINNAME" type="text" class="form-control" value="'.$animal['LatinName'].'"><option value="'.$animal['LatinName'].'">'.$animal['LatinName'].'</option>';
                foreach($latinNames as $latinName){
                    echo '<option value="'.$latinName["LatinName"].'">'.$latinName["LatinName"].'</option>';

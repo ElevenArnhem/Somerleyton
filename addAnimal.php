@@ -97,7 +97,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
 
                <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" placeholder="Naam" required=""></dd><br>
               <dt>Geslacht</dt><dd><select name="GENDER" type="text" class="form-control" required>
-                                        <option value="F">Vrouwtje</option><option value="M">Mannetje </option></select></dd><br>
+                                        <option value="F">Vrouwtje</option><option value="M">Mannetje </option> <option value="U">Nog niet bekend</option></select></dd><br>
                <dt>Soort</dt><dd><select name="LATINNAME" type="text" class="form-control" required>';
     foreach($latinNames as $latinName){
         echo '<option value="'.$latinName["LatinName"].'">'.$latinName["LatinName"].'</option>';
