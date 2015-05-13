@@ -50,7 +50,7 @@ foreach($genericFeedingScheme as $genericFeedingSchemeRow) {
 //    if($_SESSION['FUNCTION'])
     echo '<tr>
 <td>'.$genericFeedingSchemeRow['DayGeneral'].'</td>
-<td>'.$genericFeedingSchemeRow['TimeGeneral'].'</td>
+<td>'; echo explode('.', $genericFeedingSchemeRow['TimeGeneral'])[0]; echo '</td>
 <td>'.$genericFeedingSchemeRow['FeedingRecipeID'].'</td>
         ';
 
