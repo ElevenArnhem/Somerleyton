@@ -8,7 +8,6 @@
 include 'functions.php';
 include 'pageHead.php';
 
-
 if(!isset($_GET ['page'])) {
     $page = 1;
 } else {
