@@ -5,63 +5,13 @@ if(isset($_POST["submit"])) {
     $headSpeciesName = $_POST['headSpecies'];
     $subSpeciesName = $_POST["subSpecies"];
 	$description =  $_POST["description"];
-	$imageName = null;
 
-    if(isset($_POST['fileName'])) {
-        $imageName = $_POST['fileName'];
-    }
+    $imageName = null;
 
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-
-        $target_dir = isLocal()."/pictures/";
-
-        $targetFileName = $subSpeciesName . $headSpeciesName;
-        $tmpTargetFileName = $targetFileName.'.'.explode('.', $_FILES['fileToUpload']['name'])[1];
-        $targetFileName = $tmpTargetFileName;
-        $target_file = $target_dir . basename($targetFileName);
-        $uploadOk = 1;
-        $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-
-// Check if image file is a actual image or fake image
-        if (isset($_POST["submit"])) {
-
-            $check = getimagesize($_FILES["fileToUpload"].$targetFileName);
-            if ($check !== false) {
-
-                $uploadOk = 1;
-            } else {
-
-                $uploadOk = 0;
-            }
-        }
-// Check if file already exists
-        if (file_exists($target_file)) {
-            unlink('pictures/'.$targetFileName);
-//            $uploadOk = 0;
-        }
-// Check file size
-        if ($_FILES["fileToUpload"]["size"] > 5000000) {
-            echo '<div class="alert alert-danger" role="alert">Sorry, het bestand is te groot.</div>';
-            $uploadOk = 0;
-        }
-// Allow certain file formats
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif"
-        ) {
-            echo '<div class="alert alert-danger" role="alert">Sorry, alleen JPG, JPEG, PNG & GIF bestanden zijn toegestaan.</div>';
-            $uploadOk = 0;
-        }
-// Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo '<div class="alert alert-danger" role="alert">Sorry, er iets mis gegaan tijden het uploaden.</div>';
-// if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
-                $imageName = $targetFileName;
-            } else {
-                echo '<div class="alert alert-danger" role="alert">Sorry, er iets mis gegaan tijden het uploaden.</div>';
-            }
-        }
+        $imageName = $subSpeciesName . $headSpeciesName;
+        $newFileName = addSpeciesPicture($imageName);
+        $imageName = $newFileName;
     }
 
     $speciesStatement = $dbh->prepare("proc_alterSubSpecies ?, ?, ?, ?, ?");
@@ -106,16 +56,14 @@ $subSpecies = $subSpeciesProc->fetch();
     <div class="col-lg-6">
     <div class="form-group">
     <br><br>
-    <label>Afbeelding</label>
        <?php
-        if(isset($subSpecies["image"])) {
+        if(isset($subSpecies["Image"])) {
         echo '
-        <img src="..Somerleyton/pictures/'. $subSpecies["image"].'" width="300" height="300"><br><br>';
+        <img src="'. isLocal() .'/pictures/'. $subSpecies["Image"].'" width="300" height="300"><br><br>';
         }
         echo'
         Selecteer een foto:<br><br>
-        <input type="hidden" name="fileName">
-        <input class="btn btn-default"  type="file" name="fileToUpload" >
+        <input class="btn btn-default" type="file" name="fileToUpload" >
         <br>';
         ?>
     </div>
