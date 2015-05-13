@@ -1,14 +1,15 @@
 <?php
-$headSpeciesProc = $dbh->prepare('EXEC proc_getHeadSpecies');
-$headSpeciesProc->execute();
-$headSpecies = $headSpeciesProc->fetchAll();
+    $headSpeciesName = $_POST['headSpecies'];
 
 if(isset($_POST["submit"])) {
-    echo $_POST["STAFFID"];
-    echo $_POST["LATINNAME"];
-    $speciesStatement = $dbh->prepare("proc_alterHeadSpecies ?, ?");
-    $speciesStatement->bindParam(1, $_POST["STAFFID"]);
-    $speciesStatement->bindParam(2, $_POST["LATINNAME"]);
+    $staffID = $_SESSION['STAFFID'];
+    $origineleNaam = $_POST["originalHeadSpeciesName"];
+    $nieuweNaam = $_POST["headSpecies"];
+
+    $speciesStatement = $dbh->prepare("proc_alterHeadSpecies ?, ?, ?");
+    $speciesStatement->bindParam(1, $staffID);
+    $speciesStatement->bindParam(2, $origineleNaam);
+    $speciesStatement->bindParam(3, $nieuweNaam);
     $speciesStatement->execute();
     spErrorCaching($speciesStatement);
 }
@@ -16,11 +17,11 @@ if(isset($_POST["submit"])) {
 
 <h1>Hoofdsoort aanpassen</h1>
 
-<form action="?page=addHeadSpecies" method="post">
-    <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
+<form action="?page=changeHeadSpecies" method="POST">
+    <input type="hidden" name="originalHeadSpeciesName" value="<?php echo $headSpeciesName ?>"/>
     <div class="form-group">
         <label>Hoofdsoort</label>
-        <input class="form-control textbox" name="LATINNAME" required type="text" />
+        <input class="form-control textbox" name="headSpecies" type="text" value="<?php echo $headSpeciesName ?>">
     </div>
-    <input class="btn btn-default" type="submit" name="submit" value="Toevoegen">
+    <input class="btn btn-default" type="submit" name="submit" value="Opslaan">
 </form>

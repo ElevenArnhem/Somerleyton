@@ -1,7 +1,4 @@
 <?php
-$headSpeciesProc = $dbh->prepare('EXEC proc_getHeadSpecies');
-$headSpeciesProc->execute();
-$headSpecies = $headSpeciesProc->fetchAll();
 
 if(isset($_POST["submit"])) {
     echo $_POST["STAFFID"];

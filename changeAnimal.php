@@ -12,7 +12,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     }
 
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-        $target_dir = "/pictures/";
+        $target_dir = isLocal()."/pictures/";
 
         $targetFileName = $_POST['ANIMALID'];
         $tmpTargetFileName = $targetFileName.'.'.explode('.', $_FILES['fileToUpload']['name'])[1];
@@ -157,7 +157,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
    <br><br>';
     if(isset($animal['Image'])) {
         echo '
-<img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
+<img src="'. isLocal() .'/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
     }
     echo'
     Selecteer een foto:<br><br>
