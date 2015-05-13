@@ -25,7 +25,6 @@ $count = count($subSpecies);
 $allHeadSpecies = $dbh->prepare("EXEC proc_getHeadSpecies");
 $allHeadSpecies->execute();
 $headSpecies = $allHeadSpecies->fetchAll();
-$count = count($headSpecies);
 
 $paging_info = get_paging_info($count,$rowsAtPage,$page);
 
@@ -41,17 +40,17 @@ function get_paging_info($tot_rows,$rowsAtPage,$curr_page)
     return $data; //return the paging data
 
 }
+?>
 
 
-echo '<h1>Hoofdsoorten beheren</h1>';
-
-
-echo '
+<h1>Hoofdsoorten beheren</h1>
+<br>
 <table class="table table-hover">
     <tr>
         <th>Hoofdsoort</th>
         <th></th>
-    </tr>';
+    </tr>
+    <?php
     foreach($headSpecies as $fetchHeadSpecies) {
         echo '<tr>
             <td>
@@ -59,25 +58,27 @@ echo '
             </td>
             <td>
                 <form action="?page=changeHeadSpecies" method="post">
-                    <button type="submit" name="headSpecies" value="'. $fetchHeadSpecies["LatinName"] . '">Aanpassen</button>
+                    <button type="submit" class="btn btn-default" name="headSpecies" value="'. $fetchHeadSpecies["LatinName"] . '">Aanpassen</button>
                 </form>
             </td>
         </tr>';
     }
-echo '</tabel>';
-echo '<div class="btn-group" role="group">
+    ?>
+</table>
+<div class="btn-group" role="group">
     <a href="?page=addHeadSpecies"> <button type="button" class="btn btn-default" >Hoofdsoort toevoegen</button></a>
-</div>';
-?>
+</div>
 
-<?php
-echo '
+
+<h1>Subsoorten beheren</h1>
+<br>
 <table class="table table-hover">
     <tr>
         <th>Hoofdsoort</th>
         <th>Subsoort</th>
         <th></th>
-    </tr>';
+    </tr>
+    <?php
     foreach($subSpeciesByNumber as $fetchSubSpecies) {
             echo '<tr>
             <td>' . $fetchSubSpecies["LatinName"] . '</td>
@@ -85,18 +86,20 @@ echo '
             <td>
                 <form action="?page=changeSubSpecies" method="post">
                     <input type="hidden" name="headSpecies" value="'. $fetchSubSpecies["LatinName"] . '" />
-                    <button type="submit" name="subSpecies" value="'. $fetchSubSpecies["SubSpeciesName"] . '">Aanpassen</button>
+                    <button type="submit" class="btn btn-default" name="subSpecies" value="'. $fetchSubSpecies["SubSpeciesName"] . '">Aanpassen</button>
                 </form>
             </td>
             </tr>';
     }
-    echo ' </table>';
-?>
+    ?>
+</table>
 
+
+<ul class="pagination">
     <!-- If the current page is more than 1, show the First and Previous links -->
     <?php if($paging_info['curr_page'] > 1) : ?>
-        <a href='?page=species&number=1' title='Page 1'>Eerst</a>
-        <a href='?page=species&number=<?php echo $paging_info['curr_page'] - 1; ?>' title='Page <?php echo ($paging_info['curr_page'] - 1); ?>'>Vorige</a>
+        <li><a href='?page=species&number=1' title='Page 1'>Eerst</a></li>
+        <li><a href='?page=species&number=<?php echo $paging_info['curr_page'] - 1; ?>' title='Page <?php echo ($paging_info['curr_page'] - 1); ?>'>Vorige</a></li>
     <?php endif; ?>
 
     <?php
@@ -114,7 +117,7 @@ echo '
 
     <!-- If the current page >= $max then show link to 1st page -->
     <?php if($paging_info['curr_page'] >= $max) : ?>
-        <a href='?page=species&number=1' title='Pagina 1'>1</a>
+        <li><a href='?page=species&number=1' title='Pagina 1'>1</a></li>
         ..
     <?php endif; ?>
 
@@ -127,9 +130,9 @@ echo '
         ?>
 
         <?php if($paging_info['curr_page'] == $i) : ?>
-            <span class='bold'><?php echo $i; ?></span>
+            <li><a href='?page=species&number=<?php echo $i; ?>'><?php echo $i; ?></a></li>
         <?php else : ?>
-            <a href='?page=species&number=<?php echo $i; ?>' title='Page <?php echo $i; ?>'><?php echo $i; ?></a>
+        <li><a href='?page=species&number=<?php echo $i; ?>' title='Page <?php echo $i; ?>'><?php echo $i; ?></a></li>
         <?php endif; ?>
     <?php endfor; ?>
 
@@ -137,15 +140,17 @@ echo '
     <!-- If the current page is less than say the last page minus $max pages divided by 2-->
     <?php if($paging_info['curr_page'] < ($paging_info['pages'] - floor($max / 2))) : ?>
         ..
-        <a href='?page=species&number=<?php echo $paging_info['pages']; ?>' title='Page <?php echo $paging_info['pages']; ?>'><?php echo $paging_info['pages']; ?></a>
+        <li><a href='?page=species&number=<?php echo $paging_info['pages']; ?>' title='Page <?php echo $paging_info['pages']; ?>'><?php echo $paging_info['pages']; ?></a></li>
     <?php endif; ?>
 
     <!-- Show last two pages if we're not near them -->
     <?php if($paging_info['curr_page'] < $paging_info['pages']) : ?>
-        <a href='?page=species&number=<?php echo $paging_info['curr_page'] + 1; ?>' title='Page <?php echo ($paging_info['curr_page'] + 1); ?>'>Volgende</a>
-        <a href='?page=species&number=<?php echo $paging_info['pages']; ?>'>Laatste</a>
+        <li><a href='?page=species&number=<?php echo $paging_info['curr_page'] + 1; ?>' title='Page <?php echo ($paging_info['curr_page'] + 1); ?>'>Volgende</a></li>
+        <li><a href='?page=species&number=<?php echo $paging_info['pages']; ?>'>Laatste</a></li>
     <?php endif; ?>
-
+    </ul>
+<br>
+<br>
 <div class="btn-group" role="group">
     <a href="?page=addSubSpecies"> <button type="button" class="btn btn-default" >Subsoort toevoegen</button></a>
 </div>
