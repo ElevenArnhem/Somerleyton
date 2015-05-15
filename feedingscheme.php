@@ -30,7 +30,7 @@ if(isset($_POST['ADDSPECIFICFEEDINGSCHEME'])) {
     $dayGeneral = $_POST['DayGeneral'];
     $timeGeneral = $_POST['TimeGeneral'];
     $feedingRecipeID = $_POST['FeedingRecipeID'];
-    $addSpecificFeedingSchemestmt = $dbh->prepare("EXEC proc_AddSpecifiekVoerschema ?,?,?,?");
+    $addSpecificFeedingSchemestmt = $dbh->prepare("EXEC proc_AddSpecifiekVoerSchema ?,?,?,?");
     $addSpecificFeedingSchemestmt->bindParam(1,$animalID);
     $addSpecificFeedingSchemestmt->bindParam(2,$feedingRecipeID);
     $addSpecificFeedingSchemestmt->bindParam(3,$dayGeneral);
