@@ -156,9 +156,9 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
                     <td>';
             echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
             echo '</td>
-                    <td>'. $feedingSchemeRow['FeedingRecipeID'] .'
+                    <td>' . $feedingSchemeRow['FeedingRecipeID'] . '
                         <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
-                            <button type="submit" class="btn btn-link btn-xs" >
+                            <button type="submit" class="btn btn-link btn-xs" aria-label="Right Align">
                                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                             </button>
                         </form>
