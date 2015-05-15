@@ -81,6 +81,10 @@ feedingSchedule($genericFeedingScheme, $addButton, $dbh);
    echo '
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
+if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+    echo   '<input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">';
+}
+
 if($specificAnimals == 0) {
     echo '<button name = "SPECIFICANIMALS" value = "1" type = "submit" class="btn btn-default" > Alleen dieren met een specifiek voerschema </button >';
     }
