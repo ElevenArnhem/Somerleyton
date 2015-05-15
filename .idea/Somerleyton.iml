@@ -7,10 +7,20 @@
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$USER_HOME$/Desktop/Backup 28-3-2015/Desktop/School/php interpreter" />
+          <root url="file://C:/xampp/php" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$USER_HOME$/Desktop/Backup 28-3-2015/Desktop/School/php interpreter" />
+          <root url="file://C:/xampp/php" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="PHARS">
+        <CLASSES>
+          <root url="phar://C:/xampp/php/pharcommand.phar" />
+        </CLASSES>
+        <SOURCES>
+          <root url="phar://C:/xampp/php/pharcommand.phar" />
         </SOURCES>
       </library>
     </orderEntry>
