@@ -44,6 +44,14 @@ $animalsstmt->bindParam(3,$specificAnimals);
 $animalsstmt->execute();
 $animals = $animalsstmt->fetchAll();
 
+if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+    $specificAnimalID = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
+    $specificFeedingSchemestmt = $dbh->prepare("proc_GetSpecifiekVoerSchema ?");
+    $specificFeedingSchemestmt->bindParam(1, $specificAnimalID);
+    $specificFeedingSchemestmt->execute();
+    $specificFeedingScheme = $specificFeedingSchemestmt->fetchAll();
+}
+
 
 echo '<h2>Voedingsschema</h1>
     <h3>Hoofdsoort: '.$_GET['headspecies'].'</h2>
@@ -110,7 +118,7 @@ foreach($animals as $animal) {
     <td>'.$animal['AnimalID'].'</td>
     <td>
         <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
-            <button name="SPECIFICANIMALFEEDINGSCHEME" value="'.$animal['AnimalID'].'" type="submit" class="btn btn-default">
+            <button name="SPECIFICANIMALFEEDINGSCHEME" value="'.$animal['AnimalID'].'" type="submit" class="btn btn-link">
                 '.$animal['AnimalName'].'
             </button>
         </form>
@@ -119,6 +127,50 @@ foreach($animals as $animal) {
 }
 echo '
             </table>
+    </div>
+
+    <div class="col-lg-4">
+    <h4>Generiek voedingsschema</h4>
+<table class="table table-hover"><tr>
+            <th>Dag</th>
+            <th>Tijdstip</th>
+            <th>Recept</th>
+            </tr>';
+foreach($specificFeedingScheme as $specificFeedingSchemeRow) {
+//    if($_SESSION['FUNCTION'])
+    echo '<tr>
+<td>'.$specificFeedingSchemeRow['DayGeneral'].'</td>
+<td>'; echo explode('.', $specificFeedingSchemeRow['TimeGeneral'])[0]; echo '</td>
+<td>'.$specificFeedingSchemeRow['FeedingRecipeID'].'</td>
+        ';
+
+    echo'</tr>';
+};
+echo '
+<tr><form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
+<td><select name="DayGeneral" type="text" class="form-control" required>
+    <option>maandag</option>
+    <option>dinsdag</option>
+    <option>woensdag</option>
+    <option>donderdag</option>
+    <option>vrijdag</option>
+    <option>zaterdag</option>
+    <option>zondag</option>
+    </select></td>
+<td><input name="TimeGeneral" type="time" class="form-control" required></td>
+<td><select name="FeedingRecipeID"  type="text" class="form-control" required>';
+foreach($recipe as $recipeRow) {
+    echo '
+    <option>'.$recipeRow['FeedingRecipeID'].'</option>';
+}
+echo '
+    </select></td>
+    </tr>
+    <tr><td></td>
+    <td><button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button></td>
+</tr></form>
+</table>
+
     </div>
 
 
