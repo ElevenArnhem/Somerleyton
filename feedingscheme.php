@@ -35,7 +35,7 @@ $recipe = $recipestmt->fetchAll();
 
 $specificAnimals = 0;
 if(isset($_POST['SPECIFICANIMALS'])) {
-    $specificAnimals = 1;
+    $specificAnimals = $_POST['SPECIFICANIMALS'];
 }
 $animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
 $animalsstmt->bindParam(1,$headSpeciesName);
@@ -94,8 +94,11 @@ echo '
 
     </div>
     <div class="col-lg-4">
-<form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
-    <button name="SPECIFICANIMALS" type="submit" class="btn btn-default" >Alleen dieren met een specifiek voerschema</button><br><br>
+<form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
+if($specificAnimals == 0) {
+    echo '<button name = "SPECIFICANIMALS" value = "1" type = "submit" class="btn btn-default" > Alleen dieren met een specifiek voerschema </button >';
+    }
+    if($specificAnimals == 1) { echo '<button name = "SPECIFICANIMALS" value = "0" type = "submit" class="btn btn-default" > Alle dieren </button >';} echo '<br><br>
     </form>
     <table class="table table-hover"><tr>
             <th>ID</th>
