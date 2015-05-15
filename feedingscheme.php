@@ -22,6 +22,7 @@ if(isset($_POST['ADDGENERICFEEDINGSCHEMEROW'])) {
     $addGenericFeedingSchemestmt->bindParam(4,$dayGeneral);
     $addGenericFeedingSchemestmt->bindParam(5,$timeGeneral);
     $addGenericFeedingSchemestmt->execute();
+    spErrorCaching($addGenericFeedingSchemestmt);
 }
 
 if(isset($_POST['ADDSPECIFICFEEDINGSCHEME'])) {
@@ -35,6 +36,7 @@ if(isset($_POST['ADDSPECIFICFEEDINGSCHEME'])) {
     $addSpecificFeedingSchemestmt->bindParam(3,$dayGeneral);
     $addSpecificFeedingSchemestmt->bindParam(4,$timeGeneral);
     $addSpecificFeedingSchemestmt->execute();
+    spErrorCaching($addSpecificFeedingSchemestmt);
 }
 $genericFeedingSchemestmt = $dbh->prepare("EXEC proc_GetGeneriekVoerSchema ?,?");
 $genericFeedingSchemestmt->bindParam(1,$subSpeciesName);
@@ -194,6 +196,7 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
         <tr>
             <td></td>
             <td>
+                <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
                 <button name="ADDSPECIFICFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'" type="submit" class="btn btn-default" >Voeg toe</button>
             </td>
         </tr>
