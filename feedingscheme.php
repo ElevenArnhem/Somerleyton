@@ -23,6 +23,19 @@ if(isset($_POST['ADDGENERICFEEDINGSCHEMEROW'])) {
     $addGenericFeedingSchemestmt->bindParam(5,$timeGeneral);
     $addGenericFeedingSchemestmt->execute();
 }
+
+if(isset($_POST['ADDSPECIFICFEEDINGSCHEME'])) {
+    $animalID = $_POST['ADDSPECIFICFEEDINGSCHEME'];
+    $dayGeneral = $_POST['DayGeneral'];
+    $timeGeneral = $_POST['TimeGeneral'];
+    $feedingRecipeID = $_POST['FeedingRecipeID'];
+    $addSpecificFeedingSchemestmt = $dbh->prepare("EXEC proc_AddSpecifiekVoerschema ?,?,?,?");
+    $addSpecificFeedingSchemestmt->bindParam(1,$animalID);
+    $addSpecificFeedingSchemestmt->bindParam(2,$feedingRecipeID);
+    $addSpecificFeedingSchemestmt->bindParam(3,$dayGeneral);
+    $addSpecificFeedingSchemestmt->bindParam(4,$timeGeneral);
+    $addSpecificFeedingSchemestmt->execute();
+}
 $genericFeedingSchemestmt = $dbh->prepare("EXEC proc_GetGeneriekVoerSchema ?,?");
 $genericFeedingSchemestmt->bindParam(1,$subSpeciesName);
 $genericFeedingSchemestmt->bindParam(2,$headSpeciesName);
@@ -181,7 +194,7 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
         <tr>
             <td></td>
             <td>
-                <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>
+                <button name="ADDSPECIFICFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'" type="submit" class="btn btn-default" >Voeg toe</button>
             </td>
         </tr>
     </form>
