@@ -85,7 +85,10 @@ foreach($genericFeedingScheme as $genericFeedingSchemeRow) {
     echo '<tr>
 <td>'.$genericFeedingSchemeRow['DayGeneral'].'</td>
 <td>'; echo explode('.', $genericFeedingSchemeRow['TimeGeneral'])[0]; echo '</td>
-<td>'.$genericFeedingSchemeRow['FeedingRecipeID'].'</td>
+<td>'.$genericFeedingSchemeRow['FeedingRecipeID'].'
+<button type="button" class="btn btn-default" aria-label="Left Align">
+<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+</button></td>
         ';
 
     echo'</tr>';
