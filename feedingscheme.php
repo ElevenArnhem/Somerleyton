@@ -93,7 +93,7 @@ foreach($animals as $animal) {
     echo'
     <tr';
     if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME']) && $_POST['SPECIFICANIMALFEEDINGSCHEME'] == $animal['AnimalID']) {
-        echo 'class="active"';
+        echo ' class="active "';
     }
     echo'>
     <td>'.$animal['AnimalID'].'</td>
