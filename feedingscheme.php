@@ -108,7 +108,13 @@ foreach($animals as $animal) {
     echo'
     <tr>
     <td>'.$animal['AnimalID'].'</td>
-    <td>'.$animal['AnimalName'].'</td>
+    <td>
+        <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
+            <button name="SPECIFICANIMALFEEDINGSCHEME" value="'.$animal['AnimalID'].'" type="submit" class="btn btn-default">
+                '.$animal['AnimalName'].'
+            </button>
+        </form>
+    </td>
     </tr>';
 }
 echo '
