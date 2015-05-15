@@ -33,12 +33,14 @@ $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
 $recipestmt->execute();
 $recipe = $recipestmt->fetchAll();
 
-//@HeadSpeciesName			VARCHAR(50),
-//	@SubSpeciesName				VARCHAR(50),
-//	@Voerschema					BIT
-$animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,0");
+$specificAnimals = 0;
+if(isset($_POST['SPECIFICANIMALS'])) {
+    $specificAnimals = 1;
+}
+$animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
 $animalsstmt->bindParam(1,$headSpeciesName);
 $animalsstmt->bindParam(2,$subSpeciesName);
+$animalsstmt->bindParam(3,$specificAnimals);
 $animalsstmt->execute();
 $animals = $animalsstmt->fetchAll();
 
@@ -93,7 +95,7 @@ echo '
     </div>
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
-    <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Alleen dieren met een specifiek voerschema</button><br><br>
+    <button name="SPECIFICANIMALS" type="submit" class="btn btn-default" >Alleen dieren met een specifiek voerschema</button><br><br>
     </form>
     <table class="table table-hover"><tr>
             <th>ID</th>
