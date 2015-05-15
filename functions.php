@@ -158,7 +158,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
             echo '</td>
                     <td>' . $feedingSchemeRow['FeedingRecipeID'] . '
                         <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
-                            <button type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+                            <button type="submit" class="btn btn-link btn-xs" >
                                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                             </button>
                         </form>
