@@ -146,7 +146,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
             <tr>
                 <th>Dag</th>
                 <th>Tijdstip</th>
-                <th> Voedingsrecept </th>
+                <th>Recept </th>
             </tr>';
         foreach ($feedingScheme as $feedingSchemeRow) {
             //    if($_SESSION['FUNCTION'])
@@ -156,7 +156,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
                     <td>';
             echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
             echo '</td>
-                    <td>'. $feedingSchemeRow['FeedingRecipeID'].'<form action="index.php?page=feedingscheme&headspecies='. $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] .'" method="post">
+                    <td><form action="index.php?page=feedingscheme&headspecies='. $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] .'" method="post">'. $feedingSchemeRow['FeedingRecipeID'].'
                     <button type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                     </button>
