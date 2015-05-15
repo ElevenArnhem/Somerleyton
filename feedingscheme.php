@@ -73,8 +73,10 @@ echo '<h2>Voedingsschema</h1>
     <h3>Subsoort: '.$_GET['subspecies'].'</h2>
      <hr>
      <div class="row">';
+
 $submitButton = '<button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
-feedingSchedule($genericFeedingScheme, $submitButton);
+feedingSchedule($genericFeedingScheme, $submitButton, $dbh);
+
    echo '
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
@@ -106,7 +108,7 @@ echo '
 if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $submitButton = '                   <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
                     <button name="ADDSPECIFICFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'" type="submit" class="btn btn-default" >Voeg toe</button>';
-    feedingSchedule($specificFeedingScheme,$submitButton);
+    feedingSchedule($specificFeedingScheme,$submitButton, $dbh);
 
 
 }

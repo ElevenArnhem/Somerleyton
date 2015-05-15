@@ -5,7 +5,7 @@
  * Date: 1-5-2015
  * Time: 11:14
  */
-include 'conn.inc.php';
+
 function spErrorCaching($stmt) {
     $explodedStr = explode(']',$stmt->errorInfo()[2]);
     $errorMessage = end($explodedStr);
@@ -134,7 +134,7 @@ function isLocal()
     return '';
 }
 
-function feedingSchedule($feedingScheme, $submitButton) {
+function feedingSchedule($feedingScheme, $submitButton, $dbh) {
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
     $recipestmt->execute();
