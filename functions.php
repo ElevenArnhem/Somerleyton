@@ -146,7 +146,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
             <tr>
                 <th>Dag</th>
                 <th>Tijdstip</th>
-                <th> Recept </th>
+                <th> Voedingsrecept </th>
             </tr>';
         foreach ($feedingScheme as $feedingSchemeRow) {
             //    if($_SESSION['FUNCTION'])
