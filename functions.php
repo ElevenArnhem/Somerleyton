@@ -5,7 +5,7 @@
  * Date: 1-5-2015
  * Time: 11:14
  */
-
+include 'conn.inc.php';
 function spErrorCaching($stmt) {
     $explodedStr = explode(']',$stmt->errorInfo()[2]);
     $errorMessage = end($explodedStr);
@@ -132,4 +132,73 @@ function isLocal()
         return '../Somerleyton';
     }
     return '';
+}
+
+function feedingSchedule($feedingScheme, $submitButton) {
+
+    $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
+    $recipestmt->execute();
+    $recipe = $recipestmt->fetchAll();
+    echo '
+    <div class="col-lg-4">
+        <h4>Specifiek voedingsschema</h4>
+        <table class="table table-hover">
+            <tr>
+                <th>Dag</th>
+                <th>Tijdstip</th>
+                <th>Recept</th>
+            </tr>';
+        foreach ($feedingScheme as $feedingSchemeRow) {
+            //    if($_SESSION['FUNCTION'])
+            echo '
+                <tr>
+                    <td>' . $feedingSchemeRow['DayGeneral'] . '</td>
+                    <td>';
+            echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
+            echo '</td>
+                    <td>' . $feedingSchemeRow['FeedingRecipeID'] . '
+                    <button type="button" class="btn btn-link btn-xs" aria-label="Left Align">
+<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+</button></td>
+            ';
+
+            echo '</tr>';
+        };
+        echo '
+            <tr>
+                <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+                    <td>
+                        <select name="DayGeneral" type="text" class="form-control" required>
+                            <option>maandag</option>
+                            <option>dinsdag</option>
+                            <option>woensdag</option>
+                            <option>donderdag</option>
+                            <option>vrijdag</option>
+                            <option>zaterdag</option>
+                            <option>zondag</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input name="TimeGeneral" type="time" class="form-control" required>
+                    </td>
+                    <td>
+                        <select name="FeedingRecipeID"  type="text" class="form-control" required>';
+        foreach ($recipe as $recipeRow) {
+            echo '
+                            <option>' . $recipeRow['FeedingRecipeID'] . '</option>';
+        }
+        echo '
+                        </select>
+                    </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>'.$submitButton.'
+
+                </td>
+            </tr>
+        </form>
+    </table>
+
+    </div>';
 }

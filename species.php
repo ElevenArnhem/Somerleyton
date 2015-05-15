@@ -69,7 +69,7 @@ function get_paging_info($tot_rows,$rowsAtPage,$curr_page)
     <a href="?page=addHeadSpecies"> <button type="button" class="btn btn-default" >Hoofdsoort toevoegen</button></a>
 </div>
 
-
+<hr>
 <h1>Subsoorten beheren</h1>
 <br>
 <table class="table table-hover">
