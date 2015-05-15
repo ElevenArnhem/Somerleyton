@@ -134,7 +134,7 @@ function isLocal()
     return '';
 }
 
-function feedingSchedule($feedingScheme, $submitButton, $dbh) {
+function feedingSchedule($feedingScheme, $addButton, $dbh) {
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
     $recipestmt->execute();
@@ -157,9 +157,12 @@ function feedingSchedule($feedingScheme, $submitButton, $dbh) {
             echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
             echo '</td>
                     <td>' . $feedingSchemeRow['FeedingRecipeID'] . '
-                    <button type="button" class="btn btn-link btn-xs" aria-label="Left Align">
-<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-</button></td>
+                        <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+                            <button type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </td>
             ';
 
             echo '</tr>';
@@ -193,7 +196,7 @@ function feedingSchedule($feedingScheme, $submitButton, $dbh) {
             </tr>
             <tr>
                 <td></td>
-                <td>'.$submitButton.'
+                <td>'.$addButton.'
 
                 </td>
             </tr>
