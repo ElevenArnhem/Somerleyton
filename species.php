@@ -24,7 +24,7 @@ $count = count($subSpecies);
 
 $allHeadSpecies = $dbh->prepare("EXEC proc_getHeadSpecies");
 $allHeadSpecies->execute();
-$headSpecies = $allHeadSpecies->fetchAll();
+$species = $allHeadSpecies->fetchAll();
 
 $paging_info = get_paging_info($count,$rowsAtPage,$page);
 
@@ -51,7 +51,7 @@ function get_paging_info($tot_rows,$rowsAtPage,$curr_page)
         <th></th>
     </tr>
     <?php
-    foreach($headSpecies as $fetchHeadSpecies) {
+    foreach($species as $fetchHeadSpecies) {
         echo '<tr>
             <td>
                 <label> '. $fetchHeadSpecies["LatinName"] . '</label>

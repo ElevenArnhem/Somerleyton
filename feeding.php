@@ -16,10 +16,8 @@ if(isset($_POST["SEARCHSTRINGHEADSPECIES"])) {
     $headSpeciesstmt = $dbh->prepare("EXEC proc_SearchHeadSpecies ''");
     $headSpeciesstmt->execute();
     $headSpecies = $headSpeciesstmt->fetchAll();
-
-
-
 }
+
 if(isset($_POST["SEARCHSTRINGSUBSPECIES"])){
     $searchStringHeadSpecies = '';
     if(isset($_POST["SEARCHSTRINGHEADSPECIES"])) {
@@ -39,7 +37,7 @@ if(isset($_POST["SEARCHSTRINGSUBSPECIES"])){
 
 
 echo '
-
+<a class="btn btn-primary" href="index.php?page=feedingHistory">Voedings geschiedenis</a>
 <hr>
 <div class="row">
     <div class="col-lg-6">

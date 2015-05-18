@@ -134,14 +134,14 @@ function isLocal()
     return '';
 }
 
-function feedingSchedule($feedingScheme, $addButton, $dbh) {
+function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton) {
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
     $recipestmt->execute();
     $recipe = $recipestmt->fetchAll();
     echo '
     <div class="col-lg-4">
-        <h4>Specifiek voedingsschema</h4>
+        <h4>Voedingsschema</h4>
         <table class="table table-hover">
             <tr>
                 <th>Dag</th>
@@ -156,15 +156,21 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
                     <td>';
             echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
             echo '</td>
-                    <td><form action="index.php?page=feedingscheme&headspecies='. $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] .'" method="post">'. $feedingSchemeRow['FeedingRecipeID'].'
-                    <button type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+                    <form action="index.php?page=feedingscheme&headspecies='. $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] .'" method="post">
+                    <td>'. $feedingSchemeRow['FeedingRecipeID']; if($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+                echo '
+
+                <input type="hidden" name="FEEDINGRECIPEID" value="'. $feedingSchemeRow['FeedingRecipeID'].'">
+                <input type="hidden" name="DAYGENERAL" value="'. $feedingSchemeRow['DayGeneral'].'">
+                <input type="hidden" name="TIMEGENERAL" value="'. explode('.', $feedingSchemeRow['TimeGeneral'])[0].'">'. $deleteButton .'
                     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                     </button>
-                    </form></td>';
+                    </form>'; } echo '</td>';
 
             echo '</tr>';
         };
-        echo '
+        if($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+            echo '
             <tr>
                 <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
                     <td>
@@ -183,21 +189,23 @@ function feedingSchedule($feedingScheme, $addButton, $dbh) {
                     </td>
                     <td>
                         <select name="FeedingRecipeID"  type="text" class="form-control" required>';
-        foreach ($recipe as $recipeRow) {
-            echo '
+            foreach ($recipe as $recipeRow) {
+                echo '
                             <option>' . $recipeRow['FeedingRecipeID'] . '</option>';
-        }
-        echo '
+            }
+            echo '
                         </select>
                     </td>
             </tr>
             <tr>
                 <td></td>
-                <td>'.$addButton.'
+                <td>' . $addButton . '
 
                 </td>
             </tr>
-        </form>
+        </form>';
+        }
+    echo '
     </table>
 
     </div>';

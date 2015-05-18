@@ -10,17 +10,52 @@
 
 $headSpeciesName = $_GET['headspecies'];
 $subSpeciesName = $_GET['subspecies'];
+$staffID = $_SESSION['STAFFID'];
 
+//DeleteGeneriekVoerSchema (StaffID, HeadSpeciesName, SubspeciesName, FeedingRecipeID, DayGeneral, TimeGeneral)
+if(isset($_POST['DELETEGENERIC'])) {
+    $feedingRecipeID = $_POST['FEEDINGRECIPEID'];
+    $dayGeneral = $_POST['DAYGENERAL'];
+    $timeGeneral = $_POST['TIMEGENERAL'];
+//    echo $staffID, $headSpeciesName, $subSpeciesName, $feedingRecipeID, $dayGeneral, $timeGeneral;
+    $deleteGenericstmt = $dbh->prepare("proc_DeleteGeneriekVoerSchema ?,?,?,?,?,?");
+    $deleteGenericstmt->bindParam(1, $staffID);
+    $deleteGenericstmt->bindParam(2, $headSpeciesName);
+    $deleteGenericstmt->bindParam(3, $subSpeciesName);
+    $deleteGenericstmt->bindParam(4, $feedingRecipeID);
+    $deleteGenericstmt->bindParam(5, $dayGeneral);
+    $deleteGenericstmt->bindParam(6, $timeGeneral);
+    $deleteGenericstmt->execute();
+    spErrorCaching($deleteGenericstmt);
+    //if(isset())
+}
+if(isset($_POST['DELETESPECIFIC'])) {
+    $feedingRecipeID = $_POST['FEEDINGRECIPEID'];
+    $dayGeneral = $_POST['DAYGENERAL'];
+    $timeGeneral = $_POST['TIMEGENERAL'];
+    $animalID = $_POST['SPECIFICANIMALS'];
+//    echo $staffID, $animalID, $feedingRecipeID, $dayGeneral, $timeGeneral;
+    $deleteSpecificstmt = $dbh->prepare("proc_DeleteSpecifiekVoerSchema ?,?,?,?,?");
+    $deleteSpecificstmt->bindParam(1, $staffID);
+    $deleteSpecificstmt->bindParam(2, $animalID);
+    $deleteSpecificstmt->bindParam(3, $feedingRecipeID);
+    $deleteSpecificstmt->bindParam(4, $dayGeneral);
+    $deleteSpecificstmt->bindParam(5, $timeGeneral);
+    $deleteSpecificstmt->execute();
+    spErrorCaching($deleteSpecificstmt);
+    //if(isset())
+}
 if(isset($_POST['ADDGENERICFEEDINGSCHEMEROW'])) {
     $dayGeneral = $_POST['DayGeneral'];
     $timeGeneral = $_POST['TimeGeneral'];
     $feedingRecipeID = $_POST['FeedingRecipeID'];
-    $addGenericFeedingSchemestmt = $dbh->prepare("EXEC proc_AddGeneriekVoerschema ?,?,?,?,?");
+    $addGenericFeedingSchemestmt = $dbh->prepare("proc_AddGeneriekVoerschema ?,?,?,?,?,?");
     $addGenericFeedingSchemestmt->bindParam(1,$headSpeciesName);
     $addGenericFeedingSchemestmt->bindParam(2,$subSpeciesName);
     $addGenericFeedingSchemestmt->bindParam(3,$feedingRecipeID);
     $addGenericFeedingSchemestmt->bindParam(4,$dayGeneral);
     $addGenericFeedingSchemestmt->bindParam(5,$timeGeneral);
+    $addGenericFeedingSchemestmt->bindParam(6,$staffID);
     $addGenericFeedingSchemestmt->execute();
     spErrorCaching($addGenericFeedingSchemestmt);
 }
@@ -30,17 +65,19 @@ if(isset($_POST['ADDSPECIFICFEEDINGSCHEME'])) {
     $dayGeneral = $_POST['DayGeneral'];
     $timeGeneral = $_POST['TimeGeneral'];
     $feedingRecipeID = $_POST['FeedingRecipeID'];
-    $addSpecificFeedingSchemestmt = $dbh->prepare("EXEC proc_AddSpecifiekVoerSchema ?,?,?,?");
+    $addSpecificFeedingSchemestmt = $dbh->prepare("proc_AddSpecifiekVoerSchema ?,?,?,?,?");
     $addSpecificFeedingSchemestmt->bindParam(1,$animalID);
     $addSpecificFeedingSchemestmt->bindParam(2,$feedingRecipeID);
     $addSpecificFeedingSchemestmt->bindParam(3,$dayGeneral);
     $addSpecificFeedingSchemestmt->bindParam(4,$timeGeneral);
+    $addSpecificFeedingSchemestmt->bindParam(5,$staffID);
     $addSpecificFeedingSchemestmt->execute();
     spErrorCaching($addSpecificFeedingSchemestmt);
 }
-$genericFeedingSchemestmt = $dbh->prepare("EXEC proc_GetGeneriekVoerSchema ?,?");
+$genericFeedingSchemestmt = $dbh->prepare("EXEC proc_GetGeneriekVoerSchema ?,?,?");
 $genericFeedingSchemestmt->bindParam(1,$subSpeciesName);
 $genericFeedingSchemestmt->bindParam(2,$headSpeciesName);
+$genericFeedingSchemestmt->bindParam(3,$staffID);
 $genericFeedingSchemestmt->execute();
 $genericFeedingScheme = $genericFeedingSchemestmt->fetchAll();
 
@@ -61,8 +98,9 @@ $animals = $animalsstmt->fetchAll();
 
 if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $specificAnimalID = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
-    $specificFeedingSchemestmt = $dbh->prepare("proc_GetSpecifiekVoerSchema ?");
+    $specificFeedingSchemestmt = $dbh->prepare("proc_GetSpecifiekVoerSchema ?,?");
     $specificFeedingSchemestmt->bindParam(1, $specificAnimalID);
+    $specificFeedingSchemestmt->bindParam(2, $staffID);
     $specificFeedingSchemestmt->execute();
     $specificFeedingScheme = $specificFeedingSchemestmt->fetchAll();
 }
@@ -76,7 +114,9 @@ echo '<h2>Voedingsschema</h1>
 
 $addButton = '<input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
 <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
-feedingSchedule($genericFeedingScheme, $addButton, $dbh);
+$deleteButton = ' <button name="DELETEGENERIC" value="1" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+';
+feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton);
 
    echo '
     <div class="col-lg-4">
@@ -88,7 +128,7 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
 if($specificAnimals == 0) {
     echo '<button name = "SPECIFICANIMALS" value = "1" type = "submit" class="btn btn-default" > Alleen dieren met een specifiek voerschema </button >';
     }
-    if($specificAnimals == 1) { echo '<button name = "SPECIFICANIMALS" value = "0" type = "submit" class="btn btn-default" > Alle dieren </button >';} echo '<br><br>
+    if($specificAnimals > 0) { echo '<button name = "SPECIFICANIMALS" value = "0" type = "submit" class="btn btn-default" > Alle dieren </button >';} echo '<br><br>
     </form>
     <table class="table table-hover"><tr>
             <th>ID</th>
@@ -119,7 +159,12 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $addButton = ' <input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
     <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
                     <button name="ADDSPECIFICFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'" type="submit" class="btn btn-default" >Voeg toe</button>';
-    feedingSchedule($specificFeedingScheme,$addButton, $dbh);
+
+$deleteButton = ' <input type="hidden" name="SPECIFICANIMALS" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
+<input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
+<button name="DELETESPECIFIC"  type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+';
+    feedingSchedule($specificFeedingScheme,$addButton, $dbh, $deleteButton);
 
 
 }
