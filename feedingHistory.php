@@ -13,8 +13,9 @@ $speciesstmt->execute();
 $species = $speciesstmt->fetchAll();
 
 if(isset($_POST['SEARCHSTRINGSPECIES'])){
-    $startSearchDate = $_POST['']
-    $endSearchDate
+    if startdate
+    $startSearchDate = $_POST['STARTDATE'];
+    $endSearchDate = $_POST['ENDDATE'];
     $searchStringSubspecies = $_POST["SEARCHSTRINGSPECIES"];
     $speciesstmt = $dbh->prepare("EXEC proc_SearchFeedingHistoryGeneriek ?,?,?");
     $speciesstmt->bindParam(1,$searchStringSubspecies);

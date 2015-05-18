@@ -134,7 +134,7 @@ function isLocal()
     return '';
 }
 
-function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton) {
+function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals) {
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
     $recipestmt->execute();
@@ -152,7 +152,12 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton) {
             //    if($_SESSION['FUNCTION'])
             echo '
                 <tr>
-                    <td>' . $feedingSchemeRow['DayGeneral'] . '</td>
+                    <form action="index.php?page=feedingRecipe" method="post"> <td>
+                    <input type="hidden" name="latinName" value="'. $_GET['headspecies'] . '">
+                    <input type="hidden" name="subSpecies" value="'. $_GET['subspecies'] . '">';
+            if($specificAnimals > 0) { echo ' <input type="hidden" name="animalID" value="'. $specificAnimals . '">';}
+
+                   echo '<button type="submit" class="btn btn-link">'.$feedingSchemeRow['DayGeneral'] . '</button></td></form>
                     <td>';
             echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
             echo '</td>

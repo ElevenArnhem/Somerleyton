@@ -116,7 +116,7 @@ $addButton = '<input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnim
 <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
 $deleteButton = ' <button name="DELETEGENERIC" value="1" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
 ';
-feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton);
+feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
 
    echo '
     <div class="col-lg-4">
@@ -164,7 +164,7 @@ $deleteButton = ' <input type="hidden" name="SPECIFICANIMALS" value="'.$_POST['S
 <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
 <button name="DELETESPECIFIC"  type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
 ';
-    feedingSchedule($specificFeedingScheme,$addButton, $dbh, $deleteButton);
+    feedingSchedule($specificFeedingScheme,$addButton, $dbh, $deleteButton, $specificAnimals);
 
 
 }
