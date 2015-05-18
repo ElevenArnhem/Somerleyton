@@ -33,7 +33,7 @@
                         </form>
                     </td>
                     <td>
-                        <form action="?page=species" method="POST">
+                        <form action="?page=changeHeadSpecies" method="POST">
                             <button type="submit" class="btn btn-default" name="headSpecies" value="<?php echo $headSpecies["LatinName"] ?>">Aanpassen</button>
                         </form>
                     </td>
