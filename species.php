@@ -33,19 +33,34 @@
                         </form>
                     </td>
                     <td>
-                        <form action="?page=changeHeadSpecies" method="POST">
-                            <button type="submit" class="btn btn-default" name="headSpecies" value="<?php echo $headSpecies["LatinName"] ?>">Aanpassen</button>
-                        </form>
+                        <?php
+                            if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
+                                ?>
+                                <form action="?page=changeHeadSpecies" method="POST">
+                                    <button type="submit" class="btn btn-default" name="headSpecies"
+                                            value="<?php echo $headSpecies["LatinName"] ?>">Aanpassen
+                                    </button>
+                                </form>
+                            <?php
+                            }
+                        ?>
                     </td>
                 </tr>
             <?php
             }
             ?>
         </table>
-
-        <div class="btn-group" role="group">
-            <a href="?page=addHeadSpecies"> <button type="button" class="btn btn-default" >Hoofdsoort toevoegen</button></a>
-        </div>
+    <?php
+        if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
+            ?>
+            <div class="btn-group" role="group">
+                <a href="?page=addHeadSpecies">
+                    <button type="button" class="btn btn-default">Hoofdsoort toevoegen</button>
+                </a>
+            </div>
+        <?php
+        }
+    ?>
     </div>
     <div class='col-lg-4'>
     <?php
@@ -64,12 +79,17 @@
                                 <td>
                                     <?php echo $subSpecies["SubSpeciesName"] ?>
                                 </td>
-    
                                 <td>
+                                    <?php
+                                    if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
+                                    ?>
                                     <form action="index.php?page=changeSubSpecies" method="POST">
                                         <input type="hidden" name="headSpecies" value="<?php echo $selectedHeadSpecies ?>"/>
                                         <button type="submit" class="btn btn-default" name="subSpecies" value="<?php echo $subSpecies["SubSpeciesName"] ?>">Aanpassen</button>
                                     </form>
+                                    <?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php
@@ -78,10 +98,16 @@
             </table>
 
             <div class="btn-group" role="group">
+                <?php
+                if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
+                ?>
                 <form action="?page=addSubSpecies" method="POST">
                     <input type="hidden" name="LATINNAME" value="<?php echo $selectedHeadSpecies ?>"/>
                     <button type="submit" class="btn btn-default">Subsoort toevoegen</button>
                 </form>
+                <?php
+                }
+                ?>
             </div>
         <?php
         }
