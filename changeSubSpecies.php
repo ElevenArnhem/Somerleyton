@@ -5,8 +5,7 @@ if(isset($_POST["submit"])) {
     $headSpeciesName = $_POST['headSpecies'];
     $subSpeciesName = $_POST["subSpecies"];
 	$description =  $_POST["description"];
-
-    $imageName = null;
+    $imageName = $_POST["IMAGE"];
 
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
         $imageName = $subSpeciesName . $headSpeciesName;
@@ -56,6 +55,7 @@ $subSpecies = $subSpeciesProc->fetch();
     <div class="col-lg-6">
     <div class="form-group">
     <br><br>
+        <input type="hidden" name="IMAGE" value="<?php echo $subSpecies["Image"] ?>">
        <?php
         if(isset($subSpecies["Image"])) {
         echo '
