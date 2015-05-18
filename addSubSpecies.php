@@ -1,7 +1,6 @@
 <?php
-$headSpeciesProc = $dbh->prepare('EXEC proc_getHeadSpecies');
-$headSpeciesProc->execute();
-$headSpecies = $headSpeciesProc->fetchAll();
+$headSpecies = $_POST["LATINNAME"];
+
 
 if(isset($_POST["submit"])) {
 
@@ -32,13 +31,7 @@ if(isset($_POST["submit"])) {
 <form action="?page=addSubSpecies" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Hoofdsoort</label>
-            <select name="LATINNAME" id="selectbox" class="form-control" type="text" placeholder="Hoofdsoort" required>
-            <?php
-                foreach ($headSpecies as $fetchHeadSpecies) {
-                    echo '<option value="'.$fetchHeadSpecies["LatinName"].'">'.$fetchHeadSpecies["LatinName"].'</option>';
-                }
-            ?>
-            </select>
+            <input class="form-control textbox" name="LATINNAME" value="<?php echo $headSpecies ?>" type="text" required readonly/>
         </div>
     <div class="form-group">
         <label>Subsoort</label>
