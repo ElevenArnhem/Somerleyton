@@ -19,7 +19,15 @@
 
         spErrorCaching($addFeedingHistoryStatement);
     }
-
+    if(isset( $_POST['feedingSchemeRow'])) {
+        $strFeedingScheme = $_POST['feedingSchemeRow'];
+        $feedingScheme = unserialize(base64_decode($strFeedingScheme));
+        $receptID = $feedingScheme['FeedingRecipeID'];
+        $receptDetailsStatement = $dbh -> prepare("EXEC proc_GetVoerRecept ?");
+        $receptDetailsStatement -> bindParam(1, $receptID);
+        $receptDetailsStatement -> execute();
+        $receptDetails = $receptDetailsStatement -> fetchAll();
+    }
     if(isset($_POST["latinName"]) && isset($_POST["subSpecies"]) && isset($_POST['feedingSchemeRow'])) {
 
         $headSpecies = $_POST["latinName"];
@@ -28,24 +36,28 @@
         $feedingScheme = unserialize(base64_decode($strFeedingScheme));
         $receptID = $feedingScheme['FeedingRecipeID'];
 
-        $animalName = "-";
-        $animalID = null;
-
-        if(isset($_POST['animalID'])){
-            $animalID = $_POST['animalID'];
-
-            $animalDetailsStatement = $dbh -> prepare("proc_getAnimal ?");
-            $animalDetailsStatement -> bindParam(1, $animalID);
-            $animalDetailsStatement->execute();
-            $animal = $animalDetailsStatement->fetch();
-            $animalName = $animal['AnimalName'];
-        }
-
         $receptDetailsStatement = $dbh -> prepare("EXEC proc_GetVoerRecept ?");
         $receptDetailsStatement -> bindParam(1, $receptID);
         $receptDetailsStatement -> execute();
         $receptDetails = $receptDetailsStatement -> fetchAll();
     }
+
+    $animalName = "-";
+    $animalID = null;
+
+    if(isset($_POST['animalID'])){
+        $animalID = $_POST['animalID'];
+
+        $animalDetailsStatement = $dbh -> prepare("proc_getAnimal ?");
+        $animalDetailsStatement -> bindParam(1, $animalID);
+        $animalDetailsStatement->execute();
+        $animal = $animalDetailsStatement->fetch();
+        $animalName = $animal['AnimalName'];
+        $headSpecies = $animal["LatinName"];
+        $subSpecies = $animal["SubSpeciesName"];
+    }
+
+
 ?>
 <div>
     <h1>Voedingsrecept weergeven</h1>

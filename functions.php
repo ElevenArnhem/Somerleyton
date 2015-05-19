@@ -149,33 +149,41 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 <th>Recept </th>
             </tr>';
         foreach ($feedingScheme as $feedingSchemeRow) {
-            //    if($_SESSION['FUNCTION'])
-            echo '
-                <tr>
-                    <form action="index.php?page=feedingRecipe" method="post"> <td>
-                    <input type="hidden" name="feedingSchemeRow" value="'. base64_encode(serialize($feedingSchemeRow)).'">
-                    <input type="hidden" name="latinName" value="'. $_GET['headspecies'] . '">
-                    <input type="hidden" name="subSpecies" value="'. $_GET['subspecies'] . '">';
-            if($specificAnimals > 0) { echo ' <input type="hidden" name="animalID" value="'. $specificAnimals . '">';}
 
-                   echo '<button type="submit" class="btn btn-link">'.$feedingSchemeRow['DayGeneral'] . '</button></td></form>
-                    <td>';
-            echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
-            echo '</td>
-                    <form action="index.php?page=feedingscheme&headspecies='. $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] .'" method="post">
-                    <td>'. $feedingSchemeRow['FeedingRecipeID']; if($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+                //    if($_SESSION['FUNCTION'])
                 echo '
+                    <tr>
+                        <form action="index.php?page=feedingRecipe" method="post"> <td>
+                        <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
+                        <input type="hidden" name="latinName" value="' . $_GET['headspecies'] . '">
+                        <input type="hidden" name="subSpecies" value="' . $_GET['subspecies'] . '">';
+                if ($specificAnimals > 0) {
+                    echo ' <input type="hidden" name="animalID" value="' . $specificAnimals . '">';
+                }
 
-                <input type="hidden" name="FEEDINGRECIPEID" value="'. $feedingSchemeRow['FeedingRecipeID'].'">
-                <input type="hidden" name="DAYGENERAL" value="'. $feedingSchemeRow['DayGeneral'].'">
-                <input type="hidden" name="TIMEGENERAL" value="'. explode('.', $feedingSchemeRow['TimeGeneral'])[0].'">'. $deleteButton .'
-                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                    </button>
-                    </form>'; } echo '</td>';
+                echo '<button type="submit" class="btn btn-link">' . $feedingSchemeRow['DayGeneral'] . '</button></td></form>
+                        <td>';
+                echo explode('.', $feedingSchemeRow['TimeGeneral'])[0];
+                echo '</td>
+                        <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+                        <td>' . $feedingSchemeRow['FeedingRecipeID'];
+                if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+                    echo '
 
-            echo '</tr>';
+                    <input type="hidden" name="FEEDINGRECIPEID" value="' . $feedingSchemeRow['FeedingRecipeID'] . '">
+                    <input type="hidden" name="DAYGENERAL" value="' . $feedingSchemeRow['DayGeneral'] . '">
+                    <input type="hidden" name="TIMEGENERAL" value="' . explode('.', $feedingSchemeRow['TimeGeneral'])[0] . '">' . $deleteButton . '
+                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                        </button>
+                        </form>';
+                }
+                echo '</td>';
+
+                echo '</tr>';
+
         };
-        if($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+    if(isset($feedingSchemeRow)) {
+        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
             echo '
             <tr>
                 <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
@@ -211,6 +219,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             </tr>
         </form>';
         }
+    }
     echo '
     </table>
 
