@@ -5,7 +5,7 @@
         $headSpecies = $_POST["latinName"];
         $subSpecies = $_POST["subSpecies"];
 
-        $animalID = null;
+        $animalID = -1;
         if(isset($_POST['animalID']))
             $animalID = $_POST['animalID'];
 
