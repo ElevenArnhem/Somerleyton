@@ -47,87 +47,120 @@
         $receptDetails = $receptDetailsStatement -> fetchAll();
     }
 ?>
-<div>
-    <h1>Voedingsrecept weergeven</h1>
-    <table  class="table table-hover">
-        <tr>
-            <td>
-                Hoofdsoort
-            </td>
-            <td>
-                <?php echo $headSpecies ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Subsoort
-            </td>
-            <td>
-                <?php echo $subSpecies ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Dier
-            </td>
-            <td>
-                <?php echo $animalName ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Recept
-            </td>
-            <td>
-                <?php echo $receptID ?>
-            </td>
-        </tr>
-    </table>
-</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div>
+            <h1>Voedingsrecept weergeven</h1>
+            <table  class="table table-hover">
+                <tr>
+                    <td>
+                        Hoofdsoort
+                    </td>
+                    <td>
+                        <?php echo $headSpecies ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Subsoort
+                    </td>
+                    <td>
+                        <?php echo $subSpecies ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Dier
+                    </td>
+                    <td>
+                        <?php echo $animalName ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Recept
+                    </td>
+                    <td>
+                        <?php echo $receptID ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Dag
+                    </td>
+                    <td>
+                        <?php echo ucfirst($feedingScheme['DayGeneral']) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tijd
+                    </td>
+                    <td>
+                        <?php echo explode(".", $feedingScheme['TimeGeneral'])[0] ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-<div>
-    <?php echo ucfirst($feedingScheme['DayGeneral']) . " " . explode(".", $feedingScheme['TimeGeneral'])[0] ?>
-    <form action="index.php?page=feedingRecipe" method="post">
-        <input type="hidden" name="receptID" value="<?php echo $receptID ?>">
-        <input type="hidden" name="latinName" value="<?php echo $headSpecies ?>">
-        <input type="hidden" name="subSpecies" value="<?php echo $subSpecies ?>">
+        <div>
+            <form action="index.php?page=feedingRecipe" method="post">
+                <input type="hidden" name="receptID" value="<?php echo $receptID ?>">
+                <input type="hidden" name="latinName" value="<?php echo $headSpecies ?>">
+                <input type="hidden" name="subSpecies" value="<?php echo $subSpecies ?>">
 
-        <?php if($animalID != null) { ?>
-            <input type="hidden" name="animalID" value="<?php echo $animalID ?>">
-        <?php
-        }
-        ?>
+                <?php if($animalID != null) { ?>
+                    <input type="hidden" name="animalID" value="<?php echo $animalID ?>">
+                <?php
+                }
+                ?>
 
-        <input type="hidden" name="feedingSchemeRow" value="<?php echo $strFeedingScheme ?>">
+                <input type="hidden" name="feedingSchemeRow" value="<?php echo $strFeedingScheme ?>">
+                <button type="submit" name="submit" class="btn btn-default">Voeren</button>
+            </form>
+        </div>
+        <hr/>
+        <div>
+            <h3>Recept</h3>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        Item
+                    </th>
+                    <th>
+                        Hoeveelheid
+                    </th>
+                </tr>
+                <?php
 
-        <button type="submit" name="submit" class="btn btn-default">Voeren</button>
-    </form>
-</div>
+                foreach($receptDetails as $detail) {
+                ?>
+                <tr>
+                    <td>
+                       <?php echo $detail["ItemName"] ?>
+                    </td>
+                    <td>
+                        <?php echo $detail["Amount"] . ' '. $detail["Unit"] ?>
+                    </td>
+                </tr>
+                <?php
+                }
+                ?>
+            </table>
 
-<div>
-    <table class="table table-hover">
-        <tr>
-            <th>
-                Item
-            </th>
-            <th>
-                Hoeveelheid
-            </th>
-        </tr>
-        <?php
+            <!--<form action="index.php?page=editFeedingRecipe" method="post">
+                <input type="hidden" name="latinName" value="<?php //echo $headSpecies ?>">
+                <input type="hidden" name="subSpecies" value="<?php //echo $subSpecies ?>">
 
-        foreach($receptDetails as $detail) {
-        ?>
-        <tr>
-            <td>
-               <?php echo $detail["ItemName"] ?>
-            </td>
-            <td>
-                <?php echo $detail["Amount"] . ' '. $detail["Unit"] ?>
-            </td>
-        </tr>
-        <?php
-        }
-        ?>
-    </table>
+                <?php// if($animalID != null) { ?>
+                    <input type="hidden" name="animalID" value="<?php //echo $animalID ?>">
+                <?php
+                //}
+                ?>
+
+                <input type="hidden" name="feedingSchemeRow" value="<?php //echo $strFeedingScheme ?>">
+                <button type="submit" name="submit" class="btn btn-default">Aanpassen</button>
+            </form>-->
+        </div>
+    </div>
 </div>
