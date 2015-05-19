@@ -153,7 +153,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             echo '
                 <tr>
                     <form action="index.php?page=feedingRecipe" method="post"> <td>
-                    <input type="hidden" name="recipeID" value="'. $feedingSchemeRow['FeedingRecipeID'].'">
+                    <input type="hidden" name="feedingSchemeRow" value="'. base64_encode(serialize($feedingSchemeRow)).'">
                     <input type="hidden" name="latinName" value="'. $_GET['headspecies'] . '">
                     <input type="hidden" name="subSpecies" value="'. $_GET['subspecies'] . '">';
             if($specificAnimals > 0) { echo ' <input type="hidden" name="animalID" value="'. $specificAnimals . '">';}
