@@ -34,7 +34,19 @@ echo '
 
   </div><!-- /.col-lg-6 -->
 <br /><br />
+<div class="radio">';
+if(isset($_POST['ALIVEANIMAL']) && $_POST['ALIVEANIMAL'] == 0) {
+    echo '  <label>
+    <input  type="radio" name="ALIVEANIMAL" id="optionsRadios1" value="1" >
+    Levende dieren
+</label>
+</div>
 <div class="radio">
+  <label>
+    <input type="radio" name="ALIVEANIMAL" id="0" value="0" checked>
+   Overleden dieren
+</label>';
+} else { echo '
   <label>
     <input  type="radio" name="ALIVEANIMAL" id="optionsRadios1" value="1" checked>
     Levende dieren
@@ -44,7 +56,8 @@ echo '
   <label>
     <input type="radio" name="ALIVEANIMAL" id="0" value="0">
    Overleden dieren
-</label>
+</label>';
+} echo '
 </div>
   <br><br>
 </form>';

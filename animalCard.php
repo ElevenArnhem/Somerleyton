@@ -26,17 +26,19 @@ echo '<h1>'.$animal['AnimalName'].'</h1>
            <dt>Omgeving </dt><dd>'.$animal['EnvironmentName'].'</dd><br>
            <dt>Gebied </dt><dd>'.$animal['AreaName'].'</dd><br>';
             if($_SESSION['FUNCTION'] == 'HeadKeeper' || $_SESSION['FUNCTION'] == 'Keeper' ||$_SESSION['FUNCTION'] == 'Vet' ) {
+               if(!isset($_POST['PRINTVERSION'])) {
            echo'<dt>Verblijf </dt><dd>'.$animal['EnclosureID'].'</dd><br>
            <dt>Voedingsschema </dt><dd>nnb</dd><br>
-           <dt>Medische gegevens </dt><dd>nnb</dd><br>'; } echo'<br>
+           <dt>Medische gegevens </dt><dd>nnb</dd><br>'; } }echo'<br>
            <dt>Beschrijving </dt></dl> <br> '.$animal['Description'].'<br><br>';
-        if($_SESSION['FUNCTION'] == 'HeadKeeper') {
-        echo '<a href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> <button type="button" class="btn btn-default" >Aanpassen</button></a>';
+        if($_SESSION['FUNCTION'] == 'HeadKeeper' && !isset($_POST['PRINTVERSION'])) {
+        echo '<form action="index.php?page=animalCard&animalID='.$animalID.'" method="post"><div class="btn-group" role="group" ><a class="btn btn-default" role="button" href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> Aanpassen </a>
+        <button name="PRINTVERSION" type="submit" class="btn btn-default" >Print versie</button></div></form><br><br><br> ';
         }
        echo'</div>
    <div class="col-lg-6">
    <br><br>';
-if(isset($animal['Image']) && !empty($animal['Image'])) {
+if(isset($animal['Image']) && !empty($animal['Image']) && $animal['Image'] != null) {
     echo '
 <img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
 }
