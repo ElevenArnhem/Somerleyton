@@ -58,6 +58,8 @@ $searchString = '';
 
 
 
+
+
 echo '
 
 <hr>
@@ -92,10 +94,20 @@ echo '
             <th>Datum</th>
             </tr>';
 foreach($species as $speciesRow) {
+        $feedingSchemeRow = array (
+            "FeedingRecipeID"  => $speciesRow["FeedingRecipeID"],
+            "DayGeneral" => explode(' ', $speciesRow["GeneralDateTime"])[0],
+            "TimeGeneral"   => explode(' ',(explode('.', $speciesRow["GeneralDateTime"])[0]))[1]
+        );
 //    if($_SESSION['FUNCTION'])
-    echo '<tr>   <td><form action="index.php?page=feedingHistory" method="post"><input type="hidden" name="SEARCHSTRINGSPECIES" value="">
-    <button class="btn btn-link" type="submit" name="SEARCHSTRINGHEADSPECIES" value="'.$speciesRow["SubSpeciesName"].'">'.$speciesRow["SubSpeciesName"].'</button></form>
-     </td>
+    echo '<tr>  <form action="index.php?page=feedingRecipe" method="post">
+            <input type="hidden" name="feedingSchemeRow" value="'. base64_encode(serialize($feedingSchemeRow)).'">
+            <input type="hidden" name="latinName" value="'. $speciesRow['LatinName'] . '">
+            <input type="hidden" name="subSpecies" value="'. $speciesRow['SubSpeciesName'] . '">
+            <td>
+                     <button type="submit" class="btn btn-link">'.$speciesRow["SubSpeciesName"].'</button>
+            </form>
+            </td>
      <td>'.$speciesRow['FeedingRecipeID'].'</td>
      <td>'. explode('.', $speciesRow['GeneralDateTime'])[0].'</td>
         ';
@@ -133,11 +145,20 @@ echo '
             <th>Datum</th>
 </tr>';
 foreach($animals as $animal) {
+    $feedingSchemeRow = array (
+        "FeedingRecipeID"  => $animal["FeedingRecipeID"],
+        "DayGeneral" => explode(' ', $animal["SpecificDateTime"])[0],
+        "TimeGeneral"   => explode(' ',(explode('.', $animal["SpecificDateTime"])[0]))[1]
+    );
     echo '<tr>
 <td>'.$animal["AnimalID"].'</td>
-        <td>
-            <a href="?page=feedingRecipe">'.$animal["AnimalName"].'</a>
-        </td>
+        <form action="index.php?page=feedingRecipe" method="post">
+            <input type="hidden" name="feedingSchemeRow" value="'. base64_encode(serialize($feedingSchemeRow)).'">
+            <input type="hidden" name="animalID" value="'. $animal['AnimalID'] . '">
+            <td>
+                     <button type="submit" class="btn btn-link">'.$animal["AnimalName"].'</button>
+            </form>
+            </td>
         <td>'.$animal["FeedingRecipeID"].'</td>
         <td>'.explode('.', $animal["SpecificDateTime"])[0].'</td>
 ';

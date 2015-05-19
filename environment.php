@@ -86,8 +86,15 @@ echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='i
     </tr>";
 foreach($enclosures as $enclosure) {
     echo '<tr>
-           <td>'.$enclosure["EnclosureID"].'</td> ';if($_SESSION['FUNCTION'] == 'HeadKeeper'|| $_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'<td>
-<form action="index.php?page=environment" method="post">
+           <td>
+            <form action="index.php?page=changeEnclosure" method="post">
+                <input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'" >
+                <input type="hidden" name="AREA" value="'.$selectedArea.'" >
+                <button type="submit" name="ENCLOSURE" value="'.$enclosure["EnclosureID"].'" class="btn btn-link"> '.$enclosure["EnclosureID"].'</button>
+             </form>
+            </td> ';
+    if($_SESSION['FUNCTION'] == 'HeadKeeper'|| $_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'
+<td><form action="index.php?page=environment" method="post">
 <input type="hidden" name="ENCLOSURE" value="'.$enclosure["EnclosureID"].'">
 <input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'">
 <input type="hidden" name="AREA" value="'.$selectedArea.'">

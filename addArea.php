@@ -75,8 +75,8 @@ $allEnvironments->execute();
 $environments = $allEnvironments->fetchAll();
 
 $activeSaff = 1;
-$allStaffstmt = $dbh->prepare("EXEC proc_getStaffMembers ?");
-$allStaffstmt->bindParam(1, $activeSaff);
+$allStaffstmt = $dbh->prepare("EXEC proc_getKeepers");
+//$allStaffstmt->bindParam(1, $activeSaff);
 $allStaffstmt->execute();
 $allStaff = $allStaffstmt->fetchAll();
 

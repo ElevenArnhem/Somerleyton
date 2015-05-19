@@ -109,6 +109,7 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
 echo '<h2>Voedingsschema</h1>
     <h3>Hoofdsoort: '.$_GET['headspecies'].'</h2>
     <h3>Subsoort: '.$_GET['subspecies'].'</h2>
+    <a role="button" class="btn btn-primary" href="index.php?page=createRecipe">Nieuw Recept</a>
      <hr>
      <div class="row">';
 
