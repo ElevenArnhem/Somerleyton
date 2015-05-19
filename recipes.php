@@ -37,7 +37,8 @@ echo '
     echo '
     <table class="table table-hover"><tr>
                 <th>ReceptID</th>
-                <th>Bekijk ingredienten</th>
+                <th>Ingredienten</th>
+                <th>Hoeveelheid</th>
 
     </tr>';
     $recipeID = 0;
@@ -49,27 +50,32 @@ echo '
         echo '<tr>
                 <td>' . $recipe['FeedingRecipeID'] . '</td>
                 <td>
-
     ';
         if ($recipeID == $recipe['FeedingRecipeID']) {
 
             foreach ($recipes as $recipe1) {
                 if ($recipeID == $recipe1['FeedingRecipeID']) {
-                    $popupRow = $recipe1['Amount'].' ' .$recipe1['Unit'].' ' .$recipe1['ItemName']. ', ';
-                    $spacesLength = 30 - strlen($popupRow);
-
-
+                    $popupRow = $recipe1['ItemName'];
                     echo $popupRow. '<br>';
 
                 }
             }
-
         }
 
         echo'
+        </td><td>';
+        if ($recipeID == $recipe['FeedingRecipeID']) {
 
+            foreach ($recipes as $recipe1) {
+                if ($recipeID == $recipe1['FeedingRecipeID']) {
+                    $popupRow = $recipe1['Amount'].' ' .$recipe1['Unit'];
+                    echo $popupRow. '<br>';
 
-        </td>';}
+                }
+            }
+        }
+
+echo '</td>';}
 
             echo'</tr>';
         };

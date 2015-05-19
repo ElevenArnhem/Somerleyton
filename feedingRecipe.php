@@ -6,8 +6,9 @@
         $subSpecies = $_POST["subSpecies"];
 
         $animalID = -1;
-        if(isset($_POST['animalID']))
+        if(isset($_POST['animalID'])) {
             $animalID = $_POST['animalID'];
+        }
 
         $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?");
         $addFeedingHistoryStatement -> bindParam(1, $staffID);
