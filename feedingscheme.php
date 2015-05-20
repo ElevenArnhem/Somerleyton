@@ -94,7 +94,9 @@ $specificAnimals = 0;
 if(isset($_POST['SPECIFICANIMALS'])) {
     $specificAnimals = $_POST['SPECIFICANIMALS'];
 }
-$specificAnimals = $genericFeedingScheme[0]['HeadKeeperFromSubSpecies'];
+if(isset($genericFeedingScheme[0]['HeadKeeperFromSubSpecies'])) {
+    $specificAnimals = $genericFeedingScheme[0]['HeadKeeperFromSubSpecies'];
+}
 
 $animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
 $animalsstmt->bindParam(1,$headSpeciesName);
