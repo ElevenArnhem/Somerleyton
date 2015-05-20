@@ -1,8 +1,12 @@
 <?php
 
-echo '
-        <div class="col-lg-4">
-          <h2>Dierverzorger Info</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-       </div>';
+echo '        <div class="col-lg-4">
+          <h2>Dierverzorger</h2>
+
+          <p>Hier, de voor u interessante snelkoppelingen </p>
+          <p>
+          <div class="btn-group">
+              <a class="btn btn-primary" href="index.php?page=feeding" role="button">Voeding</a>
+
+          </div></p>
+        </div>';
