@@ -6,6 +6,8 @@
  * Time: 10:31
  */
 if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
+    $areaName = $_POST['AREA'];
+    $environmentName = $_POST['ENVIRONMENT'];
     $getStaffstmt = $dbh->prepare("EXEC proc_GetStaffByArea ?,?");
     $getStaffstmt->bindParam(1, $areaName);
     $getStaffstmt->bindParam(2, $environmentName);
@@ -15,12 +17,15 @@ if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
 
     echo '
     <div class="col-lg-6">
-        <h3>Dieren</h3>
+     <h2>Medewerkers</h2>
+    <h3>Omgeving: '.$_POST['ENVIRONMENT'].'</h3>
+<h3>Gebied: '.$_POST['AREA'].'</h3><br>
+            <hr>
             <table class="table table-hover">
                 <tr>
-                    <th>Diernummer</th>
+                    <th>Medewerkernummer</th>
                     <th>Naam</th>
-                    <th>Diersoort</th>
+                    <th>Functie</th>
                 </tr>';
     foreach($keepers as $keeper) {
         echo '<tr>
