@@ -169,3 +169,9 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
 
     echo'</div>';
 }
+?>
+
+<form action="index.php?page=setAnimalToDeceased" method="post">
+    <input type="hidden" name="animalID" value="<?php echo $animalID ?>" />
+    <button type="submit" class="btn btn-lg btn-primary" name="btnDoodVerklaren">Dood verklaren</button>
+</form>
