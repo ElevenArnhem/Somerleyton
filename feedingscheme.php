@@ -96,6 +96,7 @@ $animalsstmt->bindParam(3,$specificAnimals);
 $animalsstmt->execute();
 $animals = $animalsstmt->fetchAll();
 
+
 if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $specificAnimalID = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
     $specificFeedingSchemestmt = $dbh->prepare("proc_GetSpecifiekVoerSchema ?,?");
@@ -165,7 +166,7 @@ $deleteButton = ' <input type="hidden" name="SPECIFICANIMALS" value="'.$_POST['S
 <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">
 <button name="DELETESPECIFIC"  type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
 ';
-    feedingSchedule($specificFeedingScheme,$addButton, $dbh, $deleteButton, $specificAnimals);
+    feedingSchedule($specificFeedingScheme,$addButton, $dbh, $deleteButton, $specificAnimalID);
 
 
 }

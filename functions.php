@@ -141,6 +141,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
     $recipe = $recipestmt->fetchAll();
     echo '
     <div class="col-lg-4">
+    <br>
         <h4>Voedingsschema</h4>
         <table class="table table-hover">
             <tr>
@@ -158,6 +159,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                         <input type="hidden" name="latinName" value="' . $_GET['headspecies'] . '">
                         <input type="hidden" name="subSpecies" value="' . $_GET['subspecies'] . '">';
                 if ($specificAnimals > 0) {
+
                     echo ' <input type="hidden" name="animalID" value="' . $specificAnimals . '">';
                 }
 
@@ -182,8 +184,8 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 echo '</tr>';
 
         };
-    if(isset($feedingSchemeRow)) {
-        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+    if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+//        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
             echo '
             <tr>
                 <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
@@ -219,7 +221,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             </tr>
         </form>';
         }
-    }
+//    }
     echo '
     </table>
 

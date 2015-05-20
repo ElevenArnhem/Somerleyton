@@ -93,23 +93,25 @@ echo '
             <th>Recept id</th>
             <th>Datum</th>
             </tr>';
+
 foreach($species as $speciesRow) {
-        $feedingSchemeRow = array (
-            "FeedingRecipeID"  => $speciesRow["FeedingRecipeID"],
+
+        $feedingSchemeRow = array(
+            "FeedingRecipeID" => $speciesRow["FeedingRecipeID"],
             "DayGeneral" => explode(' ', $speciesRow["GeneralDateTime"])[0],
-            "TimeGeneral"   => explode(' ',(explode('.', $speciesRow["GeneralDateTime"])[0]))[1]
+            "TimeGeneral" => explode(' ', (explode('.', $speciesRow["GeneralDateTime"])[0]))[1]
         );
 //    if($_SESSION['FUNCTION'])
-    echo '<tr>  <form action="index.php?page=feedingRecipe" method="post">
-            <input type="hidden" name="feedingSchemeRow" value="'. base64_encode(serialize($feedingSchemeRow)).'">
-            <input type="hidden" name="latinName" value="'. $speciesRow['LatinName'] . '">
-            <input type="hidden" name="subSpecies" value="'. $speciesRow['SubSpeciesName'] . '">
+        echo '<tr>  <form action="index.php?page=feedingRecipe" method="post">
+            <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
+            <input type="hidden" name="latinName" value="' . $speciesRow['LatinName'] . '">
+            <input type="hidden" name="subSpecies" value="' . $speciesRow['SubSpeciesName'] . '">
             <td>
-                     <button type="submit" class="btn btn-link">'.$speciesRow["SubSpeciesName"].'</button>
+                     <button type="submit" class="btn btn-link">' . $speciesRow["SubSpeciesName"] . '</button>
             </form>
             </td>
-     <td>'.$speciesRow['FeedingRecipeID'].'</td>
-     <td>'. explode('.', $speciesRow['GeneralDateTime'])[0].'</td>
+     <td>' . $speciesRow['FeedingRecipeID'] . '</td>
+     <td>' . explode('.', $speciesRow['GeneralDateTime'])[0] . '</td>
         ';
 
     echo'</tr>';
@@ -145,6 +147,7 @@ echo '
             <th>Datum</th>
 </tr>';
 foreach($animals as $animal) {
+
     $feedingSchemeRow = array (
         "FeedingRecipeID"  => $animal["FeedingRecipeID"],
         "DayGeneral" => explode(' ', $animal["SpecificDateTime"])[0],
