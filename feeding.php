@@ -94,7 +94,7 @@ echo '
 foreach($subspecies as $subspeciesRow) {
 //    if($_SESSION['FUNCTION'])
     echo '<tr>
-        <td><a href="?page=feedingscheme&headspecies='.$subspeciesRow["HeadSpeciesName"].'&subspecies='.$subspeciesRow["SubSpeciesName"].'">'.$subspeciesRow["SubSpeciesName"].'</a></td>
+        <td><a role="button" class="btn btn-link" href="?page=feedingscheme&headspecies='.$subspeciesRow["HeadSpeciesName"].'&subspecies='.$subspeciesRow["SubSpeciesName"].'">'.$subspeciesRow["SubSpeciesName"].'</a></td>
 ';
 
     echo'</tr>';
