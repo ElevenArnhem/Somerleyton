@@ -158,7 +158,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                         <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
                         <input type="hidden" name="latinName" value="' . $_GET['headspecies'] . '">
                         <input type="hidden" name="subSpecies" value="' . $_GET['subspecies'] . '">';
-                if ($specificAnimals > 0) {
+                if (isset($_POST['SPECIFICANIMALFEEDINGSCHEME']) && $specificAnimals > 0) {
 
                     echo ' <input type="hidden" name="animalID" value="' . $specificAnimals . '">';
                 }
@@ -184,7 +184,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 echo '</tr>';
 
         };
-    if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+    if($specificAnimals > 0 || isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
 //        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
             echo '
             <tr>

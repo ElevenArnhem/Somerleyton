@@ -81,14 +81,21 @@ $genericFeedingSchemestmt->bindParam(3,$staffID);
 $genericFeedingSchemestmt->execute();
 $genericFeedingScheme = $genericFeedingSchemestmt->fetchAll();
 
+
 $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
 $recipestmt->execute();
 $recipe = $recipestmt->fetchAll();
-
 $specificAnimals = 0;
+//i
+//    $specificAnimals = $schemes['HeadKeeperFromSubSpecies'];
+//}
+
+
 if(isset($_POST['SPECIFICANIMALS'])) {
     $specificAnimals = $_POST['SPECIFICANIMALS'];
 }
+$specificAnimals = $genericFeedingScheme[0]['HeadKeeperFromSubSpecies'];
+
 $animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
 $animalsstmt->bindParam(1,$headSpeciesName);
 $animalsstmt->bindParam(2,$subSpeciesName);
@@ -99,11 +106,13 @@ $animals = $animalsstmt->fetchAll();
 
 if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $specificAnimalID = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
+    $specificAnimals =  $_POST['SPECIFICANIMALFEEDINGSCHEME'];
     $specificFeedingSchemestmt = $dbh->prepare("proc_GetSpecifiekVoerSchema ?,?");
     $specificFeedingSchemestmt->bindParam(1, $specificAnimalID);
     $specificFeedingSchemestmt->bindParam(2, $staffID);
     $specificFeedingSchemestmt->execute();
     $specificFeedingScheme = $specificFeedingSchemestmt->fetchAll();
+
 }
 
 
@@ -118,8 +127,13 @@ $addButton = '<input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnim
 <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
 $deleteButton = ' <button name="DELETEGENERIC" value="1" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
 ';
+if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+    $specificAnimals = 0;
+}
 feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
-
+if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+    $specificAnimals = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
+}
    echo '
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
