@@ -94,9 +94,7 @@ $specificAnimals = 0;
 if(isset($_POST['SPECIFICANIMALS'])) {
     $specificAnimals = $_POST['SPECIFICANIMALS'];
 }
-if(isset($genericFeedingScheme[0]['HeadKeeperFromSubSpecies'])) {
-    $specificAnimals = $genericFeedingScheme[0]['HeadKeeperFromSubSpecies'];
-}
+
 
 $animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
 $animalsstmt->bindParam(1,$headSpeciesName);
@@ -105,7 +103,9 @@ $animalsstmt->bindParam(3,$specificAnimals);
 $animalsstmt->execute();
 $animals = $animalsstmt->fetchAll();
 
-
+if(isset($genericFeedingScheme[0]['HeadKeeperFromSubSpecies'])) {
+    $specificAnimals = $genericFeedingScheme[0]['HeadKeeperFromSubSpecies'];
+}
 if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $specificAnimalID = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
     $specificAnimals =  $_POST['SPECIFICANIMALFEEDINGSCHEME'];
@@ -133,9 +133,7 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     $specificAnimals = 0;
 }
 feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
-if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
-    $specificAnimals = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
-}
+
    echo '
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
@@ -143,15 +141,18 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
     echo   '<input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="'.$_POST['SPECIFICANIMALFEEDINGSCHEME'].'">';
 }
 
-if($specificAnimals == 0) {
+if(!isset($_POST['SPECIFICANIMALS']) || (isset($_POST['SPECIFICANIMALS']) && $_POST['SPECIFICANIMALS'] == 0)) {
     echo '<button name = "SPECIFICANIMALS" value = "1" type = "submit" class="btn btn-default" > Alleen dieren met een specifiek voerschema </button >';
     }
-    if($specificAnimals > 0) { echo '<button name = "SPECIFICANIMALS" value = "0" type = "submit" class="btn btn-default" > Alle dieren </button >';} echo '<br><br>
+    if((isset($_POST['SPECIFICANIMALS']) && $_POST['SPECIFICANIMALS'] > 0)) { echo '<button name = "SPECIFICANIMALS" value = "0" type = "submit" class="btn btn-default" > Alle dieren </button >';} echo '<br><br>
     </form>
     <table class="table table-hover"><tr>
             <th>ID</th>
             <th>Naam</th>
             </tr>';
+if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+    $specificAnimals = $_POST['SPECIFICANIMALFEEDINGSCHEME'];
+}
 foreach($animals as $animal) {
     echo'
     <tr';
