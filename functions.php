@@ -260,10 +260,12 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 }
             }
 
-            echo '</td>';}
-        echo '<td><input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
+            echo '</td>';
+            echo '<td><input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
 <input type="hidden" name="ADDGENERICFEEDINGSCHEMEROW">
 <button name="FeedingRecipeID" value="'.$recipe['FeedingRecipeID'].'" type="submit" class="btn btn-default" >Voeg toe</button></td>';
+        }
+
         echo'</tr>';
     };
     if($specificAnimals > 0 || isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
@@ -285,15 +287,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                     <td>
                         <input name="TimeGeneral" type="time" class="form-control" required>
                     </td>
-                    <td>
-                        <select name="FeedingRecipeID"  type="text" class="form-control" required>';
-        foreach ($recipe2 as $recipeRow1) {
-            echo '
-                            <option>' . $recipeRow1['FeedingRecipeID'] . '</option>';
-        }
-        echo '
-                        </select>
-                    </td>
+
             </tr>
             <tr>
                 <td></td>
