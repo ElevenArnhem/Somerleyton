@@ -134,8 +134,90 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
 }
 feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
 
+
+$searchString = '';
+if(isset($_POST['SEARCHSTRING'])) {
+    $searchString = $_POST['SEARCHSTRING'];
+}
+$getRecipesstmt = $dbh->prepare("EXEC proc_SearchRecipe ?");
+$getRecipesstmt->bindParam(1, $searchString);
+$getRecipesstmt->execute();
+$recipes = $getRecipesstmt->fetchAll();
+echo '
+
+
+  <div class="col-lg-8">
+    <form action="index.php?page=recipes" method="post">
+      <div class="col-lg-6">
+
+        <div class="input-group">
+          <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek recepten op ingredient naam">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" >Zoek</button>
+          </span>
+
+        </div><!-- /input-group -->
+
+      </div><!-- /.col-lg-6 -->
+    <br /><br />
+
+      <br><br>
+    </form>';
+echo '
+    <table class="table table-hover"><tr>
+                <th>ReceptID</th>
+                <th>Ingredienten</th>
+                <th>Hoeveelheid</th>
+
+    </tr>';
+$recipeID = 0;
+foreach($recipes as $recipe) {
+    $items = null;
+    if($recipeID != $recipe['FeedingRecipeID']) {
+        $recipeID = $recipe['FeedingRecipeID'];
+
+        echo '<tr>
+                <td>' . $recipe['FeedingRecipeID'] . '</td>
+                <td>
+    ';
+        if ($recipeID == $recipe['FeedingRecipeID']) {
+
+            foreach ($recipes as $recipe1) {
+                if ($recipeID == $recipe1['FeedingRecipeID']) {
+                    $popupRow = $recipe1['ItemName'];
+                    echo $popupRow. '<br>';
+
+                }
+            }
+        }
+
+        echo'
+        </td><td>';
+        if ($recipeID == $recipe['FeedingRecipeID']) {
+
+            foreach ($recipes as $recipe1) {
+                if ($recipeID == $recipe1['FeedingRecipeID']) {
+                    $popupRow = $recipe1['Amount'].' ' .$recipe1['Unit'];
+                    echo $popupRow. '<br>';
+
+                }
+            }
+        }
+
+        echo '</td>';}
+
+    echo'</tr>';
+};
+echo '
+        </table>
+    </div>
+
+ ';
    echo '
     </div>
+
+
+
     <div class="row">
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
