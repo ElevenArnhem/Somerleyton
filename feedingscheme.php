@@ -115,23 +115,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     }
 
 
-    echo '<h2>Voedingsschema</h1>
-    <h3>Hoofdsoort: ' . $_GET['headspecies'] . '</h2>
-    <h3>Subsoort: ' . $_GET['subspecies'] . '</h2>
-    <a role="button" class="btn btn-primary" href="index.php?page=createRecipe">Nieuw Recept</a>
-    <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
-    <button name = "SPECIFICFEEDINGSCHEME" value = "1" type = "submit" class="btn btn-default" > Specifiek voedingsschema </button >
-     <hr>
-     <div class="row">';
 
-    $addButton = '<input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
-<button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
-    $deleteButton = ' <button name="DELETEGENERIC" value="1" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
-';
-    if (isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
-        $specificAnimals = 0;
-    }
-    feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
 
     if(isset($_POST['SPECIFICFEEDINGSCHEME']) && $_POST['SPECIFICFEEDINGSCHEME'] == 1) {
         echo '
@@ -195,6 +179,24 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
 
 
         }
+    } else {
+        echo '<h2>Voedingsschema</h1>
+    <h3>Hoofdsoort: ' . $_GET['headspecies'] . '</h2>
+    <h3>Subsoort: ' . $_GET['subspecies'] . '</h2>
+    <a role="button" class="btn btn-primary" href="index.php?page=createRecipe">Nieuw Recept</a>
+    <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+    <button name = "SPECIFICFEEDINGSCHEME" value = "1" type = "submit" class="btn btn-default" > Specifiek voedingsschema </button >
+     <hr>
+     <div class="row">';
+
+        $addButton = '<input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
+<button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
+        $deleteButton = ' <button name="DELETEGENERIC" value="1" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+';
+        if (isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+            $specificAnimals = 0;
+        }
+        feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
     }
     echo '
 
