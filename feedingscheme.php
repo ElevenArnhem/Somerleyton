@@ -12,8 +12,8 @@ $headSpeciesName = $_GET['headspecies'];
 $subSpeciesName = $_GET['subspecies'];
 $staffID = $_SESSION['STAFFID'];
 if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
-    if(!isset($_POST['SPECIFICANIMALS'])) {
-        $_POST['SPECIFICANIMALS'] = 0;
+    if(!isset($_POST['SPECIFICFEEDINGSCHEME'])) {
+        $_POST['SPECIFICFEEDINGSCHEME'] = 0;
     }
     if (isset($_POST['DELETEGENERIC'])) {
         $feedingRecipeID = $_POST['FEEDINGRECIPEID'];
@@ -139,7 +139,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
 
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
-<input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">';
+<input type="hidden" name="SPECIFICFEEDINGSCHEME" value="' .  $_POST['SPECIFICFEEDINGSCHEME'] . '">';
         if (isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
             echo '<input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">';
         }
@@ -169,7 +169,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     <td>' . $animal['AnimalID'] . '</td>
     <td>
         <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
-            <input type="hidden" name = "SPECIFICANIMALS" value = "'.$_POST['SPECIFICANIMALS'].'">
+            <input type="hidden" name="SPECIFICFEEDINGSCHEME" value="' .  $_POST['SPECIFICFEEDINGSCHEME'] . '">
             <input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
             <button name="SPECIFICANIMALFEEDINGSCHEME" value="' . $animal['AnimalID'] . '" type="submit" class="btn btn-link">
                 ' . $animal['AnimalName'] . '
@@ -185,11 +185,12 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
             $addButton = ' <input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
     <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">
      <input type="hidden" name = "SPECIFICANIMALS" value = "'.$_POST['SPECIFICANIMALS'].'">
+     <input type="hidden" name="SPECIFICFEEDINGSCHEME" value="' .  $_POST['SPECIFICFEEDINGSCHEME'] . '">
                     <button name="ADDSPECIFICFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '" type="submit" class="btn btn-default" >Voeg toe</button>';
 
             $deleteButton = ' <input type="hidden" name="SPECIFICANIMALS" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">
-            <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">
 <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">
+<input type="hidden" name="SPECIFICFEEDINGSCHEME" value="' .  $_POST['SPECIFICFEEDINGSCHEME'] . '">
 <button name="DELETESPECIFIC"  type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
 ';
             feedingSchedule($specificFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimalID);
@@ -200,10 +201,10 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
 
 
         $addButton = '<input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
-        <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">
+        <input type="hidden" name="SPECIFICFEEDINGSCHEME" value="' .  $_POST['SPECIFICFEEDINGSCHEME'] . '">
 <button name="ADDGENERICFEEDINGSCHEMEROW" type="submit" class="btn btn-default" >Voeg toe</button>';
         $deleteButton = ' <button name="DELETEGENERIC" value="1" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
- <input type="hidden" name="SPECIFICANIMALFEEDINGSCHEME" value="' . $_POST['SPECIFICANIMALFEEDINGSCHEME'] . '">
+ <input type="hidden" name="SPECIFICFEEDINGSCHEME" value="' .  $_POST['SPECIFICFEEDINGSCHEME'] . '">
 ';
         if (isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
             $specificAnimals = 0;
