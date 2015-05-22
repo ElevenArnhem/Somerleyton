@@ -138,7 +138,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
     $recipestmt->execute();
-    $recipe = $recipestmt->fetchAll();
+    $recipe1 = $recipestmt->fetchAll();
     echo '
     <div class="col-lg-4">
     <br>
@@ -283,7 +283,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                     </td>
                     <td>
                         <select name="FeedingRecipeID"  type="text" class="form-control" required>';
-        foreach ($recipe as $recipeRow) {
+        foreach ($recipe1 as $recipeRow) {
             echo '
                             <option>' . $recipeRow['FeedingRecipeID'] . '</option>';
         }
