@@ -261,9 +261,9 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             }
 
             echo '</td>';}
-        echo '<input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
+        echo '<td><input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
 <input type="hidden" name="ADDGENERICFEEDINGSCHEMEROW">
-<button name="FeedingRecipeID" value="'.$recipe['FeedingRecipeID'].'" type="submit" class="btn btn-default" >Voeg toe</button>';
+<button name="FeedingRecipeID" value="'.$recipe['FeedingRecipeID'].'" type="submit" class="btn btn-default" >Voeg toe</button></td>';
         echo'</tr>';
     };
     if($specificAnimals > 0 || isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
