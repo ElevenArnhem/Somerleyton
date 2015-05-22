@@ -135,8 +135,6 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
 feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
 
 
-
-
    echo '
     </div>
 
