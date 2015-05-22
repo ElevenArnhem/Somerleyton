@@ -121,7 +121,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     <br>';
     if (isset($_POST['SPECIFICFEEDINGSCHEME']) && $_POST['SPECIFICFEEDINGSCHEME'] == 1) {
         echo '<button name = "SPECIFICFEEDINGSCHEME" value = "0" type = "submit" class="btn btn-default" > Generiek voedingsschema </button >';
-    } else
+    } else {
         echo '<button name = "SPECIFICFEEDINGSCHEME" value = "1" type = "submit" class="btn btn-default" > Specifiek voedingsschema </button >';
     }
      echo '<hr>
@@ -205,4 +205,5 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     echo '
 
 </div>';
+
 }
