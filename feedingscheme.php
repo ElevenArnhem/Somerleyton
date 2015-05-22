@@ -147,7 +147,7 @@ echo '
 
 
   <div class="col-lg-8">
-    <form action="index.php?page=recipes" method="post">
+    <form action="index.php?page=feedingscheme" method="post">
       <div class="col-lg-6">
 
         <div class="input-group">
@@ -165,7 +165,6 @@ echo '
     </form>';
 echo '
     <table class="table table-hover"><tr>
-                <th>ReceptID</th>
                 <th>Ingredienten</th>
                 <th>Hoeveelheid</th>
 
@@ -177,7 +176,6 @@ foreach($recipes as $recipe) {
         $recipeID = $recipe['FeedingRecipeID'];
 
         echo '<tr>
-                <td>' . $recipe['FeedingRecipeID'] . '</td>
                 <td>
     ';
         if ($recipeID == $recipe['FeedingRecipeID']) {
