@@ -203,7 +203,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
   <div class="col-lg-8">
     <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
-      <div class="col-lg-5">
+
 
         <div class="input-group">
           <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek recepten op ingredient naam">
@@ -213,7 +213,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
         </div><!-- /input-group -->
 
-      </div><!-- /.col-lg-6 -->
+
     <br /><br />
 
       <br><br>
