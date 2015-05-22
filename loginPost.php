@@ -23,5 +23,5 @@
     if( $_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         header('Location:index.php?page=medewerkers');
     } else {
-        header('Location:index.php');
+//        header('Location:index.php');
     }
