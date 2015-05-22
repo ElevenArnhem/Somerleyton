@@ -135,6 +135,8 @@ if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
 feedingSchedule($genericFeedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals);
 
    echo '
+    </div>
+    <div class="row">
     <div class="col-lg-4">
 <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">';
 if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
