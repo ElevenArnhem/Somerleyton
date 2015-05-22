@@ -289,12 +289,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                     </td>
 
             </tr>
-            <tr>
-                <td></td>
-                <td>' . $addButton . '
 
-                </td>
-            </tr>
         </form>';
     }
     echo '
