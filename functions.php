@@ -220,7 +220,9 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
       <br><br>
     </form>';
     echo '
-    <table class="table table-hover"><tr>
+    <table class="table table-hover">
+    <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+    <tr>
                 <th>Ingredienten</th>
                 <th>Hoeveelheid</th>
 
@@ -268,7 +270,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 //        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
         echo '
             <tr>
-                <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+
                     <td>
                         <select name="DayGeneral" type="text" class="form-control" required>
                             <option>maandag</option>
