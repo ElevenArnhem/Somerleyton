@@ -147,7 +147,7 @@ echo '
 
 
   <div class="col-lg-8">
-    <form action="index.php?page=feedingscheme" method="post">
+    <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
       <div class="col-lg-6">
 
         <div class="input-group">
