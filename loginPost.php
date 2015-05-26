@@ -20,8 +20,8 @@
             $_SESSION['FUNCTION'] = $loginInfoRow['Function'];
         }
     }
-    if( $_SESSION['FUNCTION'] == 'KantoorPersoneel') {
+    if( isset( $_SESSION['FUNCTION']) && $_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         header('Location:index.php?page=medewerkers');
     } else {
-//        header('Location:index.php');
+        header('Location:index.php');
     }
