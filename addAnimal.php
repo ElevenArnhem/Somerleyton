@@ -95,7 +95,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
               <form action="index.php?page=addAnimal" method="post" enctype="multipart/form-data">
               <dl class="dl-horizontal">
 
-               <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" placeholder="Naam" required=""></dd><br>
+               <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" placeholder="Naam" required="" maxlength="50"></dd><br>
               <dt>Geslacht</dt><dd><select name="GENDER" type="text" class="form-control" required>
                                         <option value="F">Vrouwtje</option><option value="M">Mannetje </option> <option value="U">Nog niet bekend</option></select></dd><br>
                <dt>Soort</dt><dd><select name="LATINNAME" type="text" class="form-control" required>';
@@ -108,7 +108,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         echo '<option value="'.$subSpeciesName["SubSpeciesName"].'">'.$subSpeciesName["SubSpeciesName"].'</option>';
     }
     echo'</select></dd><br>
-               <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" placeholder="Geboorte plaats"></dd><br>
+               <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" placeholder="Geboorte plaats" maxlength="50"></dd><br>
                <dt>Geboorte datum</dt><dd><input name="BIRTHDATE" type="date" class="form-control" max="'. date('Y-m-d') .'"></dd><br>
                <dt>Omgeving </dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" required>';
     foreach($environmentNames as $environmentName) {
@@ -120,7 +120,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         echo '<option value="'.$area['AreaName'].'">'.$area['AreaName'].'</option>';
     }
     echo '</select></dd><br>
-                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="text" class="form-control" required placeholder="Verblijf nummer"></dd><br><br>
+                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="number" class="form-control" required placeholder="Verblijf nummer" max="2147483646"></dd><br><br>
                <dt>Beschrijving </dt></dl> <br> <textarea name="DESCRIPTION" class="form-control" rows="5" placeholder="Beschrijving"></textarea><br><br>';
 
     echo '  </div>

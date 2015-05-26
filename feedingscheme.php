@@ -149,7 +149,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
         }
 
         if (!isset($_POST['SPECIFICANIMALS']) || (isset($_POST['SPECIFICANIMALS']) && $_POST['SPECIFICANIMALS'] == 0)) {
-            echo '<button name = "SPECIFICANIMALS" value = "1" type = "submit" class="btn btn-default" > Alleen dieren met een specifiek voerschema </button >';
+            echo '<button name = "SPECIFICANIMALS" value = "1" type = "submit" class="btn btn-default" > Dieren met een specifiek voerschema </button >';
         }
         if ((isset($_POST['SPECIFICANIMALS']) && $_POST['SPECIFICANIMALS'] > 0)) {
             echo '<button name = "SPECIFICANIMALS" value = "0" type = "submit" class="btn btn-default" > Alle dieren </button >';
