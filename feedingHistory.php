@@ -63,8 +63,82 @@ $searchString = '';
 echo '
 
 <hr>
-<div class="row">
-    <div class="col-lg-6">
+<div class="row">';
+if(isset($_POST['SPECIFIC']) && $_POST['SPECIFIC'] == 0) {
+    echo '
+    <div class="col-lg-12">
+        <form action="index.php?page=feedingHistory" method="post">
+    <button name="SPECIFIC" value="1" class="btn btn-default" type="submit" >Geschiedenis per diersoort</button>
+    </form>
+    <br>
+    <form action="index.php?page=feedingHistory" method="post">
+
+    <dl class="dl-horizontal">
+
+               <dt>Van</dt><dd><input name="STARTDATEANIMALS" type="date" class="form-control"></dd><br>
+               <dt>Tot</dt><dd> <input name="ENDDATEANIMALS" type="date" class="form-control"></dd><br>
+               </dl>
+    <div class="input-group">
+    <input type="hidden" name="SPECIFIC" value="0">
+      <input name="SEARCHSTRINGANIMALS" type="text" class="form-control" placeholder="Zoek subsoort op: dier id, diernaam of ingredient">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit" >Zoek</button>
+      </span>
+
+    </div><!-- /input-group -->
+
+  <!-- /.col-lg-6 -->
+
+  <br><br>
+</form>';
+    echo '
+<table class="table table-hover"><tr>
+            <th>ID</th>
+            <th>Naam</th>
+            <th>Recept id</th>
+            <th>Voorbereid door</th>
+            <th>Datum voorbereid</th>
+            <th>Gevoerd door</th>
+            <th>Datum gevoerd</th>
+</tr>';
+    foreach ($animals as $animal) {
+
+        $feedingSchemeRow = array(
+            "FeedingRecipeID" => $animal["FeedingRecipeID"],
+            "DayGeneral" => explode(' ', $animal["SpecificFedDateTime"])[0],
+            "TimeGeneral" => explode(' ', (explode('.', $animal["SpecificFedDateTime"])[0]))[1]
+        );
+        echo '<tr>
+<td>' . $animal["AnimalID"] . '</td>
+        <form action="index.php?page=feedingRecipe" method="post">
+            <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
+            <input type="hidden" name="animalID" value="' . $animal['AnimalID'] . '">
+            <td>
+                     <button type="submit" class="btn btn-link">' . $animal["AnimalName"] . '</button>
+            </form>
+            </td>
+        <td>' . $animal["FeedingRecipeID"] . '</td>
+        <td>' . $animal["PreparedBy"] . '</td>
+        <td>' . explode('.', $animal["SpecificPreparedDateTime"])[0] . '</td>
+        <td>' . $animal["FedBy"] . '</td>
+        <td>' . explode('.', $animal["SpecificFedDateTime"])[0] . '</td>
+';
+
+        echo '</tr>';
+    };
+    echo '
+        </table>
+    </div>';
+} else {
+
+    echo '
+
+    <div class="col-lg-12">
+    <form action="index.php?page=feedingHistory" method="post">
+
+    <button name="SPECIFIC" value="0" class="btn btn-default" type="submit" >Geschiedenis per dier</button>
+    </form>
+    <br>
     <form action="index.php?page=feedingHistory" method="post">
 
 
@@ -75,6 +149,7 @@ echo '
                <dt>Tot</dt><dd> <input name="ENDDATE" type="date" class="form-control"></dd><br>
                </dl>
 <div class="input-group">
+<input type="hidden" name="SPECIFIC" value="1">
       <input name="SEARCHSTRINGSPECIES" type="text" class="form-control" placeholder="Zoek subsoort of recept">
 <span class="input-group-btn">
         <button class="btn btn-default" type="submit" >Zoek</button>
@@ -87,19 +162,22 @@ echo '
 
   <br><br>
 </form>';
-echo '
+    echo '
 <table class="table table-hover"><tr>
-            <th>Subdiersoort</th>
+            <th>Diersoort</th>
             <th>Recept id</th>
-            <th>Datum</th>
+            <th>Voorbereid door</th>
+            <th>Datum voorbereid</th>
+            <th>Gevoerd door</th>
+            <th>Datum gevoerd</th>
             </tr>';
 
-foreach($species as $speciesRow) {
+    foreach ($species as $speciesRow) {
 
         $feedingSchemeRow = array(
             "FeedingRecipeID" => $speciesRow["FeedingRecipeID"],
-            "DayGeneral" => explode(' ', $speciesRow["GeneralDateTime"])[0],
-            "TimeGeneral" => explode(' ', (explode('.', $speciesRow["GeneralDateTime"])[0]))[1]
+            "DayGeneral" => explode(' ', $speciesRow["GeneralFedDateTime"])[0],
+            "TimeGeneral" => explode(' ', (explode('.', $speciesRow["GeneralFedDateTime"])[0]))[1]
         );
 //    if($_SESSION['FUNCTION'])
         echo '<tr>  <form action="index.php?page=feedingRecipe" method="post">
@@ -111,64 +189,17 @@ foreach($species as $speciesRow) {
             </form>
             </td>
      <td>' . $speciesRow['FeedingRecipeID'] . '</td>
-     <td>' . explode('.', $speciesRow['GeneralDateTime'])[0] . '</td>
+     <td>' . $speciesRow['PreparedBy'] . '</td>
+     <td>' . explode('.', $speciesRow['GeneralPreparedDateTime'])[0] . '</td>
+     <td>' . $speciesRow['FedBy'] . '</td>
+     <td>' . explode('.', $speciesRow['GeneralFedDateTime'])[0] . '</td>
+
         ';
 
-    echo'</tr>';
-};
-echo '
+        echo '</tr>';
+    };
+    echo '
         </table>
-    </div>
-    <div class="col-lg-6">
-    <form action="index.php?page=feedingHistory" method="post">
-
-    <dl class="dl-horizontal">
-
-               <dt>Van</dt><dd><input name="STARTDATEANIMALS" type="date" class="form-control"></dd><br>
-               <dt>Tot</dt><dd> <input name="ENDDATEANIMALS" type="date" class="form-control"></dd><br>
-               </dl>
-    <div class="input-group">
-      <input name="SEARCHSTRINGANIMALS" type="text" class="form-control" placeholder="Zoek subsoort op: dier id, diernaam of ingredient">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="submit" >Zoek</button>
-      </span>
-
-    </div><!-- /input-group -->
-
-  <!-- /.col-lg-6 -->
-
-  <br><br>
-</form>';
-echo '
-<table class="table table-hover"><tr>
-            <th>ID</th>
-            <th>Naam</th>
-            <th>Recept id</th>
-            <th>Datum</th>
-</tr>';
-foreach($animals as $animal) {
-
-    $feedingSchemeRow = array (
-        "FeedingRecipeID"  => $animal["FeedingRecipeID"],
-        "DayGeneral" => explode(' ', $animal["SpecificDateTime"])[0],
-        "TimeGeneral"   => explode(' ',(explode('.', $animal["SpecificDateTime"])[0]))[1]
-    );
-    echo '<tr>
-<td>'.$animal["AnimalID"].'</td>
-        <form action="index.php?page=feedingRecipe" method="post">
-            <input type="hidden" name="feedingSchemeRow" value="'. base64_encode(serialize($feedingSchemeRow)).'">
-            <input type="hidden" name="animalID" value="'. $animal['AnimalID'] . '">
-            <td>
-                     <button type="submit" class="btn btn-link">'.$animal["AnimalName"].'</button>
-            </form>
-            </td>
-        <td>'.$animal["FeedingRecipeID"].'</td>
-        <td>'.explode('.', $animal["SpecificDateTime"])[0].'</td>
-';
-
-    echo'</tr>';
-};
-echo '
-        </table>
-    </div>
-</div>';
+    </div>';
+}
+echo '</div>';

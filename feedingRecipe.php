@@ -1,4 +1,9 @@
 <?php
+
+$animalID = -1;
+if(isset($_POST['animalID'])) {
+    $animalID = $_POST['animalID'];
+}
     if(isset($_POST['submit'])){
         $staffID = $_SESSION['STAFFID'];
         $receptID = $_POST['receptID'];
@@ -7,10 +12,7 @@
         $dayGeneral = $_POST["DayGeneral"];
         $timeGeneral = $_POST["TimeGeneral"];
 
-        $animalID = -1;
-        if(isset($_POST['animalID'])) {
-            $animalID = $_POST['animalID'];
-        }
+
 
         $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?");
         $addFeedingHistoryStatement -> bindParam(1, $staffID);
@@ -23,6 +25,25 @@
         $addFeedingHistoryStatement -> execute();
 
         spErrorCaching($addFeedingHistoryStatement);
+    } elseif(isset($_POST['submitVoorbereiden'])){
+        $addPreparedFeedingSchedule = $dbh -> prepare("proc_addPreparedFeedingSchedule ?, ?, ?, ?, ?, ?, ?");
+        $addPreparedFeedingSchedule -> bindParam(1, $staffID);
+        $addPreparedFeedingSchedule -> bindParam(2, $receptID);
+        $addPreparedFeedingSchedule -> bindParam(3, $dayGeneral);
+        $addPreparedFeedingSchedule -> bindParam(4, $timeGeneral);
+        $addPreparedFeedingSchedule -> bindParam(5, $animalID);
+        $addPreparedFeedingSchedule -> bindParam(6, $headSpecies);
+        $addPreparedFeedingSchedule -> bindParam(7, $subSpecies);
+        $addPreparedFeedingSchedule -> execute();
+        spErrorCaching($addPreparedFeedingSchedule);
+//        @StaffID      INTEGER,
+// @FeedingRecipeID    INTEGER,
+// @dag       VARCHAR(9),
+// @tijd      VARCHAR(50),
+// @AnimalID      INTEGER,
+// @HeadSpecies     VARCHAR(50),
+// @SubSpecies     VARCHAR(50)
+
     }
     if(isset( $_POST['feedingSchemeRow'])) {
         $strFeedingScheme = $_POST['feedingSchemeRow'];
@@ -60,7 +81,20 @@
         $animalName = $animal['AnimalName'];
         $headSpecies = $animal["LatinName"];
         $subSpecies = $animal["SubSpeciesName"];
+
     }
+$dayGeneral = $feedingScheme['DayGeneral'];
+$timeGeneral = explode(".", $feedingScheme['TimeGeneral'])[0];
+$getPreparedstmt = $dbh->prepare("proc_getPreparedScheme ?,?,?,?,?,?");
+$getPreparedstmt->bindParam(1,$receptID);
+$getPreparedstmt->bindParam(2,$dayGeneral);
+$getPreparedstmt->bindParam(3,$timeGeneral);
+$getPreparedstmt->bindParam(4,$headSpecies);
+$getPreparedstmt->bindParam(5,$subSpecies);
+$getPreparedstmt->bindParam(6,$animalID);
+$getPreparedstmt->execute();
+$getPrepared = $getPreparedstmt->fetchAll();
+
 
 
 ?>
@@ -136,7 +170,15 @@
                 ?>
 
                 <input type="hidden" name="feedingSchemeRow" value="<?php echo $strFeedingScheme ?>">
-                <button type="submit" name="submit" class="btn btn-default">Voeren</button>
+                <?php if(isset($getPrepared) && isset($getPrepared[0]["FeedingRecipeID"])) {
+                    echo '
+                <button type="submit" name="submit" class="btn btn-default">Voeren</button>';
+                } else {
+                    echo '
+                <button type="submit" name="submitVoorbereiden" class="btn btn-default">Voorbereiden</button>';
+                }
+
+                ?>
             </form>
         </div>
         <hr/>
