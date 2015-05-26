@@ -195,8 +195,12 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
     if(isset($_POST['SEARCHSTRING'])) {
         $searchString = $_POST['SEARCHSTRING'];
     }
-    $getRecipesstmt = $dbh->prepare("EXEC proc_SearchRecipe ?");
+    $headSpecies = $_GET['headspecies'];
+    $subSpecies = $_GET['subspecies'];
+    $getRecipesstmt = $dbh->prepare("EXEC proc_SearchRecipeForSubSpecies ?,?,?");
     $getRecipesstmt->bindParam(1, $searchString);
+    $getRecipesstmt->bindParam(2, $headSpecies);
+    $getRecipesstmt->bindParam(3, $subSpecies);
     $getRecipesstmt->execute();
     $recipes = $getRecipesstmt->fetchAll();
     echo '
