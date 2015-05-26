@@ -4,18 +4,22 @@
         $receptID = $_POST['receptID'];
         $headSpecies = $_POST["latinName"];
         $subSpecies = $_POST["subSpecies"];
+        $dayGeneral = $_POST["DayGeneral"];
+        $timeGeneral = $_POST["TimeGeneral"];
 
         $animalID = -1;
         if(isset($_POST['animalID'])) {
             $animalID = $_POST['animalID'];
         }
 
-        $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?");
+        $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?");
         $addFeedingHistoryStatement -> bindParam(1, $staffID);
         $addFeedingHistoryStatement -> bindParam(2, $receptID);
         $addFeedingHistoryStatement -> bindParam(3, $animalID);
         $addFeedingHistoryStatement -> bindParam(4, $headSpecies);
         $addFeedingHistoryStatement -> bindParam(5, $subSpecies);
+        $addFeedingHistoryStatement -> bindParam(6, $dayGeneral);
+        $addFeedingHistoryStatement -> bindParam(7, $timeGeneral);
         $addFeedingHistoryStatement -> execute();
 
         spErrorCaching($addFeedingHistoryStatement);
@@ -121,6 +125,8 @@
                 <input type="hidden" name="receptID" value="<?php echo $receptID ?>">
                 <input type="hidden" name="latinName" value="<?php echo $headSpecies ?>">
                 <input type="hidden" name="subSpecies" value="<?php echo $subSpecies ?>">
+                <input type="hidden" name="DayGeneral" value="<?php echo ucfirst($feedingScheme['DayGeneral']) ?>
+                <input type="hidden" name="TimeGeneral" value="<?php echo explode(".", $feedingScheme['TimeGeneral'])[0] ?>
 
                 <?php if($animalID != null) { ?>
                     <input type="hidden" name="animalID" value="<?php echo $animalID ?>">
