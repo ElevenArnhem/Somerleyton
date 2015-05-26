@@ -120,7 +120,7 @@ if($_SESSION['FUNCTION'] != 'Headkeeper' && $_SESSION['FUNCTION'] != 'Vet') {
         echo '<option value="'.$area['AreaName'].'">'.$area['AreaName'].'</option>';
     }
     echo '</select></dd><br>
-                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="number" class="form-control" required placeholder="Verblijf nummer" max="2147483646"></dd><br><br>
+                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="number" class="form-control" required placeholder="Verblijf nummer" maxlength="10" max="2147483646"></dd><br><br>
                <dt>Beschrijving </dt></dl> <br> <textarea name="DESCRIPTION" class="form-control" rows="5" placeholder="Beschrijving"></textarea><br><br>';
 
     echo '  </div>

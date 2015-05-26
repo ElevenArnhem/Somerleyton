@@ -149,7 +149,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
                     echo '<option value="'.$area['AreaName'].'">'.$area['AreaName'].'</option>';
                 }
             echo '</select></dd><br>
-                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="number" class="form-control" value="'.$animal['EnclosureID'].'" max="2147483646"></dd><br><br>
+                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="number" class="form-control" value="'.$animal['EnclosureID'].'" maxlength="10" max="2147483646" ></dd><br><br>
                <dt>Beschrijving </dt></dl> <br> <textarea name="DESCRIPTION" class="form-control" rows="5">'.$animal['Description'].'</textarea><br><br>';
 
         echo '  </div>

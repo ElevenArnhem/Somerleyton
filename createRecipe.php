@@ -148,7 +148,7 @@ else {
                             <?php echo $item["ItemName"] ?>
                         </td>
                         <td>
-                            <input type="number" min="1" class="form-control" name="aantal" value="1">
+                            <input type="number" min="1" max="2147483646" class="form-control" name="aantal" value="1">
                         </td>
                         <td>
                             <?php echo $item["Unit"] ?>
