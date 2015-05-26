@@ -140,7 +140,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
     $recipestmt->execute();
     $recipe2= $recipestmt->fetchAll();
     echo '
-    <div class="col-lg-4">
+    <div class="col-lg-3">
     <br>
         <h4>Voedingsschema</h4>
         <table class="table table-hover">
@@ -202,9 +202,9 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
     echo '
 
 
-  <div class="col-lg-8">
+  <div class="col-lg-6">
     <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
-      <div class="col-lg-5">
+
 
         <div class="input-group">
           <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek recepten op ingredient naam">
@@ -214,10 +214,10 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
         </div><!-- /input-group -->
 
-      </div><!-- /.col-lg-6 -->
-    <br /><br />
+     <!-- /.col-lg-6 -->
 
-      <br><br>
+
+     <br>
     </form>';
     echo '
     <table class="table table-hover">
@@ -262,8 +262,9 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
             echo '</td>';
             echo '<td><input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
-<input type="hidden" name="ADDGENERICFEEDINGSCHEMEROW">
-<button name="FeedingRecipeID" value="'.$recipe['FeedingRecipeID'].'" type="submit" class="btn btn-default" >Voeg toe</button></td>';
+            '.$addButton.'
+<input type="hidden" name="FeedingRecipeID" value="'.$recipe['FeedingRecipeID'].'" >
+</td>';
         }
 
         echo'</tr>';
