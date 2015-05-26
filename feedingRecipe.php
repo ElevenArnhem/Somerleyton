@@ -125,8 +125,9 @@
                 <input type="hidden" name="receptID" value="<?php echo $receptID ?>">
                 <input type="hidden" name="latinName" value="<?php echo $headSpecies ?>">
                 <input type="hidden" name="subSpecies" value="<?php echo $subSpecies ?>">
-                <input type="hidden" name="DayGeneral" value="<?php echo ucfirst($feedingScheme['DayGeneral']) ?>
-                <input type="hidden" name="TimeGeneral" value="<?php echo explode(".", $feedingScheme['TimeGeneral'])[0] ?>
+                <input type="hidden" name="TimeGeneral" value="<?php echo explode(".", $feedingScheme['TimeGeneral'])[0]; ?> ">
+                <input type="hidden" name="DayGeneral" value="<?php echo ucfirst($feedingScheme['DayGeneral']); ?> ">
+
 
                 <?php if($animalID != null) { ?>
                     <input type="hidden" name="animalID" value="<?php echo $animalID ?>">

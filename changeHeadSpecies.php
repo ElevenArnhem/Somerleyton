@@ -21,7 +21,7 @@ if(isset($_POST["submit"])) {
     <input type="hidden" name="originalHeadSpeciesName" value="<?php echo $headSpeciesName ?>"/>
     <div class="form-group">
         <label>Hoofdsoort</label>
-        <input class="form-control textbox" name="headSpecies" type="text" value="<?php echo $headSpeciesName ?>">
+        <input class="form-control textbox" name="headSpecies" type="text" disabled value="<?php echo $headSpeciesName ?>">
     </div>
     <input class="btn btn-default" type="submit" name="submit" value="Opslaan">
 </form>

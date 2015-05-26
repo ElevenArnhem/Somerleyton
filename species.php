@@ -32,19 +32,7 @@
                             <button class="btn btn-link" type="submit" name="selectedHeadSpecies" value="<?php echo $headSpecies["LatinName"] ?>"><?php echo $headSpecies["LatinName"] ?></button>
                         </form>
                     </td>
-                    <td>
-                        <?php
-                            if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
-                                ?>
-                                <form action="?page=changeHeadSpecies" method="POST">
-                                    <button type="submit" class="btn btn-default" name="headSpecies"
-                                            value="<?php echo $headSpecies["LatinName"] ?>">Aanpassen
-                                    </button>
-                                </form>
-                            <?php
-                            }
-                        ?>
-                    </td>
+
                 </tr>
             <?php
             }
