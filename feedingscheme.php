@@ -122,7 +122,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     echo '<h2>Voedingsschema</h1>
     <h3>Hoofdsoort: ' . $_GET['headspecies'] . '</h2>
     <h3>Subsoort: ' . $_GET['subspecies'] . '</h2>
-    <a role="button" class="btn btn-primary" href="index.php?page=createRecipe">Nieuw Recept</a>
+    <a role="button" class="btn btn-primary" href="index.php?page=createRecipe&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '">Nieuw Recept</a>
     <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
     <br>';
     if (isset($_POST['SPECIFICFEEDINGSCHEME']) && $_POST['SPECIFICFEEDINGSCHEME'] == "1") {
