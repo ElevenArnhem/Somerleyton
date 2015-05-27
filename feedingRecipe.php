@@ -4,7 +4,7 @@ $animalID = -1;
 if(isset($_POST['animalID'])) {
     $animalID = $_POST['animalID'];
 }
-    if(isset($_POST['submit'])){
+
         $staffID = $_SESSION['STAFFID'];
         $receptID = $_POST['receptID'];
         $headSpecies = $_POST["latinName"];
@@ -12,7 +12,7 @@ if(isset($_POST['animalID'])) {
         $dayGeneral = $_POST["DayGeneral"];
         $timeGeneral = $_POST["TimeGeneral"];
 
-
+if(isset($_POST['submit'])){
 
         $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?");
         $addFeedingHistoryStatement -> bindParam(1, $staffID);
@@ -26,6 +26,8 @@ if(isset($_POST['animalID'])) {
 
         spErrorCaching($addFeedingHistoryStatement);
     } elseif(isset($_POST['submitVoorbereiden'])){
+        $staffID = $_SESSION['STAFFID'];
+
         $addPreparedFeedingSchedule = $dbh -> prepare("proc_addPreparedFeedingSchedule ?, ?, ?, ?, ?, ?, ?");
         $addPreparedFeedingSchedule -> bindParam(1, $staffID);
         $addPreparedFeedingSchedule -> bindParam(2, $receptID);
