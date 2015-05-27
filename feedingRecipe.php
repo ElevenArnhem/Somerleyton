@@ -5,48 +5,12 @@ if(isset($_POST['animalID'])) {
     $animalID = $_POST['animalID'];
 }
 
-        $staffID = $_SESSION['STAFFID'];
-        $receptID = $_POST['receptID'];
-        $headSpecies = $_POST["latinName"];
-        $subSpecies = $_POST["subSpecies"];
-        $dayGeneral = $_POST["DayGeneral"];
-        $timeGeneral = $_POST["TimeGeneral"];
+$staffID = $_SESSION['STAFFID'];
+if(isset( $_POST["DayGeneral"]) && isset( $_POST["TimeGeneral"])) {
+    $dayGeneral = $_POST["DayGeneral"];
+    $timeGeneral = $_POST["TimeGeneral"];
+}
 
-if(isset($_POST['submit'])){
-
-        $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?");
-        $addFeedingHistoryStatement -> bindParam(1, $staffID);
-        $addFeedingHistoryStatement -> bindParam(2, $receptID);
-        $addFeedingHistoryStatement -> bindParam(3, $animalID);
-        $addFeedingHistoryStatement -> bindParam(4, $headSpecies);
-        $addFeedingHistoryStatement -> bindParam(5, $subSpecies);
-        $addFeedingHistoryStatement -> bindParam(6, $dayGeneral);
-        $addFeedingHistoryStatement -> bindParam(7, $timeGeneral);
-        $addFeedingHistoryStatement -> execute();
-
-        spErrorCaching($addFeedingHistoryStatement);
-    } elseif(isset($_POST['submitVoorbereiden'])){
-        $staffID = $_SESSION['STAFFID'];
-
-        $addPreparedFeedingSchedule = $dbh -> prepare("proc_addPreparedFeedingSchedule ?, ?, ?, ?, ?, ?, ?");
-        $addPreparedFeedingSchedule -> bindParam(1, $staffID);
-        $addPreparedFeedingSchedule -> bindParam(2, $receptID);
-        $addPreparedFeedingSchedule -> bindParam(3, $dayGeneral);
-        $addPreparedFeedingSchedule -> bindParam(4, $timeGeneral);
-        $addPreparedFeedingSchedule -> bindParam(5, $animalID);
-        $addPreparedFeedingSchedule -> bindParam(6, $headSpecies);
-        $addPreparedFeedingSchedule -> bindParam(7, $subSpecies);
-        $addPreparedFeedingSchedule -> execute();
-        spErrorCaching($addPreparedFeedingSchedule);
-//        @StaffID      INTEGER,
-// @FeedingRecipeID    INTEGER,
-// @dag       VARCHAR(9),
-// @tijd      VARCHAR(50),
-// @AnimalID      INTEGER,
-// @HeadSpecies     VARCHAR(50),
-// @SubSpecies     VARCHAR(50)
-
-    }
     if(isset( $_POST['feedingSchemeRow'])) {
         $strFeedingScheme = $_POST['feedingSchemeRow'];
         $feedingScheme = unserialize(base64_decode($strFeedingScheme));
@@ -68,7 +32,49 @@ if(isset($_POST['submit'])){
         $receptDetailsStatement -> bindParam(1, $receptID);
         $receptDetailsStatement -> execute();
         $receptDetails = $receptDetailsStatement -> fetchAll();
+    } else {
+
+        $receptID = $_POST['receptID'];
+        $headSpecies = $_POST["latinName"];
+        $subSpecies = $_POST["subSpecies"];
+
     }
+
+if(isset($_POST['submit'])){
+
+    $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?");
+    $addFeedingHistoryStatement -> bindParam(1, $staffID);
+    $addFeedingHistoryStatement -> bindParam(2, $receptID);
+    $addFeedingHistoryStatement -> bindParam(3, $animalID);
+    $addFeedingHistoryStatement -> bindParam(4, $headSpecies);
+    $addFeedingHistoryStatement -> bindParam(5, $subSpecies);
+    $addFeedingHistoryStatement -> bindParam(6, $dayGeneral);
+    $addFeedingHistoryStatement -> bindParam(7, $timeGeneral);
+    $addFeedingHistoryStatement -> execute();
+
+    spErrorCaching($addFeedingHistoryStatement);
+} elseif(isset($_POST['submitVoorbereiden'])){
+    $staffID = $_SESSION['STAFFID'];
+
+    $addPreparedFeedingSchedule = $dbh -> prepare("proc_addPreparedFeedingSchedule ?, ?, ?, ?, ?, ?, ?");
+    $addPreparedFeedingSchedule -> bindParam(1, $staffID);
+    $addPreparedFeedingSchedule -> bindParam(2, $receptID);
+    $addPreparedFeedingSchedule -> bindParam(3, $dayGeneral);
+    $addPreparedFeedingSchedule -> bindParam(4, $timeGeneral);
+    $addPreparedFeedingSchedule -> bindParam(5, $animalID);
+    $addPreparedFeedingSchedule -> bindParam(6, $headSpecies);
+    $addPreparedFeedingSchedule -> bindParam(7, $subSpecies);
+    $addPreparedFeedingSchedule -> execute();
+    spErrorCaching($addPreparedFeedingSchedule);
+//        @StaffID      INTEGER,
+// @FeedingRecipeID    INTEGER,
+// @dag       VARCHAR(9),
+// @tijd      VARCHAR(50),
+// @AnimalID      INTEGER,
+// @HeadSpecies     VARCHAR(50),
+// @SubSpecies     VARCHAR(50)
+
+}
 
     $animalName = "-";
     $animalID = null;
