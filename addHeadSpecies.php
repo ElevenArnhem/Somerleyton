@@ -15,7 +15,7 @@ if(isset($_POST["submit"])) {
     <input type='hidden' name='STAFFID' value='<?php echo $_SESSION['STAFFID']; ?>'>
     <div class="form-group">
         <label>Hoofdsoort</label>
-        <input class="form-control textbox" name="LATINNAME" required type="text" />
+        <input class="form-control textbox" name="LATINNAME" required type="text" maxlength="50"/>
     </div>
     <input class="btn btn-default" type="submit" name="submit" value="Toevoegen">
 </form>

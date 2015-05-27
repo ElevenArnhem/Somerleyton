@@ -149,6 +149,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 <th>Tijdstip</th>
                 <th>Recept </th>
             </tr>';
+    if (isset($feedingScheme[0]['FeedingRecipeID'])) {
         foreach ($feedingScheme as $feedingSchemeRow) {
 
                 //    if($_SESSION['FUNCTION'])
@@ -185,7 +186,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
         };
 
-//    }
+    }
     echo '
     </table>
 
@@ -227,6 +228,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
     <table class="table table-hover">
     <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
     <tr>
+                <th>ReceptID</th>
                 <th>Ingredienten</th>
                 <th>Hoeveelheid</th>
 
@@ -238,6 +240,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             $recipeID = $recipe['FeedingRecipeID'];
 
             echo '<tr>
+                <td>'.$recipe['FeedingRecipeID'].'</td>
                 <td>
     ';
             if ($recipeID == $recipe['FeedingRecipeID']) {
@@ -265,17 +268,19 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             }
 
             echo '</td>';
-            echo '<td><input type="hidden" name="SPECIFICANIMALS" value="'.$specificAnimals.'">
-            '.$addButton.'
-<input type="hidden" name="FeedingRecipeID" value="'.$recipe['FeedingRecipeID'].'" >
+            if ($feedingScheme[0]['HeadKeeperFromSubSpecies'] == '1') {
+                echo '<td><input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
+            ' . $addButton . '
+<input type="hidden" name="FeedingRecipeID" value="' . $recipe['FeedingRecipeID'] . '" >
 </td>';
-        }
+            }
+            }
 
         echo'</tr>';
     };
     if($specificAnimals > 0 || isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
-//        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
-        echo '
+        if ($feedingScheme[0]['HeadKeeperFromSubSpecies'] == '1') {
+            echo '
             <tr>
 
                     <td>
@@ -296,6 +301,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             </tr>
 
         </form>';
+        }
     }
     echo '
         </table>
