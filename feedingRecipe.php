@@ -178,12 +178,15 @@ $getPrepared = $getPreparedstmt->fetchAll();
                 ?>
 
                 <input type="hidden" name="feedingSchemeRow" value="<?php echo $strFeedingScheme ?>">
-                <?php if(isset($getPrepared) && isset($getPrepared[0]["FeedingRecipeID"])) {
+                <?php if(isset($getPrepared) && isset($getPrepared[0]["FeedingRecipeID"]) &&
+                    ($_SESSION['FUNCTION'] == 'Keeper' || $_SESSION['FUNCTION'] == 'HeadKeeper' )) {
                     echo '
                 <button type="submit" name="submit" class="btn btn-default">Voeren</button>';
                 } else {
-                    echo '
+                    if($_SESSION['FUNCTION'] == 'Keeper' || $_SESSION['FUNCTION'] == 'HeadKeeper' ) {
+                        echo '
                 <button type="submit" name="submitVoorbereiden" class="btn btn-default">Voorbereiden</button>';
+                    }
                 }
 
                 ?>
