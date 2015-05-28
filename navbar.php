@@ -48,6 +48,7 @@ echo '    <!-- Bootstrap core CSS -->
             <li><a href="?page=species">Diersoorten</a></li>
             <li><a href="?page=environment">Verblijven</a></li>
             <li><a href="?page=feeding">Voeding</a></li>
+            <li><a href="?page=orders">Orders</a></li>
             </ul>
           <ul class="nav navbar-nav navbar-right">
 
