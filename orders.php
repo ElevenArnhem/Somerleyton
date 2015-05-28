@@ -1,7 +1,7 @@
 <?php
 
     $staffID = $_SESSION['STAFFID'];
-    $currentOrderStatus = 'Betaald';
+    $currentOrderStatus = 'Geplaatst';
 
     if(isset($_POST['btnZoeken']))
     {
