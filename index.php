@@ -4,6 +4,7 @@
  * User: thom
  * Date: 24-4-2015
  * Time: 12:18*/
+date_default_timezone_set('Europe/Amsterdam');
  include 'conn.inc.php';
 include 'functions.php';
 include 'pageHead.php';
