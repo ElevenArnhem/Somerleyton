@@ -14,7 +14,7 @@
 echo '<div class="row">';
 if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     include 'headKeeperHome.php';
-    include 'keeperHome.php';
+//    include 'keeperHome.php';
 }else if($_SESSION['FUNCTION'] == 'Keeper') {
     include 'keeperHome.php';
 };

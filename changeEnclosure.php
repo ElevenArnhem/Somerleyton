@@ -59,62 +59,97 @@ if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA']) && isset($_POST['ENCLOS
     $getSpeciesInEnclosurestmt->bindParam(3, $enclosureID);
     $getSpeciesInEnclosurestmt->execute();
     $speciesInEnclosure = $getSpeciesInEnclosurestmt->fetchAll();
+
+    $getAnimalsstmt = $dbh->prepare("EXEC proc_getAnimalInEnclosure ?,?,?");
+    $getAnimalsstmt->bindParam(1, $enclosureID);
+    $getAnimalsstmt->bindParam(2, $areaName);
+    $getAnimalsstmt->bindParam(3, $environmentName);
+    $getAnimalsstmt->execute();
+    $animals = $getAnimalsstmt->fetchAll();
 }
 
 $getSubSpeciesstmt = $dbh->prepare("EXEC proc_GetSubSpecies");
 $getSubSpeciesstmt->execute();
 $subSpecies = $getSubSpeciesstmt->fetchAll();
 
+//proc_getAnimalInEnclosure EnclosureID AreaName EnvironmentName
+
+
 echo '
 <h3>Omgeving: '.$_POST['ENVIRONMENT'].'</h3>
 <h3>Gebied: '.$_POST['AREA'].'</h3>
-<h3>Verblijf: '.$_POST['ENCLOSURE'].'</h3><br><br>';
+<h3>Verblijf: '.$_POST['ENCLOSURE'].'</h3><br><br><hr>';
 
 echo '
-<div class="col-lg-6">
-    <table class="table table-hover">
-        <tr>
-            <th>Hoofdsoort</th>
-            <th>Subsoort</th>
-        </tr>';
-foreach($speciesInEnclosure as $speciesInEnclosureRow) {
-    echo '<tr>
-            <td>'.$speciesInEnclosureRow['HeadSpecies'].'</td>
-            <td>'.$speciesInEnclosureRow['SubSpeciesName'].'</td>';
-if($_SESSION['FUNCTION'] == 'HeadKeeper') {
-    echo '<form action="index.php?page=changeEnclosure" method="post">
-                        <td>
 
-                    <input type="hidden" name="ENVIRONMENT" value="' . $environmentName . '">
-                    <input type="hidden" name="AREA" value="' . $areaName . '">
-                    <input type="hidden" name="ENCLOSURE" value="' . $enclosureID . '">
-                    <input type="hidden" name="HEADSPECIES" value="'.$speciesInEnclosureRow['HeadSpecies'].'">
-                    <input type="hidden" name="SUBSPECIES" value="'.$speciesInEnclosureRow['SubSpeciesName'].'">
-                    <button name="DELETE" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
+<div class="row">
+    <div class="col-lg-6">
+    <h3>Diersoorten</h3>
+        <table class="table table-hover">
+            <tr>
+                <th>Hoofdsoort</th>
+                <th>Subsoort</th>
+            </tr>';
+    foreach($speciesInEnclosure as $speciesInEnclosureRow) {
+        echo '<tr>
+                <td>'.$speciesInEnclosureRow['HeadSpecies'].'</td>
+                <td>'.$speciesInEnclosureRow['SubSpeciesName'].'</td>';
+    if($_SESSION['FUNCTION'] == 'HeadKeeper') {
+        echo '<form action="index.php?page=changeEnclosure" method="post">
+                            <td>
 
-                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                        </button>
-                        </form></td>';
-}
+                        <input type="hidden" name="ENVIRONMENT" value="' . $environmentName . '">
+                        <input type="hidden" name="AREA" value="' . $areaName . '">
+                        <input type="hidden" name="ENCLOSURE" value="' . $enclosureID . '">
+                        <input type="hidden" name="HEADSPECIES" value="'.$speciesInEnclosureRow['HeadSpecies'].'">
+                        <input type="hidden" name="SUBSPECIES" value="'.$speciesInEnclosureRow['SubSpeciesName'].'">
+                        <button name="DELETE" type="submit" class="btn btn-link btn-xs" aria-label="Left Align">
 
-echo '    </tr>';
-}
-if($_SESSION['FUNCTION'] == 'HeadKeeper') {
-    echo '   <tr><form action="index.php?page=changeEnclosure" method="post">
-            <td></td>
-            <td><input type="hidden" name="ENVIRONMENT" value="' . $environmentName . '">
-            <input type="hidden" name="AREA" value="' . $areaName . '">
-            <input type="hidden" name="ENCLOSURE" value="' . $enclosureID . '">
-                <select name="SPECIES" type="text" class="form-control" required>';
-    foreach ($subSpecies as $subSpeciesRow) {
-        echo '<option>' . $subSpeciesRow['LatinName'] . ' | ' . $subSpeciesRow['SubSpeciesName'] . '</option>';
+                            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            </button>
+                            </form></td>';
     }
-    echo '          </select>
-            </td>
-            <td>
-             <button name="ADDSUBSPECIES" class="btn btn-primary" type="submit">Toevoegen</button>
-            </td>
-        </form></tr>';
-} echo '
-    </table>
+
+    echo '    </tr>';
+    }
+    if($_SESSION['FUNCTION'] == 'HeadKeeper') {
+        echo '   <tr><form action="index.php?page=changeEnclosure" method="post">
+                <td></td>
+                <td><input type="hidden" name="ENVIRONMENT" value="' . $environmentName . '">
+                <input type="hidden" name="AREA" value="' . $areaName . '">
+                <input type="hidden" name="ENCLOSURE" value="' . $enclosureID . '">
+                    <select name="SPECIES" type="text" class="form-control" required>';
+        foreach ($subSpecies as $subSpeciesRow) {
+            echo '<option>' . $subSpeciesRow['LatinName'] . ' | ' . $subSpeciesRow['SubSpeciesName'] . '</option>';
+        }
+        echo '          </select>
+                </td>
+                <td>
+                 <button name="ADDSUBSPECIES" class="btn btn-primary" type="submit">Toevoegen</button>
+                </td>
+            </form></tr>';
+    } echo '
+        </table>
+    </div>
+
+    <div class="col-lg-6">
+    <h3>Dieren</h3>
+        <table class="table table-hover">
+            <tr>
+                <th>Diernummer</th>
+                <th>Naam</th>
+                <th>Diersoort</th>
+            </tr>';
+foreach($animals as $animal) {
+    echo '<tr>
+                <td>'.$animal['AnimalID'].'</td>
+                <td>'.$animal['AnimalName'].'</td>
+                <td>'.$animal['SubSpeciesName'].'</td>';
+
+
+    echo '    </tr>';
+}
+ echo '
+        </table>
+    </div>
 </div>';

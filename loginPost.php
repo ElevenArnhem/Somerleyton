@@ -20,4 +20,8 @@
             $_SESSION['FUNCTION'] = $loginInfoRow['Function'];
         }
     }
-    header('Location:index.php');
+    if( isset( $_SESSION['FUNCTION']) && $_SESSION['FUNCTION'] == 'KantoorPersoneel') {
+        header('Location:index.php?page=medewerkers');
+    } else {
+        header('Location:index.php');
+    }

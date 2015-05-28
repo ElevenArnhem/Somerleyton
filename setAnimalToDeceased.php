@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Amsterdam');
     if(isset($_POST['btnSave'])){
 
         $staffID = $_SESSION['STAFFID'];

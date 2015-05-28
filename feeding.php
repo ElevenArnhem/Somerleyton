@@ -46,7 +46,7 @@ echo '
 
 
     <div class="input-group">
-      <input name="SEARCHSTRINGHEADSPECIES" type="text" class="form-control" placeholder="Zoek subsoort op: hoofdsoort">
+      <input name="SEARCHSTRINGHEADSPECIES" type="text" class="form-control" placeholder="Zoek op hoofdsoort">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit" >Zoek</button>
       </span>
@@ -76,7 +76,7 @@ echo '
 
 
     <div class="input-group">
-      <input name="SEARCHSTRINGSUBSPECIES" type="text" class="form-control" placeholder="Zoek subsoort op: subsoort">
+      <input name="SEARCHSTRINGSUBSPECIES" type="text" class="form-control" placeholder="Zoek op subsoort">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit" >Zoek</button>
       </span>
@@ -94,7 +94,7 @@ echo '
 foreach($subspecies as $subspeciesRow) {
 //    if($_SESSION['FUNCTION'])
     echo '<tr>
-        <td><a href="?page=feedingscheme&headspecies='.$subspeciesRow["HeadSpeciesName"].'&subspecies='.$subspeciesRow["SubSpeciesName"].'">'.$subspeciesRow["SubSpeciesName"].'</a></td>
+        <td><a role="button" class="btn btn-link" href="?page=feedingscheme&headspecies='.$subspeciesRow["HeadSpeciesName"].'&subspecies='.$subspeciesRow["SubSpeciesName"].'">'.$subspeciesRow["SubSpeciesName"].'</a></td>
 ';
 
     echo'</tr>';

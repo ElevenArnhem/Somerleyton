@@ -138,9 +138,9 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
     $recipestmt->execute();
-    $recipe = $recipestmt->fetchAll();
+    $recipe2= $recipestmt->fetchAll();
     echo '
-    <div class="col-lg-4">
+    <div class="col-lg-3">
     <br>
         <h4>Voedingsschema</h4>
         <table class="table table-hover">
@@ -149,6 +149,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 <th>Tijdstip</th>
                 <th>Recept </th>
             </tr>';
+    if (isset($feedingScheme[0]['FeedingRecipeID'])) {
         foreach ($feedingScheme as $feedingSchemeRow) {
 
                 //    if($_SESSION['FUNCTION'])
@@ -158,7 +159,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                         <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
                         <input type="hidden" name="latinName" value="' . $_GET['headspecies'] . '">
                         <input type="hidden" name="subSpecies" value="' . $_GET['subspecies'] . '">';
-                if ($specificAnimals > 0) {
+                if (isset($_POST['SPECIFICANIMALFEEDINGSCHEME']) && $specificAnimals > 0) {
 
                     echo ' <input type="hidden" name="animalID" value="' . $specificAnimals . '">';
                 }
@@ -184,11 +185,104 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                 echo '</tr>';
 
         };
-    if(isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
-//        if ($feedingSchemeRow['HeadKeeperFromSubSpecies'] == '1') {
+
+    }
+    echo '
+    </table>
+
+    </div>';
+
+    $searchString = '';
+    if(isset($_POST['SEARCHSTRING'])) {
+        $searchString = $_POST['SEARCHSTRING'];
+    }
+    $headSpecies = $_GET['headspecies'];
+    $subSpecies = $_GET['subspecies'];
+    $getRecipesstmt = $dbh->prepare("EXEC proc_SearchRecipeForSubSpecies ?,?,?");
+    $getRecipesstmt->bindParam(1, $searchString);
+    $getRecipesstmt->bindParam(2, $headSpecies);
+    $getRecipesstmt->bindParam(3, $subSpecies);
+    $getRecipesstmt->execute();
+    $recipes = $getRecipesstmt->fetchAll();
+    echo '
+
+
+  <div class="col-lg-6">
+    <form action="index.php?page=feedingscheme&headspecies='.$_GET['headspecies'].'&subspecies='.$_GET['subspecies'].'" method="post">
+
+
+        <div class="input-group">
+          <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek recepten op ingredient naam">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" >Zoek</button>
+          </span>
+
+        </div><!-- /input-group -->
+
+     <!-- /.col-lg-6 -->
+
+
+     <br>
+    </form>';
+    echo '
+    <table class="table table-hover">
+    <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+    <tr>
+                <th>ReceptID</th>
+                <th>Ingredienten</th>
+                <th>Hoeveelheid</th>
+
+    </tr>';
+    $recipeID = 0;
+    foreach($recipes as $recipe) {
+        $items = null;
+        if($recipeID != $recipe['FeedingRecipeID']) {
+            $recipeID = $recipe['FeedingRecipeID'];
+
+            echo '<tr>
+                <td>'.$recipe['FeedingRecipeID'].'</td>
+                <td>
+    ';
+            if ($recipeID == $recipe['FeedingRecipeID']) {
+
+                foreach ($recipes as $recipe1) {
+                    if ($recipeID == $recipe1['FeedingRecipeID']) {
+                        $popupRow = $recipe1['ItemName'];
+                        echo $popupRow. '<br>';
+
+                    }
+                }
+            }
+
+            echo'
+        </td><td>';
+            if ($recipeID == $recipe['FeedingRecipeID']) {
+
+                foreach ($recipes as $recipe1) {
+                    if ($recipeID == $recipe1['FeedingRecipeID']) {
+                        $popupRow = $recipe1['Amount'].' ' .$recipe1['Unit'];
+                        echo $popupRow. '<br>';
+
+                    }
+                }
+            }
+
+            echo '</td>';
+            if ($feedingScheme[0]['HeadKeeperFromSubSpecies'] == '1') {
+                echo '<td><input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
+            ' . $addButton . '
+<input type="hidden" name="FeedingRecipeID" value="' . $recipe['FeedingRecipeID'] . '" >
+</td>';
+            }
+            }
+
+        echo'</tr>';
+    };
+    if($specificAnimals > 0 || isset($_POST['SPECIFICANIMALFEEDINGSCHEME'])) {
+        if ($feedingScheme[0]['HeadKeeperFromSubSpecies'] == '1') {
             echo '
             <tr>
-                <form action="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
+
                     <td>
                         <select name="DayGeneral" type="text" class="form-control" required>
                             <option>maandag</option>
@@ -203,27 +297,16 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                     <td>
                         <input name="TimeGeneral" type="time" class="form-control" required>
                     </td>
-                    <td>
-                        <select name="FeedingRecipeID"  type="text" class="form-control" required>';
-            foreach ($recipe as $recipeRow) {
-                echo '
-                            <option>' . $recipeRow['FeedingRecipeID'] . '</option>';
-            }
-            echo '
-                        </select>
-                    </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>' . $addButton . '
 
-                </td>
             </tr>
+
         </form>';
         }
-//    }
+    }
     echo '
-    </table>
+        </table>
+    </div>
 
-    </div>';
+ ';
+
 }

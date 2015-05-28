@@ -57,7 +57,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Naam:
                 </dt>
                 <dd>
-                    <input name="STAFFNAME" type="text" class="form-control" required>
+                    <input name="STAFFNAME" type="text" class="form-control" maxlength="50" required>
                 </dd>
                 <br>
 
@@ -65,7 +65,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Telefoon nummer:
                 </dt>
                 <dd>
-                    <input name="STAFFPHONENUMBER" type="text" class="form-control" required>
+                    <input name="STAFFPHONENUMBER" type="text" maxlength="20" class="form-control" required>
                 </dd>
                 <br>
 
@@ -73,7 +73,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Adres:
                 </dt>
                 <dd>
-                    <input name="STAFFADDRESS" type="text" class="form-control" required>
+                    <input name="STAFFADDRESS" type="text" class="form-control" maxlength="50" required>
                 </dd>
                 <br>
 
@@ -81,7 +81,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Postcode:
                 </dt>
                 <dd>
-                    <input name="STAFFZIPCODE" type="text" class="form-control" required>
+                    <input name="STAFFZIPCODE" type="text" class="form-control"  maxlength="50" required>
                 </dd>
                 <br>
 
@@ -89,7 +89,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Stad:
                 </dt>
                 <dd>
-                    <input name="STAFFCITY" type="text" class="form-control" required>
+                    <input name="STAFFCITY" type="text" class="form-control"  maxlength="50" required>
                 </dd>
                 <br>
 
@@ -97,7 +97,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     E-mail:
                 </dt>
                 <dd>
-                    <input name="STAFFEMAIL" type="text" class="form-control" required>
+                    <input name="STAFFEMAIL" type="email" class="form-control"  maxlength="50" required>
                 </dd>
                 <br>
                 <dt>
@@ -126,7 +126,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     Wachtwoord:
                 </dt>
                 <dd>
-                    <input name="STAFFPASSWORD" type="password" class="form-control">
+                    <input name="STAFFPASSWORD" type="password" class="form-control" required>
                 </dd>
                 <br>
 

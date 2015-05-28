@@ -123,8 +123,8 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
               <h2>Dier Info</h2>
               <form action="index.php?page=changeAnimal&animalID='.$animal['AnimalID'].'" method="post" enctype="multipart/form-data">
               <dl class="dl-horizontal">
-              <input type="hidden" name="ANIMALID" value="'.$animal['AnimalID']. '">
-               <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" value="'.$animal['AnimalName'].'"></dd><br>
+              <input type="hidden" name="ANIMALID" value="'.$animal['AnimalID']. '" maxlength="50">
+               <dt>Naam</dt><dd><input name="ANIMALNAME" type="text" class="form-control" value="'.$animal['AnimalName'].'" maxlength="50"></dd><br>
               <dt>Geslacht</dt><dd><select name="GENDER" type="text" class="form-control" value="'.$animal['Gender'].'">
                                         <option value="F">Vrouwtje</option><option value="M"';if($animal['Gender'] == "M"){ echo'selected'; } echo'>Mannetje </option><option value="U" ';if($animal['Gender'] == "U"){ echo'selected'; } echo'>Nog niet bekend</option></select></dd><br>
                <dt>Soort</dt><dd><select name="LATINNAME" type="text" class="form-control" value="'.$animal['LatinName'].'"><option value="'.$animal['LatinName'].'">'.$animal['LatinName'].'</option>';
@@ -137,7 +137,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
                  echo '<option value="'.$subSpeciesName["SubSpeciesName"].'">'.$subSpeciesName["SubSpeciesName"].'</option>';
                 }
                 echo'</select></dd><br>
-               <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" value="'.$animal['BirthPlace'].'"></dd><br>
+               <dt>Geboorte plaats</dt><dd><input name="BIRTHPLACE" type="text" class="form-control" value="'.$animal['BirthPlace'].'" maxlength="50"></dd><br>
                <dt>Geboorte datum</dt><dd><input name="BIRTHDATE" type="date" class="form-control" value="'.$animal['BirthDate'].'"></dd><br>
                <dt>Omgeving </dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" value="'.$animal['EnvironmentName'].'"><option value="'.$animal['EnvironmentName'].'">'.$animal['EnvironmentName'].'</option>';
                 foreach($environmentNames as $environmentName) {
@@ -149,7 +149,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
                     echo '<option value="'.$area['AreaName'].'">'.$area['AreaName'].'</option>';
                 }
             echo '</select></dd><br>
-                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="text" class="form-control" value="'.$animal['EnclosureID'].'"></dd><br><br>
+                <dt>verblijf nummer</dt><dd><input name="ENCLOSUREID" type="number" class="form-control" value="'.$animal['EnclosureID'].'" maxlength="10" max="2147483646" ></dd><br><br>
                <dt>Beschrijving </dt></dl> <br> <textarea name="DESCRIPTION" class="form-control" rows="5">'.$animal['Description'].'</textarea><br><br>';
 
         echo '  </div>

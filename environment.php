@@ -52,8 +52,9 @@ $selectedArea = null;
 if(isset( $_POST['AREA'])) {
     $selectedArea = $_POST['AREA'];
 }
-$allEnclosures = $dbh->prepare("EXEC proc_GetEnclosureByArea ?");
+$allEnclosures = $dbh->prepare("EXEC proc_GetEnclosureByArea ?,?");
 $allEnclosures->bindParam(1,$selectedArea);
+$allEnclosures->bindParam(2,$selectedEnivornment);
 $allEnclosures->execute();
 $enclosures = $allEnclosures->fetchAll();
 
@@ -76,6 +77,7 @@ echo "</table>";if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo"<a href='?
 foreach($areas as $area) {
     echo '<tr '; if($selectedArea == $area['AreaName']) { echo 'class="active" ';} echo'>
            <form action="index.php?page=environment"  method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><input type="hidden" name="AREA" value="'.$area["AreaName"].'"> <td><button class="btn btn-link" type="submit" value="'.$area["AreaName"].'">'.$area["AreaName"].'</button></td></form>
+           <td><form action="index.php?page=viewAreaAndKeepers" method="post"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Verzorgers  </button></form></td>
            ';if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {echo'<td><form action="index.php?page=addArea" method="post"><input type="hidden" name="HEADKEEPER" value="'.$area['HeadkeeperID'].'"><input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'"><button class="btn btn-default" name="AREA" value="'.$area["AreaName"].'" type="submit" >Gebied aanpassen</button></form></td>'; } echo '
           </tr>';
 }
