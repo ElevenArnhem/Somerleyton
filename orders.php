@@ -79,7 +79,7 @@
                         <td>
                             <form action="index.php?page=alterOrder" method="post">
                                 <input type="hidden" name="orderID" value="<?php echo $order['OrderID']?>">
-                                <button type="submit" class="btn btn-default" disabled>Bewerken</button>
+                                <button type="submit" class="btn btn-default">Bewerken</button>
                             </form>
                         </td>
                     <?php
