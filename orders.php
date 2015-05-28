@@ -90,7 +90,12 @@
         }
     ?>
 </table>
-
-<form action="index.php?page=addOrder" method="post">
-    <button type="submit" class="btn btn-default">Toevoegen</button>
-</form>
+<?php
+if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
+    ?>
+    <form action="index.php?page=addOrder" method="post">
+        <button type="submit" class="btn btn-default">Toevoegen</button>
+    </form>
+<?php
+}
+?>
