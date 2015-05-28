@@ -9,7 +9,7 @@
         $selectedLeverancier = $_POST['SelectedLeverancier'];
 
     //  Get all suppliers
-    $getLeveranciersStatement = $dbh -> prepare('proc_searchLeveranciers ?, ?, ?');
+    $getLeveranciersStatement = $dbh -> prepare('EXEC proc_searchLeveranciers ?, ?, ?');
     $getLeveranciersStatement -> bindParam(1, $staffID);
     $getLeveranciersStatement -> bindParam(2, $searchCriteria);
     $getLeveranciersStatement -> bindParam(3, $leverancierIsActive);
