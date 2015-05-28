@@ -16,7 +16,7 @@
     $getLeveranciersStatement -> execute();
     $leveranciers = $getLeveranciersStatement -> fetchAll();
 
-    if(!isset($_POST['SelectedLeverancier']))
+    if(!isset($_POST['SelectedLeverancier']) && isset($leveranciers[0]['SupplierName']))
         $selectedLeverancier = $leveranciers[0]['SupplierName'];
 
     // Get all items for Supplier
