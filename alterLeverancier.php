@@ -27,7 +27,6 @@ if(isset($_POST['Telefoonnummer']) && isset($_POST['Adres'])) {
     $leverancierstmt->execute();
     $leveranciers = $leverancierstmt->fetch();
 }
-
 echo '
 <hr>
 <form action="index.php?page=alterLeverancier&Leverancier='.$_GET["Leverancier"].'" method="post">
@@ -35,10 +34,10 @@ echo '
           <h2>'.$_GET["Leverancier"].'</h2>
           <br><br>
           <p>Adres</p>
-          <input name="Adres" type="text" class="form-control" Value='.$leveranciers["SupplierAddress"].' required>
+          <input name="Adres" type="text" class="form-control" Value="'.$leveranciers["SupplierAddress"].'" required>
           <br><br>
           <p>Telefoonnummer</p>
-          <input name="Telefoonnummer" type="text" class="form-control" Value='.$leveranciers['SupplierTelephoneNumber'].' required>
+          <input name="Telefoonnummer" type="text" class="form-control" Value="'.$leveranciers['SupplierTelephoneNumber'].'" required>
 
          <br>
 
