@@ -51,7 +51,7 @@
             <?php foreach($orderDetails as $itemInOrder) {?>
                 <tr>
                     <td><?php echo $itemInOrder['ItemName'] ?></td>
-                    <td><?php echo $itemInOrder['Amount'] ?></td>
+                    <td><?php echo $itemInOrder['Amount'] . ' ' . $itemInOrder['Unit'] ?></td>
                     <td><?php echo '€ ' .round($itemInOrder['Price']) ?></td>
                 </tr>
             <?php } ?>
