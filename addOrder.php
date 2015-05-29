@@ -27,27 +27,48 @@
         $itemsForSupplier = $getItemsForSupplierStatement -> fetchAll();
 
         if(isset($_POST['btnAddItem']))  {
-            $item = $_POST['itemName'];
-            $aantal = $_POST['amountForItem'];
-            $prijs = $_POST['priceForItem'];
-
-            $itemToArray = $item . ';' . $aantal. ';' . $prijs;
+            $itemID = $_POST['itemID'];
+            $itemName = $_POST['itemName'];
+            $amount = $_POST['amountForItem'];
+            $price = $_POST['priceForItem'];
 
             if(isset($_POST['SerializedOrders'])) {
                 $serializedOrderItems = $_POST['SerializedOrders'];
                 $itemsInOrder = unserialize(base64_decode($serializedOrderItems));
             }
 
+            // if the item already exists update it.
+            foreach($itemsInOrder as $itemInOrder) {
+                $propertiesInItemInOrder = explode(';', $itemInOrder);
+                $itemInOrderID = $propertiesInItemInOrder[0];
+
+                if($itemInOrderID == $itemID) {
+                    // Update price and amount
+                    $itemInOrderAmount = $propertiesInItemInOrder[2];
+                    $itemInOrderPrice = $propertiesInItemInOrder[3];
+
+                    $amount = $amount + $itemInOrderAmount;
+                    $price = $price + $itemInOrderPrice;
+
+                    // Remove old item
+                    $index = array_search($itemInOrder, $itemsInOrder);
+                    if($index !== false){
+                        unset($itemsInOrder[$index]);
+                    }
+                }
+            }
+
+            $itemToArray = $itemID. ';' . $itemName . ';' . $amount. ';' . $price;
             array_push($itemsInOrder, $itemToArray);
         }
 
         if(isset($_POST['btnRemoveItem'])) {
+            $itemID = $_POST['itemID'];
             $item = $_POST['itemName'];
             $aantal = $_POST['amountForItem'];
             $prijs = $_POST['priceForItem'];
 
-
-            $itemToArray = $item . ';' . $aantal . ';' . $prijs;
+            $itemToArray = $itemID . ';' . $item . ';' . $aantal . ';' . $prijs;
 
             if (isset($_POST['SerializedOrders'])) {
                 $serializedOrderItems = $_POST['SerializedOrders'];
@@ -68,18 +89,30 @@
             if(isset($_POST['OrderComments']))
                 $comment = $_POST['OrderComments'];
 
-            $serializedItemsInOrder = '';
-
+            $unserializedOrders = array();
             if (isset($_POST['SerializedOrders'])) {
                 $serializedOrderItems = $_POST['SerializedOrders'];
-                $serializedItemsInOrder = base64_decode($serializedOrderItems);
+                $unserializedOrders = unserialize(base64_decode($serializedOrderItems));
+            }
+
+            // Create string with all items in the order.
+            $retVal = '';
+            foreach($unserializedOrders as $itemsInBasket) {
+                $propertiesInItemInBasket = explode(';', $itemsInBasket);
+
+                $itemInOrderID = $propertiesInItemInBasket[0];
+                $itemInOrderName = $propertiesInItemInBasket[1];
+                $itemInOrderAmount = $propertiesInItemInBasket[2];
+                $itemInOrderPrice = $propertiesInItemInBasket[3];
+
+                $retVal = $retVal . $itemInOrderID . ';' . $itemInOrderAmount . ';' . $itemInOrderPrice . '"';
             }
 
             $placeOrderStatement = $dbh -> prepare('proc_addOrder ?, ?, ?, ?');
             $placeOrderStatement -> bindParam(1, $staffID);
             $placeOrderStatement -> bindParam(2, $selectedLeverancier);
             $placeOrderStatement -> bindParam(3, $comment);
-            $placeOrderStatement -> bindParam(4, $serializedItemsInOrder);
+            $placeOrderStatement -> bindParam(4, $retVal);
             $placeOrderStatement -> execute();
 
             spErrorCaching($placeOrderStatement);
@@ -132,6 +165,7 @@
                             <input type="hidden" name="SerializedOrders" value="<?php echo $serializedOrderItems ?>">
                             <input type="hidden" name="SelectedLeverancier" value="<?php echo $selectedLeverancier ?>">
                             <input type="hidden" name="itemName" value="<?php echo $item['ItemName'] ?>">
+                            <input type="hidden" name="itemID" value="<?php echo $item['ItemID'] ?>">
                             <button type="submit" name="btnAddItem" class="btn btn-link" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
                             </button>
@@ -153,9 +187,10 @@
         <?php foreach($itemsInOrder as $itemInOrder) {
             $propertiesInItemInOrder = explode(';', $itemInOrder);
 
-            $itemInOrderName = $propertiesInItemInOrder[0];
-            $itemInOrderAmount = $propertiesInItemInOrder[1];
-            $itemInOrderPrice = $propertiesInItemInOrder[2];
+            $itemInOrderID = $propertiesInItemInOrder[0];
+            $itemInOrderName = $propertiesInItemInOrder[1];
+            $itemInOrderAmount = $propertiesInItemInOrder[2];
+            $itemInOrderPrice = $propertiesInItemInOrder[3];
             ?>
             <tr>
                 <td> <?php echo $itemInOrderName ?> </td>
@@ -163,6 +198,7 @@
                 <td> <?php echo '€ ' . $itemInOrderPrice ?> </td>
                 <td>
                     <form action="index.php?page=addOrder" method="post">
+                        <input type="hidden" name="itemID" value="<?php echo $itemInOrderID ?>">
                         <input type="hidden" name="itemName" value="<?php echo $itemInOrderName ?>">
                         <input type="hidden" name="amountForItem" value="<?php echo $itemInOrderAmount ?>">
                         <input type="hidden" name="priceForItem" value="<?php echo $itemInOrderPrice ?>">
