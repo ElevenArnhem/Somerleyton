@@ -8,7 +8,13 @@
         $getOrderDetailStatement -> bindParam(2, $orderID);
         $getOrderDetailStatement -> execute();
         $orderDetails = $getOrderDetailStatement -> fetchAll();
+
+
+        $getOrderStatesstmt = $dbh -> prepare('proc_getOrderStates');
+        $getOrderStatesstmt->execute();
+        $orderStates = $getOrderStatesstmt->fetchAll();
     }
+
 ?>
 
 <div class="row">
@@ -21,7 +27,14 @@
             <dt>Leverancier</dt><dd><?php echo $orderDetails[0]['SupplierName'] ?></dd><br>
             <dt>Telefoon nummer</dt><dd><?php echo $orderDetails[0]['SupplierTelephoneNumber'] ?></dd><br>
             <dt>Adres</dt><dd><?php echo $orderDetails[0]['SupplierAddress'] ?></dd><br>
-            <dt>Status</dt><dd><?php echo $orderDetails[0]['OrderState'] ?></dd><br>
+            <dt>Status</dt><dd>
+                                <select name="orderState" class="form-control">
+                                    <option><?php echo $orderDetails[0]['OrderState'] ?></option>
+                                    <?php foreach($orderStates as $orderState) { ?>
+                                        <option><?php echo $orderState['OrderState'] ?></option>
+                                    <?php } ?>
+
+                </select></dd><br>
             <dt>Ontvangst datum</dt><dd><?php echo $orderDetails[0]['OrderRecievedDate'] ?></dd><br>
        </dl>
     </div>

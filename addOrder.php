@@ -120,10 +120,10 @@
                             <?php echo $item['ItemName'] ?>
                         </td>
                         <td>
-                            <input type="number" min="1" value="1" name="amountForItem">
+                            <input class="form-control" type="number" min="1" value="1" name="amountForItem">
                         </td>
                         <td>
-                            <input type="number" value="1.00" step="0.01" min="0.01" name="priceForItem">
+                            <input class="form-control" type="number" value="1.00" step="0.01" min="0.01" name="priceForItem">
                         </td>
                         <td>
                             <?php echo $item['Unit'] ?>
