@@ -47,7 +47,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel' || $_SESSION['FUNCTION'] != 'Head
 
         if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
             echo '<td>
-                    <a href="?page=alterItem='.$item["ItemID"].'">
+                    <a href="?page=alterItem&ItemID='.$item["ItemID"].'">
                         <button type="button" class="btn btn-default">Aanpassen</button>
                     </a>
                   </td>';
