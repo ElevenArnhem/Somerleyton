@@ -68,7 +68,6 @@
     }
 
     if(isset($_POST['btnPlaceLocalOrder'])){
-
         $retVal = '';
         foreach($itemsInLocalOrder as $itemInLocalOrder) {
             $propertiesInItemInLocalOrder = explode(';', $itemInLocalOrder);
@@ -178,6 +177,6 @@
 
     <form action="index.php?page=addLocalOrder" method="post">
         <input type="hidden" name="itemsInLocalOrder" value="<?php echo $serializedItemsInLocalOrder ?>">
-        <button class="btn btn-primary" type="submit" name="btnPlaceLocalOrder" >Opslaan</button>
+        <button class="btn btn-primary" type="submit" name="btnPlaceLocalOrder">Opslaan</button>
     </form>
 </div>
