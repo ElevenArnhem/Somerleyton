@@ -17,7 +17,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         echo '<h3>Week: '.$week.'</h3>';
         echo '<h3>Jaar: '.$jaar.'</h3>';
 
-        $readLocalOrderStatement = $dbh->prepare("EXEC proc_getLocalOrder ?, ?,?");
+        $readLocalOrderStatement = $dbh->prepare("EXEC proc_getLocalOrders ?, ?,?");
         $readLocalOrderStatement->bindParam(1, $StaffID);
         $readLocalOrderStatement->bindParam(2, $jaar);
         $readLocalOrderStatement->bindParam(3, $week);
