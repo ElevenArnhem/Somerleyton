@@ -11,6 +11,12 @@ $animalstmt = $dbh->prepare("proc_getAnimal ?");
 $animalstmt->bindParam(1, $animalID);
 $animalstmt->execute();
 $animal = $animalstmt->fetch();
+$gender = $animal['Gender'];
+$getChildrenstmt = $dbh->prepare("proc_getChildrenFromAnimal ?");
+$getChildrenstmt->bindParam(1, $animalID);
+$getChildrenstmt->execute();
+$children = $getChildrenstmt->fetchAll();
+
 echo '<h1>'.$animal['AnimalName'].'</h1>
         <br>
         <div class="row">
@@ -28,24 +34,41 @@ echo '<h1>'.$animal['AnimalName'].'</h1>
             if($_SESSION['FUNCTION'] == 'HeadKeeper' || $_SESSION['FUNCTION'] == 'Keeper' ||$_SESSION['FUNCTION'] == 'Vet' ) {
                if(!isset($_POST['PRINTVERSION'])) {
            echo'<dt>Verblijf </dt><dd>'.$animal['EnclosureID'].'</dd><br>
-           <dt>Voedingsschema </dt><dd>nnb</dd><br>
-           <dt>Medische gegevens </dt><dd>nnb</dd><br>
-           <dt>Moeder </dt><dd><a role="button" class="btn btn-link" href="index.php?page=animalCard&animalID='.$animal['MotherID'].'">'.$animal['MotherName'].'</a></dd><br>
-           <dt>Vader </dt><dd><a role="button" class="btn btn-link" href="index.php?page=animalCard&animalID='.$animal['FatherID'].'">'.$animal['FatherName'].'</a></dd><br>'; } }echo'<br>
+           <dt>Voedingsschema </dt><dd><a role="button" href="index.php?page=feedingscheme&headspecies='.$animal['LatinName'].'&subspecies='.$animal['SubSpeciesName'].'">'.$animal['SubSpeciesName'].'</a></dd><br>
+           <dt>Moeder </dt><dd><a role="button" href="index.php?page=animalCard&animalID='.$animal['MotherID'].'">'.$animal['MotherName'].'</a></dd><br>
+           <dt>Vader </dt><dd><a role="button" href="index.php?page=animalCard&animalID='.$animal['FatherID'].'">'.$animal['FatherName'].'</a></dd><br>'; } }echo'<br>
            <dt>Beschrijving </dt></dl> <br> '.$animal['Description'].'<br><br>';
         if($_SESSION['FUNCTION'] == 'HeadKeeper' && !isset($_POST['PRINTVERSION'])) {
         echo '<form action="index.php?page=animalCard&animalID='.$animalID.'" method="post"><div class="btn-group" role="group" ><a class="btn btn-default" role="button" href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> Aanpassen </a>
-        <button name="PRINTVERSION" type="submit" class="btn btn-default" >Print versie</button></div></form><br><br><br> ';
+        <button name="PRINTVERSION" type="submit" class="btn btn-default" >Print versie</button></div></form><br><br> ';
         }
        echo'</div>
    <div class="col-lg-6">
-   <br><br>';
+   ';
 if(isset($animal['Image']) && !empty($animal['Image']) && $animal['Image'] != null) {
     echo '
 <img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
 }
 echo '</div></div>
 <div class="row">
+    <table class="table table-hover">
+        <tr>
+            <th>Kind naam</th>
+            <th>Kind geslacht</th>
+            <th>Geboorte datum kind</th>
+            <th>'; if($gender == 'M'){ echo 'Moeder'; } elseif($gender == 'F'){ echo 'Vader';} echo '</th>
+        </tr>';
+        foreach($children as $child) {
+            echo '<tr>
+                    <td><a role="button" href="index.php?page=animalCard&animalID='.$child['AnimalID'].'">'.$child['AnimalName'].'</a></td>
+                    <td>'.$child['Gender'].'</td>
+                    <td>'.$child['BirthDate'].'</td>
+                    <td><a role="button" href="index.php?page=animalCard&animalID='.$child['MateID'].'">'.$child['MateName'].'</a></td>
+
+            </tr>';
+        }
 
 
-</div> ';
+    echo '</table>
+
+</div><br><br><br> ';
