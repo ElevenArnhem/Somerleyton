@@ -17,7 +17,7 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         echo '<h3>Week: '.$week.'</h3>';
         echo '<h3>Jaar: '.$jaar.'</h3>';
 
-        $readLocalOrderStatement = $dbh->prepare("EXEC proc_getLocalOrder ?, ?,?");
+        $readLocalOrderStatement = $dbh->prepare("EXEC proc_getLocalOrders ?, ?,?");
         $readLocalOrderStatement->bindParam(1, $StaffID);
         $readLocalOrderStatement->bindParam(2, $jaar);
         $readLocalOrderStatement->bindParam(3, $week);
@@ -31,7 +31,6 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
             <th>Naam</th>
             <th>Aantal</th>
             <th>Eenheid</th>
-            <th>Hoofdverzorger</th>
         </tr>';
 
         foreach($readLocalOrders as $LocalOrder) {
@@ -40,7 +39,6 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                 <td>' . $LocalOrder["ItemName"] . '</td>
                 <td>' . $LocalOrder["Amount"] . '</td>
                 <td>' . $LocalOrder["Unit"] . '</td>
-                <td>' . $LocalOrder["StaffName"] . '</td>
             </tr>';
         }
         echo '</table>';
