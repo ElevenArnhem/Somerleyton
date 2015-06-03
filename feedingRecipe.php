@@ -42,7 +42,10 @@ if(isset( $_POST["DayGeneral"]) && isset( $_POST["TimeGeneral"])) {
 
 if(isset($_POST['submit'])){
 
-    $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?");
+    $feedingTime = $_POST['feedingTime'];
+    $dateTimeFed = date("Y-m-d").' '.$feedingTime.':59';
+
+    $addFeedingHistoryStatement = $dbh -> prepare("proc_AddFeedingHistory ?, ?, ?, ?, ?, ?, ?, ?");
     $addFeedingHistoryStatement -> bindParam(1, $staffID);
     $addFeedingHistoryStatement -> bindParam(2, $receptID);
     $addFeedingHistoryStatement -> bindParam(3, $animalID);
@@ -50,6 +53,7 @@ if(isset($_POST['submit'])){
     $addFeedingHistoryStatement -> bindParam(5, $subSpecies);
     $addFeedingHistoryStatement -> bindParam(6, $dayGeneral);
     $addFeedingHistoryStatement -> bindParam(7, $timeGeneral);
+    $addFeedingHistoryStatement -> bindParam(8, $dateTimeFed);
     $addFeedingHistoryStatement -> execute();
 
     spErrorCaching($addFeedingHistoryStatement);
@@ -181,6 +185,7 @@ $getPrepared = $getPreparedstmt->fetchAll();
                 <?php if(isset($getPrepared) && isset($getPrepared[0]["FeedingRecipeID"]) &&
                     ($_SESSION['FUNCTION'] == 'Keeper' || $_SESSION['FUNCTION'] == 'HeadKeeper' )) {
                     echo '
+                <input class="form-control" type="time" name="feedingTime" required><br>
                 <button type="submit" name="submit" class="btn btn-default">Voeren</button>';
                 } else {
                     if($_SESSION['FUNCTION'] == 'Keeper' || $_SESSION['FUNCTION'] == 'HeadKeeper' ) {
