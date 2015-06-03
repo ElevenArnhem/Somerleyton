@@ -3,7 +3,7 @@
 echo '        <div class="col-lg-4">
           <h2>Hoofdverzorger</h2>
 
-          <p>Hier, de voor u interessante snelkoppelingen </p>
+          <p>De voor u interessante snelkoppelingen </p>
           <p>
           <div class="btn-group">
               <a class="btn btn-primary" href="index.php?page=findAnimal" role="button">Dieren</a>
