@@ -68,6 +68,27 @@ function addPicture($animalID) {
 
 }
 
+function getCurrentWeekNumber(){
+    $date = getCurrentDate();
+    $week = $date -> format("W");
+
+    return $week;
+}
+
+function getCurrentYear(){
+    $date = getCurrentDate();
+    $year = $date -> format("Y");
+
+    return $year;
+}
+
+function getCurrentDate(){
+    $date = date('Y-m-d');
+    $curDate = new DateTime($date);
+
+    return $curDate;
+}
+
 function addSpeciesPicture($fileName){
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
 
