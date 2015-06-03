@@ -31,7 +31,6 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
             <th>Naam</th>
             <th>Aantal</th>
             <th>Eenheid</th>
-            <th>Hoofdverzorger</th>
         </tr>';
 
         foreach($readLocalOrders as $LocalOrder) {
@@ -40,7 +39,6 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                 <td>' . $LocalOrder["ItemName"] . '</td>
                 <td>' . $LocalOrder["Amount"] . '</td>
                 <td>' . $LocalOrder["Unit"] . '</td>
-                <td>' . $LocalOrder["StaffName"] . '</td>
             </tr>';
         }
         echo '</table>';
