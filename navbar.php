@@ -41,6 +41,7 @@
                 <li><a href="?page=findAnimal">Dieren overzicht</a></li>
                 <li><a href="?page=species">Diersoorten</a></li>
                 <li><a href="?page=environment">Verblijven</a></li>
+                <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=dierentuinen">Dierentuinen</a> </li> <?php } ?>
             </ul>
         </li>
         <li>

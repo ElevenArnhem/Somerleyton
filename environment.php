@@ -62,6 +62,7 @@ $enclosures = $allEnclosures->fetchAll();
 echo ' <div class="row"><div class="col-lg-4"><table class="table table-hover">
     <tr>
         <th>Omgeving</th>
+        <th></th>
     </tr>';
 foreach($environments as $environment) {
     echo '<tr '; if($selectedEnivornment == $environment['EnvironmentName']) { echo 'class="active" ';} echo'>
