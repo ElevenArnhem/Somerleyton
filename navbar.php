@@ -51,6 +51,7 @@ echo '    <!-- Bootstrap core CSS -->
             <li><a href="?page=orders">Orders</a></li>
             <li><a href="?page=Leverancier">Leveranciers</a></li>
             <li><a href="?page=items">Producten</a></li>
+            <!--<li><a href="?page=addLocalOrder">Bestellijsten</a></li>-->
             </ul>
           <ul class="nav navbar-nav navbar-right">
 
