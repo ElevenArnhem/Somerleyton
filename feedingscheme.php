@@ -86,7 +86,6 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     $genericFeedingSchemestmt->execute();
     $genericFeedingScheme = $genericFeedingSchemestmt->fetchAll();
 
-
     $specificAnimals = 0;
 //i
 //    $specificAnimals = $schemes['HeadKeeperFromSubSpecies'];
@@ -96,8 +95,17 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
     if (isset($_POST['SPECIFICANIMALS'])) {
         $specificAnimals = $_POST['SPECIFICANIMALS'];
     }
+    $specificAnimalForMessage = 1;
+    $animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
+    $animalsstmt->bindParam(1, $headSpeciesName);
+    $animalsstmt->bindParam(2, $subSpeciesName);
+    $animalsstmt->bindParam(3, $specificAnimalForMessage);
+    $animalsstmt->execute();
+    $animals = $animalsstmt->fetchAll();
 
-
+    if(isset($animals[0][0])) {
+        echo '<div class="alert alert-warning" role="alert">Let op er zijn dieren met een specifiek voedingsschema!</div>';
+    }
     $animalsstmt = $dbh->prepare("EXEC proc_GetAnimalAndVoersschema ?,?,?");
     $animalsstmt->bindParam(1, $headSpeciesName);
     $animalsstmt->bindParam(2, $subSpeciesName);

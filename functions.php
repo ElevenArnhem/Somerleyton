@@ -205,7 +205,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
 
                 echo '</tr>';
 
-        };
+        }
 
     }
     echo '
@@ -289,12 +289,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
             }
 
             echo '</td>';
-            if ($feedingScheme[0]['HeadKeeperFromSubSpecies'] == '1') {
-                echo '<td><input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
-            ' . $addButton . '
-<input type="hidden" name="FeedingRecipeID" value="' . $recipe['FeedingRecipeID'] . '" >
-</td>';
-            }
+
             }
 
         echo'</tr>';
@@ -318,6 +313,23 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                     <td>
                         <input name="TimeGeneral" type="time" class="form-control" required>
                     </td>
+                    <td>
+                        <select class="form-control" name="FeedingRecipeID">';
+                        foreach($recipes as $recipe) {
+                            if ($recipeID != $recipe['FeedingRecipeID']) {
+                                $recipeID = $recipe['FeedingRecipeID'];
+
+                                echo '<option>' . $recipe['FeedingRecipeID'] . '</option>';
+                            }
+                        }
+                    echo '</select>
+                    </td>
+                                <td><input type="hidden" name="SPECIFICANIMALS" value="' . $specificAnimals . '">
+                                 ' . $addButton . '
+
+                </td>
+
+
 
             </tr>
 
