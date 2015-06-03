@@ -29,7 +29,9 @@ echo '<h1>'.$animal['AnimalName'].'</h1>
                if(!isset($_POST['PRINTVERSION'])) {
            echo'<dt>Verblijf </dt><dd>'.$animal['EnclosureID'].'</dd><br>
            <dt>Voedingsschema </dt><dd>nnb</dd><br>
-           <dt>Medische gegevens </dt><dd>nnb</dd><br>'; } }echo'<br>
+           <dt>Medische gegevens </dt><dd>nnb</dd><br>
+           <dt>Moeder </dt><dd><a role="button" class="btn btn-link" href="index.php?page=animalCard&animalID='.$animal['MotherID'].'">'.$animal['MotherName'].'</a></dd><br>
+           <dt>Vader </dt><dd><a role="button" class="btn btn-link" href="index.php?page=animalCard&animalID='.$animal['FatherID'].'">'.$animal['FatherName'].'</a></dd><br>'; } }echo'<br>
            <dt>Beschrijving </dt></dl> <br> '.$animal['Description'].'<br><br>';
         if($_SESSION['FUNCTION'] == 'HeadKeeper' && !isset($_POST['PRINTVERSION'])) {
         echo '<form action="index.php?page=animalCard&animalID='.$animalID.'" method="post"><div class="btn-group" role="group" ><a class="btn btn-default" role="button" href="?page=changeAnimal&animalID='.$animal["AnimalID"].'"> Aanpassen </a>
@@ -42,4 +44,8 @@ if(isset($animal['Image']) && !empty($animal['Image']) && $animal['Image'] != nu
     echo '
 <img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
 }
-echo '</div></div>';
+echo '</div></div>
+<div class="row">
+
+
+</div> ';
