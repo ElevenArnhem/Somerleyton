@@ -8,7 +8,7 @@ date_default_timezone_set('Europe/Amsterdam');
 include 'conn.inc.php';
 include 'functions.php';
 include 'pageHead.php';
-echo $dbh;
+
 if(!isset($_GET ['page'])) {
     $page = 1;
 } else {
