@@ -2,10 +2,7 @@
 try {
     $hostname = "95.96.69.114";
     $dbname = "SomerleytonAnimalPark";
-
-
     $port = "1433";
-
     $username = "Eleven";
     $pw = "asdfasdf";
 

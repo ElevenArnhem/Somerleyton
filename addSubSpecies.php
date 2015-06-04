@@ -35,11 +35,11 @@ if(isset($_POST["submit"])) {
         </div>
     <div class="form-group">
         <label>Subsoort</label>
-        <input class="form-control textbox" name="SUBSPECIESNAME" placeholder="Naam Subsoort" type="text" required />
+        <input class="form-control textbox" name="SUBSPECIESNAME" placeholder="Naam Subsoort" type="text" maxlength="50" required />
     </div>
     <div class="form-group">
             <label>Beschrijving</label>
-            <textarea class="form-control textbox" rows="4" cols="50" name="DESCRIPTION" placeholder="Beschrijving"  required ></textarea>
+            <textarea class="form-control textbox" rows="4" cols="50" name="DESCRIPTION" placeholder="Beschrijving" maxlength="8000" required ></textarea>
     </div>
     <div class="form-group">
           <label>Selecteer een foto:</label>

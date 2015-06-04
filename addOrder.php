@@ -1,4 +1,6 @@
 <?php
+    $maxInteger = 2147483647;
+
     if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         $staffID = $_SESSION['STAFFID'];
         $searchCriteria = '';
@@ -49,6 +51,12 @@
 
                     $amount = $amount + $itemInOrderAmount;
                     $price = $price + $itemInOrderPrice;
+
+                    if($amount > $maxInteger)
+                        $amount = $maxInteger;
+
+                    if($price > $maxInteger)
+                        $price = $maxInteger;
 
                     // Remove old item
                     $index = array_search($itemInOrder, $itemsInOrder);
@@ -114,7 +122,6 @@
             $placeOrderStatement -> bindParam(3, $comment);
             $placeOrderStatement -> bindParam(4, $retVal);
             $placeOrderStatement -> execute();
-
             spErrorCaching($placeOrderStatement);
         }
     ?>
@@ -153,10 +160,10 @@
                             <?php echo $item['ItemName'] ?>
                         </td>
                         <td>
-                            <input class="form-control" type="number" min="1" value="1" name="amountForItem">
+                            <input class="form-control" type="number" min="1" value="1" max="2147483647" name="amountForItem">
                         </td>
                         <td>
-                            <input class="form-control" type="number" value="1.00" step="0.01" min="0.01" name="priceForItem">
+                            <input class="form-control" type="number" value="1.00" step="0.01" min="0.01" max="2147483647" name="priceForItem">
                         </td>
                         <td>
                             <?php echo $item['Unit'] ?>
@@ -216,7 +223,7 @@
         <input type="hidden" name="SerializedOrders" value="<?php echo $serializedOrderItems ?>">
 
         Opmerkingen
-        <textarea name="OrderComments" class="form-control" rows="5"></textarea>
+        <textarea name="OrderComments" class="form-control" rows="5" maxlength="100"></textarea>
         <br />
         <button class="btn btn-primary" type="submit" name="btnPlaceOrder" >Plaatsen</button>
     </form>
