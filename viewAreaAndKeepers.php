@@ -12,7 +12,22 @@ if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
     $getStaffstmt->bindParam(1, $areaName);
     $getStaffstmt->bindParam(2, $environmentName);
     $getStaffstmt->execute();
+
     $keepers = $getStaffstmt->fetchAll();
+    $getKeepersstmt = $dbh->prepare(" proc_getKeepers");
+    $getKeepersstmt->execute();
+    $allKeepers = $getKeepersstmt->fetchAll();
+
+    if(isset($_POST['newKeeper'])) {
+        $newKeeperID = $_POST['newKeeper'];
+        $staffID = $_SESSION['STAFFID'];
+        $addKeeperstmt = $dbh->prepare(" proc_addKeeperToArea ?,?,?,?");
+        $addKeeperstmt->bindParam(1, $staffID);
+        $addKeeperstmt->bindParam(2, $newKeeperID);
+        $addKeeperstmt->bindParam(3, $environmentName);
+        $addKeeperstmt->bindParam(4, $areaName);
+        $addKeeperstmt->execute();
+    }
 
 
     echo '
@@ -36,6 +51,32 @@ if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
 
         echo '    </tr>';
     }
+        echo '
+                <tr><form action="index.php?page=viewAreaAndKeepers" method="post">
+                    <td></td><td><input type="hidden" name="ENVIRONMENT" value="'.$_POST['ENVIRONMENT'].'">
+                    <input type="hidden" name="AREA" value="'.$_POST['AREA'].'">
+                        <select name="newKeeper" class="form-control" required>';
+                            foreach($allKeepers as $newKeeper) {
+                                $keeperExists = false;
+                                foreach($keepers as $keeper) {
+                                    if($newKeeper['StaffID'] == $keeper['StaffID']) {
+                                        $keeperExists = true;
+                                    }
+                                }
+                                if(!$keeperExists) {
+                                    echo '<option value="' . $newKeeper['StaffID'] . '">' . $newKeeper['StaffName'] . '</option>';
+                                }
+                            }
+                    echo '</select>
+                    </td>
+                    <td>
+                        <button type="submit" name="btnAddItem" class="btn btn-link" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
+                        </button>
+                    </td>
+
+                </form></tr>';
+
      echo '
             </table>
         </div>';
