@@ -315,6 +315,7 @@ function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $speci
                     </td>
                     <td>
                         <select class="form-control" name="FeedingRecipeID">';
+                        $recipeID = 0;
                         foreach($recipes as $recipe) {
                             if ($recipeID != $recipe['FeedingRecipeID']) {
                                 $recipeID = $recipe['FeedingRecipeID'];
