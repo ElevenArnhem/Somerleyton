@@ -4,6 +4,33 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     if(isset($_POST['fileName'])) {
         $picaName = $_POST['fileName'];
     }
+    if(isset($_POST['ReturnDate']) && isset($_POST['ZooName']) && isset($_POST['ExchangeType'])) {
+        $alterEchangestmt = $dbh->prepare("EXEC proc_alterExchangeHistory ?, ?, ?, ?, ?, ?, ?");
+        $alterEchangestmt->bindParam(1, $_SESSION['STAFFID']);
+        $alterEchangestmt->bindParam(2, $_GET['animalID']);
+        $alterEchangestmt->bindParam(3, $_GET["senddate"]);
+        $alterEchangestmt->bindParam(4, $_POST["ReturnDate"]);
+        $alterEchangestmt->bindParam(5, $_POST["ZooName"]);
+        $alterEchangestmt->bindParam(6, $_POST["ExchangeType"]);
+        $alterEchangestmt->bindParam(7, $_POST["Comment"]);
+
+        $alterEchangestmt->execute();
+        spErrorCaching($alterEchangestmt);
+    }
+    if(isset($_POST['senddate']) && isset($_POST['ZooName']) && isset($_POST['ExchangeType'])) {
+        $returnDate = null;
+        $alterEchangestmt = $dbh->prepare("EXEC proc_alterExchangeHistory ?, ?, ?, ?, ?, ?, ?");
+        $alterEchangestmt->bindParam(1, $_SESSION['STAFFID']);
+        $alterEchangestmt->bindParam(2, $_GET['animalID']);
+        $alterEchangestmt->bindParam(3, $_POST["senddate"]);
+        $alterEchangestmt->bindParam(4, $returnDate);
+        $alterEchangestmt->bindParam(5, $_POST["ZooName"]);
+        $alterEchangestmt->bindParam(6, $_POST["ExchangeType"]);
+        $alterEchangestmt->bindParam(7, $_POST["Comment"]);
+
+        $alterEchangestmt->execute();
+        spErrorCaching($alterEchangestmt);
+    }
 
     if(isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
         $target_dir = isLocal()."/pictures/";
@@ -196,7 +223,7 @@ echo '
         echo '<tr>
                 <td>' . $getExchangeHistory["SendDate"] . '</td>
                 <td>' . $getExchangeHistory["ReturnDate"] . '</td>
-                <td>'; if($getExchangeHistory["ExchangeType"] == 'from'){echo"Van";}else if($getExchangeHistory["ExchangeType"] == 'to'){echo"Naar";} echo'</td>
+                <td>'; if($getExchangeHistory["ExchangeType"] == 'from'){echo"Van";}else{echo"Naar";} echo'</td>
                 <td>' . $getExchangeHistory["ZooName"] . '</td>
                 <td>' . $getExchangeHistory["Comment"] . '</td>
                 <td><a href="?page=alterExchangehistory&animalid='.$animalID,'&senddate=', $getExchangeHistory["SendDate"].'">
@@ -204,7 +231,7 @@ echo '
              </tr>';
     } echo '</table>';
 } echo'
-    <a href="?page=addExchangehistory&animalid='.$animalID.'">
+    <a href="?page=addExchangeHistory&animalid='.$animalID.'">
     <button type="button" class="btn btn-default">Toevoegen</button></a>
     <br><br><br>
 ';?>

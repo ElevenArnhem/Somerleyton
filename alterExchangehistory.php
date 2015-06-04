@@ -31,19 +31,18 @@ if(isset($_GET["senddate"])) {
 if(isset($_POST['ReturnDate']) && isset($_POST['ZooName']) && isset($_POST['ExchangeType'])) {
     $alterEchangestmt = $dbh->prepare("EXEC proc_alterExchangeHistory ?, ?, ?, ?, ?, ?, ?");
     $alterEchangestmt->bindParam(1, $_SESSION['STAFFID']);
-    $alterEchangestmt->bindParam(2, $_GET['animalid']);
+    $alterEchangestmt->bindParam(2, $_GET['animalID']);
     $alterEchangestmt->bindParam(3, $_GET["senddate"]);
     $alterEchangestmt->bindParam(4, $_POST["ReturnDate"]);
     $alterEchangestmt->bindParam(5, $_POST["ZooName"]);
-    if($_POST["ExchangeType"]=='Van'){$Type = "from";}elseif($_POST["ExchangeType"]=='Naar'){$Type = "to";}
-    $alterEchangestmt->bindParam(6, $Type);
+    $alterEchangestmt->bindParam(6, $_POST["ExchangeType"]);
     $alterEchangestmt->bindParam(7, $_POST["Comment"]);
 
     $alterEchangestmt->execute();
     spErrorCaching($alterEchangestmt);
 }
 
-echo '<form action="?page=alterExchangehistory&animalid='.$animalID,'&senddate=', $sendDate.'" method="post">
+echo '<form action="?page=changeAnimal&animalID='.$animalID,'&senddate=', $sendDate.'" method="post">
       <div class="col-lg-8">
           <h2>Uitwisseling aanpassen<h2>
           <h2>'.$animal['AnimalName'].'</h2>
@@ -61,8 +60,8 @@ echo '<form action="?page=alterExchangehistory&animalid='.$animalID,'&senddate='
           <br><br>
           <p>ExchangeType</p>
           <select name="ExchangeType" type="text" class="form-control" required>
-                <option '; if($getExchangeHistorys["ExchangeType"] == 'from'){echo 'selected';} echo' >Van</option>
-                <option '; if($getExchangeHistorys["ExchangeType"] == 'to'){echo 'selected';} echo' >Naar</option>
+                <option value="from" '; if($getExchangeHistorys["ExchangeType"] == 'from'){echo 'selected';} echo' >Van</option>
+                <option value="to" '; if($getExchangeHistorys["ExchangeType"] == 'to'){echo 'selected';} echo' >Naar</option>
           </select>
           <br><br>
           <p>Comment</p>
