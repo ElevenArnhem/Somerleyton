@@ -1,4 +1,6 @@
 <?php
+    $maxInteger = 2147483647;
+
     if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
         $staffID = $_SESSION['STAFFID'];
         $searchCriteria = '';
@@ -49,6 +51,12 @@
 
                     $amount = $amount + $itemInOrderAmount;
                     $price = $price + $itemInOrderPrice;
+
+                    if($amount > $maxInteger)
+                        $amount = $maxInteger;
+
+                    if($price > $maxInteger)
+                        $price = $maxInteger;
 
                     // Remove old item
                     $index = array_search($itemInOrder, $itemsInOrder);
@@ -114,7 +122,6 @@
             $placeOrderStatement -> bindParam(3, $comment);
             $placeOrderStatement -> bindParam(4, $retVal);
             $placeOrderStatement -> execute();
-            echo $retVal;
             spErrorCaching($placeOrderStatement);
         }
     ?>
