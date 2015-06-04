@@ -11,9 +11,7 @@ try {
 
     $dbh = new PDO ("sqlsrv:Server=$hostname,$port;Database=$dbname","$username","$pw");
 } catch (PDOException $e) {
-
     echo "Failed to get DB handle: " . $e->getMessage() . "\n";
-    include 'conn.inc2.php';
     exit;
 }
 
