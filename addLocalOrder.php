@@ -136,7 +136,7 @@
                             <td><?php echo $item['ItemID'] ?></td>
                             <td><?php echo $item['ItemName'] ?></td>
                             <td><?php echo $item['Unit'] ?></td>
-                            <td><input class="form-control" type="number" min="1" value="1" name="amountForItem"></td>
+                            <td><input class="form-control" type="number" min="1" value="1" max="2147483646" name="amountForItem"></td>
                             <td>
                                 <input type="hidden" name="itemsInLocalOrder" value="<?php echo $serializedItemsInLocalOrder ?>">
                                 <input type="hidden" name="itemID" value="<?php echo $item['ItemID'] ?>">

@@ -195,7 +195,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
 <form action="index.php?page=setAnimalToDeceased" method="post">
     <input type="hidden" name="animalID" value="<?php echo $animalID ?>" />
     <button type="submit" class="btn btn-lg btn-primary" name="btnDoodVerklaren">Dood verklaren</button>
-</form>
+</form><br><br><h2>Uitwisselingsgeschiedenis</h2><br>
 
 <?php
     $StaffID = $_SESSION["STAFFID"];
@@ -208,7 +208,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
 
 if(isset($getExchangeHistorys) && isset($getExchangeHistorys[0])){
 echo '
-        <br><br><h2>Uitwisselingsgeschiedenis</h2><br>
+
         <table class="table table-hover" >
         <tr>
             <th>Datum</th>
