@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thom
- * Date: 30-4-2015
- * Time: 13:07
- */
 if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     $picaName = null;
     if(isset($_POST['fileName'])) {
@@ -175,3 +169,42 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     <input type="hidden" name="animalID" value="<?php echo $animalID ?>" />
     <button type="submit" class="btn btn-lg btn-primary" name="btnDoodVerklaren">Dood verklaren</button>
 </form>
+
+<?php
+    $StaffID = $_SESSION["STAFFID"];
+    $animalID = $_GET['animalID'];
+    $getExchangeHistoryStatement = $dbh->prepare("EXEC proc_getExchangeHistory ?,?");
+    $getExchangeHistoryStatement->bindParam(1, $StaffID);
+    $getExchangeHistoryStatement->bindParam(2, $animalID);
+    $getExchangeHistoryStatement->execute();
+    $getExchangeHistorys = $getExchangeHistoryStatement->fetchAll();
+
+if(isset($getExchangeHistorys) && isset($getExchangeHistorys[0])){
+echo '
+        <br><br><h2>Uitwisselingsgeschiedenis</h2><br>
+        <table class="table table-hover" >
+        <tr>
+            <th>Datum</th>
+            <th>Terugkomst Datum</th>
+            <th>Geleend aan/van</th>
+            <th>Dierentuin</th>
+            <th>Notities</th>
+            <th></th>
+        </tr>';
+
+    foreach($getExchangeHistorys as $getExchangeHistory) {
+        echo '<tr>
+                <td>' . $getExchangeHistory["SendDate"] . '</td>
+                <td>' . $getExchangeHistory["ReturnDate"] . '</td>
+                <td>'; if($getExchangeHistory["ExchangeType"] == 'from'){echo"Van";}else if($getExchangeHistory["ExchangeType"] == 'to'){echo"Naar";} echo'</td>
+                <td>' . $getExchangeHistory["ZooName"] . '</td>
+                <td>' . $getExchangeHistory["Comment"] . '</td>
+                <td><a href="?page=alterExchangehistory&animalid='.$animalID,'&senddate=', $getExchangeHistory["SendDate"].'">
+                    <button type="button" class="btn btn-default">Aanpassen</button></a></td>
+             </tr>';
+    } echo '</table>';
+} echo'
+    <a href="?page=addExchangehistory&animalid='.$animalID.'">
+    <button type="button" class="btn btn-default">Toevoegen</button></a>
+    <br><br><br>
+';?>

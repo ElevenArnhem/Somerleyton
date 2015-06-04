@@ -49,26 +49,70 @@ if(isset($animal['Image']) && !empty($animal['Image']) && $animal['Image'] != nu
     echo '
 <img src="/pictures/' . $animal['Image'] . '" width="300" height="300"><br><br>';
 }
-echo '</div></div>
-<div class="row">
+
+echo '</div></div>';
+if(!isset($_POST["PRINTVERSION"])) {
+    echo '<div class="row">
+        <h2>Nakomeling </h2><br>
     <table class="table table-hover">
         <tr>
-            <th>Kind naam</th>
-            <th>Kind geslacht</th>
-            <th>Geboorte datum kind</th>
-            <th>'; if($gender == 'M'){ echo 'Moeder'; } elseif($gender == 'F'){ echo 'Vader';} echo '</th>
+            <th>Naam</th>
+            <th>Geslacht</th>
+            <th>Geboorte datum</th>
+            <th>';
+    if ($gender == 'M') {
+        echo 'Moeder';
+    } elseif ($gender == 'F') {
+        echo 'Vader';
+    }
+    echo '</th>
         </tr>';
-        foreach($children as $child) {
-            echo '<tr>
-                    <td><a role="button" href="index.php?page=animalCard&animalID='.$child['AnimalID'].'">'.$child['AnimalName'].'</a></td>
-                    <td>'.$child['Gender'].'</td>
-                    <td>'.$child['BirthDate'].'</td>
-                    <td><a role="button" href="index.php?page=animalCard&animalID='.$child['MateID'].'">'.$child['MateName'].'</a></td>
+    foreach ($children as $child) {
+        echo '<tr>
+                    <td><a role="button" href="index.php?page=animalCard&animalID=' . $child['AnimalID'] . '">' . $child['AnimalName'] . '</a></td>
+                    <td>' . $child['Gender'] . '</td>
+                    <td>' . $child['BirthDate'] . '</td>
+                    <td><a role="button" href="index.php?page=animalCard&animalID=' . $child['MateID'] . '">' . $child['MateName'] . '</a></td>
 
             </tr>';
-        }
+    }
 
 
     echo '</table>
 
-</div><br><br><br> ';
+';
+
+    $StaffID = $_SESSION["STAFFID"];
+    $animalID = $_GET['animalID'];
+    $getExchangeHistoryStatement = $dbh->prepare("EXEC proc_getExchangeHistory ?,?");
+    $getExchangeHistoryStatement->bindParam(1, $StaffID);
+    $getExchangeHistoryStatement->bindParam(2, $animalID);
+    $getExchangeHistoryStatement->execute();
+    $getExchangeHistorys = $getExchangeHistoryStatement->fetchAll();
+
+    if (isset($getExchangeHistorys) && isset($getExchangeHistorys[0])) {
+        echo '
+        <br><br><h2>Uitwisselingsgeschiedenis</h2><br>
+        <table class="table table-hover" >
+        <tr>
+            <th>Datum</th>
+            <th>Terugkomst Datum</th>
+            <th>Geleend aan/van</th>
+            <th>Dierentuin</th>
+            <th>Notities</th>
+        </tr>';
+
+        foreach ($getExchangeHistorys as $getExchangeHistory) {
+            echo '<tr>
+                <td>' . $getExchangeHistory["SendDate"] . '</td>
+                <td>' . $getExchangeHistory["ReturnDate"] . '</td>
+                <td>';  if($getExchangeHistory["ExchangeType"] == 'from'){echo"Van";}else{echo'Naar';} echo'</td>
+                <td>' . $getExchangeHistory["ZooName"] . '</td>
+                <td>' . $getExchangeHistory["Comment"] . '</td>
+             </tr>';
+        }
+        echo '</table><br><br><br></div> ';
+    }
+}
+
+
