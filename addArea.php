@@ -101,7 +101,9 @@ foreach($allStaff as $staff) {
     }
 }
 foreach($allStaff as $staff) {
-    echo '<option value="'.$staff["StaffID"].'">'.$staff["StaffName"].'</option>';
+    if($OldHeadkeeperID != $staff["StaffID"]) {
+        echo '<option value="' . $staff["StaffID"] . '">' . $staff["StaffName"] . '</option>';
+    }
 }
 echo'</select></dd><br>
 </dl>
