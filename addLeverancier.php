@@ -25,11 +25,11 @@ echo '
 <hr>
 <form action="index.php?page=addLeverancier" method="post">
       <div class="col-lg-8">
-          <input name="Leveranciersnaam" type="text" class="form-control" placeholder="Leveranciersnaam" required>
+          <input name="Leveranciersnaam" type="text" class="form-control" placeholder="Leveranciersnaam" maxlength="50" required>
           <br><br><br>
-          <input name="Adres" type="text" class="form-control" placeholder="Adres" required>
+          <input name="Adres" type="text" class="form-control" placeholder="Adres" maxlength="50"  required>
           <br><br><br>
-          <input name="Telefoonnummer" type="text" class="form-control" placeholder="Telefoonnummer" required>
+          <input name="Telefoonnummer" type="text" class="form-control" placeholder="Telefoonnummer" maxlength="20"  required>
           <br><br><br>
           <button type="submit" class="btn btn-default">Invoeren</button>
       </div>

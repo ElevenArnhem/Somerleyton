@@ -86,7 +86,7 @@ echo '<div class="col-lg-4">
 <form action="index.php?page=addArea" method="post">
  <dl class="dl-horizontal">
  <input type="hidden" name="OLDENVIRONMENTNAME" value="'.$environment.'">
-<dt>Naam</dt><dd><input name="AREANAME" type="text" class="form-control" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'" placeholder="gebied naam" required></dd><br>
+<dt>Naam</dt><dd><input name="AREANAME" type="text" class="form-control" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'" placeholder="gebied naam" maxlength="50" required></dd><br>
 <dt>Omgeving</dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" '; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'disabled';} echo'>';
 if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) { echo'<option value="'.$environment.'">'.$environment.'</option>';}
 foreach($environments as $environment) {

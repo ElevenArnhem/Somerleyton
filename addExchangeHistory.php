@@ -47,7 +47,7 @@ echo '</select>
           </select>
           <br><br>
           <p>Commentaar</p>
-          <textarea name="Comment" class="form-control" rows="5" maxlength="250">Notities</textarea>
+          <textarea name="Comment" class="form-control" rows="5" maxlength="250" placeholder="Notities"></textarea>
           <br><br>
 
 
