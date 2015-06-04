@@ -8,6 +8,29 @@
 if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
     $areaName = $_POST['AREA'];
     $environmentName = $_POST['ENVIRONMENT'];
+    if(isset($_POST['newKeeper'])) {
+        $newKeeperID = $_POST['newKeeper'];
+        $staffID = $_SESSION['STAFFID'];
+        $addKeeperstmt = $dbh->prepare(" proc_addKeeperToArea ?,?,?,?");
+        $addKeeperstmt->bindParam(1, $staffID);
+        $addKeeperstmt->bindParam(2, $newKeeperID);
+        $addKeeperstmt->bindParam(3, $environmentName);
+        $addKeeperstmt->bindParam(4, $areaName);
+        $addKeeperstmt->execute();
+        spErrorCaching($addKeeperstmt);
+    }
+
+    if(isset($_POST['keeperToDeleteID'])) {
+        $keeperID = $_POST['keeperToDeleteID'];
+        $staffID = $_SESSION['STAFFID'];
+        $addKeeperstmt = $dbh->prepare(" proc_DeleteKeeperToArea ?,?,?,?");
+        $addKeeperstmt->bindParam(1, $staffID);
+        $addKeeperstmt->bindParam(2, $keeperID);
+        $addKeeperstmt->bindParam(3, $environmentName);
+        $addKeeperstmt->bindParam(4, $areaName);
+        $addKeeperstmt->execute();
+        spErrorCaching($addKeeperstmt);
+    }
     $getStaffstmt = $dbh->prepare("EXEC proc_GetStaffByArea ?,?");
     $getStaffstmt->bindParam(1, $areaName);
     $getStaffstmt->bindParam(2, $environmentName);
@@ -18,16 +41,7 @@ if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
     $getKeepersstmt->execute();
     $allKeepers = $getKeepersstmt->fetchAll();
 
-    if(isset($_POST['newKeeper'])) {
-        $newKeeperID = $_POST['newKeeper'];
-        $staffID = $_SESSION['STAFFID'];
-        $addKeeperstmt = $dbh->prepare(" proc_addKeeperToArea ?,?,?,?");
-        $addKeeperstmt->bindParam(1, $staffID);
-        $addKeeperstmt->bindParam(2, $newKeeperID);
-        $addKeeperstmt->bindParam(3, $environmentName);
-        $addKeeperstmt->bindParam(4, $areaName);
-        $addKeeperstmt->execute();
-    }
+
 
 
     echo '
@@ -47,6 +61,18 @@ if(isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
                     <td>'.$keeper['StaffID'].'</td>
                     <td>'.$keeper['StaffName'].'</td>
                     <td>'.$keeper['Function'].'</td>';
+        if($keeper['Function'] != 'HeadKeeper') {
+            echo '
+                    <td>
+                        <form action="index.php?page=viewAreaAndKeepers" method="post">
+                            <input type="hidden" name="ENVIRONMENT" value="' . $_POST['ENVIRONMENT'] . '">
+                            <input type="hidden" name="AREA" value="' . $_POST['AREA'] . '">
+                            <button type="submit" name="keeperToDeleteID" value="' . $keeper['StaffID'] . '" class="btn btn-link" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" />
+                            </button>
+                        </form>
+                    </td>';
+        }
 
 
         echo '    </tr>';
