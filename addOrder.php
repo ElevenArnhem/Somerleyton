@@ -52,11 +52,13 @@
                     $amount = $amount + $itemInOrderAmount;
                     $price = $price + $itemInOrderPrice;
 
-                    if($amount > $maxInteger)
+                    if($amount > $maxInteger) {
                         $amount = $maxInteger;
+                    }
 
-                    if($price > $maxInteger)
+                    if($price > $maxInteger) {
                         $price = $maxInteger;
+                    }
 
                     // Remove old item
                     $index = array_search($itemInOrder, $itemsInOrder);
@@ -122,6 +124,7 @@
             $placeOrderStatement -> bindParam(3, $comment);
             $placeOrderStatement -> bindParam(4, $retVal);
             $placeOrderStatement -> execute();
+
             spErrorCaching($placeOrderStatement);
         }
     ?>
@@ -221,7 +224,7 @@
     </table>
     <form action="index.php?page=addOrder" method="post">
         <input type="hidden" name="SerializedOrders" value="<?php echo $serializedOrderItems ?>">
-
+        <input type="hidden" name="SelectedLeverancier" value="<?php echo $selectedLeverancier ?>">
         Opmerkingen
         <textarea name="OrderComments" class="form-control" rows="5" maxlength="100"></textarea>
         <br />
