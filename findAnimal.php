@@ -64,14 +64,14 @@ echo '
 </form>';
 echo '
 <table class="table table-hover"><tr>
-            <th>AnimalID</th>
-            <th>AnimalName</th>
-            <th>BirthDate</th>
-            <th>BirthPlace</th>
-            <th>LatinName</th>
-            <th>SubSpeciesName</th>
-            <th>AreaName</th>
-            <th>EnclosureID</th>
+            <th>Dier nummer</th>
+            <th>Naam</th>
+            <th>Geboorte datum</th>
+            <th>Geboorte plaats</th>
+            <th>Hoofdsoort</th>
+            <th>Subsoort</th>
+            <th>Gebied naam</th>
+            <th>Verblijf nummer</th>
             <th></th>
 </tr>';
 foreach($animals as $animal) {
