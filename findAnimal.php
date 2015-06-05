@@ -25,23 +25,23 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
 echo '
 <hr>
 <form action="index.php?page=findAnimal" method="post">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek dieren op: id, naam, soort, verblijf">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="submit" >Zoek</button>
-      </span>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek dieren op: id, naam, soort, verblijf">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" >Zoek</button>
+            </span>
+        </div>
     </div>
-
-  </div><!-- /.col-lg-6 -->
-<br /><br />
-<div class="radio">';
-if(isset($_POST['ALIVEANIMAL']) && $_POST['ALIVEANIMAL'] == 0) {
-    echo '  <label>
-    <input  type="radio" name="ALIVEANIMAL" id="optionsRadios1" value="1" >
-    Levende dieren
-</label>
-</div>
+    <br /><br />
+    <div class="radio">';
+        if(isset($_POST['ALIVEANIMAL']) && $_POST['ALIVEANIMAL'] == 0) {
+            echo '
+            <label>
+                <input  type="radio" name="ALIVEANIMAL" id="optionsRadios1" value="1" >
+                Levende dieren
+            </label>
+        </div>
 <div class="radio">
   <label>
     <input type="radio" name="ALIVEANIMAL" id="0" value="0" checked>

@@ -15,13 +15,29 @@
                     $orderRecievedDate = '';
                 }
             }
+            if(isset($_POST['InvoiceRecievedDate'])) {
+                $invoiceRecievedDate = $_POST['InvoiceRecievedDate'];
 
-            $alterOrderStatement = $dbh -> prepare('proc_alterOrder ?, ?, ?, ?, ?');
+                if($invoiceRecievedDate == '1900-01-01 00:00') {
+                    $invoiceRecievedDate = '';
+                }
+            }
+            if(isset($_POST['InvoicePaidDate'])) {
+                $invoicePaidDate = $_POST['InvoicePaidDate'];
+
+                if($invoicePaidDate == '1900-01-01 00:00') {
+                    $invoicePaidDate = '';
+                }
+            }
+
+            $alterOrderStatement = $dbh -> prepare('proc_alterOrder ?, ?, ?, ?, ?, ?, ?');
             $alterOrderStatement -> bindParam(1, $staffID);
             $alterOrderStatement -> bindParam(2, $orderID);
             $alterOrderStatement -> bindParam(3, $orderState);
             $alterOrderStatement -> bindParam(4, $comment);
             $alterOrderStatement -> bindParam(5, $orderRecievedDate);
+            $alterOrderStatement -> bindParam(5, $invoiceRecievedDate);
+            $alterOrderStatement -> bindParam(5, $invoicePaidDate);
             $alterOrderStatement -> execute();
 
             spErrorCaching($alterOrderStatement);
@@ -55,10 +71,13 @@
                 <dt>Status</dt><dd>
                 <select name="OrderState" class="form-control">
                     <?php foreach($orderStates as $orderState) { ?>
-                        <option value="<?php echo $orderState['OrderState'] ?>" <?php if($currentOrderState == $orderState['OrderState']) { echo 'selected';} ?>><?php echo $orderState['OrderState'] ?></option>
+                        <option value="<?php echo $orderState['OrderState'] ?>"
+                            <?php if($currentOrderState == $orderState['OrderState']) { echo 'selected';} ?>>
+                            <?php echo $orderState['OrderState'] ?>
+                        </option>
                     <?php } ?>
                 </select></dd><br>
-                <dt>Ontvangst datum</dt><dd>
+                <dt>Product ontvangst datum</dt><dd>
 
                     <?php
                         if(isset($orderDetails[0]['OrderRecievedDate'])){
@@ -69,10 +88,16 @@
                         }
                         else {
                             ?>
-                            <input type="date" name="OrderRecievedDate" class="form-control" max="<?php echo date('Y-m-d'); ?>" />
+                            <input type="date" name="OrderRecievedDate" class="form-control" max="<?php echo date('Y-m-d'); ?>" /> </dd><br>
                 <?php
                         }
                 ?>
+                <dt>Rekening ontvangst datum</dt><dd>
+                    <input type="date" name="InvoiceRecievedDate" class="form-control" max="<?php echo date('Y-m-d'); ?>" />
+                </dd><br>
+                <dt>Rekening betaald datum</dt><dd>
+                    <input type="date" name="InvoicedPaidDate" class="form-control" max="<?php echo date('Y-m-d'); ?>" />
+                </dd><br>
            </dl>
         </div>
     </div>
