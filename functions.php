@@ -153,6 +153,11 @@ function isLocal()
     return '';
 }
 
+function makeDateTime($string) {
+    $string = explode('.',$string)[0];
+    return str_replace('T',' ', $string);
+}
+
 function feedingSchedule($feedingScheme, $addButton, $dbh, $deleteButton, $specificAnimals) {
 
     $recipestmt = $dbh->prepare("EXEC proc_GetRecipe");
