@@ -8,36 +8,30 @@ if(isset($_POST["SEARCHSTRING"])) {
     $animalstmt->bindParam(2,$aliveAnimal);
     $animalstmt->execute();
     $animals = $animalstmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-} if(!isset($_POST["SEARCHSTRING"])) {
+}
+if(!isset($_POST["SEARCHSTRING"])) {
     $animalstmt = $dbh->prepare("EXEC proc_searchAnimal '','1'");
     $animalstmt->execute();
     $animals = $animalstmt->fetchAll();
-
 }
 
 if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     echo '
-
     <div class="btn-group" role="group">
        <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Dier toevoegen</button></a>
-    </div>
-';
+    </div>';
 }
-echo '
 
+echo '
 <hr>
 <form action="index.php?page=findAnimal" method="post">
   <div class="col-lg-6">
-
     <div class="input-group">
       <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek dieren op: id, naam, soort, verblijf">
       <span class="input-group-btn">
         <button class="btn btn-default" type="submit" >Zoek</button>
       </span>
-
-    </div><!-- /input-group -->
+    </div>
 
   </div><!-- /.col-lg-6 -->
 <br /><br />
