@@ -148,7 +148,7 @@
         <tr>
             <th>Product</th>
             <th>Aantal</th>
-            <th>Prijs</th>
+            <th>Prijs totaal aantal</th>
             <th>Eenheid</th>
             <th></th>
         </tr>
