@@ -150,7 +150,7 @@ if(isset($_POST['SPECIFIC']) && $_POST['SPECIFIC'] == 0) {
                </dl>
 <div class="input-group">
 <input type="hidden" name="SPECIFIC" value="1">
-      <input name="SEARCHSTRINGSPECIES" type="text" class="form-control" placeholder="Zoek subsoort of recept">
+      <input name="SEARCHSTRINGSPECIES" type="text" class="form-control" placeholder="Zoek subsoort of ingredient">
 <span class="input-group-btn">
         <button class="btn btn-default" type="submit" >Zoek</button>
         </span>
