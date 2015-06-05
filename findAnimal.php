@@ -21,7 +21,7 @@ if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     echo '
 
     <div class="btn-group" role="group">
-       <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Toevoegen</button></a>
+       <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Dier toevoegen</button></a>
     </div>
 ';
 }

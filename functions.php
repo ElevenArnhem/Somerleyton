@@ -402,7 +402,7 @@ function searchSpecies($linkPage, $dbh) {
             </tr>';
     foreach($headSpecies as $headSpeciesRow) {
 //    if($_SESSION['FUNCTION'])
-        echo '<tr><td><form action="index.php?page=feeding" method="post"><input type="hidden" name="SEARCHSTRINGSUBSPECIES" value="">
+        echo '<tr><td><form action="index.php?page='.$linkPage.'" method="post"><input type="hidden" name="SEARCHSTRINGSUBSPECIES" value="">
     <button class="btn btn-link" type="submit" name="SEARCHSTRINGHEADSPECIES" value="'.$headSpeciesRow["HeadSpeciesName"].'">'.$headSpeciesRow["HeadSpeciesName"].'</button></form> </td>
         ';
 
@@ -411,7 +411,7 @@ function searchSpecies($linkPage, $dbh) {
     echo '
 </table></div>
 <div class="col-lg-6">
-    <form action="index.php?page=feeding" method="post">
+    <form action="index.php?page='.$linkPage.'" method="post">
 
 
     <div class="input-group">
