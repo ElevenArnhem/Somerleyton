@@ -36,8 +36,8 @@
             $alterOrderStatement -> bindParam(3, $orderState);
             $alterOrderStatement -> bindParam(4, $comment);
             $alterOrderStatement -> bindParam(5, $orderRecievedDate);
-            $alterOrderStatement -> bindParam(5, $invoiceRecievedDate);
-            $alterOrderStatement -> bindParam(5, $invoicePaidDate);
+            $alterOrderStatement -> bindParam(6, $invoiceRecievedDate);
+            $alterOrderStatement -> bindParam(7, $invoicePaidDate);
             $alterOrderStatement -> execute();
 
             spErrorCaching($alterOrderStatement);
