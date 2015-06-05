@@ -17,7 +17,14 @@ if(isset($_POST["SEARCHSTRING"])) {
 
 }
 
+if($_SESSION['FUNCTION'] == 'HeadKeeper') {
+    echo '
 
+    <div class="btn-group" role="group">
+       <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Toevoegen</button></a>
+    </div>
+';
+}
 echo '
 
 <hr>
@@ -94,11 +101,4 @@ foreach($animals as $animal) {
 };
 echo '
 </table>';
-if($_SESSION['FUNCTION'] == 'HeadKeeper') {
-    echo '
 
-    <div class="btn-group" role="group">
-       <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Toevoegen</button></a>
-    </div>
-';
-}

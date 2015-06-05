@@ -381,7 +381,7 @@ function searchSpecies($linkPage, $dbh) {
 
 <div class="row">
     <div class="col-lg-6">
-    <form action="index.php?page=feeding" method="post">
+    <form action="index.php?page='.$linkPage.'" method="post">
 
 
     <div class="input-group">
