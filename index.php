@@ -1,42 +1,42 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thom
- * Date: 24-4-2015
- * Time: 12:18*/
-date_default_timezone_set('Europe/Amsterdam');
-include 'conn.inc.php';
-include 'functions.php';
-include 'pageHead.php';
-$GLOBALS['dbh'] = $dbh;
-if(!isset($_GET ['page'])) {
-    $page = 1;
-} else {
-    $page = $_GET['page'];
-}
-session_start();
-if(empty($_SESSION['STAFFNAME'])) {
-    $_SESSION['STAFFNAME'] = null;
-}
-if( $_SESSION['STAFFNAME'] != null) {
-    include "navbar.php";
-    echo '
-    <br><br><br>
-    <div class="container">';
-
-    $dir = isLocal().'/';
-
-    $allPages = scandir($dir);
-
-    $page = $page.'.php';
-    include 'navbar.php';
-    if(!in_array($page , $allPages)) {
-        include 'home.php';
+    /**
+     * Created by PhpStorm.
+     * User: thom
+     * Date: 24-4-2015
+     * Time: 12:18*/
+    date_default_timezone_set('Europe/Amsterdam');
+    include 'conn.inc.php';
+    include 'functions.php';
+    include 'pageHead.php';
+    $GLOBALS['dbh'] = $dbh;
+    if(!isset($_GET ['page'])) {
+        $page = 1;
     } else {
-        include $page;
+        $page = $_GET['page'];
     }
-} else {
-    include 'login.php';
-}
+    session_start();
+    if(empty($_SESSION['STAFFNAME'])) {
+        $_SESSION['STAFFNAME'] = null;
+    }
+    if( $_SESSION['STAFFNAME'] != null) {
+        include "navbar.php";
+        echo '
+        <br><br><br>
+        <div class="container">';
 
-include 'footer.php';
+        $dir = isLocal().'/';
+
+        $allPages = scandir($dir);
+
+        $page = $page.'.php';
+        include 'navbar.php';
+        if(!in_array($page , $allPages)) {
+            include 'home.php';
+        } else {
+            include $page;
+        }
+    } else {
+        include 'login.php';
+    }
+
+    include 'footer.php';

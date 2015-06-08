@@ -9,9 +9,12 @@
 echo '<div class="row">';
 if($_SESSION['FUNCTION'] == 'HeadKeeper') {
     include 'headKeeperHome.php';
-}else if($_SESSION['FUNCTION'] == 'Keeper') {
+} elseif($_SESSION['FUNCTION'] == 'Keeper') {
     include 'keeperHome.php';
+} elseif($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
+    include 'OfficeStaff.php';
 }
+
 
 
 

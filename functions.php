@@ -446,25 +446,37 @@ function checkCrud() {
 function canCreate() {
     if(strpos(checkCrud(),'C') !== false) {
         return true;
-    } else
+    } else {
+        pageDontExist();
         false;
+    }
 }
 
 function canRead() {
     if(strpos(checkCrud(),'R') !== false) {
         return true;
-    } else
+    } else {
+        pageDontExist();
         false;
+    }
 }
 function canUpdate() {
     if(strpos(checkCrud(),'U') !== false) {
         return true;
-    } else
+    } else {
+        pageDontExist();
         false;
+    }
 }
 function canDelete() {
     if(strpos(checkCrud(),'D') !== false) {
         return true;
-    } else
+    } else {
+        pageDontExist();
         false;
+    }
+}
+
+function pageDontExist() {
+    echo '<div class="alert alert-danger" role="alert">U bent niet gemachtigd om deze pagina te bekijken.</div>';
 }

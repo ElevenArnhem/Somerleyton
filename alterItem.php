@@ -90,13 +90,16 @@ echo '
             <tr>
                 <th>Naam</th>
                 <th>Telefoonnummer</th>
+                <th></th>
             </tr>';
 foreach ($itemLeveranciers as $itemLeverancier) {
     echo '<tr>
               <td>' . $itemLeverancier["SupplierName"] . '</td>
               <td>' . $itemLeverancier["SupplierTelephoneNumber"] . '</td>
               <td><form action="index.php?page=alterItem&ItemID='.$item['ItemID'].'" method="post">
-              <button class="btn btn-default" name="DeleteSupplierFromItem" value="' . $itemLeverancier["SupplierName"] . '" type="submit">verwijder</button>
+                <button type="submit" name="DeleteSupplierFromItem" class="btn btn-link" aria-label="Left Align" value="' . $itemLeverancier["SupplierName"] . '">
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true" />
+                </button>
               </form></td>
            </tr>';
 }
@@ -117,6 +120,7 @@ echo '</table>
             <tr>
                 <th>Naam</th>
                 <th>Telefoonnummer</th>
+                <th></th>
             </tr>';
         foreach ($leveranciers as $leverancier) {
             $check = 0;
@@ -129,7 +133,11 @@ echo '</table>
                 echo '<tr>
                           <td>' . $leverancier["SupplierName"] . '</td>
                           <td>' . $leverancier["SupplierTelephoneNumber"] . '</td>
-                          <td><button class="btn btn-default" name="addSupplierToItem" value="' . $leverancier["SupplierName"] . '" type="submit">voeg toe</button></td>
+                          <td>
+                             <button type="submit" name="addSupplierToItem" class="btn btn-link" aria-label="Left Align" value="' . $leverancier["SupplierName"] . '" >
+                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
+                                </button>
+                            </td>
                        </tr>';
             }
         }
