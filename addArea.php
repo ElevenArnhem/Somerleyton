@@ -5,7 +5,7 @@
      * Date: 4-5-2015
      * Time: 00:16
      */
-    if(canUpdate() && canRead()) {
+    if(canRead() && canUpdate() && canCreate()) {
         $pageTitle = 'Gebied toevoegen';
         $environment = null;
         $area = null;
@@ -16,7 +16,6 @@
             $OldHeadkeeperID = $_POST['HEADKEEPER'];
             $pageTitle = 'Gebied aanpassen';
         }
-
         if (isset($_POST['TYPE'])) {
             if ($_POST['TYPE'] == 'addArea' && isset($_POST['ENVIRONMENT'])) {
                 $staffID = $_SESSION['STAFFID'];
@@ -33,10 +32,8 @@
                 $environment = $environmentName;
                 $area = $areaName;
                 $OldHeadkeeperID = $headKeeperID;
-
             } else if ($_POST['TYPE'] == 'changeArea' && isset($_POST['ENVIRONMENT'])) {
                 $staffID = $_SESSION['STAFFID'];
-                //$environmentName = $_POST['ENVIRONMENTNAME'];
                 $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
                 $areaName = $_POST['AREA'];
                 $headKeeperID = $_POST['HEADKEEPER'];
@@ -52,7 +49,6 @@
                 $area = $areaName;
                 $environment = $oldEnvironmentName;
                 $OldHeadkeeperID = $headKeeperID;
-
             } else if ($_POST['TYPE'] == 'deleteArea' && isset($_POST['ENVIRONMENT'])) {
                 $staffID = $_SESSION['STAFFID'];
                 $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
@@ -67,7 +63,6 @@
                 $_POST['ENVIRONMENT'] = null;
             }
         }
-
         $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
         $allEnvironments->execute();
         $environments = $allEnvironments->fetchAll();
