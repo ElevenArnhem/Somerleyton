@@ -137,8 +137,11 @@
                     } else {
                         echo 'addArea';
                     }
-                    echo '" type="submit">Opslaan</button>
-                <button class="btn btn-primary" name="TYPE" value="deleteArea" type="submit">Verwijder gebied</button>
+                    echo '" type="submit">Opslaan</button>';
+                if (isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) {
+                    echo '<button class="btn btn-primary" name="TYPE" value="deleteArea" type="submit">Verwijder gebied</button>';
+                }
+                echo'
             </form>
         </div>';
     }

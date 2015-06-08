@@ -434,13 +434,18 @@ function checkCrud() {
     include 'conn.inc.php';
     $function = $_SESSION['FUNCTION'];
     $page = $_GET['page'];
-    $crudstmt = $dbh->prepare("proc_getCRUD ?,?");
-    $crudstmt->bindParam(1, $page);
-    $crudstmt->bindParam(2, $function);
-    $crudstmt->execute();
-    $crud = $crudstmt->fetch()[0];
-//    spErrorCaching($crudstmt);
-    return $crud;
+    if(isset($_SESSION['page']) && $_SESSION['page'] == $page) {
+        return $_SESSION['crud'];
+    } else {
+        $_SESSION['page'] = $page;
+        $crudstmt = $dbh->prepare("proc_getCRUD ?,?");
+        $crudstmt->bindParam(1, $page);
+        $crudstmt->bindParam(2, $function);
+        $crudstmt->execute();
+        $crud = $crudstmt->fetch()[0];
+        $_SESSION['crud'] == $crud;
+        return $crud;
+    }
 }
 
 function canCreate() {
