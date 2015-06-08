@@ -439,7 +439,7 @@ function checkCrud() {
     $crudstmt->bindParam(2, $function);
     $crudstmt->execute();
     $crud = $crudstmt->fetch()[0];
-    spErrorCaching($crudstmt);
+//    spErrorCaching($crudstmt);
     return $crud;
 }
 
