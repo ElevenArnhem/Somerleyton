@@ -6,6 +6,8 @@
  * Time: 11:14
  */
 
+$dbh = $GLOBALS['dbh'];
+
 function spErrorCaching($stmt) {
     $explodedStr = explode(']',$stmt->errorInfo()[2]);
     $errorMessage = end($explodedStr);
@@ -426,4 +428,43 @@ function searchSpecies($linkPage, $dbh) {
             </table>
         </div>
     </div>';
+}
+
+function checkCrud() {
+    include 'conn.inc.php';
+    $function = $_SESSION['FUNCTION'];
+    $page = $_GET['page'];
+    $crudstmt = $dbh->prepare("proc_getCRUD ?,?");
+    $crudstmt->bindParam(1, $page);
+    $crudstmt->bindParam(2, $function);
+    $crudstmt->execute();
+    $crud = $crudstmt->fetch()[0];
+//    spErrorCaching($crudstmt);
+    return $crud;
+}
+
+function canCreate() {
+    if(strpos(checkCrud(),'C') !== false) {
+        return true;
+    } else
+        false;
+}
+
+function canRead() {
+    if(strpos(checkCrud(),'R') !== false) {
+        return true;
+    } else
+        false;
+}
+function canUpdate() {
+    if(strpos(checkCrud(),'U') !== false) {
+        return true;
+    } else
+        false;
+}
+function canDelete() {
+    if(strpos(checkCrud(),'D') !== false) {
+        return true;
+    } else
+        false;
 }
