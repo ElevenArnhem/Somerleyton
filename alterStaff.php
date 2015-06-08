@@ -111,14 +111,14 @@ if($_SESSION['FUNCTION'] == 'KantoorPersoneel') {
                     E-mail:
                 </dt>
                 <dd>
-                    <input name="STAFFEMAIL" type="email" class="form-control" value="' . $medewerker['Email'] . '" maxlength="50" required>
+                    <input name="STAFFEMAIL" type="email" class="form-control" value="' . $medewerker['Email'] . '" maxlength="50">
                 </dd>
                 <br>
                 <dt>
                     Geboorte datum:
                 </dt>
                 <dd>
-                    <input name="STAFFBIRTHDATE" type="date" class="form-control" value="' . $medewerker['Birthdate'] . '">
+                    <input name="STAFFBIRTHDATE" type="date" class="form-control" value="' . $medewerker['Birthdate'] . '" required>
                 </dd>
                 <br>
                 <dt>
