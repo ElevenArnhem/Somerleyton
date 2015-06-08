@@ -14,11 +14,10 @@ if(isset($_POST['AREA'])) {
     $OldHeadkeeperID = $_POST['HEADKEEPER'];
 }
 if(isset($_POST['TYPE'])) {
-    if($_POST['TYPE'] == 'addArea' || isset($_POST['ENVIRONMENTNAME'])) {
+    if($_POST['TYPE'] == 'addArea' && isset($_POST['ENVIRONMENT'])) {
         $staffID = $_SESSION['STAFFID'];
-        $environmentName = $_POST['ENVIRONMENTNAME'];
-
-        $areaName = $_POST['AREANAME'];
+        $environmentName = $_POST['ENVIRONMENT'];
+        $areaName = $_POST['AREA'];
         $headKeeperID = $_POST['HEADKEEPER'];
         $addAreastmt = $dbh->prepare("proc_addArea ?,?,?,?");
         $addAreastmt->bindParam(1, $staffID);
@@ -30,11 +29,11 @@ if(isset($_POST['TYPE'])) {
         $environment = $environmentName;
         $area = $areaName;
         $OldHeadkeeperID = $headKeeperID;
-    }else if($_POST['TYPE'] == 'changeArea' || isset($_POST['ENVIRONMENTNAME'])) {
+    }else if($_POST['TYPE'] == 'changeArea' && isset($_POST['ENVIRONMENT'])) {
         $staffID = $_SESSION['STAFFID'];
         //$environmentName = $_POST['ENVIRONMENTNAME'];
         $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
-        $areaName = $_POST['AREANAME'];
+        $areaName = $_POST['AREA'];
         $headKeeperID = $_POST['HEADKEEPER'];
         $oldAreaName = $_POST['OLDAREANAME'];
         $changeAreastmt = $dbh->prepare("proc_alterArea ?,?,?,?,?");
@@ -48,68 +47,78 @@ if(isset($_POST['TYPE'])) {
         $area = $areaName;
         $environment = $oldEnvironmentName;
         $OldHeadkeeperID = $headKeeperID;
-    } else if($_POST['TYPE'] == 'deleteArea' || isset($_POST['ENVIRONMENTNAME'])) {
+    } else if($_POST['TYPE'] == 'deleteArea' && isset($_POST['ENVIRONMENT'])) {
         $staffID = $_SESSION['STAFFID'];
-        //$environmentName = $_POST['ENVIRONMENTNAME'];
         $oldEnvironmentName = $_POST['OLDENVIRONMENTNAME'];
         $oldAreaName = $_POST['OLDAREANAME'];
         $deleteAreastmt = $dbh->prepare("proc_deleteArea ?,?,?");
         $deleteAreastmt->bindParam(1, $staffID);
         $deleteAreastmt->bindParam(2, $oldAreaName);
         $deleteAreastmt->bindParam(3, $oldEnvironmentName);
-
         $deleteAreastmt->execute();
         spErrorCaching($deleteAreastmt);
+        $_POST['AREA'] = null;
+        $_POST['ENVIRONMENT'] = null;
+
 
     }
-//    @staffID			INT,
-//	 @newAreaName		VARCHAR(50),
-//	 @newHeadkeeperID	INTEGER,
-//	 @environmentName	VARCHAR(50),
-//	 @areaName			VARCHAR(50),
-//	 @HeadkeeperID		INTEGER
 }
-
+//<input type="hidden" name="HEADKEEPER" value="'.$area['HeadkeeperID'].'">
+//<input type="hidden" name="ENVIRONMENT" value="'.$selectedEnivornment.'">
+//<input type="hidden" name="AREA" value="'.$area["AreaName"].'" type="submit" >
 $allEnvironments = $dbh->prepare("EXEC proc_GetEnvironment");
 $allEnvironments->execute();
 $environments = $allEnvironments->fetchAll();
 
 $activeSaff = 1;
 $allStaffstmt = $dbh->prepare("EXEC proc_getKeepers");
-//$allStaffstmt->bindParam(1, $activeSaff);
 $allStaffstmt->execute();
 $allStaff = $allStaffstmt->fetchAll();
 
 echo '<div class="col-lg-4">
 
-<h1>Gebied aanpassen</h1>
-<form action="index.php?page=addArea" method="post">
- <dl class="dl-horizontal">
- <input type="hidden" name="OLDENVIRONMENTNAME" value="'.$environment.'">
-<dt>Naam</dt><dd><input name="AREANAME" type="text" class="form-control" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'" placeholder="gebied naam" maxlength="50" required></dd><br>
-<dt>Omgeving</dt><dd><select name="ENVIRONMENTNAME" type="text" class="form-control" '; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'disabled';} echo'>';
-if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) { echo'<option value="'.$environment.'">'.$environment.'</option>';}
-foreach($environments as $environment) {
-    echo '<option value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</option>';
-}
+    <h1>Gebied aanpassen</h1>
+    <form action="index.php?page=addArea" method="post">
+        <dl class="dl-horizontal">
+            <input type="hidden" name="OLDENVIRONMENTNAME" value="'.$environment.'">
+            <dt>Naam</dt>
+            <dd>
+                <input name="AREA" type="text" class="form-control" value="';
+                    if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;}
+                    echo'" placeholder="gebied naam" maxlength="50" required>
+            </dd><br>
+            <dt>Omgeving</dt>
+            <dd><select name="ENVIRONMENT" type="text" class="form-control" ';
+                if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) {echo 'disabled';} echo'>';
+                if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) {echo '<option selected>'.$_POST['ENVIRONMENT'].'</option>';}
+                if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) { echo'<option value="'.$environment.'">'.$environment.'</option>';}
+                foreach($environments as $environment) {
+                    echo '<option value="'.$environment["EnvironmentName"].'">'.$environment["EnvironmentName"].'</option>';
+                }
+            echo'</select></dd><br>';
+            if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) {
+                echo '<input type="hidden" name="ENVIRONMENT" value="'.$_POST['ENVIRONMENT'].'">';
+            } echo '
+            <dt>Hoofddierverzorger</dt>
+            <dd><select name="HEADKEEPER" type="text" class="form-control" >';
+                foreach($allStaff as $staff) {
+                    if($OldHeadkeeperID == $staff["StaffID"]) {
+                        echo '<option value="' . $staff["StaffID"] . '">' . $staff["StaffName"] . '</option>';
+                    }
+                }
+                foreach($allStaff as $staff) {
+                    if($OldHeadkeeperID != $staff["StaffID"]) {
+                        echo '<option value="' . $staff["StaffID"] . '">' . $staff["StaffName"] . '</option>';
+                    }
+                }
+            echo'</select></dd><br>
+        </dl>
+        <input type="hidden" name="OLDAREANAME" value="';
+            if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) {echo $area;} echo'">
+        <button class="btn btn-primary" name="TYPE" value="';
+            if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENT'])) {echo 'changeArea';}
+            else {echo 'addArea';} echo'" type="submit">Opslaan</button>
 
-echo'</select></dd><br>
-<dt>Hoofddierverzorger</dt><dd><select name="HEADKEEPER" type="text" class="form-control" >';
-foreach($allStaff as $staff) {
-    if($OldHeadkeeperID == $staff["StaffID"]) {
-        echo '<option value="' . $staff["StaffID"] . '">' . $staff["StaffName"] . '</option>';
-    }
-}
-foreach($allStaff as $staff) {
-    if($OldHeadkeeperID != $staff["StaffID"]) {
-        echo '<option value="' . $staff["StaffID"] . '">' . $staff["StaffName"] . '</option>';
-    }
-}
-echo'</select></dd><br>
-</dl>
-<input type="hidden" name="OLDAREANAME" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo $area;} echo'">
-<button class="btn btn-primary" name="TYPE" value="'; if(isset($_POST['AREA']) || isset($_POST['ENVIRONMENTNAME'])) {echo 'changeArea';} else {echo 'addArea';} echo'" type="submit">Opslaan</button>
-
-<button class="btn btn-primary" name="TYPE" value="deleteArea" type="submit">Verwijder gebied</button>
-</form>
+        <button class="btn btn-primary" name="TYPE" value="deleteArea" type="submit">Verwijder gebied</button>
+    </form>
 </div>';

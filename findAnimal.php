@@ -8,39 +8,40 @@ if(isset($_POST["SEARCHSTRING"])) {
     $animalstmt->bindParam(2,$aliveAnimal);
     $animalstmt->execute();
     $animals = $animalstmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-} if(!isset($_POST["SEARCHSTRING"])) {
+}
+if(!isset($_POST["SEARCHSTRING"])) {
     $animalstmt = $dbh->prepare("EXEC proc_searchAnimal '','1'");
     $animalstmt->execute();
     $animals = $animalstmt->fetchAll();
-
 }
 
+if($_SESSION['FUNCTION'] == 'HeadKeeper') {
+    echo '
+    <div class="btn-group" role="group">
+       <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Dier toevoegen</button></a>
+    </div>';
+}
 
 echo '
-
 <hr>
 <form action="index.php?page=findAnimal" method="post">
-  <div class="col-lg-6">
-
-    <div class="input-group">
-      <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek dieren op: id, naam, soort, verblijf">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="submit" >Zoek</button>
-      </span>
-
-    </div><!-- /input-group -->
-
-  </div><!-- /.col-lg-6 -->
-<br /><br />
-<div class="radio">';
-if(isset($_POST['ALIVEANIMAL']) && $_POST['ALIVEANIMAL'] == 0) {
-    echo '  <label>
-    <input  type="radio" name="ALIVEANIMAL" id="optionsRadios1" value="1" >
-    Levende dieren
-</label>
-</div>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input name="SEARCHSTRING" type="text" class="form-control" placeholder="Zoek dieren op: id, naam, soort, verblijf">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" >Zoek</button>
+            </span>
+        </div>
+    </div>
+    <br /><br />
+    <div class="radio">';
+        if(isset($_POST['ALIVEANIMAL']) && $_POST['ALIVEANIMAL'] == 0) {
+            echo '
+            <label>
+                <input  type="radio" name="ALIVEANIMAL" id="optionsRadios1" value="1" >
+                Levende dieren
+            </label>
+        </div>
 <div class="radio">
   <label>
     <input type="radio" name="ALIVEANIMAL" id="0" value="0" checked>
@@ -63,14 +64,14 @@ if(isset($_POST['ALIVEANIMAL']) && $_POST['ALIVEANIMAL'] == 0) {
 </form>';
 echo '
 <table class="table table-hover"><tr>
-            <th>AnimalID</th>
-            <th>AnimalName</th>
-            <th>BirthDate</th>
-            <th>BirthPlace</th>
-            <th>LatinName</th>
-            <th>SubSpeciesName</th>
-            <th>AreaName</th>
-            <th>EnclosureID</th>
+            <th>Dier nummer</th>
+            <th>Naam</th>
+            <th>Geboorte datum</th>
+            <th>Geboorte plaats</th>
+            <th>Hoofdsoort</th>
+            <th>Subsoort</th>
+            <th>Gebied naam</th>
+            <th>Verblijf nummer</th>
             <th></th>
 </tr>';
 foreach($animals as $animal) {
@@ -94,11 +95,4 @@ foreach($animals as $animal) {
 };
 echo '
 </table>';
-if($_SESSION['FUNCTION'] == 'HeadKeeper') {
-    echo '
 
-    <div class="btn-group" role="group">
-       <a href="?page=addAnimal"> <button type="button" class="btn btn-default" >Toevoegen</button></a>
-    </div>
-';
-}
