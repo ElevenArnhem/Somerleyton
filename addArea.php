@@ -5,7 +5,7 @@
      * Date: 4-5-2015
      * Time: 00:16
      */
-    if(canRead() && canUpdate() && canCreate()) {
+    if(canRead() && canUpdate() && canCreate() && canDelete()) {
         $pageTitle = 'Gebied toevoegen';
         $environment = null;
         $area = null;

@@ -5,7 +5,7 @@
      * Date: 4-5-2015
      * Time: 00:12
      */
-    if(canRead() && canCreate() && canUpdate()) {
+    if(canRead() && canCreate() && canUpdate() && canDelete()) {
         $pageTitle = 'Omgeving toevoegen';
         $environment = null;
         if (isset($_POST['ENVIRONMENT'])) {
