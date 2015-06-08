@@ -5,6 +5,7 @@
  * Date: 4-5-2015
  * Time: 00:16
  */
+$pageTitle = 'Gebied toevoegen';
 $environment = null;
 $area = null;
 $OldHeadkeeperID = null;
@@ -12,7 +13,9 @@ if(isset($_POST['AREA'])) {
     $area = $_POST['AREA'];
     $environment = $_POST['ENVIRONMENT'];
     $OldHeadkeeperID = $_POST['HEADKEEPER'];
+    $pageTitle = 'Gebied aanpassen';
 }
+
 if(isset($_POST['TYPE'])) {
     if($_POST['TYPE'] == 'addArea' && isset($_POST['ENVIRONMENT'])) {
         $staffID = $_SESSION['STAFFID'];
@@ -59,8 +62,6 @@ if(isset($_POST['TYPE'])) {
         spErrorCaching($deleteAreastmt);
         $_POST['AREA'] = null;
         $_POST['ENVIRONMENT'] = null;
-
-
     }
 }
 //<input type="hidden" name="HEADKEEPER" value="'.$area['HeadkeeperID'].'">
@@ -77,7 +78,7 @@ $allStaff = $allStaffstmt->fetchAll();
 
 echo '<div class="col-lg-4">
 
-    <h1>Gebied aanpassen</h1>
+    <h1>';  echo $pageTitle . '</h1>
     <form action="index.php?page=addArea" method="post">
         <dl class="dl-horizontal">
             <input type="hidden" name="OLDENVIRONMENTNAME" value="'.$environment.'">
