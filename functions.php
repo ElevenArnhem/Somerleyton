@@ -447,7 +447,6 @@ function canCreate() {
     if(strpos(checkCrud(),'C') !== false) {
         return true;
     } else {
-        pageDontExist();
         false;
     }
 }
@@ -464,7 +463,6 @@ function canUpdate() {
     if(strpos(checkCrud(),'U') !== false) {
         return true;
     } else {
-        pageDontExist();
         false;
     }
 }
@@ -472,7 +470,6 @@ function canDelete() {
     if(strpos(checkCrud(),'D') !== false) {
         return true;
     } else {
-        pageDontExist();
         false;
     }
 }
