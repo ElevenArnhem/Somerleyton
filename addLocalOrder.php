@@ -112,6 +112,7 @@
             <div class="input-group">
                 <input name="SearchItems" type="text" class="form-control" placeholder="Zoeken">
                   <span class="input-group-btn">
+                    <input type="hidden" name="itemsInLocalOrder" value="<?php echo $serializedItemsInLocalOrder ?>">
                     <button class="btn btn-default" type="submit">Zoeken</button>
                   </span>
             </div>
