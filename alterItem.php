@@ -90,6 +90,7 @@ echo '
             <tr>
                 <th>Naam</th>
                 <th>Telefoonnummer</th>
+                <th></th>
             </tr>';
 foreach ($itemLeveranciers as $itemLeverancier) {
     echo '<tr>
@@ -119,6 +120,7 @@ echo '</table>
             <tr>
                 <th>Naam</th>
                 <th>Telefoonnummer</th>
+                <th></th>
             </tr>';
         foreach ($leveranciers as $leverancier) {
             $check = 0;
