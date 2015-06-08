@@ -431,11 +431,12 @@ function searchSpecies($linkPage, $dbh) {
 }
 
 function checkCrud() {
+    include 'conn.inc.php';
     $function = $_SESSION['FUNCTION'];
     $page = $_GET['page'];
     $crudstmt = $dbh->prepare("proc_getCRUD ?,?");
     $crudstmt->bindParam(1, $page);
-    $crudstmt->bindParam(1, $function);
+    $crudstmt->bindParam(2, $function);
     $crudstmt->execute();
     $crud = $crudstmt->fetch()[0];
     spErrorCaching($crudstmt);
