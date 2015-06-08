@@ -45,21 +45,6 @@
                 }
 
             }
-//            echo '-';
-//            echo $staffID;
-//            echo '-';
-//            echo $orderID;
-//            echo '-';
-//            echo $orderState;
-//            echo '-';
-//            echo $comment;
-//            echo '-';
-//            echo $orderRecievedDate;
-//            echo '-';
-//            echo $invoiceRecievedDate;
-//            echo '-';
-//            echo $invoicePaidDate;
-//            echo '-';
 
             $alterOrderStatement = $dbh -> prepare('proc_alterOrder ?, ?, ?, ?, ?, ?, ?');
             $alterOrderStatement -> bindParam(1, $staffID);
@@ -160,7 +145,7 @@
                     <tr>
                         <td><?php echo $itemInOrder['ItemName'] ?></td>
                         <td><?php echo $itemInOrder['Amount'] . ' ' . $itemInOrder['Unit'] ?></td>
-                        <td><?php echo '€ ' .round($itemInOrder['Price']) ?></td>
+                        <td><?php echo '€ ' .round($itemInOrder['Price'], 2) ?></td>
                     </tr>
                 <?php } ?>
             </table>
