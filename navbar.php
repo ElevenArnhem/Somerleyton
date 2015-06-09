@@ -63,10 +63,9 @@
         <li><a href="?page=feeding">Voeding</a></li>
         <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?> <li><a href="?page=medewerkers">Medewerkers</a></li> <?php } ?>
         <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=Leverancier">Leveranciers</a></li> <?php } ?>
-        <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=items">Producten</a></li><?php } ?>
+        <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=items">Producten</a></li> <?php } ?>
         </ul>
       <ul class="nav navbar-nav navbar-right">
-
         <li><a href="logOut.php" >Log uit</a> </li>
       </ul>
     </div><!--/.nav-collapse -->

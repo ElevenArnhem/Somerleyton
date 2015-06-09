@@ -1,8 +1,5 @@
 <?php
-    if($_SESSION['FUNCTION'] != 'HeadKeeper') {
-        echo '<div class="alert alert-danger" role="alert">U bent niet ingelogd met de juiste rechten.</div>';
-    }
-    else {
+    if(canRead() && canCreate() && canUpdate()) {
         $staffID = $_SESSION['STAFFID'];
         $week = getCurrentWeekNumber();
         $year = getCurrentYear();
@@ -45,17 +42,14 @@
             $itemAmount = $_POST['amountForItem'];
             $itemUnit = $_POST['itemUnit'];
 
-            // if the item already exists update it.
             foreach($itemsInLocalOrder as $itemInLocalOrder) {
                 $propertiesInItemInLocalOrder = explode(';', $itemInLocalOrder);
                 $itemInLocalOrderID = $propertiesInItemInLocalOrder[0];
 
                 if($itemInLocalOrderID == $itemID) {
-                    // Update amount
                     $itemInOrderAmount = $propertiesInItemInLocalOrder[3];
                     $itemAmount = $itemInOrderAmount + $itemAmount;
 
-                    // Remove old item
                     $index = array_search($itemInLocalOrder, $itemsInLocalOrder);
                     if($index !== false){
                         unset($itemsInLocalOrder[$index]);
@@ -104,7 +98,6 @@
 
         $serializedItemsInLocalOrder = base64_encode(serialize($itemsInLocalOrder));
     ?>
-
     <h1>Bestellijst maken</h1>
     <h4>Week: <?php echo $week ?></h4>
     <form action="index.php?page=addLocalOrder" method="post">
@@ -131,7 +124,6 @@
                 </tr>
                 <?php
                 foreach($items as $item) { ?>
-
                     <tr>
                         <form action="index.php?page=addLocalOrder" method="post">
                             <td><?php echo $item['ItemID'] ?></td>
@@ -164,14 +156,12 @@
                     <th></th>
                 </tr>
                 <?php foreach($itemsInLocalOrder as $itemInLocalOrder) {
-
                     $propertiesInLocalOrderItems = explode(';', $itemInLocalOrder);
 
                     $itemInLocalOrderID = $propertiesInLocalOrderItems[0];
                     $itemInLocalOrderName = $propertiesInLocalOrderItems[1];
                     $itemInLocalOrderUnit = $propertiesInLocalOrderItems[2];
                     $itemInOrderLocalAmount = $propertiesInLocalOrderItems[3];
-
                     ?>
                     <tr>
                         <td><?php echo $itemInLocalOrderID ?></td>
@@ -191,7 +181,6 @@
                 <?php } ?>
             </table>
         </div>
-
         <form action="index.php?page=addLocalOrder" method="post">
             <input type="hidden" name="itemsInLocalOrder" value="<?php echo $serializedItemsInLocalOrder ?>">
             <button class="btn btn-primary" type="submit" name="btnPlaceLocalOrder">Opslaan</button>

@@ -69,14 +69,13 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
         $itemsStatement->execute();
         $items = $itemsStatement->fetchAll();
     }
-
-    echo '
+?>
     <div class="row">
         <div class="col-lg-6">
-            <h3>Hoofdsoort: ' . $_GET['headspecies'] . '</h2>
-                <h3>Subsoort: ' . $_GET['subspecies'] . '</h2>
-                <a role="button" class="btn btn-primary" href="index.php?page=feedingscheme&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '">Terug naar voedingsschema</a>
-            <h1>Recept nummer: '. $receptID ?></h1>
+            <h3>Hoofdsoort: <?php echo $_GET['headspecies'] ?> </h3>
+                <h3>Subsoort: <?php echo $_GET['subspecies'] ?></h3>
+                <a role="button" class="btn btn-primary" href="index.php?page=feedingscheme&headspecies=<?php echo $_GET['headspecies']?>&subspecies=<?php echo $_GET['subspecies']?>">Terug naar voedingsschema</a>
+            <h1>Recept nummer: <?php echo $receptID ?></h1>
             <table class="table table-hover">
                 <tr>
                     <th>
@@ -89,8 +88,7 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
                 </tr>
                 <?php
                 if($receptID != null)
-                    foreach($itemsInRecept as $itemInRecept) {
-                        ?>
+                    foreach($itemsInRecept as $itemInRecept) { ?>
                         <tr>
                             <td>
                                 <?php echo $itemInRecept["ItemName"] ?>
@@ -98,15 +96,14 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
                             <td>
                                 <?php echo $itemInRecept["Amount"] . ' '. $itemInRecept["Unit"] ?>
                             </td>
-                            <td><?php echo '
-                                <form action="index.php?page=createRecipe&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">
-                                    <input type="hidden" name="receptID" value="'.$receptID.'">
-                                    <input type="hidden" name="itemID" value="'.$itemInRecept["ItemID"]. '">
-
+                            <td>
+                                <form action="index.php?page=createRecipe&headspecies=<?php echo $_GET['headspecies']?> &subspecies=<?php echo $_GET['subspecies']?>" method="post">
+                                    <input type="hidden" name="receptID" value="<?php echo $receptID ?>">
+                                    <input type="hidden" name="itemID" value="<?php echo $itemInRecept["ItemID"]?>">
                                     <button type="submit" name="btnDeleteItemFromRecipe" class="btn btn-link" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                                    </button>';
-                                ?></form>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     <?php
@@ -116,8 +113,8 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
         </div>
 
         <div class="col-lg-6">
-            <h1>Items</h1><?php echo '
-            <form action="index.php?page=createRecipe&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">'; ?>
+            <h1>Items</h1>
+            <form action="index.php?page=createRecipe&headspecies=<?php echo $_GET['headspecies']?>&subspecies=<?php echo $_GET['subspecies']?>" method="post">
                 <div class="input-group">
                     <input type="hidden" name="receptID" value="<?php echo $receptID?>">
                     <input name="SearchCriteria" type="text" class="form-control" placeholder="Zoeken">
@@ -126,8 +123,6 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
                     </span>
                 </div>
             </form>
-
-
             <table class="table table-hover">
                 <tr>
                     <th>
@@ -145,9 +140,8 @@ if(isset($_GET['headspecies']) && isset($_GET['subspecies'])) {
                     <th></th>
                 </tr>
                 <?php
-                foreach($items as $item) {
-                    echo '
-                    <form action="index.php?page=createRecipe&headspecies=' . $_GET['headspecies'] . '&subspecies=' . $_GET['subspecies'] . '" method="post">'; ?>
+                foreach($items as $item) { ?>
+                    <form action="index.php?page=createRecipe&headspecies=<?php echo $_GET['headspecies']?>&subspecies=<?php echo $_GET['subspecies']?>" method="post">
                         <tr>
                             <td>
                                 <?php echo $item["ItemID"] ?>
