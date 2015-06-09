@@ -1,8 +1,5 @@
 <?php
-    if($_SESSION['FUNCTION'] != 'KantoorPersoneel'){
-        echo '<div class="alert alert-danger" role="alert">U heeft geen rechten om deze pagina te bekijken.</div>';
-    }
-    else {
+    if(canRead()) {
     $staffID = $_SESSION['STAFFID'];
 
     $getAllZooStatement = $dbh -> prepare('proc_getAllZoos');
@@ -17,17 +14,16 @@
         <th>Naam</th>
         <th></th>
     </tr>
-
     <?php foreach($dierentuinen as $dierentuin) { ?>
-        <tr>
-            <td><?php echo $dierentuin['ZooName'] ?></td>
-            <td>
-                <form action="index.php?page=alterZoo" method="post">
-                    <input type="hidden" name="originalName" value="<?php echo $dierentuin['ZooName'] ?>">
-                    <button type="submit" class="btn btn-default">Bewerken</button>
-                </form>
-            </td>
-        </tr>
+    <tr>
+        <td><?php echo $dierentuin['ZooName'] ?></td>
+        <td>
+            <form action="index.php?page=alterZoo" method="post">
+                <input type="hidden" name="originalName" value="<?php echo $dierentuin['ZooName'] ?>">
+                <button type="submit" class="btn btn-default">Bewerken</button>
+            </form>
+        </td>
+    </tr>
     <?php } ?>
 </table>
 
