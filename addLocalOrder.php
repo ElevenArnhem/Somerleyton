@@ -1,5 +1,6 @@
 <?php
     if(canRead() && canCreate() && canUpdate()) {
+        $maxInteger = 2147483647;
         $staffID = $_SESSION['STAFFID'];
         $week = getCurrentWeekNumber();
         $year = getCurrentYear();
@@ -49,6 +50,9 @@
                 if($itemInLocalOrderID == $itemID) {
                     $itemInOrderAmount = $propertiesInItemInLocalOrder[3];
                     $itemAmount = $itemInOrderAmount + $itemAmount;
+                    if($itemAmount > $maxInteger) {
+                        $itemAmount = $maxInteger;
+                    }
 
                     $index = array_search($itemInLocalOrder, $itemsInLocalOrder);
                     if($index !== false){
