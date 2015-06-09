@@ -7,8 +7,9 @@
         $leverancierIsActive = 1;
         $itemsInOrder = array();
 
-        if (isset($_POST['SelectedLeverancier']))
+        if (isset($_POST['SelectedLeverancier'])) {
             $selectedLeverancier = $_POST['SelectedLeverancier'];
+        }
 
         //  Get all suppliers
         $getLeveranciersStatement = $dbh->prepare('EXEC proc_searchLeveranciers ?, ?, ?');
@@ -130,8 +131,7 @@
 
         Leverancier:
         <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                    aria-expanded="true">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                 <?php echo $selectedLeverancier ?>
                 <span class="caret"></span>
             </button>
@@ -140,7 +140,8 @@
                     <li role="presentation">
                         <form action="index.php?page=addOrder" method="post">
                             <button type="submit" class="btn btn-link" name="SelectedLeverancier"
-                                    value="<?php echo $leverancier['SupplierName']; ?>"><?php echo $leverancier['SupplierName']; ?></button>
+                                    value="<?php echo $leverancier['SupplierName']; ?>">
+                                <?php echo $leverancier['SupplierName']; ?></button>
                         </form>
                     </li>
                 <?php } ?>
