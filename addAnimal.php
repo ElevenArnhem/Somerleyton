@@ -124,7 +124,7 @@
                         </dd><br><br>
                         <dt>Moeder </dt>
                         <dd>
-                            <select name="MOTHER" type="text" class="form-control" required>';
+                            <select name="MOTHER" type="text" class="form-control" >';
                                 foreach ($getMothers as $mother) {
                                     echo '<option value="' . $mother['AnimalID'] . '">' . $mother['AnimalName'] . '</option>';
                                 }
@@ -134,7 +134,7 @@
                         </dd><br>
                         <dt>Vader </dt>
                         <dd>
-                            <select name="FATHER" type="text" class="form-control" required>';
+                            <select name="FATHER" type="text" class="form-control" >';
                                 foreach ($getFathers as $father) {
                                     echo '<option value="' . $father['AnimalID'] . '">' . $father['AnimalName'] . '</option>';
                                 }
