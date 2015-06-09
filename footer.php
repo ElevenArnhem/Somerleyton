@@ -6,16 +6,13 @@
  * Time: 12:19
  */
 echo'  </div> <!-- /container -->
-  <footer class="footer">
-  <nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="container">
+</div>
 
-  </div>
-</nav>
-    <div class="container">
+<br><br>
 
-    </div>
-  </footer>';
+
+
+';
 
 echo '
 <!-- Bootstrap core JavaScript
