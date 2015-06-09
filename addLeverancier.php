@@ -29,10 +29,10 @@ if(canRead() && canCreate()) {
               <p>Leveranciersnaam</p>
               <input name="Leveranciersnaam" type="text" class="form-control" placeholder="Leveranciersnaam" maxlength="50" required>
               <br><br>
-              <p>Adres</p><br>
+              <p>Adres</p>
               <input name="Adres" type="text" class="form-control" placeholder="Adres" maxlength="50"  required>
               <br><br>
-              <p>Telefoonnummer</p><br>
+              <p>Telefoonnummer</p>
               <input name="Telefoonnummer" type="text" class="form-control" placeholder="Telefoonnummer" maxlength="20"  required>
               <br><br><br>
               <button type="submit" class="btn btn-default">Invoeren</button>
