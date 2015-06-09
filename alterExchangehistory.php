@@ -49,10 +49,10 @@
                 <h2>Uitwisseling aanpassen<h2>
                 <h2>' . $animal['AnimalName'] . '</h2>
                 <br><br>
-                <p>ReturnDate</p>
+                <p>Einddatum</p>
                 <input name="ReturnDate" type="Date" class="form-control" Value="' . $getExchangeHistorys["ReturnDate"] . '" required>
                 <br><br>
-                <p>ZooName</p>';
+                <p>Dierentuin</p>';
                 $nZoos = count($getAllZoos);
                 echo '
                 <select name="ZooName" type="text" class="form-control" required>';
@@ -68,7 +68,7 @@
                 echo '
                 </select>
                 <br><br>
-                <p>ExchangeType</p>
+                <p>Uitwisseling type</p>
                 <select name="ExchangeType" type="text" class="form-control" required>
                     <option value="from" ';
                     if ($getExchangeHistorys["ExchangeType"] == 'from') {
@@ -84,7 +84,7 @@
                     ' >Naar</option>
                 </select>
                 <br><br>
-                <p>Comment</p>
+                <p>Commentaar</p>
                 <textarea name="Comment" class="form-control" rows="5" maxlength="250">' . $getExchangeHistorys["Comment"] . '</textarea>
                 <br><br>
                 <button type="submit" class="btn btn-default">Opslaan</button>
