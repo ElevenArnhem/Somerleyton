@@ -105,43 +105,46 @@ if(canRead() && canUpdate()) {
                     }
                     echo '
                 </table>
-            </div>
-            <div class="col-lg-6">
-                <form action="index.php?page=alterItem&ItemID=' . $item['ItemID'] . '" method="post">
-                    <div class="input-group">
-                        <input name="SEARCHCRITERIA" type="text" class="form-control" placeholder="Zoek leveranciers op: naam of adres">
-                            <span class="input-group-btn">
-                            <button class="btn btn-default" value="search" type="submit">Zoek</button>
-                  </span>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <form action="index.php?page=alterItem&ItemID=' . $item['ItemID'] . '" method="post">
+                <div class="input-group">
+                    <input name="SEARCHCRITERIA" type="text" class="form-control" placeholder="Zoek leveranciers op: naam of adres">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" value="search" type="submit">Zoek</button>
+                    </span>
                 </div>
                 <br><br>
-            <table class="table table-hover" >
+                <table class="table table-hover" >
                     <tr>
                         <th>Naam</th>
                         <th>Telefoonnummer</th>
                         <th></th>
                     </tr>';
-            foreach ($leveranciers as $leverancier) {
-                $check = 0;
-                foreach ($itemLeveranciers as $itemLeverancier) {
-                    if ($leverancier['SupplierName'] == $itemLeverancier['SupplierName']) {
-                        $check++;
+                    foreach ($leveranciers as $leverancier) {
+                        $check = 0;
+                        foreach ($itemLeveranciers as $itemLeverancier) {
+                            if ($leverancier['SupplierName'] == $itemLeverancier['SupplierName']) {
+                                $check++;
+                            }
+                        }
+                        if ($check == 0) {
+                            echo '
+                            <tr>
+                                <td>' . $leverancier["SupplierName"] . '</td>
+                                <td>' . $leverancier["SupplierTelephoneNumber"] . '</td>
+                                <td>
+                                    <button type="submit" name="addSupplierToItem" class="btn btn-link" aria-label="Left Align" value="' . $leverancier["SupplierName"] . '" >
+                                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
+                                    </button>
+                                </td>
+                            </tr>';
+                        }
                     }
-                }
-                if ($check == 0) {
-                    echo '<tr>
-                                  <td>' . $leverancier["SupplierName"] . '</td>
-                                  <td>' . $leverancier["SupplierTelephoneNumber"] . '</td>
-                                  <td>
-                                     <button type="submit" name="addSupplierToItem" class="btn btn-link" aria-label="Left Align" value="' . $leverancier["SupplierName"] . '" >
-                                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
-                                        </button>
-                                    </td>
-                               </tr>';
-                }
-            }
-            echo '</table>
+                    echo '
+                </table>
             </div>
         </form>
-    ';
+    </div>';
 }
