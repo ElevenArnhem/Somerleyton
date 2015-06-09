@@ -25,7 +25,15 @@
             <div class="col-lg-6">
                 <h2>Dier Info</h2>
                 <dl class="dl-horizontal">
-                    <dt>Geslacht</dt><dd>' . $animal['Gender'] . '</dd><br>
+                    <dt>Geslacht</dt><dd>';
+                        if($animal['Gender'] == 'U')   {
+                            echo 'Nog niet bekend';
+                        } elseif($animal['Gender'] == 'M') {
+                            echo 'Man';
+                        } elseif($animal['Gender'] == 'F') {
+                            echo 'Vrouw';
+                        }
+                    echo'</dd><br>
                     <dt>Soort</dt><dd>' . $animal['LatinName'] . '</dd><br>
                     <dt>Sub soort</dt><dd>' . $animal['SubSpeciesName'] . '</dd><br>
                     <dt>Latijnse naam</dt><dd>' . $animal['LatinName'] . '</dd><br>
