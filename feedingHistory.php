@@ -91,6 +91,8 @@
         <td>' . $animal["AnimalID"] . '</td>
             <form action="index.php?page=feedingRecipe" method="post">
                 <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
+                <input type="hidden" name="latinName" value="' . $animal['LatinName'] . '">
+                <input type="hidden" name="subSpecies" value="' . $animal['SubSpeciesName'] . '">
                 <input type="hidden" name="animalID" value="' . $animal['AnimalID'] . '">
                 <td>
                     <button type="submit" class="btn btn-link">' . $animal["AnimalName"] . '</button>
