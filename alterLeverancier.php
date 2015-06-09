@@ -31,46 +31,41 @@
         echo '
         <hr>
         <form action="index.php?page=alterLeverancier&Leverancier=' . $_GET["Leverancier"] . '" method="post">
-              <div class="col-lg-8">
-                  <h2>' . $_GET["Leverancier"] . '</h2>
-                  <br><br>
-                  <p>Adres</p>
-                  <input name="Adres" type="text" class="form-control" Value="' . $leveranciers["SupplierAddress"] . '" required>
-                  <br><br>
-                  <p>Telefoonnummer</p>
-                  <input name="Telefoonnummer" type="text" class="form-control" Value="' . $leveranciers['SupplierTelephoneNumber'] . '" required>
+            <div class="col-lg-8">
+                <h2>' . $_GET["Leverancier"] . '</h2>
+                <br><br>
+                <p>Adres</p>
+                <input name="Adres" type="text" class="form-control" Value="' . $leveranciers["SupplierAddress"] . '" required>
+                <br><br>
+                <p>Telefoonnummer</p>
+                <input name="Telefoonnummer" type="text" class="form-control" Value="' . $leveranciers['SupplierTelephoneNumber'] . '" required>
+                <br>
+                <div class="radio">
+                    <label>';
+                        if ($leveranciers["SupplierIsActive"] == 1) {
+                            echo '<input type="radio" name="SEARCHISACTIVE" value="1" checked>';
+                        } else {
+                            echo '<input type="radio" name="SEARCHISACTIVE" value="1">';
+                        }
+                        echo '
+                        Actieve leverancier
+                    </label>
+                </div>
 
-                 <br>
-
-                  <div class="radio">
-              <label>';
-                if ($leveranciers["SupplierIsActive"] == 1) {
-                    echo '<input type="radio" name="SEARCHISACTIVE" value="1" checked>';
-                } else {
-                    echo '<input type="radio" name="SEARCHISACTIVE" value="1">';
-                }
-                echo '
-                    Actieve leverancier
-                </label>
-            </div>
-
-            <div class="radio">
-                <label>';
-                if ($leveranciers["SupplierIsActive"] == 0) {
-                    echo '<input type="radio" name="SEARCHISACTIVE" value="0" checked>';
-                } else {
-                    echo '<input type="radio" name="SEARCHISACTIVE" value="0">';
-                }
-                echo '
+                <div class="radio">
+                    <label>';
+                        if ($leveranciers["SupplierIsActive"] == 0) {
+                            echo '<input type="radio" name="SEARCHISACTIVE" value="0" checked>';
+                        } else {
+                            echo '<input type="radio" name="SEARCHISACTIVE" value="0">';
+                        }
+                        echo '
                         Niet actieve leverancier
-                </label>
+                    </label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-default">Invoeren</button>
             </div>
-
-                  <br>
-                  <button type="submit" class="btn btn-default">Invoeren</button>
-
-              </div>
-
         </form>';
     }
 
