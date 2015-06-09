@@ -26,10 +26,13 @@ if(canRead() && canCreate()) {
     <hr>
     <form action="index.php?page=addLeverancier" method="post">
           <div class="col-lg-8">
+              <p>Leveranciersnaam</p>
               <input name="Leveranciersnaam" type="text" class="form-control" placeholder="Leveranciersnaam" maxlength="50" required>
-              <br><br><br>
+              <br><br>
+              <p>Adres</p><br>
               <input name="Adres" type="text" class="form-control" placeholder="Adres" maxlength="50"  required>
-              <br><br><br>
+              <br><br>
+              <p>Telefoonnummer</p><br>
               <input name="Telefoonnummer" type="text" class="form-control" placeholder="Telefoonnummer" maxlength="20"  required>
               <br><br><br>
               <button type="submit" class="btn btn-default">Invoeren</button>

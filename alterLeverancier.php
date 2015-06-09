@@ -64,7 +64,7 @@
                     </label>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-default">Invoeren</button>
+                <button type="submit" class="btn btn-default">Aanpassen</button>
             </div>
         </form>';
     }
