@@ -1,5 +1,5 @@
 <?php
-    if(canRead() && canCreate() && canUpdate()) {
+    if(canRead() && canCreate()) {
         $staffID = $_SESSION['STAFFID'];
         $searchCriteria = '';
         $isActive = 1;

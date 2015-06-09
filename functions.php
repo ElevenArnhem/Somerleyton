@@ -443,7 +443,7 @@ function checkCrud() {
         $crudstmt->bindParam(2, $function);
         $crudstmt->execute();
         $crud = $crudstmt->fetch()[0];
-        $_SESSION['crud'] == $crud;
+        $_SESSION['crud'] = $crud;
         return $crud;
     }
 }
