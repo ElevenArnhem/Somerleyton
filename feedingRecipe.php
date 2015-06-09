@@ -151,6 +151,40 @@ if(canRead()) {
                         <?php echo explode(".", $feedingScheme['TimeGeneral'])[0] ?>
                     </td>
                 </tr>
+                <?php if(isset($_POST['PreparedDate'])) { ?>
+                <tr>
+                    <td>
+                        Voorbereid op
+                    </td>
+                    <td>
+                        <?php echo $_POST['PreparedDate']; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Voorbereid door
+                    </td>
+                    <td>
+                        <?php echo $_POST['PreparedBy']; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gevoed op
+                    </td>
+                    <td>
+                        <?php echo $_POST['FedDate']; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gevoed door
+                    </td>
+                    <td>
+                        <?php echo $_POST['FedBy']; ?>
+                    </td>
+                </tr>
+                <?php } ?>
             </table>
         </div>
         <div>

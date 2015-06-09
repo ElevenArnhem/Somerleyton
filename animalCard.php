@@ -36,7 +36,6 @@
                     echo'</dd><br>
                     <dt>Soort</dt><dd>' . $animal['LatinName'] . '</dd><br>
                     <dt>Sub soort</dt><dd>' . $animal['SubSpeciesName'] . '</dd><br>
-                    <dt>Latijnse naam</dt><dd>' . $animal['LatinName'] . '</dd><br>
                     <dt>Geboorte plaats</dt><dd>' . $animal['BirthPlace'] . '</dd><br>
                     <dt>Geboorte datum</dt><dd>' . $animal['BirthDate'] . '</dd><br>
                     <dt>Omgeving </dt><dd>' . $animal['EnvironmentName'] . '</dd><br>

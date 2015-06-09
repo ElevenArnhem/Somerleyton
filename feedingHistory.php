@@ -147,6 +147,10 @@
                 );
                 echo '<tr>
             <form action="index.php?page=feedingRecipe" method="post">
+                    <input type="hidden" name="FedDate" value="' . explode('.', $speciesRow['GeneralFedDateTime'])[0] . '">
+                    <input type="hidden" name="FedBy" value="' . $speciesRow['FedBy'] . '">
+                    <input type="hidden" name="PreparedDate" value="' . explode('.', $speciesRow['GeneralPreparedDateTime'])[0] . '">
+                    <input type="hidden" name="PreparedBy" value="' . $speciesRow['PreparedBy'] . '">
                     <input type="hidden" name="feedingSchemeRow" value="' . base64_encode(serialize($feedingSchemeRow)) . '">
                     <input type="hidden" name="latinName" value="' . $speciesRow['LatinName'] . '">
                     <input type="hidden" name="subSpecies" value="' . $speciesRow['SubSpeciesName'] . '">
