@@ -49,7 +49,7 @@
         <li>
               <a data-toggle="dropdown" role="button" aria-expanded="false">Orders<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                  <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=orders">Order overzicht</a></li> <?php } ?>
+                  <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=orders">Orderoverzicht</a></li> <?php } ?>
                   <?php if($_SESSION['FUNCTION'] == 'KantoorPersoneel') { ?><li><a href="?page=readLocalOrder">Bestellijsten</a></li> <?php } ?>
                   <?php if($_SESSION['FUNCTION'] == 'HeadKeeper') { ?>
                       <li>
