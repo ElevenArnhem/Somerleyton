@@ -26,6 +26,8 @@ if(canRead() && canCreate()) {
     <hr>
     <form action="index.php?page=addLeverancier" method="post">
           <div class="col-lg-8">
+              <h3>Leverancier toevoegen</h3>
+              <br>
               <p>Leveranciersnaam</p>
               <input name="Leveranciersnaam" type="text" class="form-control" placeholder="Leveranciersnaam" maxlength="50" required>
               <br><br>
