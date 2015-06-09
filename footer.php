@@ -5,7 +5,17 @@
  * Date: 24-4-2015
  * Time: 12:19
  */
-echo'  </div> <!-- /container -->';
+echo'  </div> <!-- /container -->
+  <footer class="footer">
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container">
+
+  </div>
+</nav>
+    <div class="container">
+
+    </div>
+  </footer>';
 
 echo '
 <!-- Bootstrap core JavaScript
