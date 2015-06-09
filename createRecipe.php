@@ -101,12 +101,9 @@ if(canRead() && canCreate()) {
                                     <?php echo $itemInRecept["Amount"] . ' ' . $itemInRecept["Unit"] ?>
                                 </td>
                                 <td>
-                                    <form
-                                        action="index.php?page=createRecipe&headspecies=<?php echo $_GET['headspecies'] ?> &subspecies=<?php echo $_GET['subspecies'] ?>"
-                                        method="post">
+                                    <form action="index.php?page=createRecipe&headspecies=<?php echo $_GET['headspecies'] ?> &subspecies=<?php echo $_GET['subspecies'] ?>" method="post">
                                         <input type="hidden" name="receptID" value="<?php echo $receptID ?>">
-                                        <input type="hidden" name="itemID"
-                                               value="<?php echo $itemInRecept["ItemID"] ?>">
+                                        <input type="hidden" name="itemID" value="<?php echo $itemInRecept["ItemID"] ?>">
                                         <button type="submit" name="btnDeleteItemFromRecipe" class="btn btn-link"
                                                 aria-label="Left Align">
                                             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
@@ -122,7 +119,6 @@ if(canRead() && canCreate()) {
 
             <div class="col-lg-6">
                 <h1>Items</h1>
-
                 <form
                     action="index.php?page=createRecipe&headspecies=<?php echo $_GET['headspecies'] ?>&subspecies=<?php echo $_GET['subspecies'] ?>"
                     method="post">
