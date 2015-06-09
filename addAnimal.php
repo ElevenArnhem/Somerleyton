@@ -38,39 +38,39 @@
                 $motherID = null;
                 if (isset($_POST['MOTHER']) && !empty($_POST['MOTHER'])) {
                     $motherID = $_POST['MOTHER'];
+                }
 
-                    $addAnimalstmt = $dbh->prepare("proc_InsertAnimal ?,?,?,?,?,?,?,?,?,?,?,?,?");
-                    $addAnimalstmt->bindParam(1, $staffID);
-                    $addAnimalstmt->bindParam(2, $animalName);
-                    $addAnimalstmt->bindParam(3, $gender);
-                    $addAnimalstmt->bindParam(4, $birthDate);
-                    $addAnimalstmt->bindParam(5, $birthPlace);
-                    $addAnimalstmt->bindParam(6, $environmentName);
-                    $addAnimalstmt->bindParam(7, $areaName);
-                    $addAnimalstmt->bindParam(8, $enclosureID);
-                    $addAnimalstmt->bindParam(9, $latinName);
-                    $addAnimalstmt->bindParam(10, $subSpeciesName);
-                    $addAnimalstmt->bindParam(11, $picaName);
-                    $addAnimalstmt->bindParam(12, $fatherID);
-                    $addAnimalstmt->bindParam(13, $motherID);
-                    $addAnimalstmt->execute();
+                $addAnimalstmt = $dbh->prepare("proc_InsertAnimal ?,?,?,?,?,?,?,?,?,?,?,?,?");
+                $addAnimalstmt->bindParam(1, $staffID);
+                $addAnimalstmt->bindParam(2, $animalName);
+                $addAnimalstmt->bindParam(3, $gender);
+                $addAnimalstmt->bindParam(4, $birthDate);
+                $addAnimalstmt->bindParam(5, $birthPlace);
+                $addAnimalstmt->bindParam(6, $environmentName);
+                $addAnimalstmt->bindParam(7, $areaName);
+                $addAnimalstmt->bindParam(8, $enclosureID);
+                $addAnimalstmt->bindParam(9, $latinName);
+                $addAnimalstmt->bindParam(10, $subSpeciesName);
+                $addAnimalstmt->bindParam(11, $picaName);
+                $addAnimalstmt->bindParam(12, $fatherID);
+                $addAnimalstmt->bindParam(13, $motherID);
+                $addAnimalstmt->execute();
 
-                    spErrorCaching($addAnimalstmt);
-                    $addAnimalstmt->nextRowset();
-                    $newAnimal = $addAnimalstmt->fetch();
-                    $newAnimalid = $newAnimal[0];
-                    if (!empty($newAnimalid)) {
-                        if (isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
-                            addPicture($newAnimalid);
-                        }
-
-                        echo '
-                        <div class="alert alert-success" role="alert">
-                            <a href="index.php?page=changeAnimal&animalID=' . $newAnimalid . '"> Klik hier om het toegevoegde dier aan te passen. </a>
-                        </div>';
+                spErrorCaching($addAnimalstmt);
+                $addAnimalstmt->nextRowset();
+                $newAnimal = $addAnimalstmt->fetch();
+                $newAnimalid = $newAnimal[0];
+                if (!empty($newAnimalid)) {
+                    if (isset($_FILES['fileToUpload']) && !empty($_FILES['fileToUpload']['name'])) {
+                        addPicture($newAnimalid);
                     }
 
+                    echo '
+                    <div class="alert alert-success" role="alert">
+                        <a href="index.php?page=changeAnimal&animalID=' . $newAnimalid . '"> Klik hier om het toegevoegde dier aan te passen. </a>
+                    </div>';
                 }
+
             }
             $areastmt = $dbh->prepare("proc_getAreaName");
             $areastmt->execute();
@@ -124,7 +124,7 @@
                         </dd><br><br>
                         <dt>Moeder </dt>
                         <dd>
-                            <select name="MOTHER" type="text" class="form-control" required>';
+                            <select name="MOTHER" type="text" class="form-control" >';
                                 foreach ($getMothers as $mother) {
                                     echo '<option value="' . $mother['AnimalID'] . '">' . $mother['AnimalName'] . '</option>';
                                 }
@@ -134,7 +134,7 @@
                         </dd><br>
                         <dt>Vader </dt>
                         <dd>
-                            <select name="FATHER" type="text" class="form-control" required>';
+                            <select name="FATHER" type="text" class="form-control" >';
                                 foreach ($getFathers as $father) {
                                     echo '<option value="' . $father['AnimalID'] . '">' . $father['AnimalName'] . '</option>';
                                 }

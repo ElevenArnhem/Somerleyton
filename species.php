@@ -1,103 +1,102 @@
 <?php
-    include 'conn.inc.php';
-
-    $allHeadSpeciesStatement = $dbh->prepare("EXEC proc_GetHeadSpecies");
-    $allHeadSpeciesStatement->execute();
-    $allHeadSpecies = $allHeadSpeciesStatement->fetchAll();
-
-    $selectedHeadSpecies = '';
-
-    if(isset( $_POST['selectedHeadSpecies'])) {
-        $selectedHeadSpecies = $_POST['selectedHeadSpecies'];
-
-        $allSubSpeciesForHeadSpeciesStatement = $dbh -> prepare("proc_getAllSubSpeciesForHeadSpecies ?");
-        $allSubSpeciesForHeadSpeciesStatement -> bindParam(1, $selectedHeadSpecies);
-        $allSubSpeciesForHeadSpeciesStatement -> execute();
-        $subSpeciesForHeadSpecies = $allSubSpeciesForHeadSpeciesStatement -> fetchAll();
-    }
-?>
-
-<div class="row">
-    <div class="col-lg-4">
-        <table class="table table-hover">
-            <tr>
-                <th colspan="2">Hoofdsoorten</th>
-            </tr>
-            <?php
-            foreach($allHeadSpecies as $headSpecies)
-            { ?>
-                <tr <?php if($selectedHeadSpecies == $headSpecies['LatinName']) { echo 'class="active" ';} ?> >
-                    <td>
-                        <form action="index.php?page=species" method="POST">
-                            <button class="btn btn-link" type="submit" name="selectedHeadSpecies" value="<?php echo $headSpecies["LatinName"] ?>"><?php echo $headSpecies["LatinName"] ?></button>
-                        </form>
-                    </td>
-
-                </tr>
-            <?php
-            }
-            ?>
-        </table>
-    <?php
-        if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
-            ?>
-            <div class="btn-group" role="group">
-                <a href="?page=addHeadSpecies">
-                    <button type="button" class="btn btn-default">Hoofdsoort toevoegen</button>
-                </a>
-            </div>
-        <?php
+    if(canRead()) {
+        $allHeadSpeciesStatement = $dbh->prepare("EXEC proc_GetHeadSpecies");
+        $allHeadSpeciesStatement->execute();
+        $allHeadSpecies = $allHeadSpeciesStatement->fetchAll();
+        $selectedHeadSpecies = '';
+        if (isset($_POST['selectedHeadSpecies'])) {
+            $selectedHeadSpecies = $_POST['selectedHeadSpecies'];
+            $allSubSpeciesForHeadSpeciesStatement = $dbh->prepare("proc_getAllSubSpeciesForHeadSpecies ?");
+            $allSubSpeciesForHeadSpeciesStatement->bindParam(1, $selectedHeadSpecies);
+            $allSubSpeciesForHeadSpeciesStatement->execute();
+            $subSpeciesForHeadSpecies = $allSubSpeciesForHeadSpeciesStatement->fetchAll();
         }
-    ?>
-    </div>
-    <div class='col-lg-4'>
-    <?php
-        if(isset( $_POST['selectedHeadSpecies'])) {
-            ?>
+        ?>
+        <div class="row">
+        <div class="col-lg-4">
             <table class="table table-hover">
                 <tr>
-                    <th colspan="2">Subsoorten</th>
+                    <th colspan="2">Hoofdsoorten</th>
                 </tr>
-    
                 <?php
-                    foreach($subSpeciesForHeadSpecies as $subSpecies)
-                    {
-                        ?>
-                            <tr>
-                                <td>
-                                    <?php echo $subSpecies["SubSpeciesName"] ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
-                                    ?>
-                                    <form action="index.php?page=changeSubSpecies" method="POST">
-                                        <input type="hidden" name="headSpecies" value="<?php echo $selectedHeadSpecies ?>"/>
-                                        <button type="submit" class="btn btn-default" name="subSpecies" value="<?php echo $subSpecies["SubSpeciesName"] ?>">Aanpassen</button>
-                                    </form>
-                                    <?php
-                                    }
-                                    ?>
-                                </td>
-                            </tr>
-                        <?php
-                    }
-                ?>
-            </table>
+                foreach ($allHeadSpecies as $headSpecies) { ?>
+                    <tr <?php if ($selectedHeadSpecies == $headSpecies['LatinName']) {
+                        echo 'class="active" ';
+                    } ?> >
+                        <td>
+                            <form action="index.php?page=species" method="POST">
+                                <button class="btn btn-link" type="submit" name="selectedHeadSpecies"
+                                        value="<?php echo $headSpecies["LatinName"] ?>"><?php echo $headSpecies["LatinName"] ?></button>
+                            </form>
+                        </td>
 
-            <div class="btn-group" role="group">
-                <?php
-                if ($_SESSION['FUNCTION'] == 'HeadKeeper') {
-                ?>
-                <form action="?page=addSubSpecies" method="POST">
-                    <input type="hidden" name="LATINNAME" value="<?php echo $selectedHeadSpecies ?>"/>
-                    <button type="submit" class="btn btn-default">Subsoort toevoegen</button>
-                </form>
+                    </tr>
                 <?php
                 }
                 ?>
-            </div>
-        <?php
-        }
-    ?>
-</div>
+            </table>
+            <?php
+            if (canCreate()) {
+                ?>
+                <div class="btn-group" role="group">
+                    <a href="?page=addHeadSpecies">
+                        <button type="button" class="btn btn-default">Hoofdsoort toevoegen</button>
+                    </a>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+        <div class='col-lg-4'>
+            <?php
+            if (isset($_POST['selectedHeadSpecies'])) {
+                ?>
+                <table class="table table-hover">
+                    <tr>
+                        <th colspan="2">Subsoorten</th>
+                    </tr>
+                    <?php
+                    foreach ($subSpeciesForHeadSpecies as $subSpecies) {
+                        ?>
+                        <tr>
+                            <td>
+                                <?php echo $subSpecies["SubSpeciesName"] ?>
+                            </td>
+                            <td>
+                                <?php
+                                if (canUpdate()) {
+                                    ?>
+                                    <form action="index.php?page=changeSubSpecies" method="POST">
+                                        <input type="hidden" name="headSpecies" value="<?php echo $selectedHeadSpecies ?>"/>
+                                        <button type="submit" class="btn btn-default" name="subSpecies"
+                                                value="<?php echo $subSpecies["SubSpeciesName"] ?>">Aanpassen
+                                        </button>
+                                    </form>
+                                <?php
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </table>
+                <div class="btn-group" role="group">
+                    <?php
+                    if (canCreate()) {
+                        ?>
+                        <form action="?page=addSubSpecies" method="POST">
+                            <input type="hidden" name="LATINNAME" value="<?php echo $selectedHeadSpecies ?>"/>
+                            <button type="submit" class="btn btn-default">Subsoort toevoegen</button>
+                        </form>
+                    <?php
+                    }
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+    <?php
+    }
+?>

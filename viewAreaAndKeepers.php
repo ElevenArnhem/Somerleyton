@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thom
- * Date: 20-5-2015
- * Time: 10:31
- */
-
 if(canRead()) {
     if (isset($_POST['ENVIRONMENT']) && isset($_POST['AREA'])) {
         $areaName = $_POST['AREA'];
@@ -21,7 +14,6 @@ if(canRead()) {
             $addKeeperstmt->execute();
             spErrorCaching($addKeeperstmt);
         }
-
         if (isset($_POST['keeperToDeleteID'])) {
             $keeperID = $_POST['keeperToDeleteID'];
             $staffID = $_SESSION['STAFFID'];
@@ -37,18 +29,16 @@ if(canRead()) {
         $getStaffstmt->bindParam(1, $areaName);
         $getStaffstmt->bindParam(2, $environmentName);
         $getStaffstmt->execute();
-
         $keepers = $getStaffstmt->fetchAll();
         $getKeepersstmt = $dbh->prepare(" proc_getKeepers");
         $getKeepersstmt->execute();
         $allKeepers = $getKeepersstmt->fetchAll();
 
-
-        echo '
+    echo '
     <div class="col-lg-6">
-     <h2>Medewerkers</h2>
-    <h3>Omgeving: ' . $_POST['ENVIRONMENT'] . '</h3>
-    <h3>Gebied: ' . $_POST['AREA'] . '</h3><br>
+        <h2>Medewerkers</h2>
+        <h3>Omgeving: ' . $_POST['ENVIRONMENT'] . '</h3>
+        <h3>Gebied: ' . $_POST['AREA'] . '</h3><br>
             <hr>
             <table class="table table-hover">
                 <tr>
@@ -56,59 +46,57 @@ if(canRead()) {
                     <th>Naam</th>
                     <th>Functie</th>
                 </tr>';
-        foreach ($keepers as $keeper) {
-            echo '<tr>
-                    <td>' . $keeper['StaffID'] . '</td>
-                    <td>' . $keeper['StaffName'] . '</td>
-                    <td>' . $keeper['Function'] . '</td>';
-            if ($keeper['Function'] != 'HeadKeeper') {
-                echo '
-                    <td>
-                        <form action="index.php?page=viewAreaAndKeepers" method="post">
-                            <input type="hidden" name="ENVIRONMENT" value="' . $_POST['ENVIRONMENT'] . '">
-                            <input type="hidden" name="AREA" value="' . $_POST['AREA'] . '">';
-                            if(canRead()) {
-                            echo'<button type="submit" name="keeperToDeleteID" value="' . $keeper['StaffID'] . '" class="btn btn-link" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" />
-                            </button>';
-                            }
-                        echo'</form>
-                    </td>';
-            }
-
-
-            echo '    </tr>';
-        }
-        if (canUpdate()) {
-            echo '
-                <tr><form action="index.php?page=viewAreaAndKeepers" method="post">
-                    <td></td><td><input type="hidden" name="ENVIRONMENT" value="' . $_POST['ENVIRONMENT'] . '">
-                    <input type="hidden" name="AREA" value="' . $_POST['AREA'] . '">
-                        <select name="newKeeper" class="form-control" required>';
-            foreach ($allKeepers as $newKeeper) {
-                $keeperExists = false;
                 foreach ($keepers as $keeper) {
-                    if ($newKeeper['StaffID'] == $keeper['StaffID']) {
-                        $keeperExists = true;
+                    echo '<tr>
+                            <td>' . $keeper['StaffID'] . '</td>
+                            <td>' . $keeper['StaffName'] . '</td>
+                            <td>' . $keeper['Function'] . '</td>';
+                    if ($keeper['Function'] != 'HeadKeeper') {
+                        echo '
+                            <td>
+                                <form action="index.php?page=viewAreaAndKeepers" method="post">
+                                    <input type="hidden" name="ENVIRONMENT" value="' . $_POST['ENVIRONMENT'] . '">
+                                    <input type="hidden" name="AREA" value="' . $_POST['AREA'] . '">';
+                                    if(canUpdate()) {
+                                    echo'<button type="submit" name="keeperToDeleteID" value="' . $keeper['StaffID'] . '" class="btn btn-link" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" />
+                                    </button>';
+                                    }
+                                echo'</form>
+                            </td>';
                     }
+                    echo '    </tr>';
                 }
-                if (!$keeperExists) {
-                    echo '<option value="' . $newKeeper['StaffID'] . '">' . $newKeeper['StaffName'] . '</option>';
-                }
-            }
-            echo '</select>
-                    </td>
-                    <td>
-                        <button type="submit" name="btnAddItem" class="btn btn-link" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
-                        </button>
-                    </td>
+                if (canUpdate()) {
+                    echo '
+                        <tr><form action="index.php?page=viewAreaAndKeepers" method="post">
+                            <td></td><td><input type="hidden" name="ENVIRONMENT" value="' . $_POST['ENVIRONMENT'] . '">
+                            <input type="hidden" name="AREA" value="' . $_POST['AREA'] . '">
+                                <select name="newKeeper" class="form-control" required>';
+                                foreach ($allKeepers as $newKeeper) {
+                                    $keeperExists = false;
+                                    foreach ($keepers as $keeper) {
+                                        if ($newKeeper['StaffID'] == $keeper['StaffID']) {
+                                            $keeperExists = true;
+                                        }
+                                    }
+                                    if (!$keeperExists) {
+                                        echo '<option value="' . $newKeeper['StaffID'] . '">' . $newKeeper['StaffName'] . '</option>';
+                                    }
+                                }
+                    echo '</select>
+                            </td>
+                            <td>
+                                <button type="submit" name="btnAddItem" class="btn btn-link" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" />
+                                </button>
+                            </td>
 
-                </form></tr>';
+                        </form></tr>';
 
-            echo '
-            </table>
-        </div>';
+                    echo '
+                    </table>
+                </div>';
         }
     }
 }

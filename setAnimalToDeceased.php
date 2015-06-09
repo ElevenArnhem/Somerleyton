@@ -1,39 +1,30 @@
 <?php
+if(canRead() && canCreate() && canUpdate()){
 date_default_timezone_set('Europe/Amsterdam');
     if(isset($_POST['btnSave'])){
-
         $staffID = $_SESSION['STAFFID'];
         $animalID = $_POST['animalID'];
         $deceasedDate = $_POST['deceasedDate'];
         $deceasedDescription = $_POST['deceasedDescription'];
-
         $setAnimalToDeceasedStatement = $dbh->prepare(" EXEC proc_setAnimalToDeceased ?, ?, ?, ?");
         $setAnimalToDeceasedStatement ->bindParam(1, $staffID);
         $setAnimalToDeceasedStatement ->bindParam(2, $animalID);
         $setAnimalToDeceasedStatement ->bindParam(3, $deceasedDate);
         $setAnimalToDeceasedStatement ->bindParam(4, $deceasedDescription);
         $setAnimalToDeceasedStatement ->execute();
-
         spErrorCaching($setAnimalToDeceasedStatement);
     }
-
     $deceasedDate = date('Y-m-d');
-
-
     if(isset($_POST['animalID'])) {
         $animalID = $_POST['animalID'];
-
         $animalStatement = $dbh->prepare("EXEC proc_getAnimal ?");
         $animalStatement->bindParam(1, $animalID);
         $animalStatement->execute();
         $animal = $animalStatement->fetch();
-
-
         $deceasedInfoStatement = $dbh->prepare("EXEC proc_getDeceasedInfo ?");
         $deceasedInfoStatement -> bindParam(1, $animalID);
         $deceasedInfoStatement -> execute();
         $deceasedInfo = $deceasedInfoStatement -> fetch();
-
         if(!empty($deceasedInfo['DeceasedDate'])){
             $deceasedDate = $deceasedInfo['DeceasedDate'];
         }
@@ -73,3 +64,5 @@ date_default_timezone_set('Europe/Amsterdam');
         </dd>
     </dl>
 </form>
+
+<?php } ?>
