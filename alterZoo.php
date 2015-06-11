@@ -24,7 +24,7 @@ if(canRead() && canUpdate()) {
         <dt>Naam</dt>
         <dd>
             <input type="hidden" name="originalName" value="<?php echo $originalName ?>">
-            <input name="ZooName" type="text" class="form-control" value="<?php echo $originalName ?>">
+            <input name="ZooName" type="text" class="form-control" value="<?php echo $originalName ?>" maxlength="50">
         </dd>
         <button type="submit" name="btnSave" class="btn btn-default">Opslaan</button>
     </form>

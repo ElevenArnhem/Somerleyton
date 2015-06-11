@@ -234,7 +234,7 @@
             <input type="hidden" name="SerializedOrders" value="<?php echo $serializedOrderItems ?>">
             <input type="hidden" name="SelectedLeverancier" value="<?php echo $selectedLeverancier ?>">
             Opmerkingen
-            <textarea name="OrderComments" class="form-control" rows="5" maxlength="1000"></textarea>
+            <textarea name="OrderComments" class="form-control" rows="5" maxlength="250"></textarea>
             <br/>
             <button class="btn btn-primary" type="submit" name="btnPlaceOrder">Plaatsen</button>
         </form>
