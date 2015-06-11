@@ -151,7 +151,7 @@
             </div>
             <div class="col-lg-6">
                 <h4>Opmerkingen</h4>
-                <textarea name="OrderComments" class="form-control" rows="5"><?php echo $orderDetails[0]['Comment'] ?></textarea>
+                <textarea name="OrderComments" class="form-control" rows="5" maxlength="1000"><?php echo $orderDetails[0]['Comment'] ?></textarea>
             </div>
         </div>
         <input type="hidden" value="<?php echo $orderID ?>" name="orderID" />
