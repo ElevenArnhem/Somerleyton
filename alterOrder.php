@@ -19,6 +19,7 @@
                     if($orderRecievedDate == '1900-01-01 00:00') {
                         $orderRecievedDate = '';
                     } else {
+                        $orderRecievedDate = $orderRecievedDate.':59.999';
                         $orderRecievedDate = makeDateTime($orderRecievedDate);
                     }
                 }
@@ -29,6 +30,7 @@
                     if($invoiceRecievedDate == '1900-01-01 00:00') {
                         $invoiceRecievedDate = '';
                     } else {
+                        $invoiceRecievedDate = $invoiceRecievedDate.':59.999';
                         $invoiceRecievedDate = makeDateTime($invoiceRecievedDate);
                     }
                 }
@@ -39,6 +41,7 @@
                     if($invoicePaidDate == '1900-01-01 00:00') {
                         $invoicePaidDate = '';
                     } else {
+                        $invoicePaidDate = $invoicePaidDate.':59.999';
                         $invoicePaidDate = makeDateTime($invoicePaidDate);
                     }
                 }
